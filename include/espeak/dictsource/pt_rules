@@ -1,0 +1,1247 @@
+// translation rules Brazilian
+// This file is UTF-8 encoded
+
+// Options
+// ?1  European Portuguese
+// ?2  Brazilian Portuguese
+// ?3  Epenthetic [I] between consonants
+// ?4  Brazil mbrola voice
+
+// Letter groups
+// A  a vowel
+// B  a consonant, except h l r w y
+// C  a consonant
+// G  a voiced consonant
+// K  not a vowel
+
+// endings
+.L01 a am
+.L02 e em
+.L03 a am o
+.L04 a am e em o ue uem
+.L05 r ra ram re rem rde rmo
+.L06 ra ram ste re rem rmo
+.L07 sse ssem ste
+
+
+.group a
+     _) a (_       a
+     _) a (_W      'a        // in an acronym
+        a          a
+     &) a (_       =&        // in final unstressed syllable
+     &) a (s_      =&
+     &) a (_a      =&/       // ?? elide final a before a
+     &) a (_à      =&/
+?1      a (_       =&        // in final unstressed syllable
+?1      a (s_      =&
+?1      a (_a      =&/       // ?? elide final a before a
+?1      a (_à      =&/
+
+        a (C_      &
+        a (r_      'a
+?1   p) a (d_      =E
+        a (CC_     &
+        a (h_      a
+?1      a (l_      'A        // eg: Portugal, capital, etc.
+?1      a (lK      ,A        // Algarve, Almerinda, etc...
+?2      al (K      aU
+        a (lh+     a
+        a (m       &~
+        a (mAr_    &
+        a (mA@     &
+        a (n       &~
+        a (ñ       &~
+        a (nA@     &
+        a (nAr_    &
+        am (_      =&~N
+        am (C      &~m
+?4      am (C      &~N
+        an (K+     &~N
+        anh (A     &~n^
+        am (_      =&U~
+        a (t_      a
+        a (x_      a
+        a (z_      'a        //eg: paz, rapaz, capaz, etc...
+?1   C) acç        'a's      // eg: selecção, etc...
+
+        ai         aI
+        ai (s      aI
+        a (iu_     a         // caiu
+        a (iCK     a
+        ay         aI
+        ao (_      aU
+        au         aU
+        au (s      aU
+        a (uCK     a
+
+
+.group â
+        â          ''&
+        â (m       ''&~
+        â (n       ''&~
+        âm (K      ''&~m
+        ân (K      ''&~N
+        ânh        ''&~n^
+
+
+.group à
+        à          a
+     _) à (s_      aI
+
+        à (m       &~
+        à (n       &~
+        àm (K      &~m
+        àn (K      &~N
+        ành (A     &~n^
+
+
+.group á
+        á          ''a
+        ái         ''aI
+        ái (s      ''aI
+        á (iCK     ''a
+        áy         ''aI
+        ál (B      ''aU
+        áu         ''aU
+        áu (s      ''aU
+?1      ál         ''Al
+        á (uCK     ''a
+
+
+.group ã
+        ã          &~
+        ão         &U~
+
+
+.group b
+     _) b (_       be
+        b          b
+        b (b 
+?3      b (B       bI
+?3      b (s       b
+?3      b (_C      b_
+
+
+.group c
+     _) c (_       se
+        c          k
+        c (Y       s         // ce ci
+?3      c (B       kI
+?3      c (s       k
+?3      c (t       k
+?3      c (_C      k_
+        ch         S
+        ck         k
+?1      c (c                 //drop “c” in European Portuguese (eg: seleccionar)
+?1   A) ct         t         //drop “c” in European Portuguese (eg: exacto)
+?1   A) cç         s         //drop “c” in European Portuguese (eg: selecção)
+?1 conta) ct (A      kt        // eg: contacto, contactar, contactável, incontactável, etc...
+
+
+.group d
+     _) d (_       de
+        d          d
+        d (d 
+?3      d (B       dZI
+?3      d (_C      d_
+?2      d (i       dZ
+?2      d (í       dZ
+?2      d (e_      dZ
+
+
+.group e
+     _) e (_       E
+        e          e
+        e (_       =y
+        e (s_      =y
+?2      e (_AN     =i/       // ?? elide to [j] if next word starts with a vowel
+?2  &l) e (_AN     =i        //    but not after l or r
+?2  &r) e (_AN     =i
+?1      e (_iN     =i/       // drop final [i] is next word starts with another i
+
+?1      e (e       i         //eg: candeeiro
+
+?2      el (K      EU
+        e (lh+     e
+     v) e (lhA_    E
+
+        e (be_     E
+        e (bem_    E
+
+        e (ca_     E
+        e (ce_     E
+        e (cem_    E
+
+        e (chA_    E
+        e (chAm_   E
+     r) e (cho_    e
+
+        e (clA_    E
+        e (clAm_   E
+        e (co_     E
+        e (ctA_    E
+        e (ctAm_   E
+
+        e (de_     E
+        e (dem_    E
+
+        e (fa_     E
+
+        e (gA_     E
+        e (gAm_    E
+
+        e (grA_    E
+        e (grAm_   E
+
+     h) e (gA_     e
+     h) e (gAm_    e
+
+        e (gue_    E
+        e (guem_   E
+
+        e (lA_     E
+        e (lo_     E
+        e (lAm_    E
+
+     i) e (r_      E
+    @s) e (r_      E
+     u) e (r_      E
+
+    ib) e (rA_     E
+     d) e (rA_     E
+    ed) e (rAm_    e
+     m) e (rA_     E
+    iv) e (rAm_    E
+   pod) e (rA_     e
+     d) e (rAm_    E
+    ib) e (rAm_    E
+    @s) e (rA_     E
+    @s) e (rAm_    E
+    sp) e (rA_     E
+    sp) e (rAm_    E
+     f) e (re_     E
+     f) e (rem_    E
+
+        e (que_    E
+        e (quem_   E
+
+        e (rgA_    E
+        e (rgAm_   E
+
+        e (rgue_   E
+        e (rguem_  E
+
+        e (rsA_    E
+        e (rsAm_   E
+
+        e (se_     E
+        e (sem_    E
+
+        e (ssA_    E
+        e (ssAm_   E
+
+        e (stA_    E
+        e (stAm_   E
+        e (strA_   E
+
+        e (rme_    E
+
+        e (rnA_    E
+        e (rnAm_   E
+
+        e (rtA_    E
+        e (rtAm_   E
+
+        e (rrA_    E
+        e (rrAm_   E
+
+        e (rvA_    E
+        e (rvAm_   E
+
+        e (tA_     E
+     m) e (ta_     e
+     m) e (tam_    e
+     m) e (to_     e
+    An) e (tA_     e
+   gaz) e (ta_     e
+        e (tAm_    E
+
+        e (gi_     e
+        e (gri_    e
+        e (li_     e
+        e (rgi_    e
+        e (sti_    e
+        e (ti_     e
+        e (rti_    e
+        e (rvi_    e
+        e (xi_     e
+        e (vA_     E
+     t) e (ve_     e
+        e (vi_     e
+        e (vê_     e
+        e (vAm_    E
+
+        e (rrAs_   E
+
+        e (x_      E
+        e (xA_     E
+        e (xAm_    E
+?2  _n) e (t       E
+        em (C      eIm
+        en (K      eIN
+        enh        en^
+
+        em (_      =eIN
+        em (s_     =eIN
+        en (_      =eIN
+        en (s_     =eIN
+
+        ei         eI
+        ei (s      eI
+        ei ($w_alt EI
+        e (iCK     e
+        ey         eI
+        eu         eU
+        eu (s      eU
+        e (uCK     e
+
+?1   d) e (CAA     y
+?1   d) e (CACAA   y
+?1   d) e (CACAC   y
+?1   d) e (CACC    y
+?1   d) e (CCAA    y
+?1   d) e (nCAA    ,e
+?1   d) e (CCACA   y
+?1   d) e (nCACA   ,e
+?1   d) e (CCACCA  y
+?1   d) e (nCACCA  ,e
+
+     j) e (tA_     E
+     j) e (tAm_    E
+    _r) eex (A     eez
+
+?1   _) es (C@@    S         // drop initial "e".
+?1   _) e (f       i         // efectuar, etc.
+?1  _n) e (nhu     i         // eg: nenhum, nenhuma, nenhuns, nenhumas.
+?1      e (la_     'E        // eg: cadela, janela, vela, etc...
+?1   C) e (cC      ,E        // eg: seleccionar, efectuar, etc...
+?1   C) ecç        'Es       // eg: selecção, etc...
+?1   C) e (ã       i         // leão, panteão, etc.
+?1   C) e (a       i         // oceano, etc.
+?1   C) e (o       'i        // eg: geologia, etc...
+?1   C) e (ú       i         // conteúdo, etc.
+?1  Cã) e          j         // cães, mãe, etc...
+?1   c) e (rea     y         // cereais
+?1   d) e (fici    y         // deficiênte, deficiência, etc...
+?1  _d) e (fini    y         //definições.
+?1  _d) e (slig    y         // desligar.
+?1  _d) e (sloc    y         // eg: deslocamento, etc...
+?1  _f) e (ch      y         // fechar
+?1  _p) e (rcentag y         // percentagem
+?1   p) e (ssoa    y         //pessoal, pessoais, etc.
+?1  pr) e (cis     y         // precisar
+?1  pr) e (f       y         // preferências, etc.
+?1  _r) e (cicl    y         // recicla, reciclagem, etc...
+?1   r) e (cor     y         // recorrer, recordar
+?1   r) e (luz     y         // eg: reluzir
+?1   r) e (lva     ,E        // eg: relvado
+?1   r) e (smung   y         // resmungar
+?1   r) e (ss      y         // eg: ressequidos
+?1   r) e (volv    y         // revolver
+?1   r) e (vel     y         // revelar
+?1  _t) e (rmin    y         // terminar.
+?1  _v) e (loci    y         // velocidade
+?1  _f) e (rramenta y        // ferramenta, ferramentas.
+?1  _p) e (squ     y         // pesquisar
+?1 hip) e (r       ,E        // eg: hiper
+?1 sup) e (r       ,E        // super
+?1  _m) e (ga      ,E        // mega
+?1 _int) e (rn      ,E        // Interno
+?1   n) e (t       'E        // eg: net
+?1      e (l_      'E        // eg: possível, manuel, etc...
+?1   v) e (l_      ,E        // eg: possível, amovível, disponível, etc...
+?1   l) e (ta      'E        // eg: bicicleta, atleta.
+
+
+    sf) e (ra_     E         // esfera, biosfera
+
+//sort
+    _d) e (L05_    E
+   _vi) e (L05_    E
+   fiz) e (L05_    E
+   pus) e (L05_    E         // com- im- de-
+   tiv) e (L05_    E         // es-
+  _com) e (L05_    e
+  _pud) e (L05_    E
+  _tem) e (L05_    e
+ _coub) e (L05_    E
+ _exag) e (L05_    E
+ _houv) e (L05_    E
+ _perd) e (L05_    e
+ _quis) e (L05_    E
+ _soub) e (L05_    E
+ _talh) e (L05_    E
+ _trem) e (L05_    e
+_troux) e (L05_    E
+  diss) e (L06_    E         // contra-
+  fend) e (L06_    e         // de- o-
+  tend) e (L06_    e         // a- con- en- es-
+  vend) e (L06_    e         // re-
+ _mord) e (L06_    e
+ _rend) e (L06_    e
+ prend) e (L06_    e         // a- rea- des- desa-
+_arrepend) e (L06_ e
+_depend) e (L06_   e
+_escond) e (L06_   e
+preend) e (L06_    e         // com- a- re- sur-
+respond) e (L06_   e         // cor-
+   bat) e (L07_    e         // re- com-
+   ceb) e (L07_    e         // re- per- con-
+   ced) e (L07_    e         // pro- con- su-
+   met) e (L07_    e         // co- pro- arre- re- intro- compro- sub-
+   mex) e (L07_    e
+   mov) e (L07_    e         // re- co-
+   viv) e (L07_    e         // re-
+  _beb) e (L07_    e
+  _com) e (L07_    e
+  _tem) e (L07_    e
+  colh) e (L07_    e         // & es-
+  corr) e (L07_    e         // per- con- in- so- dis-
+  ench) e (L07_    e         // pre-
+  fend) e (L07_    e         // de- o-
+  nasc) e (L07_    e         // re-
+  tend) e (L07_    e         // en-  con- a- es-
+  torc) e (L07_    e         // con-
+  venc) e (L07_    e         // con-
+  vend) e (L07_    e         // re-
+  vert) e (L07_    e         // in- re- con-
+  volv) e (L07_    e         // de- en- re-
+ _desc) e (L07_    e
+ _eleg) e (L07_    e
+ _ergu) e (L07_    e
+ _mord) e (L07_    e
+ _morr) e (L07_    e
+ _perd) e (L07_    e
+ _sofr) e (L07_    e
+ _trem) e (L07_    e
+ merec) e (L07_    e         // des-
+ padec) e (L07_    e         // com-
+ parec) e (L07_    e         // a- rea- com- desa-
+ prend) e (L07_    e         // a- rea- des-
+ screv) e (L07_    e         // e- in- ree- pre- de-
+_aborrec) e (L07_  e
+_absolv) e (L07_   e
+_acontec) e (L07_  e
+_adoec) e (L07_    e
+_adormec) e (L07_  e
+_agradec) e (L07_  e
+_amanhec) e (L07_  e
+_amolec) e (L07_   e
+_anoitec) e (L07_  e
+_apodrec) e (L07_  e
+_arrepend) e (L07_ e
+_atrev) e (L07_    e
+_cresc) e (L07_    e
+_depend) e (L07_   e
+_desguarnec) e (L07_ e
+_emagrec) e (L07_  e
+_endurec) e (L07_  e
+_enlouquec) e (L07_ e
+_enraivec) e (L07_ e
+_entorpec) e (L07_ e
+_entristec) e (L07_ e
+_envaidec) e (L07_ e
+_envelhec) e (L07_ e
+_esclarec) e (L07_ e
+_escond) e (L07_   e
+_escurec) e (L07_  e
+_espairec) e (L07_ e
+_esquec) e (L07_   e
+_estremec) e (L07_ e
+_interromp) e (L07_ e
+_perec) e (L07_    e
+_rejuvenec) e (L07_ e
+_resolv) e (L07_   e
+_suspend) e (L07_  e
+_troux) e (L07_    E
+abastec) e (L07_   e         // re-
+conhec) e (L07_    e         // & re- des-
+estabelec) e (L07_ e         // re-
+favorec) e (L07_   e         // des-
+obedec) e (L07_    e         // des-
+preend) e (L07_    e         // sur- com-
+proteg) e (L07_    e         // des-
+respond) e (L07_   e         // cor-
+    qu) e (brL04_  E
+  _cel) e (brL04_  E
+   _ex) e (crL04_  E
+  _enr) e (dL01_   E
+  _arr) e (dL03_   E
+ _depr) e (dL03_   E
+ _hosp) e (dL03_   E
+   _gr) e (gL03_   e
+  _gal) e (gL03_   e
+  _pel) e (gL03_   e
+    _n) e (grL03_  e
+   _ch) e (guL02_  e
+  estr) ei (L04_   EI
+    _r) e (jL03_   E
+  _inv) e (jL04_   E
+    tr) e (pL04_   E         // es-
+  _dec) e (pL04_   E
+   _in) e (ptL03_  E
+    ad) e (quL04_  E
+  _imp) e (rL03_   E
+  _sev) e (rL03_   E
+ _reit) e (rL03_   E
+ _sinc) e (rL03_   E
+    _g) e (rL04_   E
+    _z) e (rL04_   E
+    qu) e (rL04_   E         // re-
+   _op) e (rL04_   E
+   gen) e (rL04_   E         // de- re-
+  _alt) e (rL04_   E
+  _enc) e (rL04_   E
+  _sug) e (rL04_   E
+  _sup) e (rL04_   E
+  _tol) e (rL04_   E
+  _ven) e (rL04_   E
+  acel) e (rL04_   E         // des-
+ _apod) e (rL04_   E
+ _coop) e (rL04_   E
+ _temp) e (rL04_   E
+_recup) e (rL04_   E
+_refrig) e (rL04_  E
+    _v) e (rbL03_  E
+   _ex) e (rcL02_  E
+ _alic) e (rcL02_  E
+    _p) e (rdL02_  E
+    _l) e (rdL03_  E
+    _h) e (rdL04_  E
+  _bez) e (rrL03_  e
+  _inv) e (rtL03_  e
+    _f) e (rvL03_  e
+ _alic) e (rçL03_  E
+    _p) e (sL01_   E
+    _l) e (sL03_   E
+ _refr) e (scL01_  E
+    _d) e (scL02_  E
+   _cr) e (scL02_  E
+    _p) e (scL03_  E
+    _m) e (sclL04  E
+    _d) e (spL02_  E
+    _p) e (squL02_ E
+ _refr) e (squL02_ E
+    _l) e (ssL02_  e
+  _esp) e (ssL03_  e
+    _c) e (stL03_  e
+   _pr) e (tL03_   e
+  _rem) e (tL03_   e
+ _derr) e (tL03_   e
+_obsol) e (tL03_   e
+  _sol) e (trL03_  E
+  _pen) e (trL04_  E
+    _d) e (vL03_   e
+   scr) e (vL03_   e         // e- in- pre- ree- de-
+  _atr) e (vL03_   e
+     m) e (xL03_   e
+    _r) e (zL04_   E
+   _pr) e (zL04_   E
+   spr) e (zL04_   E
+  _rev) e (zL04_   E
+_embel) e (zL04_   E
+   com) e (çL01_   E
+     p) e (çL03_   E
+    _m) e (çL03_   E
+_entorp) e (çL03_  e
+//endsort
+
+
+
+.group é
+        é          ''E
+        éi         ''EI
+        éi (s      ''EI
+        é (iCK     ''E
+        éy         ''eI
+        él (B      ''EU
+        éu         ''EU
+        éu (s      ''EU
+        é (uCK     ''E
+        ém (_      ''eIN
+        ém (s_     ''eIN
+        én (_      ''eIN
+        én (s_     ''eIN
+
+
+.group ê
+        ê          ''e
+        êm (_      ''eIN
+        êm (C      ''eIm
+        ên (K      ''eIN
+        ênh        ''en^
+        êm (_      ''eIN
+
+
+.group f
+?1   _) f (_W      Ef;       // within an acronym
+?1   _) f (_       Ef        // individual letter or end-of-acronym
+     _) f (_       'Efy
+        f          f
+        f (f 
+?3      f (B       fI
+?3      f (_C      f_
+
+
+.group g
+?1   _) g (_       ge
+?1   _) g (_W      Ze        // within an acronym
+     _) g (_       Ze
+        g          g
+        g (g 
+?3      g (B       gI
+?3      g (_C      g_
+        g (Y       Z         // ge gi
+        gu (Y      g
+     a) gu (ent    gw
+   _ar) gu (i      gw
+ averi) gu (e      gw
+  enxa) gu (e      gw
+     i) gu (idade  gw
+   lin) gu (e      gw
+   lin) gu (i      gw
+  _min) gu (e      gw
+  _pin) gu (im_    gw
+  _pin) gu (ins_   gw
+   _sa) gu (i      gw
+   san) gu (ín     gw
+   san) gu (in     gw
+   tin) gu (i      gw
+?1   n) gu (A      gw        // eg: língua, etc.
+?1 man) gu (ei     g         // mangueira
+?1      gu (ém_    g         // eg: alguém, ninguém, etc...
+
+
+.group h
+     _) h (_       ag'a
+        h                    // silent
+
+
+.group i
+     _) i (_       i
+        i          i
+        i (A       j
+        i (o       i
+    Cr) i          i
+    Cl) i          i
+        i (_       'i
+
+?2      il (K      iU
+        i (lh+     i
+
+        im (_      iN
+        im (C      im
+?4      im (C      iN
+        in (C      iN        // ?4  ??
+        in (g      iN
+        in (k      iN
+        inh        in^
+
+        i (A_      'i
+        i (am_     'i
+        i (em_     'i
+
+        io (_      iU
+        io (s_     iU
+        i (oCK     i
+        iu (_      iU
+        iu (s_     iU
+        i (uCK     i
+
+    áC) i (A_      j
+   áCC) i (A_      j
+    âC) i (A_      j
+   âCC) i (A_      j
+    éC) i (A_      j
+   éCC) i (A_      j
+    êC) i (A_      j
+   êCC) i (A_      j
+    íC) i (A_      j
+   íCC) i (A_      j
+    óC) i (A_      j
+   óCC) i (A_      j
+    ôC) i (A_      j
+   ôCC) i (A_      j
+    úC) i (A_      j
+   úCC) i (A_      j
+
+?1   _) i (ntern   'i        //inter
+?1   @) ing (_     _^_EN
+?1   @) ings (_    _^_EN
+
+
+.group í
+        í          ''i
+        í (m       ''i
+        í (n       ''i
+        ím (_      ''iN
+        ím (C      ''im
+        ín (K      ''iN
+        ính        ''in^
+        íl (B      ''IU
+
+
+.group j
+     _) j (_       Z'Ot&
+        j          Z
+?3      j (B       ZI
+?3      j (_C      Z_
+
+
+.group k
+?1   _) k (_       k'ap&
+?2   _) k (_       ka
+        k          k
+        k (k 
+?3      k (B       kI
+?3      k (s       k
+?3      k (t       k
+?3      k (_C      k_
+
+
+.group l
+?1   _) l (_W      El;       // within an acronym
+?1   _) l (_       El
+     _) l (_       'Ely
+        l          l
+     l) l 
+?1      lh         l^
+?2      lh         lj
+?4   A) lh         l^
+
+
+.group m
+?1   _) m (_W      Em;
+?1   _) m (_       Em
+     _) m (_       'eme
+        m          m
+        m (m 
+?3      m (B       mI
+?3      m (_C      m_
+
+
+.group n
+?1   _) n (_W      En;
+?1   _) n (_       En
+     _) n (_       'ene
+        n          n
+        n (n 
+?3      n (B       nI
+?3      n (_C      n_
+        nh         n^
+?1   A) nn         n         //drop “n” (eg: connosco).
+
+
+.group ñ
+     _) ñ (_       'En^e
+        ñ          n^
+
+
+
+.group o
+        o          o
+     @) o (_       =U
+        o (s_      =U
+        ou         ow
+        oi         oI
+        oi ($w_alt OI
+        oi ($w_alt2++ oI
+        oi (a_     OI        // ??
+        oi (cA_    OI
+        oi (de_    OI
+        oi (s      oI
+        o (iCK     o
+?1   C) oo (_      ow        // eg: voo, enjoo, etc...
+        oy         OI
+
+        o (cA_     O
+        o (cAm_    O
+
+        o (que_    O
+        o (quem_   O
+
+     p) o (dA_     O
+     p) o (dAm_    O
+
+        o (g_      O
+        o (gs_     O
+
+        o (ge_     O
+        o (gem_    O
+
+        o (jA_     O
+        o (jAm_    O
+
+        o (ldA_    O
+        o (ldAm_   O
+
+        o (lA_     O
+        o (lAm_    O
+
+        o (lhe_    O
+        o (lhem_   O
+
+        o (ltA_    O
+        o (ltAm_   O
+
+        o (lve_    O
+        o (lvem_   O
+
+        o (bri_    o
+        o (di_     o
+        o (li_     o
+        o (rci_    o
+        o (rdi_    o
+        o (rri_    o
+        o (rvi_    o
+        o (sA_     O
+        o (so_N    o         // not for osos_
+        o (sAm_    O
+
+        o (ssA_    O
+        o (ssAm_   O
+
+        o (va_     O
+        o (vAm_    O
+        o (ve_     O
+     m) o (va_     o
+     m) o (vam_    o
+        o (veCs_   O
+
+        o (l_      'O
+?2      ol (B      ow
+
+        om (_      oN
+        o (ma_     o
+
+        om (C      om
+?4      om (C      oN
+        on (K      oN
+    @s) on (_      %oN       // words ending in -son
+        o (na_     o
+        onh        on^
+
+        o (brA_    O
+        o (brAm_   O
+        o (dA_     O
+        o (dAm_    O
+     t) o (dA_     o
+
+        o (rCA_    O
+        o (rCo_    o
+        o (rCAm_   O
+
+        o (stA_    O
+        o (sto_    o
+        o (stAm_   O
+        o (strA_   O
+        o (strAm_  O
+
+        o (tA_     O
+        o (tAm_    O
+
+?2      o (x_      O
+?1      oz (_      Os#
+?2      oz (_      Oz
+        o (zes_    O
+        o (rA_     O
+     b) o (re_     o
+     c) o (re_     o
+     d) o (re_     o
+     l) o (re_     o
+     t) o (re_     o
+     v) o (re_     o
+        o (rAm_    O
+     b) o (rA_     O
+    @@) o (rA_     o
+
+        o (p_      O
+?1   _) o (C       O         // eg: olá, orla, opção, etc...
+?1  _C) o (CACAC   u         // Documento, documentação, localizar, etc.
+?1   f) o (rmat    u         // formatar, formato.
+?1  _p) o (rtuC    u         // Portugal, Portucalense, etc...
+?1  pr) o (f       u
+?1  _s) o (lu      u         // solução, soluções.
+?1 interr) o (g       u         // eg: interrogação
+?1   f) o (rmulá   u         // eg: formulário, formulários.
+?1   v) o (lt      O
+
+//sort
+    _f) o (L05_    o
+_pormen) o (L05_   O
+    _f) o (L07_    o
+    _s) o (bL02_   O
+   _af) o (bL04_   O
+  _esn) o (bL04_   O
+ _engl) o (bL04_   O
+     _) o (cL03_   o
+    br) o (chL04_  O
+  _deb) o (chL04_  O
+    _m) o (fL01_   O
+    _m) o (fL02_   O
+    _s) o (frL02_  O
+     r) o (gL04_   O         // inter-
+    _j) o (gL04_   O
+   _af) o (gL04_   O
+  _adv) o (gL04_   O
+  _ref) o (gL04_   O
+   _ap) oi (L01_   OI
+   _ap) oi (L02_   OI
+    _b) oi (L04_   OI
+    _t) o (lL03_   o
+    _f) o (lgL04_  O
+  _emp) o (lgL04_  O
+     _) o (lhL04_  O
+     m) o (lhL04_  O
+   ent) o (pL02_   O
+    _c) o (pL03_   O
+  _ens) o (pL04_   O
+  _gal) o (pL04_   O
+    _s) o (prL04_  O
+     _) o (ptL04_  O
+     p) o (rL02_   o
+  _dev) o (rL02_   O
+ _defl) o (rL02_   O
+ _impl) o (rL02_   O
+ _inod) o (rL03_   O
+_inson) o (rL03_   O
+_comem) o (rL04    O
+_aprim) o (rL04_   O
+_remem) o (rL04_   O
+     f) o (rmL03_  O
+  _enf) o (rquL02_ O
+  _ext) o (rquL02_ O
+     c) o (rrL01_  o         // escorra, incorra, corra, recorra
+    _m) o (rrL01_  o
+     p) o (rtL03_  O         // im- trans- de- re- com- a- ex-
+     t) o (rçL01_  O         // con-
+    _r) o (snL04_  O
+    _c) o (spL02_  O
+  _enr) o (squL02_ O
+     p) ostos (_   Ost=Us#   // dispostos etc.
+  _gar) o (tL03_   o
+  _mar) o (tL03_   O
+   _ch) o (vL01_   o
+    pr) o (vL03_   O
+    _g) o (zL04_   O
+  _esb) o (çL01_   O
+    _r) o (çL03_   O
+    tr) o (çL03_   O         // des-
+   _ad) o (çL03_   O
+  _end) o (çL03_   O
+//endsort
+
+.group ô
+        ô          ''o
+        ôm (_      ''oN
+        ôm (C      ''om
+        ôn (K      ''oN
+        ônh        ''on^
+
+
+.group ó
+        ó          ''O
+
+        ói         ''OI
+        ói (s      ''OI
+        ó (iCK     ''O
+        óu         ''Ow
+        óy         ''OI
+
+
+.group õ
+        õ          o~
+        õe         o~j
+
+
+.group p
+     _) p (_       pe
+        p          p
+        p (p 
+?3      p (B       pI
+?3      p (s       p
+?3      p (t       p
+?3      p (_C      p_
+        ph         f
+
+
+.group q
+     _) q (_       ke
+        q          k
+?3      q (B       kI
+        qu         kw
+        qü         kw
+        qu (Y      k
+        qu (K      ku
+?2   _) que (_K    ke
+     _) que (_     ky
+?1   _) qua        kwa       // quatro, etc.
+?1   _) que        ke        // quente, etc.
+?1   _) quei (C    k'eI      // queira, queima, etc
+     A) quên       kw'eN     // frequência, etc.
+     C) quên       kw'eN     // quinquênio, etc.
+   ade) qu (e      kw
+    _a) qu (idade_ kw
+    _a) qu (ífero_ kw
+     e) qu (estr   kw
+   ese) qu (ív     kw
+    _e) qu (in     kw
+   fre) qu (ent    kw
+  _ini) qu (idade_ kw
+    li) qu (id     kw
+    lí) qu (id     kw
+     n) qu (en     kw
+     _) qu (inqu   kw
+    se) qu (en     kw
+  tran) qu (il     kw
+?1      queç       kes       // esqueça.
+?1   A) que (nA_   ke        // pequeno, etc.
+?1   C) quê (_     ke        // porquê, etc.
+?1      que (l     ke        // aquele, etc.
+?1      que (r_    kE        // qualquer, etc.
+?1      qui        ki        // quinta, esquilo, etc.
+?1   _) quind      kuind     // quindecágono, etc.
+?1 tran) qui        kui       // tranquilo, etc.
+?1   _) quo        kuo       // quoficiente, etc.
+
+
+.group r
+?1   _) r (_W      'Err;     // within an acronym
+?1   _) r (_       'Err
+     _) r (_       'Exe
+     _) r (_\$     xe'aU     // currency
+        r          *
+        r (_       r
+        r (C       *@-
+     A) r (A       *
+     A) r (_A      *
+     C) r (A       R
+        rr         x
+     _) r          x
+     l) r          x
+     n) r (+       x
+     s) r          x
+?1   A) r (_       r-        // [r-] is English linking-r
+
+
+.group s
+?1   _) s (_W      Es|;      // within an acronym  [s]+[;] not [s;] phoneme
+?1   _) s (_       Es
+?2   _) s (_       'Esy
+        s          s
+        ss         s
+        sc (Y      s
+        sç         s
+        sh         S
+?4   _) s (C       Is
+     A) s (A       z
+?1   @) s (_       s#
+?2      s (_       s#
+
+?!4  @) s (_G      z         // next word starts with voiced consonant
+
+     A) s (_S1     s
+     A) s (_AS1    z         // next word starts with vowel
+
+   ese) s (_       s
+?!4  A) s (_GS1    z         // next word starts with voiced consonant
+
+?1   A) s (C       s#
+?1   A) ss         s
+?1   A) s (G+      Z
+?1   A) s (_KS1    s#
+?1   A) s (_G+S1   Z
+        s (G       z
+        s (w+      s
+        sr         zx
+
+     _) sobre (@P5 sob*e
+ _tran) s (A       z
+
+
+.group t
+     _) t (_       te
+        t          t
+        t (t 
+?3      t (B       tSI
+?3      t (_C      t_
+?2      t (i       tS
+?2      t (í       tS
+?2      t (e_      tS
+?1      th         _^_EN
+?1      tion (_    _^_EN
+
+
+.group u
+     _) u (_       u
+        u          u
+        u (A       w
+        u (_A      w
+     r) u (A       u
+     r) u (_A      u
+        u (A_      'u
+
+        u (am_     'u
+        u (em_     'u
+        ui         uI
+        ui (_      'uI
+        u (iu      w
+        u (iCK     u
+        uy         uI
+        ul (K      uw
+        u (lh+     u
+
+        um (_      u~N
+        um (C      u~m
+?4      um (C      u~N
+        un (K      u~N
+        unh        u~n^
+
+     g) u (Y 
+
+
+.group ú
+        ú          ''u
+        úm (_      ''u~N
+        úm (C      ''u~m
+?4      úm (C      ''u~N
+        ún (K      ''u~N
+        únh        ''u~n^
+
+.group v
+        v          v
+        v (v 
+?3      v (B       vI
+?3      v (_C      v_
+
+
+.group w
+?1   _) w (_       d'&bl,iu
+?2   _) w (_       d'ablju
+        w          w
+?1      w (_       _^_EN
+?4   _) w          u
+
+
+.group x
+        x (A       S
+     A) x (A       ks
+    _e) x (A       z
+    _ê) x (A       z
+  _ine) x (A       z
+  _ine) x (oráv    ks
+     e) x (A       ks
+?1   e) x (CA      S
+    ai) x (A       S
+    ei) x (A       S
+   _au) x          s
+    ou) x (+       S
+     u) x (i       S
+        x (iqu     S
+        x (C       s
+        xc (Y      s
+        x (s 
+        x (_       ks
+        x (AxA     S
+        x (ó_      z
+     a) x (a       S
+     a) x (á       S
+     a) x (ar      S
+     a) x (ei      S
+    xA) x (A       S
+   ale) x (a       S
+   bau) x (A       S
+   brA) x (A       S
+    bY) x (A       S
+   _ca) x (A       S
+   _co) x (A       S
+  _coe) x (A       z
+   _fa) x (i       S
+  _fle) x (a       S
+   gra) x (A       S
+   _he) x (A       z
+?2 _he) x (A       ks
+   _li) x (A       S
+   _lu) x (A       S
+  _mar) x          ks
+    má) x (im      s         // máximo, máximas, etc.
+    me) x (A       S
+   _mé) x (i       S
+    mo) x (a       S
+    _o) x (A       S
+    _o) x (i       ks
+    _o) x (í       ks
+    pi) x (A       S
+  _pro) x (A       S
+  _pra) x (A       S
+   prA) x (i       s         // aproximado, aproximadamente, aproximar, próximo, etc.
+    pu) x (A       S         // verb "puxar" and all its conjugations
+   qui) x (A       S
+    ri) x (A       S
+  rela) x (A       S
+   _ro) x (A       S
+   _ta) x (e       S
+ _trou) x (e       s
+   _ve) x (A       S
+   _xi) x (A       S
+?1   i) x (a_      S
+?1   i) x (as_     S
+ _trou) x (ér      s
+  _pro) x (imi     s
+
+
+.group y
+?1   _) y (_       'ips,ilON
+?2   _) y (_       'ipsiloN
+        y          i
+        y (A       j
+        y (_       %i        // ?? stress on 1st syllable  EN
+
+
+.group z
+     _) z (_       ze
+        z          z
+        z (z 
+?3      z (B       zI
+?3      z (_C      z_
+?1   @) z (_       S
+?2   @) z (_       s
+     @) z (_A      z
+     @) z (_G      z
+
+?1   A) z (C       S
+?1   A) z (G+      Z
+?1   A) z (_C      S
+?1   A) z (_G+     Z
+
+
+.group
+        ç          s
+
+        ü          u
+        ß          s
+
+        $          sifR'&U~
+   _r_) $ 
+
+    D_) º          %o        // ordinal
+    D_) ª          %a        // ordinal
+
+
+        , (D       v'irgul&
+
+
+    __) - (_D      m'enUs
+    D_) - (_D      m'enUs
+    A_) - (_D      _
+    C_) - (_D      _

@@ -1,0 +1,151 @@
+ 
+// This file is UTF8 encoded 
+// Spelling to phoneme words and exceptions for Malayalam
+
+
+// letter names (consonants)
+
+U+d02	'a#m
+U+d03	visarg@m
+U+d3d   avagraha
+U+d4d	c#andraka:r@m
+U+d4e	c#il.ac#aram  // ??
+
+ൺ	_'yn.  // chillu consonants
+ൻ	_in
+ർ	_'yR
+ൽ	_il
+ൾ	_'yl.
+ൿ	_ik
+ണൎ	_'yn.  // eSpeak uses unofficial 0xd4e for "virama + U+200d" to indicate 'chillu' characters
+നൎ	_in
+റൎ	_'yR
+ലൎ	_il
+ളൎ	_'yl.
+കൎ	_ik
+
+
+
+// combining vowels, precede by a click so they can be distinguished from stand-alone vowels
+ാ	#X2a::
+ി	#X1i
+ീ	#X2i::
+ു	#X1u
+ൂ	#X2u::
+ൃ	#X1ri
+ൄ	#X2ri::
+െ	#X1e
+േ	#X2e::
+ൈ	#X2aI
+ൊ	#X1o
+ോ	#X2o::
+ൌ	#X2aU
+ൗ	#X2aU
+
+
+// speak Latin letters as English
+a	e:j
+b	bi:
+c	si:
+d	di:
+e	i:
+f	Ef
+g	dZi:
+h	e:tS
+i	a:j
+j	dZe:j
+k	ke:j
+l	El
+m	Em
+n	En
+o	o:
+p	pi:
+q	kju:
+r	a:R
+s	Es
+t	t#i:
+u	ju:
+v	vi:
+w	dVbVlju:
+x	Eks
+y	wa:j
+z	zEd
+
+// symbols
+%	S;at@ma:n@m  $max3
+*	ast@risk  $max3   // or [[ta:rika]]
+=	sam@m
++	ku:t.t.@n.@m
+&	samuccaj@m
+_.	bindu
+_,	aNkuS;@m
+_;	ro:d#ini
+_?	co:dj@cihn@m
+_!	a:S;c@rjacihn@m
+
+
+// numbers
+_0	p'u:Jj@m
+_1	'onny
+_2	r@n.d#y
+_3	m'u:nny
+_4	n'a:ly
+_5	'an^cy
+_6	'a:R2y
+_7	'e:r.y
+_8	'et.t.y
+_9	'onpaty
+_10	p'atty
+_1X	p'ati
+
+_11	p'atinonny
+_12	p'antran.t.y
+_19	p'attompatu
+_20	'irup'aty
+_2X	'irupatti
+_30	m'uppaty
+_3X	m'uppatti':
+_40	n'a:lppaty
+_4X	n'a:lppatti
+_50	'anpaty
+_5X	'anpatti
+_60	'aR2upaty
+_6X	'aR2upatti
+_70	'er.'upaty
+_7X	'er.'upatti
+_80	'en.paty
+_8X	'en.patti
+_90	t'on.n.u:r:
+_9X	t'on.n.u:t.t.i
+
+_0C	n'u:R
+_1C0	n'u:r:
+_1C	n'u:t.t.i
+_2C0	irunn'u:r
+_2C	irunn'u:t.t.i
+_3C0	munn'u:r
+_3C	munn'u:t.t.i
+_4C0	na:nnu:r
+_4C	na:nnu:t.t.i
+_5C0	'an^cu:r
+_5C	'an^cu:t.t.i
+_6C0	aR2unu:r
+_6C	aR2unu:t.t.i
+_7C0	'er.'unu:r
+_7C	'er.'unu:t.t.i
+_8C0	'en.n.u:r
+_8C	'en.n.u:t.t.i
+_9C0	tol.l.'a:jiRam
+_9C	tol.l.'a:jiRatti
+
+_0M1x	'a:jiRam
+_0M1	'a:jiRat.t.i
+_0M2x	l'aks.am
+_0M2	l'aks.at.t.i
+_0M3	k'o:t.i
+
+_dpt	_d'aS;a:mS;@m_
+
+
+
+

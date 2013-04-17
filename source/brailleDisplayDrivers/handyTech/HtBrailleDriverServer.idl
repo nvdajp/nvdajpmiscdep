@@ -1,0 +1,269 @@
+// ------------------------------ CVS Information ------------------------------
+// $Id: HtBrailleDriverServer.idl,v 1.13 2010/03/24 10:10:02 mme Exp $
+// -----------------------------------------------------------------------------
+
+
+// HtBrailleDriverServer.idl : IDL-Quellcode für HtBrailleDriverServer.dll
+//
+
+// Diese Datei wird mit dem MIDL-Tool bearbeitet,
+// um den Quellcode für die Typbibliothek (HtBrailleDriverServer.tlb)und die Abruffunktionen zu erzeugen.
+
+import "oaidl.idl";
+import "ocidl.idl";
+
+enum HtBrlErrorCode;
+
+    [
+        object,
+        uuid(43A71F9B-58EE-42D4-B58E-0F9FBA28D995),
+        dual,
+        helpstring("IHtBrailleDriver interface"),
+        pointer_default(unique)
+    ]
+    interface IHtBrailleDriver : IDispatch
+    {
+        [id(1), helpstring("method initialize")] HRESULT initialize([out, retval] enum HtBrlErrorCodes* errorCode);
+        [id(2), helpstring("method initializeWithId")] HRESULT initializeWithId([in] BSTR identifier, [out, retval] enum HtBrlErrorCodes* errorCode);
+        [id(3), helpstring("method terminate")] HRESULT terminate([out, retval] enum HtBrlErrorCodes* errorCode);
+        [id(4), helpstring("method sleep")] HRESULT sleep([in] VARIANT_BOOL setIntoSleep, [out, retval] enum HtBrlErrorCodes* errorCode);
+        [id(5), helpstring("method isSleeping")] HRESULT isSleeping([out] VARIANT_BOOL* isSleeping, [out, retval] enum HtBrlErrorCodes* errorCode);
+        [id(6), helpstring("method getDeviceName")] HRESULT getDeviceName([out] BSTR* deviceName, [out, retval] enum HtBrlErrorCodes* errorCode);
+        [id(7), helpstring("method getPortDescriptor")] HRESULT getPortDescriptor([out] BSTR* portDescriptor, [out, retval] enum HtBrlErrorCodes* errorCode);
+        [id(8), helpstring("method displayText")] HRESULT displayText([in, out] SAFEARRAY(unsigned char)* dotsString, [out, retval] enum HtBrlErrorCodes* errorCode);
+        [id(9), helpstring("method clearText")] HRESULT clearText([out, retval] enum HtBrlErrorCodes* errorCode);
+        [id(10), helpstring("method displayStatus")] HRESULT displayStatus([in, out] SAFEARRAY(unsigned char)* dotsString, [out, retval] enum HtBrlErrorCodes* errorCode);
+        [id(11), helpstring("method clearStatus")] HRESULT clearStatus([out, retval] enum HtBrlErrorCodes* errorCode);
+        [id(12), helpstring("method supportCustomLayout")] HRESULT supportCustomLayout([out] VARIANT_BOOL* supportCustomLayout, [out, retval] enum HtBrlErrorCodes* errorCode);
+        [id(13), helpstring("method setCustomLayout")] HRESULT setCustomLayout([in] int statusAreaStart, [in] int statusAreaLength, [in] int textAreaStart, [in] int textAreaLength, [out, retval] enum HtBrlErrorCodes* errorCode);
+        [id(14), helpstring("method getCustomLayout")] HRESULT getCustomLayout([out] int* statusAreaStart, [out] int* statusAreaLength, [out] int* textAreaStart, [out] int* textAreaLength, [out, retval] enum HtBrlErrorCodes* errorCode);
+        [id(15), helpstring("method getCurrentStatusLength")] HRESULT getCurrentStatusLength([out] int* statusLength, [out, retval] enum HtBrlErrorCodes* errorCode);
+        [id(16), helpstring("method getCurrentTextLength")] HRESULT getCurrentTextLength([out] int* textLength, [out, retval] enum HtBrlErrorCodes* errorCode);
+        [id(17), helpstring("method getTotalCellCount")] HRESULT getTotalCellCount([out] int* totalCellCount, [out, retval] enum HtBrlErrorCodes* errorCode);
+        [id(18), helpstring("method showStatus")] HRESULT showStatus([in] VARIANT_BOOL showStatus, [out, retval] enum HtBrlErrorCodes* errorCode);
+        [id(19), helpstring("method isStatusShown")] HRESULT isStatusShown([out] VARIANT_BOOL* isStatusShown, [out, retval] enum HtBrlErrorCodes* errorCode);
+        [id(20), helpstring("method enableCursor")] HRESULT enableCursor([in] VARIANT_BOOL enableCursor, [out, retval] enum HtBrlErrorCodes* errorCode);
+        [id(21), helpstring("method isCursorEnabled")] HRESULT isCursorEnabled([out] VARIANT_BOOL* isCursorEnabled, [out, retval] enum HtBrlErrorCodes* errorCode);
+        [id(22), helpstring("method configureCursor")] HRESULT configureCursor([in] int blinkRate, [in] unsigned char cursorShape, [out, retval] enum HtBrlErrorCodes* errorCode);
+        [id(23), helpstring("method setCursorPos")] HRESULT setCursorPos([in] int position, [out, retval] enum HtBrlErrorCodes* errorCode);
+        [id(24), helpstring("method enableBrailleInput")] HRESULT enableBrailleInput([in] VARIANT_BOOL enableBrailleInput, [in] enum HtBrlInputModes inputMode, [out, retval] enum HtBrlErrorCodes* errorCode);
+        [id(25), helpstring("method isBrailleInputEnabled")] HRESULT isBrailleInputEnabled([out] VARIANT_BOOL* isBrailleInputEnabled, [out, retval] enum HtBrlErrorCodes* errorCode);
+        [id(26), helpstring("method setScreenReaderKey")] HRESULT setScreenReaderKey([in] unsigned char virtualKey, [out, retval] enum HtBrlErrorCodes* errorCode);
+        [id(27), helpstring("method turnOnMenuMode")] HRESULT turnOnMenuMode([out, retval] enum HtBrlErrorCodes* errorCode);
+        [id(28), helpstring("method getBrailleDeviceId")] HRESULT getBrailleDeviceId([out] enum HtBrlDevice* brailleDevice, [out, retval] enum HtBrlErrorCodes* errorCode);
+        [id(29), helpstring("method supportAtc")] HRESULT supportAtc([out] VARIANT_BOOL* supportAtc, [out, retval] enum HtBrlErrorCodes* errorCode);
+        [id(30), helpstring("method activateAtc")] HRESULT activateAtc([in] VARIANT_BOOL activateAtc, [out, retval] enum HtBrlErrorCodes* errorCode);
+        [id(31), helpstring("method isAtcActive")] HRESULT isAtcActive([out] VARIANT_BOOL* isActive, [out, retval] enum HtBrlErrorCodes* errorCode);
+        [id(32), helpstring("method enableAtcLogger")] HRESULT enableAtcLogger([in] VARIANT_BOOL enableLogger, [out, retval] enum HtBrlErrorCodes* errorCode);
+        [id(33), helpstring("method isAtcLoggerActive")] HRESULT isAtcLoggerActive([out] VARIANT_BOOL* isActive, [out, retval] enum HtBrlErrorCodes* errorCode);
+        [id(34), helpstring("method startConfigDialog")] HRESULT startConfigDialog([in] VARIANT_BOOL dialogIsBlocking, [out, retval] enum HtBrlErrorCodes* errorCode);
+        [id(35), helpstring("method setLanguage")] HRESULT setLanguage([in] int languageId, [out, retval] enum HtBrlErrorCodes* errorCode);
+        [id(36), helpstring("method getAvailableLanguageIds")] HRESULT getAvailableLanguageIds([in, out] SAFEARRAY(int)* languageIds, [in] int maxBuffer, [out] int* availableIds, [out, retval] enum HtBrlErrorCodes* errorCode);
+    };
+
+[
+    uuid(33257EFB-336F-4680-B94E-F5013BA6B9B3),
+    version(1.0),
+    helpstring("HtBrailleDriverServer 1.0 type library")
+]
+library HTBRAILLEDRIVERSERVERLib
+{
+    importlib("stdole32.tlb");
+    importlib("stdole2.tlb");
+
+    [public]
+    typedef enum HtBrlErrorCodes {
+        ERR_NO_ERROR                        =  0,
+        ERR_UNKNOWN                         =  1,
+        ERR_NOT_IMPLEMENTED                 =  2,
+        ERR_INVALID_ARGUMENTS               =  3,
+        ERR_NO_DEVICE_CONNECTED             =  4,
+        ERR_CONNECTION_LOST                 =  5,
+        ERR_DRIVER_NOT_ONLINE               =  6,
+        ERR_DRIVER_IS_RUNNING               =  7,
+        ERR_DRIVER_IS_SLEEPING              =  8,
+        ERR_DRIVER_IS_ALIVE                 =  9,
+        ERR_HAS_DEDICATED_STATUS            = 10,
+        ERR_STATUS_ALREADY_SHOWN            = 11,
+        ERR_STATUS_ALREADY_HIDDEN           = 12,
+        ERR_INVALID_LAYOUT                  = 13,
+        ERR_CURSOR_ALREADY_STARTED          = 14,
+        ERR_CURSOR_NOT_STARTED              = 15,
+        ERR_INVALID_CURSOR_POS              = 16,
+        ERR_NO_MENU_MODE                    = 17,
+        ERR_BRAILLE_INPUT_ALREADY_STARTED   = 18,
+        ERR_BRAILLE_INPUT_ALREADY_STOPPED   = 19,
+        ERR_CANNOT_WAKE_UP_DRIVER           = 20,
+        ERR_BRAILLE_INPUT_CANNOT_ACTIVATED  = 21,
+        ERR_ATC_NOT_SUPPORTED               = 22,
+        ERR_ATC_IS_RUNNING                  = 23,
+        ERR_ATC_IS_NOT_RUNNING              = 24,
+        ERR_ATC_LOGGER_IS_RUNNING           = 25,
+        ERR_ATC_LOGGER_IS_NOT_RUNNING       = 26,
+        ERR_CONFIG_DIALOG_CANNOT_STARTED    = 27,
+        ERR_LANGUAGE_NOT_SUPPORTED          = 28,
+        ERR_MORE_DATA                       = 29,
+        ERR_FEATURE_DISABLED                = 30
+    } HtBrlErrorCodes;
+
+    typedef enum HtBrlInputModes {
+        INJECT_BRAILLE_INPUT_INSIDE     = 0,
+        INJECT_BRAILLE_INPUT_OUTSIDE    = 1
+    } HtBrlInputModes;
+
+    typedef enum HtBrlKeys {
+        KEY_NO_KEY          =  0,
+        KEY_B1              =  1,
+        KEY_B2              =  2,
+        KEY_B3              =  3,
+        KEY_B4              =  4,
+        KEY_B5              =  5,
+        KEY_B6              =  6,
+        KEY_B7              =  7,
+        KEY_B8              =  8,
+        KEY_B9              =  9,
+        KEY_B10             = 10,
+        KEY_B11             = 11,
+        KEY_B12             = 12,
+        KEY_B13             = 13,
+        KEY_B14             = 14,
+        KEY_N0              = 16,
+        KEY_N1              = 17,
+        KEY_N2              = 18,
+        KEY_N3              = 19,
+        KEY_N4              = 20,
+        KEY_N5              = 21,
+        KEY_N6              = 22,
+        KEY_N7              = 23,
+        KEY_N8              = 24,
+        KEY_N9              = 25,
+        KEY_LEFT            = 27,
+        KEY_RIGHT           = 28,
+        KEY_UP              = 29,
+        KEY_DOWN            = 30,
+        KEY_SPACE           = 31,
+        KEY_LEFT_SPACE      = 32,
+        KEY_RIGHT_SPACE     = 33,
+        KEY_ESC             = 34,
+        KEY_ENTER           = 35,
+        KEY_ROUTING         = 36,
+        KEY_STATUS_ROUTING  = 37,
+        KEY_BOOKWORM_LEFT   = 38,
+        KEY_BOOKWORM_RIGHT  = 39,
+        KEY_BOOKWORM_ESC    = 40,
+        KEY_BOOKWORM_ENTER  = 41,
+        KEY_TLU             = 42,
+        KEY_TLD             = 43,
+        KEY_TRU             = 44,
+        KEY_TRD             = 45
+    } HtBrlKeys;
+
+    typedef enum HtBrlKeyEvents {
+        KEYEVENT_ESC            =  0,
+        KEYEVENT_ALT            =  1,
+        KEYEVENT_ENTER          =  2,
+        KEYEVENT_BACKSPACE      =  3,
+        KEYEVENT_DELETE         =  4,
+        KEYEVENT_INSERT         =  5,
+        KEYEVENT_TAB            =  6,
+        KEYEVENT_CURSOR_UP      =  7,
+        KEYEVENT_CURSOR_DOWN    =  8,
+        KEYEVENT_CURSOR_LEFT    =  9,
+        KEYEVENT_CURSOR_RIGHT   = 10,
+        KEYEVENT_PAGE_UP        = 11,
+        KEYEVENT_PAGE_DOWN      = 12,
+        KEYEVENT_HOME           = 13,
+        KEYEVENT_END            = 14,
+        KEYEVENT_WIN            = 15,
+        KEYEVENT_APPLICATION    = 16,
+        KEYEVENT_PAUSE          = 17,
+        KEYEVENT_SPACE          = 18,
+        KEYEVENT_F1             = 19,
+        KEYEVENT_F2             = 20,
+        KEYEVENT_F3             = 21,
+        KEYEVENT_F4             = 22,
+        KEYEVENT_F5             = 23,
+        KEYEVENT_F6             = 24,
+        KEYEVENT_F7             = 25,
+        KEYEVENT_F8             = 26,
+        KEYEVENT_F9             = 27,
+        KEYEVENT_F10            = 28,
+        KEYEVENT_F11            = 29,
+        KEYEVENT_F12            = 30,
+        KEYEVENT_CHARACTER      = 31
+    } HtBrlKeyEvents;
+
+    typedef enum HtBrlShiftStates {
+        SHIFTED_CTRL                = 0,
+        SHIFTED_ALT                 = 1,
+        SHIFTED_SHIFT               = 2,
+        SHIFTED_WIN                 = 3,
+        SHIFTED_SR_KEY              = 4
+    } HtBrlShiftStates;
+
+    typedef enum HtBrlDevice {
+        DEVICE_NO_DEVICE                = 0,
+        DEVICE_MODULAR_80               = 1,
+        DEVICE_MODULAR_40               = 2,
+        DEVICE_MODULAR_20               = 3,
+        DEVICE_MODULAR_EVOLUTION_88     = 4,
+        DEVICE_MODULAR_EVOLUTION_64     = 5,
+        DEVICE_WAVE                     = 6,
+        DEVICE_BRAILLINO                = 7,
+        DEVICE_STAR_40                  = 8,
+        DEVICE_STAR_80                  = 9,
+        DEVICE_BOOKWORM                 = 10,
+        DEVICE_EASYBRAILLE              = 11,
+        DEVICE_ATC_BRAILLE_NAVIGATOR    = 12,
+        DEVICE_ACTIVE_BRAILLE           = 13
+    } HtBrlDevice;
+
+    typedef enum HtAtcAction {
+        ATCACTION_DO_NOTHING                = 0,
+        ATCACTION_SAY_CHARACTER             = 1,
+        ATCACTION_SAY_WORD                  = 2,
+        ATCACTION_SAY_LINE                  = 3,
+        ATCACTION_LOW_SIGNAL                = 4,
+        ATCACTION_HIGH_SIGNAL               = 5,
+        ATCACTION_SAY_LINE_GO_NEXT_LINE     = 6,
+        ATCACTION_READ_ALOUD                = 7,
+        ATCACTION_SAY_ATTRIBUTES            = 8,
+        ATCACTION_SAY_ATTRIBUTE_CHANGES     = 9,
+        ATCACTION_ROUTE_CURSOR              = 10,
+        ATCACTION_SHOW_NEXT_LINE            = 11,
+        ATCACTION_SHOW_PREV_LINE            = 12,
+        ATCACTION_LINEEND_SIGNAL            = 13
+    } HtAtcAction;
+
+
+    [
+        uuid(EF551F82-1C7E-421F-963D-D9D03548785A),
+        helpstring("_IHtBrailleDriver event interface")
+    ]
+    dispinterface IHtBrailleDriverSink
+    {
+        properties:
+        methods:
+        [id(1), helpstring("method onKeysPressed")] HRESULT onKeysPressed([in, out] SAFEARRAY(enum HtBrlKeys)* keys, [in] int cursorRoutingPosition);
+        [id(2), helpstring("method onLayoutChanged")] HRESULT onLayoutChanged();
+        [id(3), helpstring("method sayString")] HRESULT sayString([in] BSTR stringToSay);
+        [id(4), helpstring("method translateDotsToChar")] HRESULT translateTotsToChar([in] unsigned char dots, [out] short* character);
+        [id(5), helpstring("method processingBrailleInput")] HRESULT processingBrailleInput([in] enum HtBrlKeyEvents keyEvent, [in, out] SAFEARRAY(enum HtBrlShiftStates)* shiftedKeys, [in] unsigned char dots);
+        [id(6), helpstring("method onBrailleDeviceConnected")] HRESULT onBrailleDeviceConnected([in] enum HtBrlDevice brailleDevice);
+        [id(7), helpstring("method onPositionChanged")] HRESULT onPositionChanged([in] int position);
+        [id(8), helpstring("method onAtcEventAction")] HRESULT onAtcEventAction([in] int atcAction, [in] int readingPosition, [in] int param1, [in] int param2);
+//      [id(9), helpstring("method abortRunningAtcActions")] HRESULT abortRunningAtcActions();
+    };
+
+
+    [
+        uuid(209445BA-92ED-4AB2-83EC-F24ACEE77EE0),
+        helpstring("HtBrailleDriver Class")
+    ]
+    coclass HtBrailleDriver
+    {
+        [default] interface IHtBrailleDriver;
+        [default, source] dispinterface IHtBrailleDriverSink;
+    };
+};
+
