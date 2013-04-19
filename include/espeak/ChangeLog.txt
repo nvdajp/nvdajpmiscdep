@@ -1,7 +1,13 @@
-espeak 1.47.06  15.04.2013
-espeak 1.47.05  08.04.2013
+espeak 1.47.07  18.04.2013
+Language data changes only.
 
-Bug fixes.
+espeak 1.47.06  15.04.2013
+Bug fix for names of non-ascii digits.
+
+RISC OS version:
+  Fix for systems which have 44010Hz but not 22050Hz audio.
+  Now runs OK in ARMv7 mode.
+
 
 espeak 1.47.04  02.04.2013
 

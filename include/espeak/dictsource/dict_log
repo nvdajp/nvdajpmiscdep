@@ -26,9 +26,9 @@ Compiling: '/home/jsd1/speechdata/dictsource/bg_rules'
 
 Using phonemetable: 'bn'
 Compiling: '/home/jsd1/speechdata/dictsource/bn_list'
-	253 entries
+	252 entries
 Compiling: '/home/jsd1/speechdata/dictsource/bn_rules'
-	157 rules, 67 groups (66)
+	163 rules, 67 groups (66)
 
 Using phonemetable: 'ca'
 Compiling: '/home/jsd1/speechdata/dictsource/ca_list'
@@ -68,7 +68,7 @@ Compiling: '/home/jsd1/speechdata/dictsource/el_rules'
 
 Using phonemetable: 'en'
 Compiling: '/home/jsd1/speechdata/dictsource/en_list'
-	4116 entries
+	4117 entries
 Compiling: '/home/jsd1/speechdata/dictsource/en_rules'
 	5843 rules, 101 groups (0)
 
@@ -280,9 +280,9 @@ Compiling: '/home/jsd1/speechdata/dictsource/pl_rules'
 
 Using phonemetable: 'pt'
 Compiling: '/home/jsd1/speechdata/dictsource/pt_list'
-	1198 entries
+	1207 entries
 Compiling: '/home/jsd1/speechdata/dictsource/pt_rules'
-	961 rules, 39 groups (0)
+	964 rules, 39 groups (0)
 
 Using phonemetable: 'ro'
 Compiling: '/home/jsd1/speechdata/dictsource/ro_list'
