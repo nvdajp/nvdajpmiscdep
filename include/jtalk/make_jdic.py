@@ -355,6 +355,8 @@ def filter_jdic(s):
 	elif a[0] == '各党' and len(a) == 15:
 		a.append('カク トー')
 		s = ",".join(a)
+	elif a[0] == '金' and a[12] == 'キム':
+		s = ""
 	return s
 
 def convert_jdic_file(src_file, src_enc, dest_file, dest_enc):
