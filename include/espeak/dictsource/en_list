@@ -17,7 +17,7 @@
 // ?8  Use full vowel, not schwa in some word endings
 
 // $alt1   use strong ending (-an, -table, -inal, -ier)
-// $alt2   use weak ending (ate, ery, ess, ile, men)
+// $alt2   use weak ending (ard, ate, ery, ess, ile, men)
 // $alt3   use weak first vowel, a->[a#], e->[@], o->[0#]
 // $alt4   separate 'h', not 'th'
 // $alt6   'to'
@@ -106,6 +106,8 @@ _hok	h'Uk
 
 // character names
 _cap	k,ap@-t@L
+_sub	s,VbskrIpt||
+_sup	s,u:p3skrIpt||
 _?A	l,Et3
 _??	sImb@L
 _braille br'eIl
@@ -149,19 +151,14 @@ _}	raItbreIs
 _¡	%Inv,3:tI2dEkskl@m'eIS@n
 _¦	broUk@nb'A@
 _¨	daIa#r'i:sIs
-_ª	fEmI2nIn'O@dI2n@L
 _«	lEft'gIl@mEt
 _­	makr0n
-²	tu:
-³	Tri:
-_¹	su:p@skrIptw'0n
-_²	su:p@skrIptt'u:
-_³	su:p@skrIptT'ri:
+²	tu:	$native
+³	Tri:	$native
+
 _´	a#kju:taksEnt
 _·	mId@Ld0t
 _¸	sEd'Il@
-//_º	maskjUlIn'O@dI2n@L
-_º	dI2gr'i:z
 _»	raIt'gIl@mEt
 _¿	%Inv,3:tI2dkw'EstS@n
 
@@ -285,42 +282,42 @@ _ja	dZ'ap@ni:z
 _zh	tS'aIni:z
 
 // Cyrillic letters
-а	a
-б	bE
-в	vE
-г	gE
-д	dE
-е	jE
-ё	jo
-ж	ZE
-з	zE
-и	I
+а	a:
+б	bE:
+в	vE:
+г	gE:
+д	dE:
+е	jE:
+ё	jo:
+ж	ZE:
+з	zE:
+и	I:
 й	,Ik@-*'atkOji
-к	ka
+к	ka:
 л	El/1
 м	Em
 н	En
-о	o
-п	pE
+о	o:
+п	pE:
 р	Er
 с	Es
-т	tE
-у	u
+т	tE:
+у	u|:
 ф	Ef
-х	xa
-ц	tsE
-ч	tSE
-ш	Sa
-щ	StSa
+х	xa:
+ц	tsE:
+ч	tSE:
+ш	Sa:
+щ	StSa:
 ъ	jEr
 ы	j'Eru
 ь	j'eri
-э	E
-ю	ju
-я	ja
-ћ	tS;E
-ђ	djE
-ќ	kjE
+э	E:
+ю	ju|:
+я	ja:
+ћ	tS;E:
+ђ	djE:
+ќ	kjE:
 
 
 // Arabic letters
@@ -508,7 +505,7 @@ _3o	T'3:
 _5o	f'If
 _20o	tw'Enti@
 _30o	T'3:ti@
-?3 _30o T'IRti@
+?5 _30o T'IRti@
 _40o	f'o@ti@
 _50o	f'Ifti@
 _60o	s'Iksti@
@@ -569,6 +566,7 @@ i.e	aIi:_!   $pause
 imo	$abbrev
 inlb	$abbrev
 ios	$abbrev
+ipa	$abbrev
 irc	$abbrev
 irs	$abbrev
 isbn	$abbrev
@@ -697,6 +695,7 @@ adieu		a#dju:
 adieus		a#dju:z
 adieux		a#dju:z
 adios		aDj'o:s
+adjective	$1
 admirable	adm@r@b@L
 admirably	adm@r@bli
 admonition	adm@n'IS@n
@@ -807,7 +806,7 @@ antibody	$1
 antichrist	$1
 anticline	$1
 antidote	$1
-antifreze	$1
+antifreeze	$1
 antigen		$1
 antihero	$1
 antilog		$1
@@ -1274,6 +1273,7 @@ corral		k@r'al
 cosmos		k0zm0s
 ?3 cosmos	k0zmoUs
 cougar		ku:g3
+counteract	$3
 countered	kaUnt3d
 (coup de grâce)	ku:d@||gr'A:
 coupon		ku:p0n
@@ -1434,6 +1434,7 @@ duvet		du:veI
 d'ye		dj@
 dynamo		$1
 
+earlobe		i@3loUb
 early		3:lI
 eavesdrop	i:vzdr0p
 ebay		i:beI
@@ -1546,6 +1547,7 @@ eyrie		i@ri
 facade		f@sA:d
 façade		f@sA:d
 facetious	$alt3
+faculty		fak@Lt2i
 faeces		fi:si:z
 fahrenheit	far@nhaIt
 fairest		fe@r@st
@@ -1607,7 +1609,6 @@ fortune		fO@tSu:n
 foyer		fOIeI
 freelance	fri:laans
 freon		fri:0n
-frequent	frI2kwEnt $verb
 fricassee	frIka#seI
 frigate		frIg@t
 fringer		frIndZ3	// infringer
@@ -1718,6 +1719,7 @@ hello		h@loU
 henceforth	hEnsfo@T
 ?3 herb		3:b
 hercules	h3:kjUli:z
+heredity	h3rEdI2ti
 ?3 hereford	h3:f3d
 heretical	hI2rEtI2k@L
 hereto		hi@3'tu:
@@ -2819,6 +2821,7 @@ taffeta		tafI#t@
 takel		tak@L
 talent		tal@nt
 tallyho		talI'hoU
+timbre		tamb3
 tampon		tamp0n
 tangerine	tandZ@r'i:n
 taoiseach	ti:S@x
@@ -2853,6 +2856,7 @@ temperature	tEmprI2tS3
 ?!3 temporary	tEmpr@rI
 ?3 template	tEmpl@t
 therefore	$1
+thereof		De@r'0v
 thermos		T3:m@s
 thermostable	$alt1
 thesis		Ti:sIs
@@ -3000,6 +3004,7 @@ vertices	v3:tIsi:z
 vestige		vEstI2dZ
 vex		vEks        // for vexed
 viagra		vaI'agr@
+vibrato		vI2brA:toU
 vicar		vIk3
 vigilante	vIdZI2l'anti
 vignette	vInj'Et
@@ -3182,6 +3187,7 @@ Belgrade	$2
 Belize		bEl'i:z
 Bengal		b,Eng'O:l
 Benin		bEnIn
+Berkeley	b3:kli
 Bhutan		bu:t'an
 Bideford	bIdIf@d
 Bogota		b0g@t'A:
@@ -3218,6 +3224,7 @@ Cruz		kru:z
 Cyprus		saIpr@s
 Dahomey		$alt3
 Dallas		dal@s
+Dagestan	dA:gIst'A:n
 Damascus	$alt3
 Dakota		$alt3
 Danish		deInIS
@@ -3247,6 +3254,7 @@ Gomera		goUm'e@r@
 Gurmukhi	gU@mUki
 Harare		ha#rA:ri
 Hanoi		han'OI
+Harvard		$alt2
 Havana		ha#van@
 Hawaii		h@w'aIi:
 Hawai'i		h@w'aIi:
@@ -3283,6 +3291,8 @@ Korean		kOr'i:@n
 ?3 Korean	k3r'i:@n
 Kosovo		k0s@voU
 Kuala		kwA:la#
+Kyrgyz		k3:rgIz
+Kyrgyzstan	k3:rgIst'A:n
 Lagos		leIg0s
 Lahore		$alt3
 Lebanon		lEb@n0n
@@ -3442,10 +3452,8 @@ Abe		eIb
 Abu		abu:
 Abraham		eIbr@ham
 Ada		eId@  $onlys
-Andrea		$2
 Adrian		eIdri@n
 Agatha		aga#T@
-Angelika	$2
 Aggie		agi
 Agnes		agn@s
 Aguilera	agi:l'e@r@
@@ -3470,7 +3478,8 @@ Amy		eImi
 Andre		0ndreI
 Andrea		andri@
 Andreas		A:ndr'eI@s
-Angela		$1
+Angela		andZ@l@
+Angelika	$2
 Anita		$alt3
 Anthony		ant@ni
 Anton		ant0n
@@ -3590,11 +3599,13 @@ Giordino	dZO@d'i:noU
 Giovanni	dZ@v'A:ni
 Graeme		greI@m
 Graham		greI@m
+Gruffydd	grIfIT
 Guido		gwi:doU
 Guinevere	gwInI#vi@3
 Hadrian		heIdri:@n
 Hamish		heImIS
 Harriet		hari@t
+Harvey		hA@vi
 Heidi		haIdi
 Hecate		hEk@teI
 Hekate		hEk@teI
@@ -3652,6 +3663,7 @@ Louise		lu:w'i:z
 Luigi		lu:'i:dZi
 Luis		lu:Is
 Lupe		lu:peI
+Luther		lu:T3
 Madeleine	mad@lI2n
 Madeline	mad@lI2n
 Maeve		meIv
@@ -3771,6 +3783,7 @@ Vanessa		$alt3
 Wallace		w0lI#s
 Wally		w0li
 ?3 William	wIlj@m
+Yerevan		jEr@v'an
 Yves		i:v
 Yvonne		$2
 Zoe		zoUi
@@ -3911,6 +3924,7 @@ at               at		$nounf $only $u
 (at once)        a#t_w0ns
 ?6 (at once)     a#t_wVns
 (at will)        a#t_w'Il
+(at & t)	'eIt2i:@nt'i:
 
 with             wID		$u
 (with the)       w%IDD@2	$nounf

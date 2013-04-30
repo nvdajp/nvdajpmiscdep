@@ -16,6 +16,12 @@ Compiling: '/home/jsd1/speechdata/dictsource/an_list'
 Compiling: '/home/jsd1/speechdata/dictsource/an_rules'
 	172 rules, 29 groups (0)
 
+Using phonemetable: 'az'
+Compiling: '/home/jsd1/speechdata/dictsource/az_list'
+	84 entries
+Compiling: '/home/jsd1/speechdata/dictsource/az_rules'
+	58 rules, 34 groups (0)
+
 Using phonemetable: 'bg'
 Compiling: '/home/jsd1/speechdata/dictsource/bg_listx'
 	2790 entries
@@ -56,7 +62,7 @@ Compiling: '/home/jsd1/speechdata/dictsource/da_rules'
 
 Using phonemetable: 'de'
 Compiling: '/home/jsd1/speechdata/dictsource/de_list'
-	648 entries
+	650 entries
 Compiling: '/home/jsd1/speechdata/dictsource/de_rules'
 	1241 rules, 34 groups (0)
 
@@ -68,9 +74,9 @@ Compiling: '/home/jsd1/speechdata/dictsource/el_rules'
 
 Using phonemetable: 'en'
 Compiling: '/home/jsd1/speechdata/dictsource/en_list'
-	4117 entries
+	4131 entries
 Compiling: '/home/jsd1/speechdata/dictsource/en_rules'
-	5843 rules, 101 groups (0)
+	5852 rules, 101 groups (0)
 
 Using phonemetable: 'eo'
 Compiling: '/home/jsd1/speechdata/dictsource/eo_list'
@@ -82,7 +88,7 @@ Using phonemetable: 'es'
 Compiling: '/home/jsd1/speechdata/dictsource/es_list'
 	358 entries
 Compiling: '/home/jsd1/speechdata/dictsource/es_rules'
-	184 rules, 27 groups (0)
+	187 rules, 27 groups (0)
 
 Using phonemetable: 'et'
 Compiling: '/home/jsd1/speechdata/dictsource/et_list'
@@ -110,9 +116,9 @@ Compiling: '/home/jsd1/speechdata/dictsource/fr_rules'
 
 Using phonemetable: 'ga'
 Compiling: '/home/jsd1/speechdata/dictsource/ga_list'
-	218 entries
+	226 entries
 Compiling: '/home/jsd1/speechdata/dictsource/ga_rules'
-	356 rules, 34 groups (0)
+	408 rules, 34 groups (0)
 
 Using phonemetable: 'grc'
 Compiling: '/home/jsd1/speechdata/dictsource/grc_list'
@@ -130,7 +136,7 @@ Using phonemetable: 'hi'
 Compiling: '/home/jsd1/speechdata/dictsource/hi_list'
 	259 entries
 Compiling: '/home/jsd1/speechdata/dictsource/hi_rules'
-	252 rules, 87 groups (86)
+	265 rules, 87 groups (86)
 
 Using phonemetable: 'hu'
 Compiling: '/home/jsd1/speechdata/dictsource/hu_list'
@@ -140,9 +146,9 @@ Compiling: '/home/jsd1/speechdata/dictsource/hu_rules'
 
 Using phonemetable: 'hy'
 Compiling: '/home/jsd1/speechdata/dictsource/hy_list'
-	70 entries
+	112 entries
 Compiling: '/home/jsd1/speechdata/dictsource/hy_rules'
-	93 rules, 39 groups (38)
+	94 rules, 38 groups (38)
 
 Using phonemetable: 'id'
 Compiling: '/home/jsd1/speechdata/dictsource/id_list'
@@ -246,13 +252,13 @@ Using phonemetable: 'ne'
 Compiling: '/home/jsd1/speechdata/dictsource/ne_list'
 	194 entries
 Compiling: '/home/jsd1/speechdata/dictsource/ne_rules'
-	524 rules, 100 groups (92)
+	520 rules, 100 groups (92)
 
 Using phonemetable: 'nl'
 Compiling: '/home/jsd1/speechdata/dictsource/nl_list'
-	1507 entries
+	1519 entries
 Compiling: '/home/jsd1/speechdata/dictsource/nl_rules'
-	698 rules, 34 groups (0)
+	726 rules, 35 groups (0)
 
 Using phonemetable: 'no'
 Compiling: '/home/jsd1/speechdata/dictsource/no_list'
@@ -280,9 +286,9 @@ Compiling: '/home/jsd1/speechdata/dictsource/pl_rules'
 
 Using phonemetable: 'pt'
 Compiling: '/home/jsd1/speechdata/dictsource/pt_list'
-	1207 entries
+	1246 entries
 Compiling: '/home/jsd1/speechdata/dictsource/pt_rules'
-	964 rules, 39 groups (0)
+	997 rules, 39 groups (0)
 
 Using phonemetable: 'ro'
 Compiling: '/home/jsd1/speechdata/dictsource/ro_list'
@@ -304,7 +310,7 @@ Compiling: '/home/jsd1/speechdata/dictsource/si_rules'
 
 Using phonemetable: 'sk'
 Compiling: '/home/jsd1/speechdata/dictsource/sk_list'
-	321 entries
+	347 entries
 Compiling: '/home/jsd1/speechdata/dictsource/sk_rules'
 	535 rules, 46 groups (0)
 
@@ -312,7 +318,7 @@ Using phonemetable: 'sl'
 Compiling: '/home/jsd1/speechdata/dictsource/sl_list'
 	105 entries
 Compiling: '/home/jsd1/speechdata/dictsource/sl_rules'
-	81 rules, 30 groups (0)
+	84 rules, 31 groups (0)
 
 Using phonemetable: 'sq'
 Compiling: '/home/jsd1/speechdata/dictsource/sq_list'
@@ -348,7 +354,7 @@ Using phonemetable: 'tr'
 Compiling: '/home/jsd1/speechdata/dictsource/tr_list'
 	252 entries
 Compiling: '/home/jsd1/speechdata/dictsource/tr_rules'
-	200 rules, 33 groups (0)
+	207 rules, 34 groups (0)
 
 Using phonemetable: 'ur'
 Compiling: '/home/jsd1/speechdata/dictsource/ur_list'
@@ -360,7 +366,7 @@ Using phonemetable: 'vi'
 Compiling: '/home/jsd1/speechdata/dictsource/vi_list'
 	135 entries
 Compiling: '/home/jsd1/speechdata/dictsource/vi_rules'
-	463 rules, 97 groups (0)
+	547 rules, 97 groups (0)
 
 Using phonemetable: 'zh'
 Compiling: '/home/jsd1/speechdata/dictsource/zh_list'

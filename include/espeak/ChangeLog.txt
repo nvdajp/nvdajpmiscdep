@@ -1,3 +1,18 @@
+espeak 1.47.09  29.04.2013
+  Bug fix (lookup in *_list occasionally found the wrong word).
+
+espeak 1.47.08  26.04.2013
+
+Automatically generate character names for subscript and
+superscript characters.
+
+Use internal ctype data for character codes up to U+024F.
+
+Add API function  espeak_TextToPhonemes().
+
+Add test language az, Azerbaijani.
+
+
 espeak 1.47.07  18.04.2013
 Language data changes only.
 

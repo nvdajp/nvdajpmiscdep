@@ -79,7 +79,7 @@ ALPHABET alphabets [] = {
     {"_ar",    OFFSET_ARABIC,   0x600, 0x6ff,  0, 0},
     {"_dv",    OFFSET_THAANA,   0x780, 0x7bf,  0, 0},
     {"_hi",    OFFSET_DEVANAGARI, 0x900, 0x97f,L('h','i'), AL_WORDS},
-    {"_bn",    OFFSET_BENGALI,  0x0980, 0x9ff, L('b','n'), 0},
+    {"_bn",    OFFSET_BENGALI,  0x0980, 0x9ff, L('b','n'), AL_WORDS},
     {"_gur",   OFFSET_GURMUKHI, 0xa00, 0xa7f,  L('p','a'), AL_WORDS},
     {"_gu",    OFFSET_GUJARATI, 0xa80, 0xaff,  0, 0},
     {"_or",    OFFSET_ORIYA,    0xb00, 0xb7f,  0, 0},
@@ -87,7 +87,7 @@ ALPHABET alphabets [] = {
     {"_te",    OFFSET_TELUGU,   0xc00, 0xc7f,  L('t','e'), 0},
     {"_kn",    OFFSET_KANNADA,  0xc80, 0xcff,  L('k','n'), AL_WORDS},
     {"_ml",    OFFSET_MALAYALAM,0xd00, 0xd7f,  L('m','l'), AL_WORDS},
-    {"_si",    OFFSET_SINHALA,  0xd80, 0xdff,  0, 0},
+    {"_si",    OFFSET_SINHALA,  0xd80, 0xdff,  L('s','i'), AL_WORDS},
     {"_th",    OFFSET_THAI,     0xe00, 0xe7f,  0, 0},
     {"_lo",    OFFSET_LAO,      0xe80, 0xeff,  0, 0},
     {"_ti",    OFFSET_TIBET,    0xf00, 0xfff,  0, 0},
@@ -844,6 +844,7 @@ Translator *SelectTranslator(const char *name)
 			tr->langopts.stress_rule = STRESSPOSN_1L;
 			tr->langopts.numbers = 1;
 			tr->langopts.accents = 2;  // 'capital' after letter name
+			tr->langopts.param[LOPT_UNPRONOUNCABLE] = 3;  // don't count apostrophe
 		}
 		break;
 
@@ -971,7 +972,7 @@ SetLengthMods(tr,3);  // all equal
 			SetLetterBits(tr,LETTERGP_VOWEL2,hy_vowels);
 			SetLetterBits(tr,LETTERGP_C,hy_consonants);
 			tr->langopts.max_initial_consonants = 6;
-			tr->langopts.numbers = NUM_DECIMAL_COMMA | NUM_OMIT_1_HUNDRED;
+			tr->langopts.numbers = NUM_DECIMAL_COMMA | NUM_ALLOW_SPACE | NUM_OMIT_1_HUNDRED;
 		//	tr->langopts.param[LOPT_UNPRONOUNCABLE] = 1;   // disable check for unpronouncable words
 		}
 		break;
@@ -1289,6 +1290,7 @@ SetLengthMods(tr,3);  // all equal
 			ResetLetterBits(tr,0x2);
 			SetLetterBits(tr,1,"bcdfgjkmnpqstvxz");      // B  hard consonants, excluding h,l,r,w,y
 			tr->langopts.param[LOPT_ALT] = 2;      // call ApplySpecialAttributes2() if a word has $alt or $alt2
+			tr->langopts.accents = 2;  // 'capital' after letter name
 		}
 		break;
 
@@ -1520,6 +1522,7 @@ SetLengthMods(tr,3);  // all equal
 
 			tr->langopts.stress_rule = 7;   // stress on the last syllable, before any explicitly unstressed syllable
 			tr->langopts.stress_flags = S_NO_AUTO_2;  //no automatic secondary stress
+			tr->langopts.dotless_i = 1;
 			tr->langopts.param[LOPT_SUFFIX] = 1;
 
 			if(name2 == L('a','z'))
