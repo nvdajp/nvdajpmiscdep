@@ -1,3 +1,7 @@
+espeak 1.47.10  30.04.2013
+  Data change only.
+  Revert 't' sound in Spanish to version 1.47.07.
+
 espeak 1.47.09  29.04.2013
   Bug fix (lookup in *_list occasionally found the wrong word).
 
