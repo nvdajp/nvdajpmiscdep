@@ -11,18 +11,7 @@ DEFAULT_COST = 1600
 
 import os
 from os import path
-
-def alpha2mb(s):
-        # 'abc' -> 'ａｂｃ'
-        import string
-        from_table = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'
-        to_table = 'ＡＢＣＤＥＦＧＨＩＪＫＬＭＮＯＰＱＲＳＴＵＶＷＸＹＺａｂｃｄｅｆｇｈｉｊｋｌｍｎｏｐｑｒｓｔｕｖｗｘｙｚ'
-        result = ''
-        for ch in s:
-                pos = string.find(from_table, ch)
-                if pos >= 0:
-                        result += to_table[pos]
-        return result
+from alpha2mb import alpha2mb
 
 def make_dic(IN_FILE, CODE, THISDIR):
 	import re
@@ -30,7 +19,7 @@ def make_dic(IN_FILE, CODE, THISDIR):
 		['alt', 	'オルト'],
 		['acrobat', 'アクロバット'],
 		['adobe', 	'アドビー', "1/4", 1000],
-		['about', 	'アバウト'],
+		['about', 	'アバウト', '2/4'],
 		['ass', 	'アス', "1/2", 10000],
 		['azure', 	'アジュール', None, 100],
 		['api',     'エーピーアイ', None, 500],
@@ -126,7 +115,7 @@ def make_dic(IN_FILE, CODE, THISDIR):
 		['nullsoft', 	'ヌルソフト', None, 1000],
 		['cygdrive', 	'シグドライブ', None, 1000],
 		['ustream', 	'ユーストリーム', None, 1000],
-		['ubunt', 		'ウブンツー', None, 1000],
+		['ubuntu', 		'ウブンツー', None, 1000],
 		['ware', 		'ウェアー', None, 1000],
 		
 		['time', 		'タイム', None, 1000],

@@ -9,6 +9,7 @@ import sys
 import re
 import os
 from os import path
+from alpha2mb import alpha2mb
 
 romadic = [
 		# third item is number of morae
@@ -235,19 +236,6 @@ romadic = [
 		['e', 			'エ', 				1],
 		['o', 			'オ', 				1],
 	]
-
-def alpha2mb(s):
-	# 'abc' -> 'ａｂｃ'
-	import string
-	from_table = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'
-	to_table = 'ＡＢＣＤＥＦＧＨＩＪＫＬＭＮＯＰＱＲＳＴＵＶＷＸＹＺａｂｃｄｅｆｇｈｉｊｋｌｍｎｏｐｑｒｓｔｕｖｗｘｙｚ'
-	result = ''
-	for ch in s:
-		pos = string.find(from_table, ch)
-		if pos >= 0:
-			result += to_table[pos]
-	return result
-
 
 def isGoodEntry(s):
 	a = s.split(',')
