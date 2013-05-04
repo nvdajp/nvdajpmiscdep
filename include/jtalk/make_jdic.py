@@ -357,6 +357,8 @@ def filter_jdic(s):
 		s = ",".join(a)
 	elif a[0] == '金' and a[12] == 'キム':
 		s = ""
+	elif a[0] == '湯川' and a[12] == 'ユガワ':
+		s = ""
 	return s
 
 def convert_jdic_file(src_file, src_enc, dest_file, dest_enc):
