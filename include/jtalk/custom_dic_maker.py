@@ -206,7 +206,7 @@ jdic = [
 		['古本漁り', 'フルホンアサリ', None, None, None, 'フルホン アサリ'],
 		['足の甲', 'アシノコー', None, None, None, 'アシノ コー'],
 		['日の足', 'ヒノアシ'],
-		['醤油味', 'ショーユアジ', '3/5', None, None, 'ショーユ アジ'],
+		{'text':'醤油味', 'speech':'ショーユアジ', 'accent':'3/5', 'braille':'ショーユ アジ'},
 
 		['きゃ', 'キャ',		"1/1", 		15000,		"記号,一般,*,*,*,*"],
 		['きゅ', 'キュ',		"1/1", 		15000,		"記号,一般,*,*,*,*"],
@@ -249,27 +249,47 @@ jdic = [
 		
 	]
 
+class DicItem(object):
+	__slots__ = ('text', 'speech', 'accent', 'cost', 'pos', 'braille')
+
+	def __init__(self, a):
+		if isinstance(a, list):
+			self.text = a[0]
+			self.speech = a[1]
+			self.accent = a[2] if len(a) >= 3 else None
+			self.cost = a[3] if len(a) >= 4 else None
+			self.pos = a[4] if len(a) >= 5 else None
+			self.braille = a[5] if len(a) >= 6 else None
+		elif isinstance(a, dict):
+			self.text = a['text']
+			self.speech = a['speech'] if 'speech' in a else None
+			self.accent = a['accent'] if 'accent' in a else None
+			self.cost = a['cost'] if 'cost' in a else None
+			self.pos = a['pos'] if 'pos' in a else None
+			self.braille = a['braille'] if 'braille' in a else None
+
 def make_dic(CODE, THISDIR):
 	with open(path.join(THISDIR, OUT_FILE), "w") as file:
 		## jdic
 		for i in jdic:
-			k = i[0]
+			di = DicItem(i)
+			k = di.text
 			k1 = k
-			y = i[1]
+			y = di.speech
 			mora_count = len(y)
 			# アクセント位置を省略すると "0/(文字数)" になる
 			pros = "0/%d" % mora_count
 			cost = 1000
 			pos = "名詞,一般,*,*,*,*"
 			brl = None
-			if len(i) >= 3 and i[2]:
-				pros = i[2]
+			if di.accent:
+				pros = di.accent
 				# '3/' のようにアクセント位置だけを書けるようにする
 				# 最後の文字が / であればモーラ数（文字数）を付与する
 				if pros[-1] == '/': pros += str(mora_count)
-			if len(i) >= 4 and i[3]: cost = i[3]
-			if len(i) >= 5 and i[4]: pos  = i[4]
-			if len(i) >= 6: brl  = i[5]
+			if di.cost: cost = di.cost
+			if di.pos: pos = di.pos
+			if di.braille: brl = di.braille
 			# 表層形,左文脈ID,右文脈ID,コスト,品詞,品詞細分類1,品詞細分類2,品詞細分類3,活用形,活用型,原形,読み,発音
 			s = "%s,-1,-1,%d,%s,%s,%s,%s,%s,C0" % (k1,cost,pos,k1,y,y,pros)
 			if brl:

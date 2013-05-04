@@ -245,15 +245,22 @@ tasks = [
 	['古本漁り', 'フルホンアサリ', 'フルホン アサリ'],
 	['足の甲', 'アシノコー', 'アシノ コー'],
 	['日の足が伸びる', 'ヒノアシガノビル', 'ヒノアシ/ガ/ノビル'],
-	['醤油味', 'ショーユアジ', 'ショーユ アジ'],
-	['砂糖醤油', 'サトージョウユ'], # regression test
+	{'text':'醤油味', 'speech':'ショーユアジ', 'braille':'ショーユ アジ'},
+	{'text':'砂糖醤油', 'speech':'サトージョウユ'}, # regression test
 ]
 
 if __name__ == '__main__':
 	JT_DIR = os.path.normpath(os.path.join(os.getcwdu(), '..', '..', 'source', 'synthDrivers', 'jtalk'))
 	print JT_DIR
 	Mecab_initialize(__print, JT_DIR)
-	for item in tasks:
+	for i in tasks:
+		if isinstance(i, dict):
+			if 'braille' in i:
+				item = [ i['text'], i['speech'], i['braille'] ]
+			else:
+				item = [ i['text'], i['speech'] ]
+		else:
+			item = i
 		buffer = ''
 		result = get_reading(item[0])
 		if item[1] is not None and result[0] != item[1]:
