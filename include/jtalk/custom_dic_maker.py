@@ -9,6 +9,7 @@ import sys
 import re
 import os
 from os import path
+from alpha2mb import alpha2mb
 
 jdic = [
 		# first item should use fullshape(zenkaku) charactors
@@ -247,18 +248,6 @@ jdic = [
 		['ぐゎ', 'グワ',		"1/1", 		15000,		"記号,一般,*,*,*,*"],
 		
 	]
-
-def alpha2mb(s):
-	# 'abc' -> 'ａｂｃ'
-	import string
-	from_table = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'
-	to_table = 'ＡＢＣＤＥＦＧＨＩＪＫＬＭＮＯＰＱＲＳＴＵＶＷＸＹＺａｂｃｄｅｆｇｈｉｊｋｌｍｎｏｐｑｒｓｔｕｖｗｘｙｚ'
-	result = ''
-	for ch in s:
-		pos = string.find(from_table, ch)
-		if pos >= 0:
-			result += to_table[pos]
-	return result
 
 def make_dic(CODE, THISDIR):
 	with open(path.join(THISDIR, OUT_FILE), "w") as file:
