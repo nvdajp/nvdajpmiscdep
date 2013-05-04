@@ -29,7 +29,7 @@ def Mecab_get_reading(mf, CODE_=CODE):
 			rd = ar[0]
 		reading += rd
 		if len(ar) > 12:
-			braille += ar[12] + r" "
+			braille += ar[12] + r"/"
 		else:
 			braille += rd + r"/"
 	return (reading, braille.rstrip(r" /"))
@@ -160,7 +160,7 @@ tasks = [
 	['をりがみ', 'オリガミ', ], # 点訳のてびき第3版 第2章 その1 2 5 No.25
 	['八幡平', 'ハチマンタイ', ], # ヤワタダイラ
 	['山ん中', 'ヤマンナカ', ], # 点訳のてびき第3版 第3章 その1 2 No.14
-	['そういうわけ', 'ソーユウワケ', 'ソー イウ ワケ', ], # 点訳のてびき第3版 第3章 その1 3 No.51
+	['そういうわけ', 'ソーユウワケ', 'ソー イウ/ワケ', ], # 点訳のてびき第3版 第3章 その1 3 No.51
 	['そういう', 'ソーユウ', 'ソー イウ', ], # 点訳のてびき第3版 第3章 その1 5 No.2
 	['どうして', 'ドーシテ', 'ドー シテ', ], # 点訳のてびき第3版 第3章 その1 5 No.5
 
@@ -245,8 +245,24 @@ tasks = [
 	['古本漁り', 'フルホンアサリ', 'フルホン アサリ'],
 	['足の甲', 'アシノコー', 'アシノ コー'],
 	['日の足が伸びる', 'ヒノアシガノビル', 'ヒノアシ/ガ/ノビル'],
-	{'text':'醤油味', 'speech':'ショーユアジ', 'braille':'ショーユ アジ'},
+	{'text':'醤油味', 'braille':'ショーユ アジ'},
 	{'text':'砂糖醤油', 'speech':'サトージョウユ'}, # regression test
+
+	# 点字表記辞典「あ」(2)
+	#{'text':'足手纏い', 'braille':'アシデ マトイ'},
+	#{'text':'手荷物預かり所', 'braille':'テニモツ アズカリジョ'},
+	#{'text':'額に汗して', 'braille':'ヒタイニ アセ シテ'},
+	#{'text':'認め遊ばす', 'braille':'シタタメアソバス'},
+	{'text':'源朝臣頼政', 'braille':'ミナモトノ アソン ヨリマサ'},
+	{'text':'東漢直駒', 'braille':'ヤマトノ アヤノ アタイノ コマ'},
+	#{'text':'徒し男', 'braille':'アダシ オトコ'},
+	#{'text':'徒し世', 'braille':'アダシヨ'},
+	#{'text':'新し物好き', 'braille':'アタラシモノズキ'},
+	#{'text':'暖かご飯', 'braille':'アッタカ ゴハン'},
+	#{'text':'城跡', 'braille':'シロアト'},
+	#{'text':'兄妹', 'braille':'アニ イモート'},
+	{'text':'兄貴風を吹かす', 'input':'アニキカゼヲ フカス', 'braille':'アニキカゼ/ヲ/フカス'},
+	#{'text':'秀兄イ', 'braille':'ヒデ アニイ'},
 ]
 
 if __name__ == '__main__':
@@ -256,7 +272,17 @@ if __name__ == '__main__':
 	for i in tasks:
 		if isinstance(i, dict):
 			if 'braille' in i:
-				item = [ i['text'], i['speech'], i['braille'] ]
+				if 'speech' in i:
+					item = [ i['text'], i['speech'], i['braille'] ]
+				else:
+					s = i['braille'].replace(' ', '').replace('/', '')
+					item = [ i['text'], s, i['braille'] ]
+			elif 'input' in i:
+				if 'speech' in i:
+					item = [ i['text'], i['speech'], i['input'] ]
+				else:
+					s = i['input'].replace(' ', '').replace('/', '')
+					item = [ i['text'], s, i['input'] ]
 			else:
 				item = [ i['text'], i['speech'] ]
 		else:
