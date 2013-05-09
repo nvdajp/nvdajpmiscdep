@@ -243,6 +243,8 @@ def isGoodEntry(s):
 		return False
 	if a[0] == 'ｕｓｅ' and a[12] == 'ウセー':
 		return False
+	if a[0] == 'ｏｎｅ' and a[12] == 'オネー':
+		return False
 	return True
 
 def make_dic(CODE, THISDIR):
