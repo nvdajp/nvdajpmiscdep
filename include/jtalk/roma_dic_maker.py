@@ -245,9 +245,14 @@ def isGoodEntry(s):
 		return False
 	if a[0] == 'ｏｎｅ' and a[12] == 'オネー':
 		return False
+	if a[0] == 'ｅｓｅ' and a[12] == 'エセー':
+		return False
 	return True
 
 def make_dic(CODE, THISDIR):
+	hin0 = "名詞"
+	hin1 = "固有名詞"
+	hin2 = "一般"
 	with open(path.join(THISDIR, OUT_FILE), "w") as file:
 		## romadic
 		cost = 500.0
@@ -259,7 +264,7 @@ def make_dic(CODE, THISDIR):
 				y = i[1] + p[1] + 'ー'
 				pros = "%d/%d" % (0, i[2] + 2)
 				# 表層形,左文脈ID,右文脈ID,コスト,品詞,品詞細分類1,品詞細分類2,品詞細分類3,活用形,活用型,原形,読み,発音
-				s = "%s,-1,-1,%.1f,名詞,一般,*,*,*,*,%s,%s,%s,%s,C0\n" % (k1,cost,k1,y,y,pros)
+				s = "%s,,,%.1f,%s,%s,%s,*,*,*,%s,%s,%s,%s,C0\n" % (k1,cost,hin0,hin1,hin2,k1,y,y,pros)
 				if isGoodEntry(s): file.write(s.encode(CODE))
 			cost += step
 			for p in [('a', 'ア'), ('i', 'イ'), ('u', 'ウ'), ('e', 'エ'), ('o', 'オ')]:
@@ -267,7 +272,7 @@ def make_dic(CODE, THISDIR):
 				y = p[1] + i[1] + 'ー'
 				pros = "%d/%d" % (0, i[2] + 2)
 				# 表層形,左文脈ID,右文脈ID,コスト,品詞,品詞細分類1,品詞細分類2,品詞細分類3,活用形,活用型,原形,読み,発音
-				s = "%s,-1,-1,%.1f,名詞,一般,*,*,*,*,%s,%s,%s,%s,C0\n" % (k1,cost,k1,y,y,pros)
+				s = "%s,,,%.1f,%s,%s,%s,*,*,*,%s,%s,%s,%s,C0\n" % (k1,cost,hin0,hin1,hin2,k1,y,y,pros)
 				if isGoodEntry(s): file.write(s.encode(CODE))
 			cost += step
 		for i in romadic:
@@ -277,7 +282,7 @@ def make_dic(CODE, THISDIR):
 				y = i[1] + 'ックスー'
 				pros = "%d/%d" % (0, i[2] + 4)
 				# 表層形,左文脈ID,右文脈ID,コスト,品詞,品詞細分類1,品詞細分類2,品詞細分類3,活用形,活用型,原形,読み,発音
-				s = "%s,-1,-1,%.1f,名詞,一般,*,*,*,*,%s,%s,%s,%s,C0\n" % (k1,cost,k1,y,y,pros)
+				s = "%s,,,%.1f,%s,%s,%s,*,*,*,%s,%s,%s,%s,C0\n" % (k1,cost,hin0,hin1,hin2,k1,y,y,pros)
 				if isGoodEntry(s): file.write(s.encode(CODE))
 				cost += step
 		for i in romadic:
@@ -287,7 +292,7 @@ def make_dic(CODE, THISDIR):
 				y = i[1] + 'ンー'
 				pros = "%d/%d" % (0, i[2] + 2)
 				# 表層形,左文脈ID,右文脈ID,コスト,品詞,品詞細分類1,品詞細分類2,品詞細分類3,活用形,活用型,原形,読み,発音
-				s = "%s,-1,-1,%.1f,名詞,一般,*,*,*,*,%s,%s,%s,%s,C0\n" % (k1,cost,k1,y,y,pros)
+				s = "%s,,,%.1f,%s,%s,%s,*,*,*,%s,%s,%s,%s,C0\n" % (k1,cost,hin0,hin1,hin2,k1,y,y,pros)
 				if isGoodEntry(s): file.write(s.encode(CODE))
 				cost += step
 		for i in romadic:
@@ -297,7 +302,7 @@ def make_dic(CODE, THISDIR):
 				y = i[1] + 'ー'
 				pros = "%d/%d" % (0, i[2] + 1)
 				# 表層形,左文脈ID,右文脈ID,コスト,品詞,品詞細分類1,品詞細分類2,品詞細分類3,活用形,活用型,原形,読み,発音
-				s = "%s,-1,-1,%.1f,名詞,一般,*,*,*,*,%s,%s,%s,%s,C0\n" % (k1,cost,k1,y,y,pros)
+				s = "%s,,,%.1f,%s,%s,%s,*,*,*,%s,%s,%s,%s,C0\n" % (k1,cost,hin0,hin1,hin2,k1,y,y,pros)
 				if isGoodEntry(s): file.write(s.encode(CODE))
 				cost += step
 

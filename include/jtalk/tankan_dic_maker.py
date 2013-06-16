@@ -74,13 +74,17 @@ def make_dic(CODE, CS_FILE, THISDIR):
 				continue
 			k1 = k
 			y = v
+			# ー,,,5000,名詞,サ変接続,*,*,*,*,ー,チョーオン,チョーオン,0/5,C0
+			if k1 == 'ー':
+				continue
 			if 'コモジノ' in y:
 				continue
 			y = y.replace(' ', '')
 			mora_count = len(y)
+			cost = 15000
 			# 表層形,左文脈ID,右文脈ID,コスト,品詞,品詞細分類1,品詞細分類2,品詞細分類3,活用形,活用型,原形,読み,発音
 			# 名詞,普通名詞
-			s = "%s,-1,-1,15000,名詞,サ変接続,*,*,*,*,%s,%s,%s,0/%d,C0\n" % (k1,k1,y,y,mora_count)
+			s = "%s,,,%d,名詞,サ変接続,*,*,*,*,%s,%s,%s,0/%d,C0\n" % (k1,cost,k1,y,y,mora_count)
 			file.write(s.encode(CODE))
 
 if __name__ == '__main__':

@@ -227,7 +227,7 @@ def make_dic(IN_FILE, CODE, THISDIR):
 				if i[2] != None: pros = i[2]
 			if len(i) >= 4: cost = i[3]
 			# 表層形,左文脈ID,右文脈ID,コスト,品詞,品詞細分類1,品詞細分類2,品詞細分類3,活用形,活用型,原形,読み,発音
-			s = "%s,-1,-1,%d,名詞,一般,*,*,*,*,%s,%s,%s,%s,C0\n" % (k1,cost,k1,y,y,pros)
+			s = "%s,,,%d,名詞,一般,*,*,*,*,%s,%s,%s,%s,C0\n" % (k1,cost,k1,y,y,pros)
 			file.write(s.encode(CODE))
 
 if __name__ == '__main__':

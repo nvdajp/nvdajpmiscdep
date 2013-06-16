@@ -73,6 +73,8 @@ def filter_jdic(s):
 		s = ""
 	elif a[0] == '全' and a[11] == 'チョン':
 		s = ""
+	elif a[0] == '行' and a[6] == '助数詞' and a[11] == 'コウ':
+		s = ""
 	elif a[0] == '００７' and a[11] == 'ゼロゼロセブン':
 		s = ""
 	elif a[0] == '未曾有' and a[12] == 'ミゾー':
@@ -267,11 +269,41 @@ def filter_jdic(s):
 	elif a[0] == '一流' and len(a) == 15:
 		a.append('1リュー')
 		s = ",".join(a)
-	elif a[0] == '一月' and len(a) == 15:
+	elif a[0] in ('一月', '１月') and len(a) == 15:
 		a.append('1ガツ')
 		s = ",".join(a)
-	elif a[0] == '二月' and len(a) == 15:
+	elif a[0] in ('二月', '２月') and len(a) == 15:
 		a.append('2ガツ')
+		s = ",".join(a)
+	elif a[0] in ('三月', '３月') and len(a) == 15:
+		a.append('3ガツ')
+		s = ",".join(a)
+	elif a[0] in ('四月', '４月') and len(a) == 15:
+		a.append('4ガツ')
+		s = ",".join(a)
+	elif a[0] in ('五月', '５月') and len(a) == 15:
+		a.append('5ガツ')
+		s = ",".join(a)
+	elif a[0] in ('六月', '６月') and len(a) == 15:
+		a.append('6ガツ')
+		s = ",".join(a)
+	elif a[0] in ('七月', '７月') and len(a) == 15:
+		a.append('7ガツ')
+		s = ",".join(a)
+	elif a[0] in ('八月', '８月') and len(a) == 15:
+		a.append('8ガツ')
+		s = ",".join(a)
+	elif a[0] in ('九月', '９月') and len(a) == 15:
+		a.append('9ガツ')
+		s = ",".join(a)
+	elif a[0] in ('十月', '一〇月', '１０月') and len(a) == 15:
+		a.append('10ガツ')
+		s = ",".join(a)
+	elif a[0] in ('十一月', '一一月', '１１月') and len(a) == 15:
+		a.append('11ガツ')
+		s = ",".join(a)
+	elif a[0] in ('十二月', '一二月', '１２月') and len(a) == 15:
+		a.append('12ガツ')
 		s = ",".join(a)
 	elif a[0] == '四方' and len(a) == 15:
 		a.append('4ホー')
