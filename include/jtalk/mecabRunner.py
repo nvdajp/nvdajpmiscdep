@@ -9,7 +9,7 @@ import sys
 from mecab import *
 
 def __print(s):
-	print s.encode('cp932', 'ignore')
+	print s.encode('utf-8', 'ignore')
 
 buffer = ''
 
@@ -222,6 +222,10 @@ tasks = [
 	['さんりんしゃ', None, '3リンシャ'],
 	['いちばん', None, '1バン'],
 	['Ｘ線', None, 'Xセン'],
+
+	{'text':'カムイトﾟラノ', 'speech':'カムイトラノ'}, # U+ff9f
+	{'text':'カムイト゚ラノ', 'speech':'カムイトラノ'}, # U+309a
+	{'text':'カムイト゜ラノ', 'speech':'カムイトラノ'}, # U+309c
 
 	{'text':'触読', 'braille':'ショクドク'},
 	{'text':'触読式時計', 'braille':'ショクドクシキ トケイ'},
