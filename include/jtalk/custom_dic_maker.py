@@ -217,6 +217,7 @@ jdic = [
 	{'text':'高張性', 'braille':'コーチョーセイ'},
 	{'text':'酸性泉', 'braille':'サンセイセン'},
 	{'text':'放射能泉', 'braille':'ホーシャノーセン'},
+	{'text':'次章', 'braille':'ジショー'},
 
 	{'text':'名ｓｐｅｅｃｈ集', 'speech':'メイスピーチシュー', 'accent':'4/8', 'braille':'メイspeechシュー', 'cost':1000},
 	{'text':'一人当り', 'braille':'ヒトリアタリ', 'accent':'4/6'},
