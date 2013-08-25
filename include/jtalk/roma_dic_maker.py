@@ -241,11 +241,27 @@ def isGoodEntry(s):
 	a = s.split(',')
 	if a[0] == 'ｅｃｈｏ' and a[12] == 'エチョー':
 		return False
+	if a[0] == 'ａｔｉ' and a[12] == 'アチー':
+		return False
+	if a[0] == 'ｕｓａ' and a[12] == 'ウサー':
+		return False
 	if a[0] == 'ｕｓｅ' and a[12] == 'ウセー':
 		return False
 	if a[0] == 'ｏｎｅ' and a[12] == 'オネー':
 		return False
 	if a[0] == 'ｅｓｅ' and a[12] == 'エセー':
+		return False
+	if a[0] == 'ｇｕａ' and a[12] == 'グアー':
+		return False
+	if a[0] == 'ｇｅ' and a[12] == 'ゲー':
+		return False
+	if a[0] == 'ｋｅ' and a[12] == 'ケー':
+		return False
+	if a[0] == 'ｒｅ' and a[12] == 'レー':
+		return False
+	if a[0] == 'ｍｅ' and a[12] == 'メー':
+		return False
+	if a[0] == 'ｎｅ' and a[12] == 'ネー':
 		return False
 	return True
 

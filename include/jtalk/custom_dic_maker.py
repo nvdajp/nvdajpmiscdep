@@ -219,6 +219,16 @@ jdic = [
 	{'text':'放射能泉', 'braille':'ホーシャノーセン'},
 	{'text':'次章', 'braille':'ジショー'},
 
+	{'text':'更衣室', 'braille':'コーイシツ'},
+	{'text':'盗撮', 'braille':'トーサツ'},
+	{'text':'所により', 'braille':'トコロニ ヨリ'},
+	{'text':'編集人', 'braille':'ヘンシューニン'},
+	{'text':'発行人', 'braille':'ハッコーニン'},
+	{'text':'受取人', 'braille':'ウケトリニン'},
+	{'text':'配達人', 'braille':'ハイタツニン'},
+	{'text':'管理人', 'braille':'カンリニン'},
+	{'text':'下請人', 'braille':'シタウケニン'},
+
 	{'text':'名ｓｐｅｅｃｈ集', 'speech':'メイスピーチシュー', 'accent':'4/8', 'braille':'メイspeechシュー', 'cost':1000},
 	{'text':'一人当り', 'braille':'ヒトリアタリ', 'accent':'4/6'},
 	{'text': '天照大神', 'braille':'アマテラス オオミカミ'},

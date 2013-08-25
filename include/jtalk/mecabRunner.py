@@ -311,6 +311,39 @@ tasks = [
 	{'text':'名speech集', 'speech':'メイスピーチシュー', 'braille':'メイspeechシュー'},
 	{'text':'一人当り10個ずつ', 'braille':'ヒトリアタリ/イチ/ゼロ/コ/ズツ'},
 	{'text':'０４月', 'speech':'ゼロシガツ', 'braille':'ゼロ/4ガツ'},
+
+	# 2013-08-25
+
+	{'text':'usage', 'speech':'ユーセイジ'},
+	{'text':'june', 'speech':'ジューン'},
+	{'text':'foundation', 'speech':'ファウンデイション'},
+	{'text':'everyone', 'speech':'エブリワン'},
+	{'text':'allowed', 'speech':'アラウド'},
+	{'text':'designed', 'speech':'デザインド'},
+	{'text':'take', 'speech':'テイク'},
+	{'text':'share', 'speech':'シェアー'},
+	{'text':'change', 'speech':'チェインジ'},
+	{'text':'guarantee', 'speech':'ギャランティー'},
+	{'text':'preamble', 'speech':'プリアムブル'},
+	{'text':'make', 'speech':'メイク'},
+	{'text':'sure', 'speech':'シュア'},
+	{'text':'users', 'speech':'ユーザーズ'},
+	{'text':'some', 'speech':'サム'},
+	#{'text':'★～＜QUIZ＞～～～～～～～～～～～～～～～', 'speech':'★～＜ＱＵＩＺ＞～～～～～～～～～～～～～～～', 'braille':'★/～/＜/ＱＵＩＺ/＞/～/～/～/～/～/～/～/～/～/～/～/～/～/～/～'},
+
+	{'text':'更衣室', 'braille':'コーイシツ'},
+	{'text':'盗撮', 'braille':'トーサツ'},
+	#{'text':'北の風晴れ所により一時雨', 'braille':'キタノ/カゼ/ハレ/トコロニ ヨリ/イチジ/アメ'},
+	{'text':'晴れ所により一時雨', 'braille':'ハレ/トコロニ ヨリ/イチジ/アメ'},
+	{'text':'山西', 'braille':'ヤマニシ'},
+	{'text':'久代', 'braille':'ヒサヨ'},
+
+	{'text':'編集人', 'braille':'ヘンシューニン'},
+	{'text':'発行人', 'braille':'ハッコーニン'},
+	{'text':'受取人', 'braille':'ウケトリニン'},
+	{'text':'配達人', 'braille':'ハイタツニン'},
+	{'text':'管理人', 'braille':'カンリニン'},
+	{'text':'下請人', 'braille':'シタウケニン'},
 ]
 
 if __name__ == '__main__':
