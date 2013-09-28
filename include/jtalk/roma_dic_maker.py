@@ -253,6 +253,12 @@ def isGoodEntry(s):
 		return False
 	if a[0] == 'ｇｕａ' and a[12] == 'グアー':
 		return False
+	if a[0] == 'ａｎ' and a[12] == 'アンー':
+		return False
+	if a[0] == 'ｅｎ' and a[12] == 'エンー':
+		return False
+	if a[0] == 'ｕｎ' and a[12] == 'ウンー':
+		return False
 	if a[0] == 'ｇｅ' and a[12] == 'ゲー':
 		return False
 	if a[0] == 'ｋｅ' and a[12] == 'ケー':
@@ -262,6 +268,32 @@ def isGoodEntry(s):
 	if a[0] == 'ｍｅ' and a[12] == 'メー':
 		return False
 	if a[0] == 'ｎｅ' and a[12] == 'ネー':
+		return False
+	if a[0] == 'ｄｅ' and a[12] == 'デー':
+		return False
+	if a[0] == 'ｐｅ' and a[12] == 'ペー':
+		return False
+	if a[0] == 'ｚｅ' and a[12] == 'ゼー':
+		return False
+	if a[0] == 'ｔａ' and a[12] == 'ター':
+		return False
+	if a[0] == 'ｔｅ' and a[12] == 'テー':
+		return False
+	if a[0] == 'ｔｏ' and a[12] == 'トー':
+		return False
+	if a[0] == 'ｔｉ' and a[12] == 'チー':
+		return False
+	if a[0] == 'ｂｕ' and a[12] == 'ブー':
+		return False
+	if a[0] == 'ｔｔｏｎ' and a[12] == 'ットンー':
+		return False
+	if a[0] == 'ａｎｉ' and a[12] == 'アニー':
+		return False
+	if a[0] == 'ｅｒｅ' and a[12] == 'エレー':
+		return False
+	if a[0] == 'ｉｔｉ' and a[12] == 'イチー':
+		return False
+	if a[0] == 'ｉｆｉ' and a[12] == 'イフィー':
 		return False
 	return True
 
