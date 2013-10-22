@@ -388,6 +388,11 @@ tasks = [
 	{'text':'配達人', 'braille':'ハイタツニン'},
 	{'text':'管理人', 'braille':'カンリニン'},
 	{'text':'下請人', 'braille':'シタウケニン'},
+
+	{'text':'遠い向こう', 'speech':'トオイムコー', 'braille':'トオイ/ムコー'},
+	#{'text':'とおいむこう', 'speech':'トオイムコー', 'braille':'トオイ/ムコー'},
+	#{'text':'あいうえお', 'braille':'アイウエオ'},
+	#{'text':'かきくけこ', 'braille':'カキクケコ'},
 ]
 
 if __name__ == '__main__':
