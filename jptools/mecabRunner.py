@@ -6,6 +6,7 @@
 from __future__ import unicode_literals
 import os
 import sys
+sys.path.append(r'..\source\synthDrivers\jtalk')
 from mecab import *
 
 def __print(s):
@@ -396,7 +397,7 @@ tasks = [
 ]
 
 if __name__ == '__main__':
-	JT_DIR = os.path.normpath(os.path.join(os.getcwdu(), '..', '..', 'source', 'synthDrivers', 'jtalk'))
+	JT_DIR = os.path.normpath(os.path.join(os.getcwdu(), '..', 'source', 'synthDrivers', 'jtalk'))
 	print JT_DIR
 	Mecab_initialize(__print, JT_DIR)
 	for i in tasks:

@@ -446,8 +446,8 @@ def libjt_synthesis(feature, size, fperiod_=80, feed_func_=None, is_speaking_fun
 		libjt.njd_set_pronunciation(njd)
 		libjt.njd_set_digit(njd)
 		libjt.njd_set_accent_phrase(njd)
-	except WindowsError:
-		if logwrite_ : logwrite_('libjt_synthesis error #1 ')
+	except WindowsError(e):
+		if logwrite_ : logwrite_('libjt_synthesis error #1 ' + str(e))
 	# exception: access violation reading 0x00000000
 	# https://github.com/nishimotz/libopenjtalk/commit/10d3abda6835e0547846fb5e12a36c1425561aaa#diff-66
 	try:
@@ -459,8 +459,8 @@ def libjt_synthesis(feature, size, fperiod_=80, feed_func_=None, is_speaking_fun
 		libjt.njd_set_long_vowel(njd)
 		libjt.njd2jpcommon(jpcommon, njd)
 		libjt.JPCommon_make_label(jpcommon)
-	except WindowsError:
-		if logwrite_ : logwrite_('libjt_synthesis error #2 ')
+	except WindowsError(e):
+		if logwrite_ : logwrite_('libjt_synthesis error #2 ' + str(e))
 	if is_speaking_func_ and not is_speaking_func_() :
 		libjt_refresh()
 		return None

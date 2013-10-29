@@ -1,4 +1,3 @@
-copy c:\work\nvda\jpmain\source\locale\ja\characters.dic characters-ja.dic
 rem build
 python make_timestamp.py
 cd htsengineapi
