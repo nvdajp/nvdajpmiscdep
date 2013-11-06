@@ -352,6 +352,21 @@ tasks = [
 
 	{'text':'遠い向こう', 'speech':'トオイムコー', 'braille':'トオイ/ムコー'},
 	#{'text':'とおいむこう', 'speech':'トオイムコー', 'braille':'トオイ/ムコー'},
-	#{'text':'あいうえお', 'braille':'アイウエオ'},
-	#{'text':'かきくけこ', 'braille':'カキクケコ'},
+	{'text':'あいうえお', 'braille':'アイウエオ'},
+	{'text':'かきくけこ', 'braille':'カキクケコ'},
+
+	{'text':'untitled', 'speech':'アンタイトルド'},
+	{'text':'reopen', 'speech':'リオウプン'},
+	{'text':'chain', 'speech':'チェイン'},
+	{'text':'auto', 'speech':'オート'},
+	{'text':'minute', 'speech':'ミニットゥ'},
+	{'text':'flanger', 'speech':'フランジャー'},
+	{'text':'stereo', 'speech':'ステリオウ'},
+	{'text':'rate', 'speech':'レイトゥ'},
+	{'text':'resample', 'speech':'リサンプル'},
+	{'text':'exit', 'speech':'エグジットゥ'},
+
+	{'text':'ありがとう', 'braille':'アリガトー'},
+	{'text':'有り難う', 'braille':'アリガトー'},
+	{'text':'有り難うございました', 'braille':'アリガトー/ゴザイ/マシ/タ'},
 ]

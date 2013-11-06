@@ -229,6 +229,9 @@ def make_dic(IN_FILE, CODE, THISDIR):
 		['cycles', 'サイクルズ'],
 		['levels', 'レベルズ'],
 		['speaks', 'スピークス'],
+		['untitled', 'アンタイトルド'],
+		['flanger', 'フランジャー'],
+		['resample', 'リサンプル'],
 	]
 	k = {}
 	for i in d:

@@ -295,6 +295,18 @@ def isGoodEntry(s):
 		return False
 	if a[0] == 'ｉｆｉ' and a[12] == 'イフィー':
 		return False
+	if a[0] == 'ｐｅｎ' and a[12] == 'ペンー':
+		return False
+	if a[0] == 'ｉｎ' and a[12] == 'インー':
+		return False
+	if a[0] == 'ｕｔｏ' and a[12] == 'ウトー':
+		return False
+	if a[0] == 'ｕｔｅ' and a[12] == 'ウテー':
+		return False
+	if a[0] == 'ａｔｅ' and a[12] == 'アテー':
+		return False
+	if a[0] == 'ｅｘ' and a[12] == 'エックスー':
+		return False
 	return True
 
 def make_dic(CODE, THISDIR):
