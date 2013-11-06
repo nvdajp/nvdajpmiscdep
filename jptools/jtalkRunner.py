@@ -15,6 +15,8 @@ import sys
 import wave
 import time
 import pyaudio
+import cProfile
+import pstats
 sys.path.append(r'..\source\synthDrivers\jtalk')
 from _jtalk_core import *
 import _nvdajp_predic 
@@ -47,32 +49,7 @@ def print_code(msg):
 		s += '%04x ' % ord(c)
 	print(s)
 
-if __name__ == '__main__':
-	njd = NJD()
-	jpcommon = JPCommon()
-	engine = HTS_Engine()
-	voice_args = {
-		"id": "V1",
-		"name": "m001",
-		"lang":"ja",
-		"samp_rate": 48000,
-		"fperiod": 240,
-		"alpha": 0.55,
-		"lf0_base":5.0,
-		"use_lpf":1,
-		"speaker_attenuation":1.0,
-		"dir": VOICE_DIR
-		}
-	libjt = libjt_initialize(JT_DLL, **voice_args)
-	libjt_load(voice_args['dir'].encode('mbcs'))
-	Mecab_initialize(__print, JT_DIR)
-	#
-	#msg = '100.25ドル。ウェルカムトゥー nvda テンキーのinsertキーとメインのinsertキーの両方がnvdaキーとして動作します'
-	#msg = 'YouTube iTunes Store sjis co jp'
-	#msg = '十五絡脈病証。' # nvdajp ticket 29828
-	#msg = 'マーク。まーく。' # nvdajp ticket 29859
-	msg = '∫⣿♪ ウェルカムトゥー 鈹噯呃瘂蹻脘鑱涿癃 十五絡脈病証 マーク。まーく。ふぅー。ふぅぅぅぅぅー。ぅー。ぅぅー。'
-	_nvdajp_predic.setup()
+def do_synthesis(msg, voice_args, do_play):
 	msg = _nvdajp_predic.convert(msg)
 	s = Mecab_text2mecab(msg, CODE_='utf-8')
 	__print("utf-8: (%s)" % s.decode('utf-8', 'ignore'))
@@ -88,11 +65,49 @@ if __name__ == '__main__':
 						   fperiod_ = fperiod,
 						   logwrite_ = __print)
 	mf = None
-	if data: 
-		pa_play(data, voice_args['samp_rate'])
+	if data and do_play:
+		pa_play(data, samp_rate = voice_args['samp_rate'])
 		w = wave.Wave_write("_test.wav")
 		w.setparams( (1, 2, voice_args['samp_rate'], len(data)/2,
 					  'NONE', 'not compressed') )
 		w.writeframes(data)
 		w.close()
 	libjt_clear()
+
+def main(do_play = True):
+	njd = NJD()
+	jpcommon = JPCommon()
+	engine = HTS_Engine()
+	voice_args = {
+		"id": "V1",
+		"name": "m001",
+		"lang":"ja",
+		"samp_rate": 48000,
+		"fperiod": 240,
+		"alpha": 0.55,
+		"lf0_base":5.0,
+		"use_lpf":1,
+		"speaker_attenuation":1.0,
+		"dir": VOICE_DIR
+		}
+	libjt_initialize(JT_DLL, **voice_args)
+	libjt_load(voice_args['dir'].encode('mbcs'))
+	Mecab_initialize(__print, JT_DIR)
+	_nvdajp_predic.setup()
+
+	msgs = [
+		'100.25ドル。ウェルカムトゥー nvda テンキーのinsertキーとメインのinsertキーの両方がnvdaキーとして動作します',
+		'YouTube iTunes Store sjis co jp',
+		'十五絡脈病証。', # nvdajp ticket 29828
+		'マーク。まーく。', # nvdajp ticket 29859
+		'∫⣿♪ ウェルカムトゥー 鈹噯呃瘂蹻脘鑱涿癃 十五絡脈病証 マーク。まーく。ふぅー。ふぅぅぅぅぅー。ぅー。ぅぅー。',
+		]
+
+	do_synthesis(msgs[0] * 10, voice_args, do_play)
+
+if __name__ == '__main__':
+	prof = cProfile.run("main(do_play=False)", '_cprof.prof')
+	p = pstats.Stats('_cprof.prof')
+	p.strip_dirs()
+	p.sort_stats('time', 'calls')
+	p.print_stats()
