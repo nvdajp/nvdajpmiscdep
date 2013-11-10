@@ -446,28 +446,28 @@ def libjt_synthesis(feature, size, fperiod_=80, feed_func_=None, is_speaking_fun
 		libjt.njd_set_pronunciation(njd)
 		libjt.njd_set_digit(njd)
 		libjt.njd_set_accent_phrase(njd)
-	except WindowsError(e):
+	except WindowsError as e:
 		if logwrite_ : logwrite_('libjt_synthesis error #1 ' + str(e))
 	# exception: access violation reading 0x00000000
 	# https://github.com/nishimotz/libopenjtalk/commit/10d3abda6835e0547846fb5e12a36c1425561aaa#diff-66
 	try:
 		libjt.njd_set_accent_type(njd)
-	except WindowsError:
-		if logwrite_ : logwrite_('libjt_synthesis njd_set_accent_type() error ')
+	except WindowsError as e:
+		if logwrite_ : logwrite_('libjt_synthesis njd_set_accent_type() error ' + str(e))
 	try:
 		libjt.njd_set_unvoiced_vowel(njd)
 		libjt.njd_set_long_vowel(njd)
 		libjt.njd2jpcommon(jpcommon, njd)
 		libjt.JPCommon_make_label(jpcommon)
-	except WindowsError(e):
+	except WindowsError as e:
 		if logwrite_ : logwrite_('libjt_synthesis error #2 ' + str(e))
 	if is_speaking_func_ and not is_speaking_func_() :
 		libjt_refresh()
 		return None
 	try:
 		s = libjt.JPCommon_get_label_size(jpcommon)
-	except WindowsError:
-		if logwrite_ : logwrite_('libjt_synthesis JPCommon_get_label_size() error ')
+	except WindowsError as e:
+		if logwrite_ : logwrite_('libjt_synthesis JPCommon_get_label_size() error ' + str(e))
 	buf = None
 	if s > 2:
 		try:
@@ -476,8 +476,8 @@ def libjt_synthesis(feature, size, fperiod_=80, feed_func_=None, is_speaking_fun
 			libjt.HTS_Engine_create_sstream(engine)
 			libjt.HTS_Engine_create_pstream(engine)
 			libjt.HTS_Engine_create_gstream(engine)
-		except WindowsError:
-			if logwrite_ : logwrite_('libjt_synthesis error #3 ')
+		except WindowsError as e:
+			if logwrite_ : logwrite_('libjt_synthesis error #3 ' + str(e))
 		if is_speaking_func_ and not is_speaking_func_() :
 			libjt_refresh()
 			return None
@@ -489,7 +489,7 @@ def libjt_synthesis(feature, size, fperiod_=80, feed_func_=None, is_speaking_fun
 			buf = string_at(speech_ptr, byte_count)
 			if feed_func_: feed_func_(buf)
 			#libjt.jt_save_logs("_logfile", engine, njd)
-		except WindowsError:
-			if logwrite_ : logwrite_('libjt_synthesis error #5 ')
+		except WindowsError as e:
+			if logwrite_ : logwrite_('libjt_synthesis error #5 ' + str(e))
 	if logwrite_ : logwrite_('libjt_synthesis done.')
 	return buf

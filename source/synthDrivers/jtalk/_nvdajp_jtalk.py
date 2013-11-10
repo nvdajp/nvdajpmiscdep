@@ -135,23 +135,28 @@ def _jtalk_speak(msg, index=None, prop=None):
 			if DEBUG: _jtalk_core.Mecab_print(mf, logwrite)
 			_jtalk_core.Mecab_correctFeatures(mf)
 			if DEBUG: _jtalk_core.Mecab_print(mf, logwrite)
-			_jtalk_core.Mecab_utf8_to_cp932(mf)
-			if DEBUG: _jtalk_core.Mecab_print(mf, logwrite, CODE_='cp932')
-			if DEBUG: logwrite("Mecab_analysis done")
-			if not isSpeaking(): _jtalk_core.libjt_refresh(); return
-			_jtalk_core.libjt_synthesis(mf.feature, mf.size, 
-				fperiod_ = fperiod_current, 
-				feed_func_ = player.feed, # player.feed() is called inside
-				is_speaking_func_ = isSpeaking, 
-				thres_ = thres_level,
-				thres2_ = thres2_level,
-				level_ = int(max_level * speaker_attenuation),
-				logwrite_ = lw,
-				lf0_offset_ = lo,
-				lf0_amp_ = la)
-			mf = None
-			if DEBUG: logwrite("libjt_synthesis done")
-			_jtalk_core.libjt_refresh()
+			ar = _jtalk_core.Mecab_splitFeatures(mf, CODE_='utf-8')
+			for m in ar:
+				_jtalk_core.Mecab_utf8_to_cp932(m)
+				if DEBUG: _jtalk_core.Mecab_print(m, logwrite, CODE_='cp932')
+				if DEBUG: logwrite("Mecab_analysis done")
+				if not isSpeaking(): _jtalk_core.libjt_refresh(); return
+				_jtalk_core.libjt_synthesis(
+					m.feature,
+					m.size,
+					fperiod_ = fperiod_current,
+					feed_func_ = player.feed, # player.feed() is called inside
+					is_speaking_func_ = isSpeaking,
+					thres_ = thres_level,
+					thres2_ = thres2_level,
+					level_ = int(max_level * speaker_attenuation),
+					logwrite_ = lw,
+					lf0_offset_ = lo,
+					lf0_amp_ = la)
+				del m
+				if DEBUG: logwrite("libjt_synthesis done")
+				_jtalk_core.libjt_refresh()
+			del mf
 		except WindowsError:
 			if DEBUG: logwrite("WindowsError")
 	player.sync()

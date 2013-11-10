@@ -427,3 +427,29 @@ def Mecab_utf8_to_cp932(mf):
 	for pos in xrange(0, mf.size):
 		s = Mecab_getFeature(mf, pos, CODE_ = 'utf-8')
 		Mecab_setFeature(mf, pos, s, CODE_ = 'cp932')
+
+def Mecab_duplicateFeatures(mf, startPos = 0, stopPos = None, CODE_ = 'utf-8'):
+	if not stopPos:
+		stopPos = mf.size
+	nbmf = NonblockingMecabFeatures()
+	newPos = 0
+	for pos in xrange(startPos, stopPos):
+		s = Mecab_getFeature(mf, pos, CODE_)
+		Mecab_setFeature(nbmf, newPos, s, CODE_)
+		newPos += 1
+	nbmf.size = newPos
+	return nbmf
+
+def Mecab_splitFeatures(mf, CODE_ = 'utf-8'):
+	ar = []
+	startPos = 0
+	for pos in xrange(mf.size):
+		a = Mecab_getFeature(mf, pos, CODE_).split(',')
+		if a[1] == u'記号' and a[2] in (u'空白', u'句点', u'読点'):
+			f = Mecab_duplicateFeatures(mf, startPos, pos + 1, CODE_)
+			ar.append(f)
+			startPos = pos + 1
+	if startPos < mf.size:
+		f = Mecab_duplicateFeatures(mf, startPos, mf.size, CODE_)
+		ar.append(f)
+	return ar

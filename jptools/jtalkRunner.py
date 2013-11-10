@@ -57,22 +57,31 @@ def do_synthesis(msg, voice_args, do_play):
 	Mecab_analysis(s, mf)
 	Mecab_print(mf, __print, CODE_='utf-8')
 	Mecab_correctFeatures(mf, CODE_='utf-8')
-	Mecab_utf8_to_cp932(mf)
-	Mecab_print(mf, __print, CODE_='cp932')
 	fperiod = voice_args['fperiod']
-	data = libjt_synthesis(mf.feature,
-						   mf.size,
-						   fperiod_ = fperiod,
-						   logwrite_ = __print)
-	mf = None
-	if data and do_play:
-		pa_play(data, samp_rate = voice_args['samp_rate'])
-		w = wave.Wave_write("_test.wav")
-		w.setparams( (1, 2, voice_args['samp_rate'], len(data)/2,
-					  'NONE', 'not compressed') )
-		w.writeframes(data)
-		w.close()
-	libjt_clear()
+	data_array = []
+	ar = Mecab_splitFeatures(mf, CODE_='utf-8')
+	__print('array size %d' % len(ar))
+	for a in ar:
+		__print('feature size %d' % a.size)
+		Mecab_print(a, __print, CODE_='utf-8')
+		Mecab_utf8_to_cp932(a)
+		data = libjt_synthesis(a.feature,
+							   a.size,
+							   fperiod_ = fperiod,
+							   logwrite_ = __print)
+		__print('data size %d' % len(data))
+		data_array.append(data)
+		libjt_refresh()
+		del a
+	del mf
+	for data in data_array:
+		if data and do_play:
+			pa_play(data, samp_rate = voice_args['samp_rate'])
+			w = wave.Wave_write("_test.wav")
+			w.setparams( (1, 2, voice_args['samp_rate'], len(data)/2,
+						  'NONE', 'not compressed') )
+			w.writeframes(data)
+			w.close()
 
 def main(do_play = True):
 	njd = NJD()
@@ -96,8 +105,8 @@ def main(do_play = True):
 	_nvdajp_predic.setup()
 
 	msgs = [
-		'100.25ドル。ウェルカムトゥー nvda テンキーのinsertキーとメインのinsertキーの両方がnvdaキーとして動作します',
-		'YouTube iTunes Store sjis co jp',
+		'100.25ドル。ウェルカムトゥー nvda テンキーのinsertキーと、メインのinsertキーの両方が、nvdaキーとして動作します',
+		'You Tube i Tunes Store sjis co jp',
 		'十五絡脈病証。', # nvdajp ticket 29828
 		'マーク。まーく。', # nvdajp ticket 29859
 		'∫⣿♪ ウェルカムトゥー 鈹噯呃瘂蹻脘鑱涿癃 十五絡脈病証 マーク。まーく。ふぅー。ふぅぅぅぅぅー。ぅー。ぅぅー。',
