@@ -91,7 +91,7 @@ thres_level = 128
 thres2_level = 128
 speaker_attenuation = 1.0
 
-logwrite = None
+logwrite = log.debug
 lastIndex = None
 currIndex = None
 lastIndex = None
@@ -234,34 +234,34 @@ def pause(switch):
 		player.pause(switch)
 
 def initialize(voice = default_jtalk_voice):
-	_espeak.initialize()
-	_espeak.setVoiceByLanguage("en")
-	_espeak.setVoiceAndVariant(variant=voice["espeak_variant"])
-	log.info("jtalk using eSpeak version %s" % _espeak.info())
-	global player, logwrite, voice_args
+	global player, voice_args
 	global speaker_attenuation
 	voice_args = voice
 	speaker_attenuation = voice_args['speaker_attenuation']
-	player = nvwave.WavePlayer(channels=1, samplesPerSec=voice_args['samp_rate'], bitsPerSample=16, outputDevice=config.conf["speech"]["outputDevice"])
-	_bgthread.initialize()
+	if not _espeak.espeakDLL:
+		_espeak.initialize()
+		log.debug("jtalk using eSpeak version %s" % _espeak.info())
+	_espeak.setVoiceByLanguage("en")
+	_espeak.setVoiceAndVariant(variant=voice["espeak_variant"])
+	if not player:
+		player = nvwave.WavePlayer(channels=1, samplesPerSec=voice_args['samp_rate'], bitsPerSample=16, outputDevice=config.conf["speech"]["outputDevice"])
+	if not _bgthread.bgThread:
+		_bgthread.initialize()
+	if not _jtalk_core.mecab:
+		_jtalk_core.Mecab_initialize(log.info)
+	_nvdajp_predic.setup()
 
 	jt_dll = os.path.join(jtalk_dir, 'libopenjtalk.dll')
-	log.info('jt_dll %s' % jt_dll)
+	log.debug('jt_dll %s' % jt_dll)
 	_jtalk_core.libjt_initialize(jt_dll, **voice_args)
+	log.debug(_jtalk_core.libjt_version())
+
 	voice_dir = os.path.join(jtalk_dir, voice_args['dir'])
-	if not os.path.isdir(voice_dir):
+	if os.path.isdir(voice_dir):
+		_jtalk_core.libjt_load(voice_dir)
+		log.info("loaded " + voice_args['dir'])
+	else:
 		log.error('%s is not voice directory.' % voice_dir)
-		return
-	log.debug('loading %s' % voice_dir)
-	_jtalk_core.libjt_load(voice_dir)
-	logwrite = log.debug
-	_jtalk_core.Mecab_initialize(logwrite)
-	_nvdajp_predic.setup()
-	try:
-		logwrite(_jtalk_core.libjt_version())
-	except:
-		logwrite("libopenjtalk version unavailable")
-	if DEBUG: logwrite("jtalk for NVDA started. voice:" + voice_args['dir'])
 
 def terminate():
 	global player
