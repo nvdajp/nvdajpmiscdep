@@ -105,9 +105,10 @@ def setSpeaking(b):
 	_bgthread.isSpeaking = b
 
 def _jtalk_speak(msg, index=None, prop=None):
-	if prop is None: return
 	global currIndex, buff
 	global currentEngine
+	global lastIndex
+	if prop is None: return
 	currIndex = index
 	if prop.characterMode:
 		fperiod_current = voice_args['fperiod']
@@ -120,47 +121,43 @@ def _jtalk_speak(msg, index=None, prop=None):
 	setSpeaking(True)
 	currentEngine = 2
 	if DEBUG: logwrite("p:%d i:%d msg:%s" % (prop.pitch, prop.inflection, msg))
+	level =	int(max_level * speaker_attenuation)
 	la = 0.020 * prop.inflection # 50 = original range
 	ls = 0.015 * (prop.pitch - 50.0 + voice_args['pitch_bias']) # 50 = no shift
 	lo = ls + voice_args['lf0_base'] * (1 - la)
 	if DEBUG: logwrite("lo:%f la:%f" % (lo, la))
-	for m in string.split(msg):
-		try:
-			if DEBUG: logwrite("unicode (%s)" % m)
-			s = _jtalk_core.Mecab_text2mecab(m)
-			if DEBUG: logwrite("utf-8 (%s)" % s.decode('utf-8', 'ignore'))
-			if not isSpeaking(): _jtalk_core.libjt_refresh(); return
-			mf = _jtalk_core.MecabFeatures()
-			_jtalk_core.Mecab_analysis(s, mf, logwrite_=logwrite)
-			if DEBUG: _jtalk_core.Mecab_print(mf, logwrite)
-			_jtalk_core.Mecab_correctFeatures(mf)
-			if DEBUG: _jtalk_core.Mecab_print(mf, logwrite)
-			ar = _jtalk_core.Mecab_splitFeatures(mf, CODE_='utf-8')
-			for m in ar:
-				_jtalk_core.Mecab_utf8_to_cp932(m)
-				if DEBUG: _jtalk_core.Mecab_print(m, logwrite, CODE_='cp932')
-				if DEBUG: logwrite("Mecab_analysis done")
-				if not isSpeaking(): _jtalk_core.libjt_refresh(); return
-				_jtalk_core.libjt_synthesis(
-					m.feature,
-					m.size,
-					fperiod_ = fperiod_current,
-					feed_func_ = player.feed, # player.feed() is called inside
-					is_speaking_func_ = isSpeaking,
-					thres_ = thres_level,
-					thres2_ = thres2_level,
-					level_ = int(max_level * speaker_attenuation),
-					logwrite_ = lw,
-					lf0_offset_ = lo,
-					lf0_amp_ = la)
-				del m
-				if DEBUG: logwrite("libjt_synthesis done")
-				_jtalk_core.libjt_refresh()
-			del mf
-		except WindowsError:
-			if DEBUG: logwrite("WindowsError")
+	if DEBUG: logwrite("unicode (%s)" % msg)
+	s = _jtalk_core.Mecab_text2mecab(msg)
+	if DEBUG: logwrite("utf-8 (%s)" % s.decode('utf-8', 'ignore'))
+	if not isSpeaking(): _jtalk_core.libjt_refresh(); return
+	mf = _jtalk_core.MecabFeatures()
+	_jtalk_core.Mecab_analysis(s, mf, logwrite_=logwrite)
+	if DEBUG: _jtalk_core.Mecab_print(mf, logwrite)
+	_jtalk_core.Mecab_correctFeatures(mf)
+	if DEBUG: _jtalk_core.Mecab_print(mf, logwrite)
+	ar = _jtalk_core.Mecab_splitFeatures(mf, CODE_='utf-8')
+	for m in ar:
+		if isSpeaking():
+			_jtalk_core.Mecab_utf8_to_cp932(m)
+			if DEBUG: _jtalk_core.Mecab_print(m, logwrite, CODE_='cp932')
+			if DEBUG: logwrite("Mecab_analysis done")
+			_jtalk_core.libjt_synthesis(
+				m.feature,
+				m.size,
+				fperiod_ = fperiod_current,
+				feed_func_ = player.feed, # player.feed() is called inside
+				is_speaking_func_ = isSpeaking,
+				thres_ = thres_level,
+				thres2_ = thres2_level,
+				level_ = level,
+				logwrite_ = lw,
+				lf0_offset_ = lo,
+				lf0_amp_ = la)
+			_jtalk_core.libjt_refresh()
+			if DEBUG: logwrite("libjt_synthesis done")
+		del m
+	del mf
 	player.sync()
-	global lastIndex
 	lastIndex = currIndex
 	currIndex = None
 	setSpeaking(False)
