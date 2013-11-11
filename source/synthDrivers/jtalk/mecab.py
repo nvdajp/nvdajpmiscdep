@@ -271,7 +271,8 @@ def Mecab_initialize(logwrite_ = None, jtalk_dir = DEFAULT_JTALK_DIR):
 		mecab = libmc.mecab_new(5, args)
 		if logwrite_:
 			if not mecab: logwrite_('mecab_new failed.')
-			logwrite_(libmc.mecab_strerror(mecab))
+			s = libmc.mecab_strerror(mecab).strip()
+			if s: logwrite_(s)
 	#if logwrite_: logwrite_('mecab init end')
 
 def Mecab_analysis(src, features, logwrite_ = None):
