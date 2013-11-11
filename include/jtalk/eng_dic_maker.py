@@ -232,6 +232,13 @@ def make_dic(IN_FILE, CODE, THISDIR):
 		['untitled', 'アンタイトルド'],
 		['flanger', 'フランジャー'],
 		['resample', 'リサンプル'],
+		['epub', 'イーパブ'],
+		['libre', 'リブレ'],
+		['gpu', 'ジーピーユー'],
+		['unicode', 'ユニコウドゥ'],
+		['drivers', 'ドゥライバーズ'],
+		['unicode', 'ユニコウドゥ'],
+		['visum', 'ビズム'],
 	]
 	k = {}
 	for i in d:

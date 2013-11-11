@@ -273,7 +273,11 @@ def isGoodEntry(s):
 		return False
 	if a[0] == 'ｐｅ' and a[12] == 'ペー':
 		return False
+	if a[0] == 'ｓｅ' and a[12] == 'セー':
+		return False
 	if a[0] == 'ｚｅ' and a[12] == 'ゼー':
+		return False
+	if a[0] == 'ｂａ' and a[12] == 'バー':
 		return False
 	if a[0] == 'ｔａ' and a[12] == 'ター':
 		return False
@@ -304,6 +308,8 @@ def isGoodEntry(s):
 	if a[0] == 'ｕｔｅ' and a[12] == 'ウテー':
 		return False
 	if a[0] == 'ａｔｅ' and a[12] == 'アテー':
+		return False
+	if a[0] == 'ａｒｅ' and a[12] == 'アレー':
 		return False
 	if a[0] == 'ｅｘ' and a[12] == 'エックスー':
 		return False
