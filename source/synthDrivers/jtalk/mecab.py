@@ -303,7 +303,7 @@ def Mecab_analysis(src, features, logwrite_ = None):
 			i += 1
 		node = node[0].next
 		features.size = i
-		if i > FECOUNT: 
+		if i >= FECOUNT:
 			if logwrite_: logwrite('too many nodes')
 			return
 	return
@@ -446,7 +446,7 @@ def Mecab_splitFeatures(mf, CODE_ = 'utf-8'):
 	startPos = 0
 	for pos in xrange(mf.size):
 		a = Mecab_getFeature(mf, pos, CODE_).split(',')
-		if a[1] == u'記号' and a[2] in (u'空白', u'句点', u'読点'):
+		if a[0].isspace() or a[1] == u'記号' and a[2] in (u'空白', u'句点', u'読点'):
 			f = Mecab_duplicateFeatures(mf, startPos, pos + 1, CODE_)
 			ar.append(f)
 			startPos = pos + 1
