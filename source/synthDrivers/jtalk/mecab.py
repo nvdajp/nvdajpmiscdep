@@ -304,7 +304,7 @@ def Mecab_analysis(src, features, logwrite_ = None):
 		node = node[0].next
 		features.size = i
 		if i >= FECOUNT:
-			if logwrite_: logwrite('too many nodes')
+			if logwrite_: logwrite_('too many nodes')
 			return
 	return
 
