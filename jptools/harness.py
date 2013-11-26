@@ -4326,5 +4326,20 @@ tests = [
 	{   'text': '鬘合わせ', 'input': 'カツラ アワセ'},
 	{   'text': '暗順応', 'input': 'アンジュンノー'},
 
+	{   'text':'↓最新号はこちらからお楽しみください↓', 'input':'↓サイシンゴーワ コチラカラ オタノシミクダサイ↓'},
+	{   'text':'http://www.mag2.com/o/tabi/2013/1121.html', 'input':'⠠⠦http://www.mag2.com/o/tabi/2013/1121.html⠠⠴'},
+	{   'text':'このメルマガはHTML形式です。HTMLメール表示をオフにしている', 'input':'コノ メルマガワ HTML ケイシキデス。HTML メール ヒョージヲ オフニシテ イル'},
+	{   'text':'　　　　　　　　　　a', 'input':'          a'},
+	{   'text':'http://www.mag2.com/o/tabi/2013/1121', 'input':'⠠⠦http://www.mag2.com/o/tabi/2013/1121⠠⠴'},
+	{   'text':'http:', 'input':'http:'},
+	{   'text':'http://www.mag2.com/o/tabi/2013/', 'input':'⠠⠦http://www.mag2.com/o/tabi/2013/⠠⠴'},
+	{   'text':'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa', 'input':'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'},
+	{   'text':'http:///////aaaaaaaaaaaaaaaaaaaaaaaaaaa', 'input':'⠠⠦http:///////aaaaaaaaaaaaaaaaaaaaaaaaaaa⠠⠴'},
+	{   'text':'http///////aaaaaaaaaaaaaaaaaaaaaaaaaa', 'input':'http///////aaaaaaaaaaaaaaaaaaaaaaaaaa'},
+	{   'text':'http://////aaaaaaaaaaaaaaaaaaaaaaaaaaa', 'input':'⠠⠦http://////aaaaaaaaaaaaaaaaaaaaaaaaaaa⠠⠴'},
+	{   'text':'http://///aaaaaaaaaaaaaaaaaaaaaaaaaaaa', 'input':'⠠⠦http://///aaaaaaaaaaaaaaaaaaaaaaaaaaaa⠠⠴'},
+	{   'text':'http:/aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa', 'input':'http:/aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'},
+	{   'text':'http://aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa', 'input':'⠠⠦http://aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa⠠⠴'},
+
 	]
 
