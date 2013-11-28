@@ -126,37 +126,38 @@ def _jtalk_speak(msg, index=None, prop=None):
 	ls = 0.015 * (prop.pitch - 50.0 + voice_args['pitch_bias']) # 50 = no shift
 	lo = ls + voice_args['lf0_base'] * (1 - la)
 	if DEBUG: logwrite("lo:%f la:%f" % (lo, la))
-	if DEBUG: logwrite("unicode (%s)" % msg)
-	s = _jtalk_core.Mecab_text2mecab(msg)
-	if DEBUG: logwrite("utf-8 (%s)" % s.decode('utf-8', 'ignore'))
-	if not isSpeaking(): _jtalk_core.libjt_refresh(); return
-	mf = _jtalk_core.MecabFeatures()
-	_jtalk_core.Mecab_analysis(s, mf, logwrite_=logwrite)
-	if DEBUG: _jtalk_core.Mecab_print(mf, logwrite)
-	_jtalk_core.Mecab_correctFeatures(mf)
-	if DEBUG: _jtalk_core.Mecab_print(mf, logwrite)
-	ar = _jtalk_core.Mecab_splitFeatures(mf, CODE_='utf-8')
-	for m in ar:
-		if isSpeaking():
-			_jtalk_core.Mecab_utf8_to_cp932(m)
-			if DEBUG: _jtalk_core.Mecab_print(m, logwrite, CODE_='cp932')
-			if DEBUG: logwrite("Mecab_analysis done")
-			_jtalk_core.libjt_synthesis(
-				m.feature,
-				m.size,
-				fperiod_ = fperiod_current,
-				feed_func_ = player.feed, # player.feed() is called inside
-				is_speaking_func_ = isSpeaking,
-				thres_ = thres_level,
-				thres2_ = thres2_level,
-				level_ = level,
-				logwrite_ = lw,
-				lf0_offset_ = lo,
-				lf0_amp_ = la)
-			_jtalk_core.libjt_refresh()
-			if DEBUG: logwrite("libjt_synthesis done")
-		del m
-	del mf
+	for t in string.split(msg):
+		if DEBUG: logwrite("unicode (%s)" % t)
+		s = _jtalk_core.Mecab_text2mecab(t)
+		if DEBUG: logwrite("utf-8 (%s)" % s.decode('utf-8', 'ignore'))
+		if not isSpeaking(): _jtalk_core.libjt_refresh(); return
+		mf = _jtalk_core.MecabFeatures()
+		_jtalk_core.Mecab_analysis(s, mf, logwrite_=logwrite)
+		if DEBUG: _jtalk_core.Mecab_print(mf, logwrite)
+		_jtalk_core.Mecab_correctFeatures(mf)
+		if DEBUG: _jtalk_core.Mecab_print(mf, logwrite)
+		ar = _jtalk_core.Mecab_splitFeatures(mf, CODE_='utf-8')
+		for m in ar:
+			if isSpeaking():
+				_jtalk_core.Mecab_utf8_to_cp932(m)
+				if DEBUG: _jtalk_core.Mecab_print(m, logwrite, CODE_='cp932')
+				if DEBUG: logwrite("Mecab_analysis done")
+				_jtalk_core.libjt_synthesis(
+					m.feature,
+					m.size,
+					fperiod_ = fperiod_current,
+					feed_func_ = player.feed, # player.feed() is called inside
+					is_speaking_func_ = isSpeaking,
+					thres_ = thres_level,
+					thres2_ = thres2_level,
+					level_ = level,
+					logwrite_ = lw,
+					lf0_offset_ = lo,
+					lf0_amp_ = la)
+				_jtalk_core.libjt_refresh()
+				if DEBUG: logwrite("libjt_synthesis done")
+			del m
+		del mf
 	player.sync()
 	lastIndex = currIndex
 	currIndex = None
