@@ -404,6 +404,8 @@ def filter_jdic(s):
 		s = ""
 	elif a[0] == '山西' and a[12] == 'サンセイ':
 		s = ""
+	elif a[0] == '梅木' and a[12] in ('ウメノキ', 'ウメギ'):
+		s = ""
 	return s
 
 def convert_jdic_file(src_file, src_enc, dest_file, dest_enc):
