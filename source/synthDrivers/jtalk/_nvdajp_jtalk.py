@@ -272,18 +272,14 @@ def terminate():
 	player = None
 	_espeak.terminate()
 
+rate_percent = 50
+
 def get_rate(rateBoost):
-	f = fperiod
-	if not rateBoost:
-		f = fperiod / RATE_BOOST_MULTIPLIER
-	if voice_args['samp_rate'] == 16000:
-		return int(160 - 2 * f)
-	if voice_args['samp_rate'] == 48000:
-		return int((240 - f) / 1.5)
-	return 0
+	return rate_percent
 
 def set_rate(rate, rateBoost):
-	global fperiod
+	global fperiod, rate_percent
+	rate_percent = rate
 	if voice_args['samp_rate'] == 16000:
 		fperiod = int(80 - int(rate) / 2) # 80..30
 	if voice_args['samp_rate'] == 48000:
