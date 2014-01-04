@@ -1,2 +1,2 @@
-python mecabRunner.py|lv -Iu
+python mecabRunner.py
 

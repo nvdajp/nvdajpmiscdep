@@ -112,12 +112,19 @@ def pass2(verboseMode=False):
 				else:
 					correct_inpos1 = None
 				# merged inpos
-				inpos, outpos = translator2.mergePositionMap(
+				inpos, outpos_ = translator2.mergePositionMap(
 					inpos1, inpos2, len(pat), len(t['text']))
+				# outpos
+				outpos = translator2.makeOutPos(inpos, len(t['text']), len(pat))
+
 				if t.has_key('inpos'):
 					correct_inpos = ','.join(['%d' % n for n in t['inpos'] ])
 				else:
 					correct_inpos = None
+				if t.has_key('outpos'):
+					correct_outpos = ','.join(['%d' % n for n in t['outpos'] ])
+				else:
+					correct_outpos = None
 				# result
 				result_inpos2 = ','.join(['%d' % n for n in inpos2])
 				result_inpos1 = ','.join(['%d' % n for n in inpos1])
@@ -127,7 +134,8 @@ def pass2(verboseMode=False):
 				isError = False
 				if result != t['input'] or \
 						(correct_inpos2 and result_inpos2 != correct_inpos2) or \
-						(correct_inpos and result_inpos != correct_inpos):
+						(correct_inpos and result_inpos != correct_inpos) or \
+						(correct_outpos and result_outpos != correct_outpos):
 					isError = True
 					count+=1 
 				if isError or verboseMode:
@@ -141,6 +149,8 @@ def pass2(verboseMode=False):
 						f.write("cor_in1: " + correct_inpos1 + "\n")
 					if correct_inpos:
 						f.write("cor_in : " + correct_inpos + "\n")
+					if correct_outpos:
+						f.write("cor_out: " + correct_outpos + "\n")
 					f.write("res_in2: " + result_inpos2 + "\n")
 					f.write("res_in1: " + result_inpos1 + "\n")
 					f.write("res_in : " + result_inpos + "\n")
