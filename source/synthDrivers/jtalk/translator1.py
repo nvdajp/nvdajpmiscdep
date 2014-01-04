@@ -462,7 +462,7 @@ def translateWithInPos(text):
 				retval += '⠤'
 				inPos.append(pos - 1) # つなぎ符は直前の文字に対応
 			retval += kana2_dic[text[pos:pos+2]]
-			inPos.extend([pos] * len(kana2_dic[text[pos:pos+2]]))
+			inPos.extend([pos, pos+1])
 			latin = num = False
 			pos += 2
 		#One kana character
