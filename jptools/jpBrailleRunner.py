@@ -215,7 +215,7 @@ if __name__ == '__main__':
 					  action="store_true",
 					  dest="verbose",
 					  default="False",
-					  help="pass2 only timeit")
+					  help="pass2 with verbose mode")
 	parser.add_option("-m", "--makedoc",
 					  action="store_true",
 					  dest="make_doc",

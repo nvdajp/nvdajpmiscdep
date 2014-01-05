@@ -125,7 +125,7 @@ class MecabMorph(object):
 				  self.kana, self.yomi, self.accent, self.output, self.sepflag))
 
 def update_phonetic_symbols(mo):
-	for p in range(0, len(mo.yomi)):
+	for p in xrange(0, len(mo.yomi)):
 		# 点訳のてびき第3版 第2章 その1 1 5
 		# ５、長音の書き表し方 (1), (2)
 		# before: ああ,ああ,感動詞,*,*,*,アア,アー,1/2,アー,0
@@ -344,7 +344,7 @@ def replace_alphabet_morphs(li):
 	#  Ｂａｓｉｃ,Basic,名詞,アルファベット,*,*,ビーアシーシー,ビーアシーシー,1/2,Basic
 	new_li = []
 	alp_morphs = []
-	for pos in range(len(li)):
+	for pos in xrange(len(li)):
 		mo = li[pos]
 		if pos < len(li) - 1:
 			next_mo = li[pos + 1]
@@ -673,7 +673,7 @@ def morphs_to_string(li, inbuf, logwrite):
 	outbuf = ''
 	inpos2 = []
 	p = 0
-	for i in range(0, len(li)):
+	for i in xrange(0, len(li)):
 		if not li[i].output:
 			continue
 		out = li[i].output
@@ -681,22 +681,22 @@ def morphs_to_string(li, inbuf, logwrite):
 		outbuf += out
 		hyolen = len(li[i].hyouki)
 		if hyolen == outlen:
-			inpos2.extend(range(p, p + outlen))
+			inpos2.extend(xrange(p, p + outlen))
 		elif out[:2] == '⠠⠦' and out[-2:] == '⠠⠴':
 			# 情報処理用点字の内側
 			c = outlen - 4
 			inpos2.extend([p] * 2)
-			inpos2.extend(range(p, p + c))
+			inpos2.extend(xrange(p, p + c))
 			inpos2.extend([p + c - 1] * 2)
 		elif out[:1] == '⠦' and out[-1:] == '⠴':
 			# 外国語引用符の内側
 			c = outlen - 2
 			inpos2.extend([p])
-			inpos2.extend(range(p, p + c))
+			inpos2.extend(xrange(p, p + c))
 			inpos2.extend([p + c - 1])
 		else:
 			# 表記と出力の文字数が変化する場合
-			for x in range(outlen):
+			for x in xrange(outlen):
 				inpos2.append(p + int(float(x) * hyolen / outlen))
 		p += hyolen
 		if li[i].sepflag:
@@ -723,7 +723,7 @@ def japanese_braille_separate(inbuf, logwrite):
 	text = inbuf
 	if RE_MB_ALPHA_NUM_SPACE.match(text):
 		outbuf = unicode_normalize(text)
-		inpos2 = range(len(outbuf))
+		inpos2 = xrange(len(outbuf))
 		return (outbuf, inpos2)
 
 	# 'あ゛ー' Unicode 正規化されて空白が入るので事前に補正する
@@ -793,7 +793,7 @@ def japanese_braille_separate(inbuf, logwrite):
 	# after:
 	# ’,’,記号,括弧閉,*,*,’,’,*/*,',0
 	# ０,0,名詞,数,*,*,ゼロ,ゼロ,1/2,0,0
-	for pos in range(0, len(li) - 1):
+	for pos in xrange(0, len(li) - 1):
 		if li[pos].hyouki == '’' and li[pos+1].hinshi2 == '数':
 			li[pos].output = "'"
 
@@ -806,7 +806,7 @@ def japanese_braille_separate(inbuf, logwrite):
 	# 二,二,名詞,数,*,*,2,2,1/2,2,0
 	# 、,、,記号,読点,*,*,、,、,*/*,⠼,0
 	# 三,三,名詞,数,*,*,3,3,1/2,3,0
-	for pos in range(1, len(li) - 1):
+	for pos in xrange(1, len(li) - 1):
 		if li[pos-1].output.isdigit() and \
 				li[pos].hyouki in ('、', '・') and \
 				li[pos+1].output.isdigit():
@@ -947,7 +947,7 @@ def makeOutPos(inPos, inlen, outlen):
 			outPos[ inPos[p] ] = p
 	# fill skipped outPos
 	prev = 0
-	for p in range(inlen):
+	for p in xrange(inlen):
 		if outPos[p] == -1:
 			outPos[p] = prev
 		else:
@@ -956,7 +956,7 @@ def makeOutPos(inPos, inlen, outlen):
 
 def mergePositionMap(inpos1, inpos2, outlen, inlen):
 	inPos = [0] * outlen
-	for p in range(outlen):
+	for p in xrange(outlen):
 		inPos[p] = inpos2[ inpos1[p] ]
 	outPos = makeOutPos(inPos, inlen, outlen)
 	return inPos, outPos
