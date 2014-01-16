@@ -1,29 +1,22 @@
 ===============================================================================
-                   HTS Voice "NIT ATR503 M001" version 1.05
-                           release December 25, 2012
+                          HTS Voice "Mei" version 1.4
+                           release December 25, 2013
 
 
-HTS voice trained by using the Nitech Japanese Speech Database "NIT ATR503
-M001" is released as a part of Open JTalk (http://open-jtalk.sourceforge.net/).
-This voice consists of HMMs trained by using HMM-based Speech Synthesis System
-(HTS) version 2.3 alpha (http://hts.sp.nitech.ac.jp/).
+The work is released as a part of MMDAgent (http://www.mmdagent.jp/).
 
 *******************************************************************************
                                     Copying
 *******************************************************************************
 
 # ----------------------------------------------------------------- #
-#           HTS Voice "NIT ATR503 M001"                             #
-#           released by HTS Working Group                           #
-#           http://open-jtalk.sourceforge.net/                      #
+#           HTS Voice "Mei"                                         #
+#           released by MMDAgent Project Team                       #
+#           http://www.mmdagent.jp/                                 #
 # ----------------------------------------------------------------- #
 #                                                                   #
-#  Copyright (c) 2003-2012  Nagoya Institute of Technology          #
+#  Copyright (c) 2009-2013  Nagoya Institute of Technology          #
 #                           Department of Computer Science          #
-#                                                                   #
-#                2003-2008  Tokyo Institute of Technology           #
-#                           Interdisciplinary Graduate School of    #
-#                           Science and Engineering                 #
 #                                                                   #
 # Some rights reserved.                                             #
 #                                                                   #
@@ -58,45 +51,29 @@ This voice consists of HMMs trained by using HMM-based Speech Synthesis System
 # See http://creativecommons.org/ for details.                      #
 # ----------------------------------------------------------------- #
 
-See also "COPYING" file in the current directory for details.
-
-*******************************************************************************
-                                 Installation
-*******************************************************************************
-
-See "INSTALL" in the same directory for details.
+See also "COPYRIGHT.txt" file in the current directory for details.
 
 *******************************************************************************
                                Acknowledgements
 *******************************************************************************
 
 Keiichi Tokuda
-Shinji Sako
-Heiga Zen
+Akinobu Lee
 Keiichiro Oura
 
 *******************************************************************************
                                   Who we are
 *******************************************************************************
 
-The HTS working group is a voluntary group for developing the HMM-Based Speech
-Synthesis System. Current members are
+The MMDAgent project team is a voluntary group for developing the Toolkit for
+Building Voice Interaction System. Current members are
 
  Keiichi Tokuda      http://www.sp.nitech.ac.jp/~tokuda/
- (Produce and Design)
+ Akinobu Lee         http://www.sp.nitech.ac.jp/~ri/
  Keiichiro Oura      http://www.sp.nitech.ac.jp/~uratec/
- (Design and Development, Main Maintainer)
- Kei Hashimoto       http://www.sp.nitech.ac.jp/~bonanza/
- Sayaka Shiota       http://www.sp.nitech.ac.jp/~sayaka/
- Shinji Takaki       http://www.sp.nitech.ac.jp/~k-prr44/
- Heiga Zen
- Junichi Yamagishi   http://homepages.inf.ed.ac.uk/jyamagis/
- Tomoki Toda         http://spalab.naist.jp/~tomoki/index_e.html
- Takashi Nose
- Shinji Sako         http://www.mmsp.nitech.ac.jp/~sako/
- Alan W. Black       http://www.cs.cmu.edu/~awb/
+ Daisuke Yamamoto    http://yamamoto.web.nitech.ac.jp/member/yamamoto/yamamoto.html
 
 and the members are dynamically changing. The current formal contact address of
-HTS working group and a mailing list for HTS users can be found at
-http://hts.sp.nitech.ac.jp/
+MMDAgent project team and a mailing list for MMDAgent users can be found at
+http://www.mmdagent.jp/
 ===============================================================================

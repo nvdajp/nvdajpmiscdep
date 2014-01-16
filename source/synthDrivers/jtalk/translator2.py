@@ -8,6 +8,7 @@
 from __future__ import unicode_literals
 import os
 import copy
+import re
 from _nvdajp_unicode import unicode_normalize
 from mecab import *
 import translator1
@@ -735,7 +736,7 @@ def japanese_braille_separate(inbuf, logwrite):
 	# 'ふにゃ～'
 	text = text.replace('ゃ～', 'ゃー')
 
-	text = Mecab_text2mecab(text)
+	text = text2mecab(text)
 	mf = MecabFeatures()
 	Mecab_analysis(text, mf)
 	Mecab_correctFeatures(mf)
