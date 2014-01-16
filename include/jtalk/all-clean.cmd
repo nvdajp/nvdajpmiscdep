@@ -1,13 +1,8 @@
 rem all-clean
 
-cd htsengineapi
-nmake -f Makefile.mak clean
-cd ..
-cd libopenjtalk
-nmake -f Makefile.mak clean
-cd ..
-
-del libopenjtalk\lib\libopenjtalk-timestamp.h
+cd ..\python-jtalk
+call clean.cmd
+cd ..\jtalk
 
 cd libopenjtalk\mecab-naist-jdic
 rmdir /S /Q dic

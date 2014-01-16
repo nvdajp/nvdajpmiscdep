@@ -1,0 +1,3 @@
+[submodule "include/python-jtalk"]
+	path = include/python-jtalk
+	url = https://nishimotz@bitbucket.org/nishimotz/python-jtalk.git

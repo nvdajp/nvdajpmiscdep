@@ -1,14 +1,10 @@
 rem build
-python make_timestamp.py
-cd htsengineapi
-nmake -f Makefile.mak
-cd ..
-cd libopenjtalk
-nmake -f Makefile.mak
-cd ..
-rem mecab-dict-index
+cd ..\python-jtalk
+call build.cmd
+
+rem dic-build
+cd ..\jtalk
 cd libopenjtalk\mecab\src
 nmake -f Makefile.mak all
 cd ..\..\..
-rem dic-build
 python make_jdic.py

@@ -16,12 +16,15 @@ import custom_dic_maker
 import roma_dic_maker
 
 # MECAB_DICT_INDEX と OUTDIR は libopenjtalk/mecab-naist-jdic/_temp が基準
-THISDIR = path.join(path.dirname(path.abspath(__file__)), "libopenjtalk", "mecab-naist-jdic")
+JTDIR = path.dirname(path.abspath(__file__))
+ENGDIC = path.normpath(path.join(JTDIR, "bep-eng.dic"))
+CS_FILE = path.normpath(path.join(JTDIR, "characters-ja.dic"))
+
+#THISDIR = path.normpath(path.join(JTDIR, "..", "python-jtalk", "libopenjtalk", "mecab-naist-jdic"))
+THISDIR = path.normpath(path.join(JTDIR, "libopenjtalk", "mecab-naist-jdic"))
 OUTDIR = path.normpath(path.join(THISDIR, "dic"))
 TEMPDIR = path.normpath(path.join(THISDIR, "_temp"))
-ENGDIC = path.normpath(path.join(path.dirname(path.abspath(__file__)), "bep-eng.dic"))
 MECAB_DICT_INDEX = path.normpath(path.join(THISDIR, "..", "mecab", "src", "mecab-dict-index.exe"))
-CS_FILE = path.join(path.dirname(path.abspath(__file__)), "characters-ja.dic")
 
 CODE = 'utf-8' # cp932
 
