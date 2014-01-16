@@ -27,11 +27,11 @@ import config
 
 jtalk_dir = unicode(os.path.dirname(__file__), 'mbcs')
 if hasattr(sys,'frozen'):
-	d = os.path.join(os.getcwdu(), 'synthDrivers', '_jtalk107')
+	d = os.path.join(os.getcwdu(), 'synthDrivers', 'jtalk')
 	if os.path.isdir(d):
 		jtalk_dir = d
 
-mecab_dir = os.path.join(jtalk_dir, '..', 'jtalk')
+mecab_dir = jtalk_dir
 
 DEBUG = False
 
