@@ -1,2 +1,2 @@
-python mecabRunner.py
-
+call userdicBuilder.cmd
+python mecabRunner.py|nkf

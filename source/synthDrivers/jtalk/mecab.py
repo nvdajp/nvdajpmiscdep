@@ -107,7 +107,7 @@ class MecabFeatures(NonblockingMecabFeatures):
 		super(MecabFeatures, self).__del__()
 		lock.release()
 
-def Mecab_initialize(logwrite_ = None, mecab_dir = None):
+def Mecab_initialize(logwrite_ = None, mecab_dir = None, user_dics = None):
 	mecab_dll = os.path.join(mecab_dir, 'libmecab.dll')
 	global libmc
 	if libmc is None:

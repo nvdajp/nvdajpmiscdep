@@ -47,9 +47,13 @@ def get_reading(msg):
 	return reading
 
 if __name__ == '__main__':
-	JT_DIR = os.path.normpath(os.path.join(os.getcwdu(), '..', 'source', 'synthDrivers', 'jtalk'))
-	print JT_DIR
-	Mecab_initialize(__print, JT_DIR)
+	jt_dir = os.path.normpath(os.path.join(os.getcwdu(), '..', 'source', 'synthDrivers', 'jtalk'))
+	user_dics = [
+		os.path.normpath(os.path.join(os.getcwdu(), '_mecabuser.dic'))
+		]
+	print jt_dir
+	print user_dics
+	Mecab_initialize(__print, jt_dir, user_dics)
 	for i in tasks:
 		if isinstance(i, dict):
 			if 'braille' in i:
