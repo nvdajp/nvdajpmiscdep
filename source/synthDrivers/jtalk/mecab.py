@@ -129,15 +129,11 @@ def Mecab_initialize(logwrite_ = None, libmecab_dir = None, dic = None, user_dic
 				raise RuntimeError('utf-8 dictionary for mecab required.')
 		except:
 			pass
-		ud = ''
+		argc, args = 3, (c_char_p * 3)('mecab', '-d', dic.encode('utf-8'))
 		if user_dics:
-			ud = r'userdic = ' + ','.join(user_dics)
-		mecabrc = os.path.join(libmecab_dir, '_mecabrc')
-		import codecs
-		with codecs.open(mecabrc, 'w', 'utf8', 'ignore') as fw:
-			fw.write(ud + '\r\n')
-		args = (c_char_p * 5)('mecab', '-d', dic.encode('utf-8'), '-r', mecabrc.encode('utf-8'))
-		mecab = libmc.mecab_new(5, args)
+			ud = ','.join(user_dics)
+			argc, args = 5, (c_char_p * 5)('mecab', '-d', dic.encode('utf-8'), '-u', ud.encode('utf-8'))
+		mecab = libmc.mecab_new(argc, args)
 		if logwrite_:
 			if not mecab: logwrite_('mecab_new failed.')
 			s = libmc.mecab_strerror(mecab).strip()
