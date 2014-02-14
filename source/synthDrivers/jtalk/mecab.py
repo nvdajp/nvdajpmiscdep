@@ -107,8 +107,8 @@ class MecabFeatures(NonblockingMecabFeatures):
 		super(MecabFeatures, self).__del__()
 		lock.release()
 
-def Mecab_initialize(logwrite_ = None, mecab_dir = None, user_dics = None):
-	mecab_dll = os.path.join(mecab_dir, 'libmecab.dll')
+def Mecab_initialize(logwrite_ = None, libmecab_dir = None, dic = None, user_dics = None):
+	mecab_dll = os.path.join(libmecab_dir, 'libmecab.dll')
 	global libmc
 	if libmc is None:
 		libmc = cdll.LoadLibrary(mecab_dll.encode('mbcs'))
@@ -118,7 +118,6 @@ def Mecab_initialize(logwrite_ = None, mecab_dir = None, user_dics = None):
 		libmc.mecab_new.argtypes = [c_int, c_char_p_p]
 	global mecab
 	if mecab is None:
-		dic = os.path.join(mecab_dir, 'dic')
 		if logwrite_: logwrite_('dic: %s' % dic)
 		try:
 			f = open(os.path.join(dic, "DIC_VERSION"))
@@ -133,7 +132,7 @@ def Mecab_initialize(logwrite_ = None, mecab_dir = None, user_dics = None):
 		ud = ''
 		if user_dics:
 			ud = r'userdic = ' + ','.join(user_dics)
-		mecabrc = os.path.join(mecab_dir, '_mecabrc')
+		mecabrc = os.path.join(libmecab_dir, '_mecabrc')
 		import codecs
 		with codecs.open(mecabrc, 'w', 'utf8', 'ignore') as fw:
 			fw.write(ud + '\r\n')

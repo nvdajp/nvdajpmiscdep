@@ -143,7 +143,7 @@ def main(do_play = False, do_write = True, do_log = False):
 	libjt_initialize(JT_DLL)
 	v = voices[1]
 	libjt_load(v['htsvoice'])
-	Mecab_initialize(__print, JT_DIR)
+	Mecab_initialize(__print, JT_DIR, os.path.join(JT_DIR, 'dic'))
 
 	msgs = [
 		'100.25ドル。ウェルカムトゥー nvda テンキーのinsertキーと、メインのinsertキーの両方が、nvdaキーとして動作します',

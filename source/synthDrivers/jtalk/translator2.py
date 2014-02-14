@@ -20,6 +20,7 @@ if hasattr(sys,'frozen'):
 	d = os.path.join(os.getcwdu(), 'synthDrivers', 'jtalk')
 	if os.path.isdir(d):
 		MECAB_DIR = d
+DIC_DIR = os.path.join(MECAB_DIR, 'dic')
 
 try:
 	from logHandler import log
@@ -915,12 +916,12 @@ def japanese_braille_separate(inbuf, logwrite):
 
 mecab_initialized = False
 
-def initialize(mecab_dir_=None, logwrite=_logwrite):
+def initialize(mecab_dir_=None, dic_dir_=None, logwrite=_logwrite):
 	global mecab_initialized
-	if mecab_dir_:
-		Mecab_initialize(logwrite, mecab_dir_)
+	if mecab_dir_ and dic_dir_:
+		Mecab_initialize(logwrite, mecab_dir_, dic_dir_)
 	else:
-		Mecab_initialize(logwrite, MECAB_DIR)
+		Mecab_initialize(logwrite, MECAB_DIR, DIC_DIR)
 	if logwrite: logwrite("initialize() done.")
 	mecab_initialized = True
 

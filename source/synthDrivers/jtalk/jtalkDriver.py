@@ -31,7 +31,7 @@ if hasattr(sys,'frozen'):
 	if os.path.isdir(d):
 		jtalk_dir = d
 
-mecab_dir = jtalk_dir
+dic_dir = os.path.join(jtalk_dir, 'dic')
 
 DEBUG = False
 
@@ -244,7 +244,7 @@ def initialize(voice = default_jtalk_voice):
 	if not _bgthread.bgThread:
 		_bgthread.initialize()
 	if not mecab:
-		Mecab_initialize(logwrite_=log.info, mecab_dir = mecab_dir)
+		Mecab_initialize(log.info, jtalk_dir, dic_dir)
 	jtalkPrepare.setup()
 
 	jt_dll = os.path.join(jtalk_dir, 'libopenjtalk.dll')

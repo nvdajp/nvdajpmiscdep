@@ -20,6 +20,7 @@ import timeit
 
 jtalk_dir = os.path.join(os.getcwdu(), '..', 'source', 'synthDrivers', 'jtalk')
 sys.path.append(jtalk_dir)
+dic_dir = os.path.join(jtalk_dir, 'dic')
 
 import translator1
 import translator2
@@ -88,7 +89,7 @@ def pass2(verboseMode=False):
 	outfile = '__h2output.txt'
 	with open(outfile, 'w') as f:
 		output = cStringIO.StringIO()
-		translator2.initialize(jtalk_dir, __print)
+		translator2.initialize(jtalk_dir, dic_dir, __print)
 		log = output.getvalue()
 		output.close()
 		f.write(log)
