@@ -9,21 +9,21 @@
 
 # from __future__ import unicode_literals
 import sys
-sys.path.append(r'..\source\synthDrivers\jtalk')
-from harness import tests
 import os
 import sys
 import optparse
 import datetime
 import cStringIO
 import timeit
-
-jtalk_dir = os.path.join(os.getcwdu(), '..', 'source', 'synthDrivers', 'jtalk')
+jtalk_dir = os.path.normpath(
+	os.path.join(os.getcwdu(), '..', 'source', 'synthDrivers', 'jtalk')
+	)
 sys.path.append(jtalk_dir)
-dic_dir = os.path.join(jtalk_dir, 'dic')
-
+from harness import tests
 import translator1
 import translator2
+
+dic_dir = os.path.join(jtalk_dir, 'dic')
 
 def __write(file, s=""):
 	file.write(s.encode('utf-8', 'ignore'))

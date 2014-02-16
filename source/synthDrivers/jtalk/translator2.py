@@ -12,16 +12,9 @@ import re
 from _nvdajp_unicode import unicode_normalize
 from mecab import *
 import translator1
+from jtalkDir import *
 
 _logwrite = None
-
-MECAB_DIR = unicode(os.path.dirname(__file__), 'mbcs')
-if hasattr(sys,'frozen'):
-	d = os.path.join(os.getcwdu(), 'synthDrivers', 'jtalk')
-	if os.path.isdir(d):
-		MECAB_DIR = d
-DIC_DIR = os.path.join(MECAB_DIR, 'dic')
-
 try:
 	from logHandler import log
 	_logwrite = log.debug
@@ -921,7 +914,7 @@ def initialize(mecab_dir_=None, dic_dir_=None, logwrite=_logwrite):
 	if mecab_dir_ and dic_dir_:
 		Mecab_initialize(logwrite, mecab_dir_, dic_dir_)
 	else:
-		Mecab_initialize(logwrite, MECAB_DIR, DIC_DIR)
+		Mecab_initialize(logwrite, jtalk_dir, dic_dir)
 	if logwrite: logwrite("initialize() done.")
 	mecab_initialized = True
 

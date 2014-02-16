@@ -1,4 +1,3 @@
-# _nvdajp_jtalk.py 
 # -*- coding: utf-8 -*-
 #A part of NonVisual Desktop Access (NVDA)
 # speech engine nvdajp_jtalk
@@ -20,18 +19,10 @@ from jtalkCore import *
 import jtalkPrepare 
 from ..jtalk._nvdajp_unicode import unicode_normalize
 from ..jtalk import _bgthread
-import sys
 import time
 import watchdog
 import config
-
-jtalk_dir = unicode(os.path.dirname(__file__), 'mbcs')
-if hasattr(sys,'frozen'):
-	d = os.path.join(os.getcwdu(), 'synthDrivers', 'jtalk')
-	if os.path.isdir(d):
-		jtalk_dir = d
-
-dic_dir = os.path.join(jtalk_dir, 'dic')
+from jtalkDir import *
 
 DEBUG = False
 

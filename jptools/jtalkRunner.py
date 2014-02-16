@@ -16,11 +16,13 @@ import time
 import pyaudio
 import cProfile
 import pstats
-sys.path.append(r'..\source\synthDrivers\jtalk')
+JT_DIR = os.path.normpath(
+	os.path.join(os.getcwdu(), '..', 'source', 'synthDrivers', 'jtalk')
+	)
+sys.path.append(JT_DIR)
 from jtalkCore import *
 import jtalkPrepare
 
-JT_DIR = r'..\source\synthDrivers\jtalk'
 JT_DLL = os.path.join(JT_DIR, 'libopenjtalk.dll')
 
 voices = [

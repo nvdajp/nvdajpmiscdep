@@ -6,7 +6,10 @@
 from __future__ import unicode_literals
 import os
 import sys
-sys.path.append(r'..\source\synthDrivers\jtalk')
+jt_dir = os.path.normpath(
+	os.path.join(os.getcwdu(), '..', 'source', 'synthDrivers', 'jtalk')
+	)
+sys.path.append(jt_dir)
 from mecab import *
 from mecabHarness import tasks
 
@@ -47,7 +50,6 @@ def get_reading(msg):
 	return reading
 
 if __name__ == '__main__':
-	jt_dir = os.path.normpath(os.path.join(os.getcwdu(), '..', 'source', 'synthDrivers', 'jtalk'))
 	dic = os.path.join(jt_dir, 'dic')
 	user_dics = [
 		os.path.normpath(os.path.join(os.getcwdu(), '_mecabuser.dic'))
