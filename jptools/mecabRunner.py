@@ -6,12 +6,17 @@
 from __future__ import unicode_literals
 import os
 import sys
+from glob import glob
 jt_dir = os.path.normpath(
 	os.path.join(os.getcwdu(), '..', 'source', 'synthDrivers', 'jtalk')
 	)
 sys.path.append(jt_dir)
 from mecab import *
 from mecabHarness import tasks
+
+dic = os.path.join(jt_dir, 'dic')
+configDir = os.getcwdu()
+user_dics = [os.path.normpath(d) for d in glob(os.path.join(configDir, 'jtusr*.dic'))]
 
 def __print(s):
 	print s.encode('utf-8', 'ignore')
@@ -50,10 +55,6 @@ def get_reading(msg):
 	return reading
 
 if __name__ == '__main__':
-	dic = os.path.join(jt_dir, 'dic')
-	user_dics = [
-		os.path.normpath(os.path.join(os.getcwdu(), 'jtusr.dic'))
-		]
 	print jt_dir, dic, user_dics
 	Mecab_initialize(__print, jt_dir, dic, user_dics)
 	for i in tasks:
