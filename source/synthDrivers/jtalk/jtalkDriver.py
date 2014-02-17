@@ -22,7 +22,7 @@ from ..jtalk import _bgthread
 import time
 import watchdog
 import config
-from jtalkDir import *
+from jtalkDir import jtalk_dir, dic_dir, user_dics
 
 DEBUG = False
 
@@ -235,7 +235,7 @@ def initialize(voice = default_jtalk_voice):
 	if not _bgthread.bgThread:
 		_bgthread.initialize()
 	if not mecab:
-		Mecab_initialize(log.info, jtalk_dir, dic_dir)
+		Mecab_initialize(log.info, jtalk_dir, dic_dir, user_dics)
 	jtalkPrepare.setup()
 
 	jt_dll = os.path.join(jtalk_dir, 'libopenjtalk.dll')

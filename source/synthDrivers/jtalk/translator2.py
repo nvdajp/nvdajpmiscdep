@@ -12,7 +12,7 @@ import re
 from _nvdajp_unicode import unicode_normalize
 from mecab import *
 import translator1
-from jtalkDir import *
+from jtalkDir import jtalk_dir, dic_dir, user_dics
 
 _logwrite = None
 try:
@@ -909,12 +909,12 @@ def japanese_braille_separate(inbuf, logwrite):
 
 mecab_initialized = False
 
-def initialize(mecab_dir_=None, dic_dir_=None, logwrite=_logwrite):
+def initialize(logwrite=_logwrite, mecab_dir_=None, dic_dir_=None, user_dics_=None):
 	global mecab_initialized
-	if mecab_dir_ and dic_dir_:
-		Mecab_initialize(logwrite, mecab_dir_, dic_dir_)
+	if mecab_dir_ and dic_dir_ and user_dics_:
+		Mecab_initialize(logwrite, mecab_dir_, dic_dir_, user_dics_)
 	else:
-		Mecab_initialize(logwrite, jtalk_dir, dic_dir)
+		Mecab_initialize(logwrite, jtalk_dir, dic_dir, user_dics)
 	if logwrite: logwrite("initialize() done.")
 	mecab_initialized = True
 

@@ -13,10 +13,10 @@ jt_dir = os.path.normpath(
 sys.path.append(jt_dir)
 from mecab import *
 from mecabHarness import tasks
+import jtalkDir
 
 dic = os.path.join(jt_dir, 'dic')
-configDir = os.getcwdu()
-user_dics = [os.path.normpath(d) for d in glob(os.path.join(configDir, 'jtusr*.dic'))]
+user_dics = jtalkDir.user_dics
 
 def __print(s):
 	print s.encode('utf-8', 'ignore')

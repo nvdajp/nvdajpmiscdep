@@ -22,8 +22,9 @@ sys.path.append(jtalk_dir)
 from harness import tests
 import translator1
 import translator2
-
+import jtalkDir
 dic_dir = os.path.join(jtalk_dir, 'dic')
+user_dics = jtalkDir.user_dics
 
 def __write(file, s=""):
 	file.write(s.encode('utf-8', 'ignore'))
@@ -89,7 +90,7 @@ def pass2(verboseMode=False):
 	outfile = '__h2output.txt'
 	with open(outfile, 'w') as f:
 		output = cStringIO.StringIO()
-		translator2.initialize(jtalk_dir, dic_dir, __print)
+		translator2.initialize(__print, jtalk_dir, dic_dir, user_dics)
 		log = output.getvalue()
 		output.close()
 		f.write(log)

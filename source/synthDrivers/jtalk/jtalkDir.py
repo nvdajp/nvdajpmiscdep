@@ -5,6 +5,7 @@
 
 import os
 import sys
+from glob import glob
 
 jtalk_dir = unicode(os.path.dirname(__file__), 'mbcs')
 if hasattr(sys,'frozen'):
@@ -14,3 +15,10 @@ if hasattr(sys,'frozen'):
 
 dic_dir = os.path.join(jtalk_dir, 'dic')
 
+configDir = os.getcwdu()
+try:
+	import globalVars
+	configDir = globalVars.appArgs.configPath
+except:
+	pass
+user_dics = [os.path.normpath(d) for d in glob(os.path.join(configDir, 'jtusr*.dic'))]
