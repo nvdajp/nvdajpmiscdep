@@ -52,7 +52,7 @@ def get_reading(msg):
 if __name__ == '__main__':
 	dic = os.path.join(jt_dir, 'dic')
 	user_dics = [
-		os.path.normpath(os.path.join(os.getcwdu(), '_mecabuser.dic'))
+		os.path.normpath(os.path.join(os.getcwdu(), 'jtusr.dic'))
 		]
 	print jt_dir, dic, user_dics
 	Mecab_initialize(__print, jt_dir, dic, user_dics)
