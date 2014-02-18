@@ -118,7 +118,7 @@ def Mecab_initialize(logwrite_ = None, libmecab_dir = None, dic = None, user_dic
 		libmc.mecab_new.argtypes = [c_int, c_char_p_p]
 	global mecab
 	if mecab is None:
-		if logwrite_: logwrite_('dic: %s' % dic)
+		if logwrite_: logwrite_(u'dic: %s' % dic)
 		try:
 			f = open(os.path.join(dic, "DIC_VERSION"))
 			s = f.read().strip()
@@ -133,6 +133,7 @@ def Mecab_initialize(logwrite_ = None, libmecab_dir = None, dic = None, user_dic
 		if user_dics:
 			# ignore item which contains comma
 			ud = ','.join([s for s in user_dics if not ',' in s])
+			if logwrite_: logwrite_(u'user_dics: %s' % ud)
 			argc, args = 5, (c_char_p * 5)('mecab', '-d', dic.encode('utf-8'), '-u', ud.encode('utf-8'))
 		mecab = libmc.mecab_new(argc, args)
 		if logwrite_:
