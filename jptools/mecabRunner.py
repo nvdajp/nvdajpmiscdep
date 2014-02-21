@@ -16,6 +16,7 @@ from mecabHarness import tasks
 import jtalkDir
 
 dic = os.path.join(jt_dir, 'dic')
+user_dics_org = jtalkDir.user_dics_org
 user_dics = jtalkDir.user_dics
 
 def __print(s):
@@ -55,7 +56,7 @@ def get_reading(msg):
 	return reading
 
 if __name__ == '__main__':
-	print jt_dir, dic, user_dics
+	print jt_dir, dic, user_dics_org, user_dics
 	Mecab_initialize(__print, jt_dir, dic, user_dics)
 	for i in tasks:
 		if isinstance(i, dict):

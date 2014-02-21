@@ -6,6 +6,8 @@
 import os
 import sys
 from glob import glob
+import tempfile
+import shutil
 
 jtalk_dir = unicode(os.path.dirname(__file__), 'mbcs')
 if hasattr(sys,'frozen'):
@@ -21,4 +23,12 @@ try:
 	configDir = globalVars.appArgs.configPath
 except:
 	pass
-user_dics = [os.path.normpath(d) for d in glob(os.path.join(configDir, 'jtusr*.dic'))]
+user_dics_org = [os.path.normpath(d) for d in glob(os.path.join(configDir, 'jtusr*.dic'))]
+
+tempDir = unicode(tempfile.mkdtemp(), 'mbcs')
+user_dics = []
+for u in user_dics_org:
+	b = os.path.basename(u)
+	d = os.path.join(tempDir, b)
+	shutil.copyfile(u, d)
+	user_dics.append(d)
