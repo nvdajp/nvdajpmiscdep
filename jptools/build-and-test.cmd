@@ -1,4 +1,3 @@
-call setenv-x86.cmd
 cd ..\include\jtalk
 call all-clean.cmd
 call all-build.cmd
