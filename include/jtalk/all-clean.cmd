@@ -4,6 +4,10 @@ cd ..\python-jtalk
 call clean.cmd
 cd ..\jtalk
 
+cd libopenjtalk\mecab\src
+nmake -f Makefile.mak clean
+cd ..\..\..
+
 cd libopenjtalk\mecab-naist-jdic
 rmdir /S /Q dic
 rmdir /S /Q _temp
