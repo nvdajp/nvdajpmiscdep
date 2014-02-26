@@ -249,6 +249,11 @@ jdic = [
 	{'text': '合わせ鏡', 'braille':'アワセ カガミ'},
 	{'text': '鬘合わせ', 'braille':'カツラ アワセ'},
 	{'text': '暗順応', 'braille':'アンジュンノー'},
+
+	{'text': '大慌て', 'braille':'オオアワテ', 'accent':'3/5'},
+	{'text': '大旦那', 'braille':'オオダンナ', 'accent':'3/5'},
+	{'text': '大人数', 'braille':'オオニンズー', 'accent':'3/6'},
+
 	{'text': '付点', 'speech':'フテン', 'accent':'0/3'},
 
 	{'text':'有り難う',

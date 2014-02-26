@@ -101,11 +101,14 @@ def filter_jdic(s):
 	elif a[0] == '繕う' and a[12] == 'ツクロウ':
 		a[12] = 'ツクロー'
 		s = ",".join(a)
-	elif a[0] in ('大きい', 'おおきい') and a[12] == 'オーキイ' and len(a) == 15:
-		a.append('オオキイ')
+	elif a[0] == 'おおきい' and a[12] == 'オーキイ' and len(a) == 15:
+		a.append(a[11])
 		s = ",".join(a)
-	elif a[0] in ('大まか', 'おおまか') and a[12] == 'オーマカ' and len(a) == 15:
-		a.append('オオマカ')
+	elif a[0] == 'おおまか' and a[12] == 'オーマカ' and len(a) == 15:
+		a.append(a[11])
+		s = ",".join(a)
+	elif a[0][0] == '大' and a[12][0:2] == 'オー' and len(a) == 15:
+		a.append(a[11])
 		s = ",".join(a)
 	elif a[0] == '仰せ' and a[12] == 'オーセ':
 		a[12] = 'オオセ'
