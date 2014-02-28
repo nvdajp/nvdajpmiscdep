@@ -23,7 +23,7 @@ try:
 	configDir = globalVars.appArgs.configPath
 except:
 	pass
-user_dics_org = [os.path.normpath(d) for d in glob(os.path.join(configDir, 'jtusr*.dic'))]
+user_dics_org = [os.path.normpath(d) for d in glob(os.path.join(configDir, 'jtusr.dic'))]
 
 tempDir = unicode(tempfile.mkdtemp(), 'mbcs')
 user_dics = []
