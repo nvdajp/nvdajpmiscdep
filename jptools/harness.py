@@ -3996,6 +3996,8 @@ tests = [
 		'comment': '点訳のてびき第3版 第3章 その3 3.',
 		'text': '一郎くん', 'input': 'イチロー クン'
 		},
+	{   'text':'久代さん', 'input':'ヒサヨ サン'},
+	{   'text':'新家さん', 'input':'シンケ サン'},
 	{
 		'comment': '点訳のてびき第3版 第3章 その3 3. 備考1',
 		'text': '魚屋さん', 'input': 'サカナヤサン'
@@ -4446,12 +4448,11 @@ tests = [
 	{   'text':'http:/aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa', 'input':'http:/aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'},
 	{   'text':'http://aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa', 'input':'⠠⠦http://aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa⠠⠴'},
 
-	#{   'text':'久代', 'input':'ヒサヨ'},
-	#{   'text':'久代さん', 'input':'ヒサヨ サン'},
 	#{   'text':'障害者協会', 'input':'ショーガイシャ キョーカイ'},
-	#{   'text':'新家さん', 'input':'シンケ サン'},
-	#{   'text':'御園', 'input':'ミソノ'},
-	#{   'text':'参加者　御園、田中、中原、御園', 'input':'ミソノ'},
+	{   'text':'久代', 'input':'ヒサヨ'},
+	{   'text':"　御園　", 'input':' ミソノ'},
+	#{   'text':"　西本　", 'input':' ニシモト'},
+	{   'text':'参加者　御園、田中、中原、御園', 'input':'サンカシャ ミソノ、タナカ、ナカハラ、ミソノ'},
 	#{   'text':'有り難うございました', 'input':'アリガトー ゴザイマシタ'},
 	#{   'text':'いう', 'input':'イウ'},
 	#{   'text':'森田知事', 'input':'モリタ チジ'},
@@ -4466,7 +4467,7 @@ tests = [
 	#{   'text':'お黙りなさい', 'input':'オダマリナサイ'},
 	#{   'text':'二人して', 'input':'フタリシテ'},
 	#{   'text':'京丹後', 'input':'キョータンゴ'},
-	#{   'text':'次世代型点字ピンディスプレイ', 'input':'ジセダイガタ テンジピンディスプレイ'},
+	{   'text':'次世代型点字ピンディスプレイ', 'input':'ジセダイガタ テンジピンディスプレイ'},
 	#{   'text':'世界初', 'input':'セカイ ハツ'},
 	#{   'text':'見出しレベル３', 'input':'ミダシ レベル 3'},
 	#{   'text':'もうすぐ', 'input':'モー スグ'},

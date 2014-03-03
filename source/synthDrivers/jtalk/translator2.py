@@ -635,6 +635,11 @@ def should_separate(prev2_mo, prev_mo, mo, next_mo):
 	if prev_mo.hyouki == 'わが' and mo.hyouki == 'まま':
 		return False
 
+	# 人名に続く「さん」「様」「君」「殿」「氏（し）」「氏（うじ）」は区切って書く
+	# (名詞,固有名詞,人名 -> 名詞,接尾,人名)
+	if prev_mo.hinshi2 == '固有名詞' and prev_mo.hinshi3 == '人名' and ((mo.hinshi2 == '接尾' and mo.hinshi3 == '人名') or (mo.hyouki == 'さん')):
+		return True
+
 	if prev_mo.hinshi1 == '名詞' and mo.hinshi1 == '名詞':
 		if mo.hinshi2 == '数': return False
 		# 人名

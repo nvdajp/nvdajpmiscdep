@@ -517,7 +517,7 @@ def translateWithInPos(text):
 			pos += 1
 	# rstrip with inPos
 	outbuf = retval
-	if text[-1] != ' ':
+	if text and text[-1] != ' ':
 		while outbuf[-1:] == ' ':
 			outbuf = outbuf[:-1]
 			inPos.pop()

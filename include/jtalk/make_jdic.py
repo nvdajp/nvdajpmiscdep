@@ -412,6 +412,12 @@ def filter_jdic(s):
 		s = ""
 	elif a[0] == '梅木' and a[12] in ('ウメノキ', 'ウメギ'):
 		s = ""
+	elif a[0] == '御園' and a[12] == 'ミソ':
+		s = ""
+	elif a[0] == '新家' and a[11] in ('シンヤ', 'ニイノミ'):
+		s = ""
+	elif a[0] == '新家' and a[6] != '人名' and a[11] == 'シンケ':
+		s = ""
 	return s
 
 def convert_jdic_file(src_file, src_enc, dest_file, dest_enc):
