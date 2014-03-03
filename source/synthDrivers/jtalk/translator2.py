@@ -465,7 +465,7 @@ def should_separate(prev2_mo, prev_mo, mo, next_mo):
 		return True
 
 	# 数字の前のマスアケ
-	if prev_mo.nhyouki in ('零下', '西暦', 'ボーイング', 'ベスト', 'ルイ', '先', '振替', 'No.', '一人当り') \
+	if prev_mo.nhyouki in ('零下', '西暦', 'ボーイング', 'ベスト', 'ルイ', '先', '振替', 'No.', '一人当り', '全', '満') \
 			and mo.output.isdigit():
 		return True
 
@@ -501,6 +501,11 @@ def should_separate(prev2_mo, prev_mo, mo, next_mo):
 
 	# 外国語引用符、マスアケ、助詞、助動詞
 	if prev_mo.output and prev_mo.output.endswith('⠴') and mo.hinshi1 in ('助詞', '助動詞'): return True
+
+	# 複合語（接頭語・接尾語・造語要素）【備考１】
+	# 接頭語・接尾語・造語要素であっても、意味の理解を助ける場合には、
+	# 発音上の切れ目を考慮して区切って書いてよい。
+	if prev_mo.hyouki not in ('お', 'ご', '旧') and prev_mo.hinshi1 == '接頭詞' and mo.hinshi1 == '名詞' and mo.hinshi2 != '数': return True
 
 	if prev_mo.hinshi1 == '名詞' and prev_mo.hinshi2 == '接尾':
 		# 助数詞のあとにアラビア数字が来たらマスアケ
