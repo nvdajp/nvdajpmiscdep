@@ -84,6 +84,7 @@ def pass1():
 						f.write("comment: " + t['comment'].encode('utf-8') + "\n")
 					f.write("\n")
 		print 'h1: %d error(s). see %s' % (count, outfile)
+	return (count, outfile)
 	
 def pass2(verboseMode=False):
 	global output
@@ -163,6 +164,7 @@ def pass2(verboseMode=False):
 					f.write(log)
 					f.write("\n")
 		print 'h2: %d error(s). see %s' % (count, outfile)
+	return (count, outfile)
 
 def make_doc():
 	outfile = '__jpBrailleHarness.t2t'
@@ -229,22 +231,9 @@ if __name__ == '__main__':
 					  type="int",
 					  default=1,
 					  help="number for timeit")
-	parser.add_option("-o", "--outposTest",
-					  action="store_true",
-					  dest="outpos_test",
-					  default=False,
-					  help="outpos test")
 	(options, args) = parser.parse_args()
 
-	if options.outpos_test == True:
-		# translate([b'louis/tables/en-us-g2.ctb'], 'Hello world!')
-		inPos  = [0, 0, 1, 2, 3, 4, 5, 6, 6, 11]
-		inlen  = len('Hello world!')
-		outlen = len(',hello _w6')
-		outPos = translator2.makeOutPos(inPos, inlen, outlen)
-		print outPos 
-		assert outPos == [1, 2, 3, 4, 5, 6, 7, 7, 7, 7, 7, 9]
-	elif options.make_doc == True:
+	if options.make_doc == True:
 		make_doc()
 	elif options.pass1_only == True:
 		t = timeit.Timer(stmt=pass1)
