@@ -3,7 +3,7 @@ call all-clean.cmd
 call all-build.cmd
 call all-install.cmd
 cd ..\..\jptools
-call test-mecab.cmd
+call test.cmd
 cd ..\include\python-jtalk
 call clean.cmd
 cd ..\..\jptools
