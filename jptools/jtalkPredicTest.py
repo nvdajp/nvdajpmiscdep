@@ -5,9 +5,8 @@ from __future__ import unicode_literals, print_function
 import os
 import sys
 sys.path.append(r'..\source\synthDrivers\jtalk')
-from _jtalk_core import *
 from _nvdajp_unicode import unicode_normalize
-import _nvdajp_predic
+import jtalkPrepare
 
 tests = [
 	['ー', 'チョーオン'],
@@ -68,11 +67,17 @@ tests = [
 def _print(s):
 	print(s.encode('utf-8', 'ignore'))
 
-if __name__ == '__main__':
-	_nvdajp_predic.setup()
+def runTasks():
+	jtalkPrepare.setup()
+	count = 0
 	for item in tests:
 		msg = item[0]
 		msg = unicode_normalize(msg)
-		s = _nvdajp_predic.convert(msg)
+		s = jtalkPrepare.convert(msg)
 		if item[1] != s:
 			_print('expected:%s result:%s' % (item[1], s))
+			count += 1
+	return count
+
+if __name__ == '__main__':
+	runTasks()

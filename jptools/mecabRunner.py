@@ -55,9 +55,13 @@ def get_reading(msg):
 	mf = None
 	return reading
 
-if __name__ == '__main__':
+def runTasks(enableUserDic=False):
 	print jt_dir, dic, user_dics_org, user_dics
-	Mecab_initialize(__print, jt_dir, dic, user_dics)
+	if enableUserDic:
+		Mecab_initialize(__print, jt_dir, dic, user_dics)
+	else:
+		Mecab_initialize(__print, jt_dir, dic)
+	count = 0
 	for i in tasks:
 		if isinstance(i, dict):
 			if 'braille' in i:
@@ -85,6 +89,7 @@ if __name__ == '__main__':
 			__print('input:    ' + item[0])
 			__print('reading expected: ' + item[1])
 			__print('reading result:   ' + result[0])
+			count += 1
 		if len(item) > 2 and result[1] != item[2]:
 			__print('')
 			__print('')
@@ -92,5 +97,9 @@ if __name__ == '__main__':
 			__print('input:            ' + item[0])
 			__print('braille expected: ' + item[2])
 			__print('braille result:   ' + result[1])
+			count += 1
 
-	
+	return count
+
+if __name__ == '__main__':
+	runTasks(enableUserDic=True)

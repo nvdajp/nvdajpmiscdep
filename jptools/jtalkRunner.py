@@ -75,8 +75,11 @@ def pa_play(data, samp_rate = 16000):
 	stream.close()
 	p.terminate()
 
+do_print = False
+
 def __print(s):
-	print(s.encode('cp932', 'ignore'))
+	if do_print:
+		print(s.encode('cp932', 'ignore'))
 
 def print_code(msg):
 	s = ''
@@ -154,8 +157,10 @@ def main(do_play = False, do_write = True, do_log = False):
 	s = msgs[0]
 	fperiod = v['fperiod']
 	do_synthesis(s, v, do_play, do_write, do_log, fperiod, pitch=50, inflection=50)
+	return 0
 
 if __name__ == '__main__':
+	do_print = True
 	main(do_play=False, do_write=True)
 	#prof = cProfile.run("main(do_play=True)", '_cprof.prof')
 	#p = pstats.Stats('_cprof.prof')
