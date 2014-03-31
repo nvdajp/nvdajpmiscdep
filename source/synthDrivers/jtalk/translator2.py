@@ -643,7 +643,10 @@ def should_separate(prev2_mo, prev_mo, mo, next_mo):
 	if prev_mo.hinshi1 == '名詞' and mo.hinshi1 == '名詞':
 		if mo.hinshi2 == '数': return False
 		# 人名
-		if prev_mo.hinshi4 in ('姓', '名') and mo.hinshi2 == '接尾' and mo.hinshi3 == '人名': return True
+		if (prev_mo.hinshi4 in ('姓', '名') or prev_mo.hinshi3 == '人名') and (
+			(mo.hinshi2 == '接尾' and mo.hinshi3 == '人名') or
+			mo.hyouki in ('曲', '記', '絵', 'アナ', 'プロ')
+			): return True
 		# 複合名詞内部の2拍以下は切らない
 		if not prev_mo.hinshi2 in ('数', 'アルファベット') and not mo.hinshi2 in ('数', 'アルファベット'):
 			if len(prev_mo.yomi) <= 2 and len(mo.yomi) >= 3: return False

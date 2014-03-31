@@ -418,6 +418,9 @@ def filter_jdic(s):
 		s = ""
 	elif a[0] == '新家' and a[6] != '人名' and a[11] == 'シンケ':
 		s = ""
+	elif a[0] == '正岡子規':
+		a.append('マサオカ シキ')
+		s = ",".join(a)
 	return s
 
 def convert_jdic_file(src_file, src_enc, dest_file, dest_enc):
