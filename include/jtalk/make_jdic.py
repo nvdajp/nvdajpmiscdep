@@ -421,6 +421,8 @@ def filter_jdic(s):
 	elif a[0] == '正岡子規':
 		a.append('マサオカ シキ')
 		s = ",".join(a)
+	elif a[0] == '作' and a[6] == '人名' and a[11] == 'ツクル':
+		s = ""
 	return s
 
 def convert_jdic_file(src_file, src_enc, dest_file, dest_enc):
