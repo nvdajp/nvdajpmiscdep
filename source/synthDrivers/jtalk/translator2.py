@@ -647,7 +647,7 @@ def should_separate(prev2_mo, prev_mo, mo, next_mo):
 		# 場合は、前を区切って書く
 		if (prev_mo.hinshi4 in ('姓', '名') or prev_mo.hinshi3 == '人名'):
 			if mo.hyouki in ('嬢',):
-				return True
+				return False
 			elif ((mo.hinshi2 == '接尾' and mo.hinshi3 == '人名') or
 				mo.hyouki in ('訳', '作', '談', '曲', '記', '絵', 'アナ', 'プロ')
 				):
