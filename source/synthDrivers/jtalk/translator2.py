@@ -465,8 +465,22 @@ def should_separate(prev2_mo, prev_mo, mo, next_mo):
 	if prev_mo.hyouki == '一時' and mo.hyouki == '雨':
 		return True
 
+	# 副,知事
+	if prev_mo.hyouki == '副' and mo.hinshi1 == '名詞' and mo.hinshi2 == '一般':
+		return False
+
+	# 世界/初
+	if prev_mo.hinshi1 == '名詞' and prev_mo.hinshi2 == '一般' and mo.hyouki == '初' :
+		return True
+
+	# 障害,者/協会
+	if prev2_mo and prev2_mo.hinshi1 == '名詞' and \
+			prev_mo.hyouki == '者' and \
+			mo.hinshi1 == '名詞':
+		return True
+
 	# 数字の前のマスアケ
-	if prev_mo.nhyouki in ('零下', '西暦', 'ボーイング', 'ベスト', 'ルイ', '先', '振替', 'No.', '一人当り', '全', '満') \
+	if prev_mo.nhyouki in ('零下', '西暦', 'ボーイング', 'ベスト', 'ルイ', '先', '振替', 'No.', '一人当り', '全', '満', 'レベル') \
 			and mo.output.isdigit():
 		return True
 
@@ -638,7 +652,7 @@ def should_separate(prev2_mo, prev_mo, mo, next_mo):
 
 	# 人名に続く「さん」「様」「君」「殿」「氏（し）」「氏（うじ）」は区切って書く
 	# (名詞,固有名詞,人名 -> 名詞,接尾,人名)
-	if prev_mo.hinshi2 == '固有名詞' and prev_mo.hinshi3 == '人名' and ((mo.hinshi2 == '接尾' and mo.hinshi3 == '人名') or (mo.hyouki == 'さん')):
+	if prev_mo.hinshi2 == '固有名詞' and prev_mo.hinshi3 == '人名' and ((mo.hinshi2 == '接尾' and mo.hinshi3 == '人名') or (mo.hyouki in ('さん', '知事'))):
 		return True
 
 	if prev_mo.hinshi1 == '名詞' and mo.hinshi1 == '名詞':

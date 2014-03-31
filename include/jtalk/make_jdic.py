@@ -429,6 +429,9 @@ def filter_jdic(s):
 	elif a[0] == '丹後半島' and a[12] == 'タンゴハントー':
 		a.append('タンゴ ハントー')
 		s = ",".join(a)
+	elif a[0] == 'もうすぐ' and a[12] == 'モースグ':
+		a.append('モー スグ')
+		s = ",".join(a)
 	return s
 
 def convert_jdic_file(src_file, src_enc, dest_file, dest_enc):
