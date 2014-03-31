@@ -20,11 +20,14 @@ jtalk_dir = os.path.normpath(
 	)
 sys.path.append(jtalk_dir)
 from harness import tests
+from nabccHarness import tests as nabcc_tests
+tests.extend(nabcc_tests)
 import translator1
 import translator2
 import jtalkDir
 dic_dir = os.path.join(jtalk_dir, 'dic')
 user_dics = jtalkDir.user_dics
+
 
 def __write(file, s=""):
 	file.write(s.encode('utf-8', 'ignore'))
@@ -63,6 +66,8 @@ def pass1():
 	with open(outfile, 'w') as f:
 		count = 0
 		for t in tests:
+			if t.has_key('mode') and t['mode'] == 'NABCC':
+				continue
 			if t.has_key('output'):
 				result, inpos1 = translator1.translateWithInPos(t['input'])
 				if t.has_key('inpos1'):
@@ -199,6 +204,8 @@ NVDA 日本語版 点訳テストケース """ + timestamp + u"""
 				__writeln(f, u"- 点字: " + t['output'].replace(' ', u'□'))
 			if t.has_key('output'):
 				__writeln(f, u"- ドット番号: " + dot_numbers(t['output']))
+			if t.has_key('mode'):
+				__writeln(f, u"- モード: " + t['mode'])
 			if t.has_key('comment'):
 				__writeln(f, u"- コメント: " + t['comment'])
 			__writeln(f, u"-")
