@@ -423,6 +423,12 @@ def filter_jdic(s):
 		s = ",".join(a)
 	elif a[0] == '作' and a[6] == '人名' and a[11] == 'ツクル':
 		s = ""
+	elif a[0] == '宗谷岬' and a[12] == 'ソーヤミサキ':
+		a.append('ソーヤ ミサキ')
+		s = ",".join(a)
+	elif a[0] == '丹後半島' and a[12] == 'タンゴハントー':
+		a.append('タンゴ ハントー')
+		s = ",".join(a)
 	return s
 
 def convert_jdic_file(src_file, src_enc, dest_file, dest_enc):

@@ -452,8 +452,9 @@ def should_separate(prev2_mo, prev_mo, mo, next_mo):
 			mo.hinshi1 == '名詞' and mo.hinshi2 == '一般':
 		return True
 	# 永田町 １
+	# 「岬」「峠」「半島」はマス空けが原則
 	if prev_mo.hinshi2 == '固有名詞' and prev_mo.hinshi3 == '地域' and \
-			mo.hinshi2 == '数':
+			(mo.hinshi2 == '数' or mo.hyouki in ('岬', '峠', '半島')):
 		return True
 
 	# 晴れ/所に より
