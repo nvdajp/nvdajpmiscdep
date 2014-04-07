@@ -351,6 +351,30 @@ jdic = [
 	{'text':'ト　゚', 'speech':'ト'}, # U+309a
 	#{'text':'ト゜', 'speech':'ト'}, # U+309c
 	#{'text':'トﾟ', 'speech':'ト'}, # U+ff9f
+
+	# 仝	4edd	[ドージョー]	ドージョー
+	{'text':'仝', 'braille':'ドージョー', 'cost':5000},
+
+	# ノノ字点（ののじてん）・同じく記号
+	# 〃	3003	[オナジク]	オナジク
+	{'text':'〃', 'braille':'オナジク', 'cost':5000},
+
+	# 二の字点（にのじてん）
+	# 〻    303b
+	{'text':'各〻', 'braille':'オノオノ'},
+	{'text':'屡〻', 'braille':'シバシバ'},
+
+	# くの字点（くのじてん）
+	# 〱    3031 くの字点
+	# 〲    3032 くの字点(濁点)
+	# 〳    3033 くの字点上
+	# 〴    3034 くの字点上(濁点)
+	# 〵    3035 くの字点下
+	{   'text':'〱', 'braille':'クノジテン'},
+	{   'text':'〲', 'braille':'クノジテン ダクテン'},
+	{   'text':'〳', 'braille':'クノジテン ウエ'},
+	{   'text':'〴', 'braille':'クノジテン ウエ ダクテン'},
+	{   'text':'〵', 'braille':'クノジテン シタ'},
 ]
 
 class DicItem(object):
@@ -368,8 +392,11 @@ class DicItem(object):
 			self.text = a['text']
 			if 'speech' in a:
 				self.speech = a['speech']
-			else:
+			elif 'braille' in a:
 				self.speech = a['braille'].replace(' ', '').replace('/', '')
+			else:
+				print 'data error: ' + str(a)
+				sys.exit(1)
 			self.accent = a['accent'] if 'accent' in a else None
 			self.cost = a['cost'] if 'cost' in a else None
 			self.pos = a['pos'] if 'pos' in a else None

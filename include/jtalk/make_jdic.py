@@ -432,6 +432,14 @@ def filter_jdic(s):
 	elif a[0] == 'もうすぐ' and a[12] == 'モースグ':
 		a.append('モー スグ')
 		s = ",".join(a)
+	elif a[0] == '仝':
+		# 同上記号
+		# 仝	4edd	[ドージョー]	ドージョー
+		s = "" # custom_dic_maker
+	elif a[0] == '〃':
+		# ノノ字点（ののじてん）・同じく記号
+		# 〃	3003	[オナジク]	オナジク
+		s = "" # custom_dic_maker
 	return s
 
 def convert_jdic_file(src_file, src_enc, dest_file, dest_enc):
