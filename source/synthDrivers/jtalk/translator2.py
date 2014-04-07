@@ -828,9 +828,13 @@ def japanese_braille_separate(inbuf, logwrite):
 		if mo.hyouki == '〟':
 			mo.hinshi1 = '記号'
 			mo.hinshi2 = '括弧閉'
+		if mo.hyouki == '々々々々':
+			mo.hinshi1 = '記号'
+			mo.hinshi2 = '一般'
 		if mo.hyouki == '〻':
 			# 303b 二の字点（にのじてん）
-			mo.output = 'ニノジテン'
+			mo.hinshi1 = '記号'
+			mo.hinshi2 = '一般'
 
 	for mo in li:
 		if mo.hinshi2 in ('括弧開', '括弧閉'):
@@ -869,13 +873,25 @@ def japanese_braille_separate(inbuf, logwrite):
 			li[pos].output = '⠼'
 
 	# 記号を Unicode 正規化
+	# 踊り字の処理
 	for i in xrange(0, len(li)):
 		mo = li[i]
 		if mo.hinshi1 == '記号' and mo.hinshi2 == '一般':
-			if mo.hyouki == 'ゝ' and i > 0:
+			if mo.hyouki == '〻':
+				mo.output = 'ニノジテン'
+			elif mo.hyouki == 'ゝ' and i > 0:
 				mo.output = to_no_dakuon_kana(li[i-1].output)
 			elif mo.hyouki == 'ゞ' and i > 0:
 				mo.output = to_dakuon_kana(li[i-1].output)
+			elif mo.hyouki == '々々々々' and i > 0:
+				mo.output = li[i-1].output * 4
+			elif mo.hyouki == '々々' and i > 0:
+				mo.output = li[i-1].output * 2
+			elif mo.hyouki == '々' and i > 0:
+				if li[i-1].hyouki[0] == '々' and i > 1:
+					mo.output = li[i-2].output
+				else:
+					mo.output = li[i-1].output
 			else:
 				mo.output = mo.nhyouki
 		if mo.hyouki == '．' and mo.hinshi1 == '名詞' and mo.hinshi2 == '数':
