@@ -294,6 +294,8 @@ tests = [
 		'inpos':  [0,0,0,1,2,3,4,5,5,5],
 		'comment': 'Latinの 0x002D HYPHEN-MINUS は 0x2212 MUNUS SIGN に正規化しない',
 		},
+	{'text':'ト゚', 'input':'ト'}, # U+309a
+	{'text':'ト　゚', 'input':'ト'}, # U+309a
 	{
 		'input': 'Aア',
 		'output': '⠰⠠⠁⠤⠁',
