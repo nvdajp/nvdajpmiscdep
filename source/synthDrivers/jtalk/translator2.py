@@ -753,6 +753,25 @@ RE_GAIJI = re.compile('^[A-Za-z][A-Za-z0-9\,\.\+\- ]+$')
 RE_KATAKANA = re.compile('^[ァ-ヾ]+$')
 RE_HIRAGANA = re.compile('^[ぁ-ゞ]+$')
 
+NO_DAKUON_DIC = {
+	'ヅ' : 'ツ',
+}
+
+DAKUON_DIC = {
+	'フ' : 'ブ',
+	'ブ' : 'ブ',
+}
+
+def to_no_dakuon_kana(s):
+	if s in NO_DAKUON_DIC:
+		return NO_DAKUON_DIC[s]
+	return s
+
+def to_dakuon_kana(s):
+	if s in DAKUON_DIC:
+		return DAKUON_DIC[s]
+	return s
+
 def japanese_braille_separate(inbuf, logwrite):
 	text = inbuf
 	if RE_MB_ALPHA_NUM_SPACE.match(text):
@@ -850,9 +869,15 @@ def japanese_braille_separate(inbuf, logwrite):
 			li[pos].output = '⠼'
 
 	# 記号を Unicode 正規化
-	for mo in li:
+	for i in xrange(0, len(li)):
+		mo = li[i]
 		if mo.hinshi1 == '記号' and mo.hinshi2 == '一般':
-			mo.output = mo.nhyouki
+			if mo.hyouki == 'ゝ' and i > 0:
+				mo.output = to_no_dakuon_kana(li[i-1].output)
+			elif mo.hyouki == 'ゞ' and i > 0:
+				mo.output = to_dakuon_kana(li[i-1].output)
+			else:
+				mo.output = mo.nhyouki
 		if mo.hyouki == '．' and mo.hinshi1 == '名詞' and mo.hinshi2 == '数':
 			mo.output = '.'
 		if mo.hyouki == '，' and mo.hinshi1 == '名詞' and mo.hinshi2 == '数':
