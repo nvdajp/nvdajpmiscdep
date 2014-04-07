@@ -890,8 +890,10 @@ def japanese_braille_separate(inbuf, logwrite):
 			elif mo.hyouki == '々' and i > 0:
 				if li[i-1].hyouki[0] == '々' and i > 1:
 					mo.output = li[i-2].output
-				else:
+				elif len(li[i-1].hyouki) == 1:
 					mo.output = li[i-1].output
+				else:
+					mo.output = '' # FIXME
 			else:
 				mo.output = mo.nhyouki
 		if mo.hyouki == '．' and mo.hinshi1 == '名詞' and mo.hinshi2 == '数':
