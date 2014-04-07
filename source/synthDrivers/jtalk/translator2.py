@@ -754,13 +754,18 @@ RE_KATAKANA = re.compile('^[ァ-ヾ]+$')
 RE_HIRAGANA = re.compile('^[ぁ-ゞ]+$')
 
 NO_DAKUON_DIC = {
-	'ヅ' : 'ツ',
-}
+	'ガ' : 'カ', 'ギ' : 'キ', 'グ' : 'ク', 'ゲ' : 'ケ', 'ゴ' : 'コ',
+	'ザ' : 'サ', 'ジ' : 'シ', 'ズ' : 'ス', 'ゼ' : 'セ', 'ゾ' : 'ソ',
+	'ダ' : 'タ', 'ヂ' : 'チ', 'ヅ' : 'ツ', 'デ' : 'テ', 'ド' : 'ト',
+	'バ' : 'ハ', 'ビ' : 'ヒ', 'ブ' : 'フ', 'ベ' : 'ヘ', 'ボ' : 'ホ',
+	}
 
 DAKUON_DIC = {
-	'フ' : 'ブ',
-	'ブ' : 'ブ',
-}
+	'カ' : 'ガ', 'キ' : 'ギ', 'ク' : 'グ', 'ケ' : 'ゲ', 'コ' : 'ゴ',
+	'サ' : 'ザ', 'シ' : 'ジ', 'ス' : 'ズ', 'セ' : 'ゼ', 'ソ' : 'ゾ',
+	'タ' : 'ダ', 'チ' : 'ヂ', 'ツ' : 'ヅ', 'テ' : 'デ', 'ト' : 'ド',
+	'ハ' : 'バ', 'ヒ' : 'ビ', 'フ' : 'ブ', 'ヘ' : 'ベ', 'ホ' : 'ボ',
+	}
 
 def to_no_dakuon_kana(s):
 	if s in NO_DAKUON_DIC:
@@ -879,10 +884,10 @@ def japanese_braille_separate(inbuf, logwrite):
 		if mo.hinshi1 == '記号' and mo.hinshi2 == '一般':
 			if mo.hyouki == '〻':
 				mo.output = 'ニノジテン'
-			elif mo.hyouki == 'ゝ' and i > 0:
-				mo.output = to_no_dakuon_kana(li[i-1].output)
-			elif mo.hyouki == 'ゞ' and i > 0:
-				mo.output = to_dakuon_kana(li[i-1].output)
+			elif mo.hyouki in ('ゝ', 'ヽ') and i > 0:
+				mo.output = to_no_dakuon_kana(li[i-1].output[-1:])
+			elif mo.hyouki in ('ゞ', 'ヾ') and i > 0:
+				mo.output = to_dakuon_kana(li[i-1].output[-1:])
 			elif mo.hyouki == '々々々々' and i > 0:
 				mo.output = li[i-1].output * 4
 			elif mo.hyouki == '々々' and i > 0:
