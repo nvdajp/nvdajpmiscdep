@@ -809,6 +809,9 @@ def japanese_braille_separate(inbuf, logwrite):
 		if mo.hyouki == '〟':
 			mo.hinshi1 = '記号'
 			mo.hinshi2 = '括弧閉'
+		if mo.hyouki == '〻':
+			# 303b 二の字点（にのじてん）
+			mo.output = 'ニノジテン'
 
 	for mo in li:
 		if mo.hinshi2 in ('括弧開', '括弧閉'):
