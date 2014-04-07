@@ -877,39 +877,6 @@ def japanese_braille_separate(inbuf, logwrite):
 				li[pos+1].output.isdigit():
 			li[pos].output = '⠼'
 
-	# 記号を Unicode 正規化
-	# 踊り字の処理
-	for i in xrange(0, len(li)):
-		mo = li[i]
-		if mo.hinshi1 == '記号' and mo.hinshi2 == '一般':
-			if mo.hyouki == '〻':
-				mo.output = 'ニノジテン'
-			elif mo.hyouki in ('ゝ', 'ヽ') and i > 0:
-				mo.output = to_no_dakuon_kana(li[i-1].output[-1:])
-			elif mo.hyouki in ('ゞ', 'ヾ') and i > 0:
-				mo.output = to_dakuon_kana(li[i-1].output[-1:])
-			elif mo.hyouki == '々々々々' and i > 0:
-				mo.output = li[i-1].output * 4
-			elif mo.hyouki == '々々' and i > 0:
-				mo.output = li[i-1].output * 2
-			elif mo.hyouki == '々' and i > 0:
-				if li[i-1].hyouki[0] == '々' and i > 1:
-					mo.output = li[i-2].output
-				elif len(li[i-1].hyouki) == 1:
-					mo.output = li[i-1].output
-				else:
-					mo.output = '' # FIXME
-			else:
-				mo.output = mo.nhyouki
-		if mo.hyouki == '．' and mo.hinshi1 == '名詞' and mo.hinshi2 == '数':
-			mo.output = '.'
-		if mo.hyouki == '，' and mo.hinshi1 == '名詞' and mo.hinshi2 == '数':
-			mo.output = ','
-		if mo.hinshi1 == '記号' and mo.hinshi2 == '句点' and mo.nhyouki == '.':
-			mo.output = '.'
-		if mo.hinshi1 == '記号' and mo.hinshi2 == '読点' and mo.nhyouki == ',':
-			mo.output = ','
-
 	# before: ａｂ,ab,名詞,一般,*,*,アブ,アブ,1/2,アブ,0
 	# after:  ａｂ,ab,名詞,一般,*,*,アブ,アブ,1/2,ab,0
 	# before: Ｎｏ．,No.,接頭詞,数接続,*,*,ナンバー,ナンバー,1/4,ナンバー,0
@@ -946,6 +913,43 @@ def japanese_braille_separate(inbuf, logwrite):
 		if mo.output == 'ヮ': mo.output = 'ワ'
 		if mo.output == 'ヵ': mo.output = 'カ'
 		if mo.output == 'ヶ': mo.output = 'ケ'
+
+	# 記号を Unicode 正規化
+	# 踊り字の処理
+	for i in xrange(0, len(li)):
+		mo = li[i]
+		if mo.hinshi1 == '記号' and mo.hinshi2 == '一般':
+			if mo.hyouki == '〻':
+				mo.output = 'ニノジテン'
+			elif mo.hyouki == 'ゝ' and i > 0:
+				mo.output = to_no_dakuon_kana(li[i-1].output[-1:])
+			elif mo.hyouki == 'ゞ' and i > 0:
+				mo.output = to_dakuon_kana(li[i-1].output[-1:])
+			elif mo.hyouki == 'ヽ' and i > 0:
+				mo.output = to_no_dakuon_kana(li[i-1].output[-1:])
+			elif mo.hyouki == 'ヾ' and i > 0:
+				mo.output = to_dakuon_kana(li[i-1].output[-1:])
+			elif mo.hyouki == '々々々々' and i > 0:
+				mo.output = li[i-1].output * 4
+			elif mo.hyouki == '々々' and i > 0:
+				mo.output = li[i-1].output * 2
+			elif mo.hyouki == '々' and i > 0:
+				if li[i-1].hyouki[0] == '々' and i > 1:
+					mo.output = li[i-2].output
+				elif len(li[i-1].hyouki) == 1:
+					mo.output = li[i-1].output
+				else:
+					mo.output = '' # FIXME
+			else:
+				mo.output = mo.nhyouki
+		if mo.hyouki == '．' and mo.hinshi1 == '名詞' and mo.hinshi2 == '数':
+			mo.output = '.'
+		if mo.hyouki == '，' and mo.hinshi1 == '名詞' and mo.hinshi2 == '数':
+			mo.output = ','
+		if mo.hinshi1 == '記号' and mo.hinshi2 == '句点' and mo.nhyouki == '.':
+			mo.output = '.'
+		if mo.hinshi1 == '記号' and mo.hinshi2 == '読点' and mo.nhyouki == ',':
+			mo.output = ','
 
 	for mo in li:
 		# 情報処理点字の開始記号と終了記号
