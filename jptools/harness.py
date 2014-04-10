@@ -4509,6 +4509,8 @@ tests = [
 	{   'text':'鈴木アナ', 'input':'スズキ アナ'},
 	{   'text':'岡本プロ', 'input':'オカモト プロ'},
 
+	#{   'text':'びっくら放いた', 'input':'ビックラ コイタ'},
+
 	{ 'note': '+ 踊り字 +' },
 	# http://ja.wikipedia.org/wiki/%E8%B8%8A%E3%82%8A%E5%AD%97
 
