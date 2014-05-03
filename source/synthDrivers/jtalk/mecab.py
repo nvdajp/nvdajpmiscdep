@@ -129,12 +129,13 @@ def Mecab_initialize(logwrite_ = None, libmecab_dir = None, dic = None, user_dic
 				raise RuntimeError('utf-8 dictionary for mecab required.')
 		except:
 			pass
-		argc, args = 3, (c_char_p * 3)('mecab', '-d', dic.encode('utf-8'))
+		mecabrc = os.path.join(libmecab_dir, 'mecabrc')
+		argc, args = 5, (c_char_p * 5)('mecab', '-d', dic.encode('utf-8'), '-r', mecabrc.encode('utf-8'))
 		if user_dics:
 			# ignore item which contains comma
 			ud = ','.join([s for s in user_dics if not ',' in s])
 			if logwrite_: logwrite_(u'user_dics: %s' % ud)
-			argc, args = 5, (c_char_p * 5)('mecab', '-d', dic.encode('utf-8'), '-u', ud.encode('utf-8'))
+			argc, args = 7, (c_char_p * 7)('mecab', '-d', dic.encode('utf-8'), '-r', mecabrc.encode('utf-8'), '-u', ud.encode('utf-8'))
 		mecab = libmc.mecab_new(argc, args)
 		if logwrite_:
 			if not mecab: logwrite_('mecab_new failed.')

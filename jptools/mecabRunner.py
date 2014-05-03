@@ -56,10 +56,11 @@ def get_reading(msg):
 	return reading
 
 def runTasks(enableUserDic=False):
-	print jt_dir, dic, user_dics_org, user_dics
 	if enableUserDic:
+		print jt_dir, dic, user_dics
 		Mecab_initialize(__print, jt_dir, dic, user_dics)
 	else:
+		print jt_dir, dic
 		Mecab_initialize(__print, jt_dir, dic)
 	count = 0
 	for i in tasks:
