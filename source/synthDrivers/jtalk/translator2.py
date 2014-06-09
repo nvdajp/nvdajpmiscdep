@@ -1032,12 +1032,12 @@ def translateWithInPos2(inbuf, logwrite=_logwrite, nabcc=False):
 	return (outbuf, result, inpos1, inpos2)
 
 # for brailleViewer
-def getReadingAndBraille(text, logwrite=_logwrite):
-	return translateWithInPos2(text, logwrite=logwrite)[0:2]
+def getReadingAndBraille(text, logwrite=_logwrite, nabcc=False):
+	return translateWithInPos2(text, logwrite=logwrite, nabcc=nabcc)[0:2]
 
 # returns '\u2801\u2802\u2803\u2804\u2805\u2806\u2807'
-def japaneseToUnicodeBraille(text, logwrite=_logwrite):
-	return translateWithInPos2(text, logwrite=logwrite)[0]
+def japaneseToUnicodeBraille(text, logwrite=_logwrite, nabcc=False):
+	return translateWithInPos2(text, logwrite=logwrite, nabcc=nabcc)[0]
 
 def makeOutPos(inPos, inlen, outlen):
 	# make outPos
@@ -1064,7 +1064,7 @@ def mergePositionMap(inpos1, inpos2, outlen, inlen):
 # louis-compatible method
 # tableList, typeform are not supported.
 # mode=dotsIO is default.
-def translate(inbuf, cursorPos=0, logwrite=_logwrite, unicodeIO=False):
+def translate(inbuf, cursorPos=0, logwrite=_logwrite, unicodeIO=False, nabcc=False):
 	"""Translate a string of characters, providing position information.
 	@param inbuf: The string to translate.
 	@type inbuf: str
@@ -1078,7 +1078,7 @@ def translate(inbuf, cursorPos=0, logwrite=_logwrite, unicodeIO=False):
 	@rtype: (str, list of int, list of int, int)
 	@raise RuntimeError: If a complete translation could not be done.
 	"""
-	sp, outbuf, inpos1, inpos2 = translateWithInPos2(inbuf, logwrite=logwrite)
+	sp, outbuf, inpos1, inpos2 = translateWithInPos2(inbuf, logwrite=logwrite, nabcc=nabcc)
 	if not unicodeIO:
 		pat = outbuf.replace(' ', '\u2800')
 		outbuf = ''.join([unichr((ord(c) - 0x2800) + 0x8000) for c in pat])
