@@ -431,7 +431,7 @@ def fix_japanese_date_morphs(li):
 			new_li.append(li[i])
 	return new_li
 
-def should_separate(prev2_mo, prev_mo, mo, next_mo):
+def should_separate(prev2_mo, prev_mo, mo, next_mo, nabcc=False):
 	if mo.hyouki == 'ー': return False
 	if prev_mo.hyouki == 'ー': return False
 	if mo.hyouki in 'ぁぃぅぇぉっゃゅょゎァィゥェォッャュョヮヵヶ': return False
@@ -543,6 +543,8 @@ def should_separate(prev2_mo, prev_mo, mo, next_mo):
 	# ＣＤ,CD,名詞,一般,*,*,シーディー,シーディー,3/4,シーディー,0
 	# を,を,助詞,格助詞,一般,*,ヲ,ヲ,0/1,ヲ,0
 	if is_alpha(prev_mo.nhyouki) and mo.hinshi1 in ('助詞', '助動詞'):
+		return True
+	if nabcc and (prev_mo.hinshi2 == 'アルファベット') and mo.hinshi1 in ('助詞', '助動詞'):
 		return True
 
 	# ピリオドの後の助詞
@@ -777,7 +779,7 @@ def to_dakuon_kana(s):
 		return DAKUON_DIC[s]
 	return s
 
-def japanese_braille_separate(inbuf, logwrite):
+def japanese_braille_separate(inbuf, logwrite, nabcc=False):
 	text = inbuf
 	if RE_MB_ALPHA_NUM_SPACE.match(text):
 		outbuf = unicode_normalize(text)
@@ -875,7 +877,10 @@ def japanese_braille_separate(inbuf, logwrite):
 		if li[pos-1].output.isdigit() and \
 				li[pos].hyouki in ('、', '・') and \
 				li[pos+1].output.isdigit():
-			li[pos].output = '⠼'
+			if nabcc:
+				li[pos].output = '.'
+			else:
+				li[pos].output = '⠼'
 
 	# before: ａｂ,ab,名詞,一般,*,*,アブ,アブ,1/2,アブ,0
 	# after:  ａｂ,ab,名詞,一般,*,*,アブ,アブ,1/2,ab,0
@@ -955,12 +960,18 @@ def japanese_braille_separate(inbuf, logwrite):
 		# 情報処理点字の開始記号と終了記号
 		if RE_INFOMATION.match(mo.nhyouki) and \
 				('@' in mo.nhyouki) or ('://' in mo.nhyouki) or ('\\' in mo.nhyouki):
-			mo.output = '⠠⠦' + mo.nhyouki + '⠠⠴'
+			if nabcc:
+				mo.output = mo.nhyouki
+			else:
+				mo.output = '⠠⠦' + mo.nhyouki + '⠠⠴'
 		# 外国語引用符
 		# 空白をはさまない1単語は外国語引用符ではなく外字符で
 		elif RE_GAIJI.match(mo.nhyouki) and \
 				(' ' in mo.nhyouki) or ('.' in mo.nhyouki and len(mo.nhyouki) > 3):
-			mo.output = '⠦' + mo.nhyouki + '⠴'
+			if nabcc:
+				mo.output = mo.nhyouki
+			else:
+				mo.output = '⠦' + mo.nhyouki + '⠴'
 
 	for mo in li:
 		# 情報処理点字でも外国語引用符でもなく output が & を含む場合は前後をあける
@@ -986,7 +997,7 @@ def japanese_braille_separate(inbuf, logwrite):
 		prev2_mo = li[i-2] if i-2 >= 0 else None
 		prev_mo = li[i-1]
 		next_mo = li[i+1] if i+1 < len(li) else None
-		li[i-1].sepflag = should_separate(prev2_mo, prev_mo, li[i], next_mo)
+		li[i-1].sepflag = should_separate(prev2_mo, prev_mo, li[i], next_mo, nabcc=nabcc)
 
 	for mo in li:
 		mo.write(logwrite)
@@ -1012,11 +1023,11 @@ def terminate():
 	global mecab_initialized
 	mecab_initialized = False
 
-def translateWithInPos2(inbuf, logwrite=_logwrite):
+def translateWithInPos2(inbuf, logwrite=_logwrite, nabcc=False):
 	if not mecab_initialized:
 		initialize()
-	outbuf, inpos2 = japanese_braille_separate(inbuf, logwrite)
-	result, inpos1 = translator1.translateWithInPos(outbuf)
+	outbuf, inpos2 = japanese_braille_separate(inbuf, logwrite, nabcc=nabcc)
+	result, inpos1 = translator1.translateWithInPos(outbuf, nabcc=nabcc)
 	result = result.replace('□', ' ')
 	return (outbuf, result, inpos1, inpos2)
 

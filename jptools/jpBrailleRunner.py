@@ -104,10 +104,13 @@ def pass2(verboseMode=False):
 		f.write("\n")
 		count = 0
 		for t in tests:
+			nabcc = False
+			if t.has_key('mode') and t['mode'] == 'NABCC':
+				nabcc = True
 			if t.has_key('text'):
 				output = cStringIO.StringIO()
 				result, pat, inpos1, inpos2 = translator2.translateWithInPos2(
-					t['text'], logwrite=__print)
+					t['text'], logwrite=__print, nabcc=nabcc)
 				log = output.getvalue()
 				output.close()
 				# inpos2

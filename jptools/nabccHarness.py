@@ -19,6 +19,11 @@ tests = [
 		},
 	{
 		'mode':   'NABCC',
+		'input':  'aアbcdefghijklmnopqrstuvwxyzア',
+		'output': '⠁⠁⠃⠉⠙⠑⠋⠛⠓⠊⠚⠅⠇⠍⠝⠕⠏⠟⠗⠎⠞⠥⠧⠺⠭⠽⠵⠁',
+		},
+	{
+		'mode':   'NABCC',
 		'input':  '1234567890',
 		'output': '⠂⠆⠒⠲⠢⠖⠶⠦⠔⠴',
 		},
@@ -51,5 +56,41 @@ tests = [
 		'mode':   'NABCC',
 		'input':  '^@#\\|/*',
 		'output': '⡘⡈⠼⡳⠳⠌⠡',
+		},
+	{
+		'mode':   'NABCC',
+		'text': 'ab 123　あab 123　あ',
+		'input': 'ab 123 ア ab 123 ア',
+		'output': '⠁⠃ ⠂⠆⠒ ⠁ ⠁⠃ ⠂⠆⠒ ⠁',
+		},
+	{
+		'mode':   'NABCC',
+		'text': 'ユーザーガイド(U)',
+		'input': 'ユーザー ガイド(U)',
+		'output': '⠬⠒⠐⠱⠒ ⠐⠡⠃⠐⠞⠷⡥⠾',
+		},
+	{
+		'mode':   'NABCC',
+		'text': 'アドレスはnv@nvda.jpです。',
+		'input': 'アドレスワ nv@nvda.jp デス。',
+		'output': '⠁⠐⠞⠛⠹⠄ ⠝⠧⡈⠝⠧⠙⠁⠨⠚⠏ ⠐⠟⠹⠲',
+		},
+	{
+		'mode':   'NABCC',
+		'text': 'C:\\Program Files',
+		'input': 'C:\\Program Files',
+		'output': '⡉⠱⡳⡏⠗⠕⠛⠗⠁⠍ ⡋⠊⠇⠑⠎',
+		},
+	{
+		'mode':   'NABCC',
+		'text': 'C:\\Users\\ユーザー',
+		'input': 'C:\\Users\\ ユーザー',
+		'output': '⡉⠱⡳⡥⠎⠑⠗⠎⡳ ⠬⠒⠐⠱⠒',
+		},
+	{
+		'mode':   'NABCC',
+		'text': '二、三',
+		'input': '2.3',
+		'output': '⠆⠨⠒',
 		},
 	]
