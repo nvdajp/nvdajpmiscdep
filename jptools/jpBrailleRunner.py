@@ -66,10 +66,11 @@ def pass1():
 	with open(outfile, 'w') as f:
 		count = 0
 		for t in tests:
+			nabcc = False
 			if t.has_key('mode') and t['mode'] == 'NABCC':
-				continue
+				nabcc = True
 			if t.has_key('output'):
-				result, inpos1 = translator1.translateWithInPos(t['input'])
+				result, inpos1 = translator1.translateWithInPos(t['input'], nabcc=nabcc)
 				if t.has_key('inpos1'):
 					correct_inpos1 = ','.join(['%d' % n for n in t['inpos1'] ])
 				else:

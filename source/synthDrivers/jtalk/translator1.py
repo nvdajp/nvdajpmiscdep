@@ -350,7 +350,19 @@ def is_ara(c):
 	# 数字の後につなぎ符が必要
 	return c in 'アイウエオラリルレロ'
 
-def translateWithInPos(text):
+def make_nabcc_dic():
+	dic = {}
+	for c in alpha_dic:
+		dic[c] = alpha_dic[c]
+	keys = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ,;:.!"\'()-_<=>%+~`&$?{[}]^@#\\|/*'
+	vals = '⠴⠂⠆⠒⠲⠢⠖⠶⠦⠔⡁⡃⡉⡙⡑⡋⡛⡓⡊⡚⡅⡇⡍⡝⡕⡏⡟⡗⡎⡞⡥⡧⡺⡭⡽⡵⠠⠰⠱⠨⠮⠐⠄⠷⠾⠤⠸⠣⠿⠜⠩⠬⠘⠈⠯⠫⠹⠪⡪⠻⡻⡘⡈⠼⡳⠳⠌⠡'
+	for pos in xrange(len(keys)):
+		dic[keys[pos]] = vals[pos]
+	return dic
+
+nabcc_dic = make_nabcc_dic()
+
+def translateWithInPos(text, nabcc=False):
 	retval = ''
 	pos = 0
 	latin = False # 外字符モード
@@ -367,6 +379,11 @@ def translateWithInPos(text):
 			retval += ' '
 			inPos.append(pos)
 			capital = latin = num = False
+			pos += 1
+		#nabcc
+		elif nabcc and (text[pos] in nabcc_dic):
+			retval += nabcc_dic[text[pos]]
+			inPos.append(pos)
 			pos += 1
 		#Numeric
 		elif text[pos] in num_dic:
