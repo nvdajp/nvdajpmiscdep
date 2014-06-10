@@ -334,7 +334,7 @@ def is_alpha(s):
 
 RE_ASCII_SYMBOLS = re.compile('^[\,\.\:\;\!\?\@\#\\\$\%\&\*\|\+\-\/\=\<\>\"\'\^\`\_\~]+$')
 
-def replace_alphabet_morphs(li):
+def replace_alphabet_morphs(li, nabcc=False):
 	# アルファベットまたは記号だけで表記されている語を結合する
 	# 情報処理点字の部分文字列になる記号を前後にまとめる
 	# input:
@@ -371,6 +371,8 @@ def replace_alphabet_morphs(li):
 		elif alp_morphs and mo.nhyouki.isdigit():
 			alp_morphs.append(mo)
 		elif alp_morphs and mo.nhyouki in ',.:;!?@#\\$%&*|+-/=<>"\'^`_~{}[]':
+			alp_morphs.append(mo)
+		elif nabcc and mo.nhyouki in '”’‘＿':
 			alp_morphs.append(mo)
 		else:
 			if alp_morphs:
@@ -544,8 +546,9 @@ def should_separate(prev2_mo, prev_mo, mo, next_mo, nabcc=False):
 	# を,を,助詞,格助詞,一般,*,ヲ,ヲ,0/1,ヲ,0
 	if is_alpha(prev_mo.nhyouki) and mo.hinshi1 in ('助詞', '助動詞'):
 		return True
-	if nabcc and (prev_mo.hinshi2 == 'アルファベット') and mo.hinshi1 in ('助詞', '助動詞'):
-		return True
+	if nabcc:
+		if prev_mo.hinshi2 == 'アルファベット' and mo.hinshi1 in ('助詞', '助動詞'):
+			return True
 
 	# ピリオドの後の助詞
 	if prev_mo.nhyouki.endswith('.') and mo.hinshi1 == '助詞':
@@ -826,7 +829,7 @@ def japanese_braille_separate(inbuf, logwrite, nabcc=False):
 		if mo.hinshi2 == 'アルファベット':
 			mo.output = mo.nhyouki
 
-	li = replace_alphabet_morphs(li)
+	li = replace_alphabet_morphs(li, nabcc=nabcc)
 
 	for mo in li:
 		if mo.hyouki == '〝':
@@ -990,6 +993,10 @@ def japanese_braille_separate(inbuf, logwrite, nabcc=False):
 				else:
 					mo.output = mo.output.replace('&', ' & ')
 	
+	if nabcc:
+		for mo in li:
+			mo.output = mo.output.replace('”', '"').replace('’', "'").replace('‘', '`')
+
 	# 日付の和語読み処理
 	li = fix_japanese_date_morphs(li)
 
@@ -999,18 +1006,6 @@ def japanese_braille_separate(inbuf, logwrite, nabcc=False):
 		prev_mo = li[i-1]
 		next_mo = li[i+1] if i+1 < len(li) else None
 		li[i-1].sepflag = should_separate(prev2_mo, prev_mo, li[i], next_mo, nabcc=nabcc)
-
-	if nabcc:
-		for i in xrange(len(li)):
-			mo = li[i]
-			if mo.output == '”':
-				mo.output = '"'
-			elif mo.output == '’':
-				mo.output = "'"
-			elif mo.output == '‘':
-				mo.output = '`'
-				if i > 0:
-					li[i-1].sepflag = False
 
 	for mo in li:
 		mo.write(logwrite)

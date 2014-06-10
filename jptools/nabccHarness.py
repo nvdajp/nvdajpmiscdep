@@ -68,6 +68,18 @@ tests = [
 		},
 	{
 		'mode':   'NABCC',
+		'text':  '"a"',
+		'input':  '"a"',
+		'output': '⠐⠁⠐',
+		},
+	{
+		'mode':   'NABCC',
+		'text':  "'a'",
+		'input':  "'a'",
+		'output': '⠄⠁⠄',
+		},
+	{
+		'mode':   'NABCC',
 		'text': 'ab 123　あab 123　あ',
 		'input': 'ab 123 ア ab 123 ア',
 		'output': '⠁⠃ ⠂⠆⠒ ⠁ ⠁⠃ ⠂⠆⠒ ⠁',
