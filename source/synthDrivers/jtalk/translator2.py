@@ -973,21 +973,22 @@ def japanese_braille_separate(inbuf, logwrite, nabcc=False):
 			else:
 				mo.output = '⠦' + mo.nhyouki + '⠴'
 
-	for mo in li:
-		# 情報処理点字でも外国語引用符でもなく output が & を含む場合は前後をあける
-		if not mo.output.startswith('⠠⠦') and not mo.output.startswith('⠦'):
-			# &
-			if mo.output == '&':
-				continue
-			# &xx
-			elif mo.output.startswith('&'):
-				mo.output = mo.output.replace('&', '& ')
-			# xx&
-			elif mo.output.endswith('&'):
-				mo.output = mo.output.replace('&', ' &')
-			# xx&xx
-			else:
-				mo.output = mo.output.replace('&', ' & ')
+	if not nabcc:
+		for mo in li:
+			# 情報処理点字でも外国語引用符でもなく output が & を含む場合は前後をあける
+			if not mo.output.startswith('⠠⠦') and not mo.output.startswith('⠦'):
+				# &
+				if mo.output == '&':
+					continue
+				# &xx
+				elif mo.output.startswith('&'):
+					mo.output = mo.output.replace('&', '& ')
+				# xx&
+				elif mo.output.endswith('&'):
+					mo.output = mo.output.replace('&', ' &')
+					# xx&xx
+				else:
+					mo.output = mo.output.replace('&', ' & ')
 	
 	# 日付の和語読み処理
 	li = fix_japanese_date_morphs(li)
@@ -998,6 +999,18 @@ def japanese_braille_separate(inbuf, logwrite, nabcc=False):
 		prev_mo = li[i-1]
 		next_mo = li[i+1] if i+1 < len(li) else None
 		li[i-1].sepflag = should_separate(prev2_mo, prev_mo, li[i], next_mo, nabcc=nabcc)
+
+	if nabcc:
+		for i in xrange(len(li)):
+			mo = li[i]
+			if mo.output == '”':
+				mo.output = '"'
+			elif mo.output == '’':
+				mo.output = "'"
+			elif mo.output == '‘':
+				mo.output = '`'
+				if i > 0:
+					li[i-1].sepflag = False
 
 	for mo in li:
 		mo.write(logwrite)
