@@ -809,10 +809,10 @@ def japanese_braille_separate(inbuf, logwrite, nabcc=False):
 	mf = None
 
 	for mo in li:
-		if mo.nhyouki == '⡀':
+		if '⡀' in mo.nhyouki:
 			mo.hinshi1 = '記号'
-			mo.hinshi2 = '空白'
-			mo.kana = mo.yomi = mo.output = '⡀'
+			#mo.hinshi2 = '空白'
+			mo.kana = mo.yomi = mo.output = mo.nhyouki
 
 	for mo in li:
 		if mo.hinshi1 == '空白':

@@ -120,4 +120,22 @@ tests = [
 		'input': 'a⡀a',
 		'output': '⠁⡀⠁',
 		},
+	{
+		'mode':   'NABCC',
+		'text': 'if\ta():',
+		'input': 'if⡀a():',
+		'output': '⠊⠋⡀⠁⠷⠾⠱',
+		},
+	{
+		'mode':   'NABCC',
+		'text': 'file name\t"a",\t\'c\',',
+		'input': 'file name⡀"a",⡀\'c\',',
+		'output': '⠋⠊⠇⠑ ⠝⠁⠍⠑⡀⠐⠁⠐⠠⡀⠄⠉⠄⠠',
+		},
+	{
+		'mode':   'NABCC',
+		'text': 'fil\t"a",\t\'c\',',
+		'input': 'fil⡀"a",⡀\'c\',',
+		'output': '⠋⠊⠇⡀⠐⠁⠐⠠⡀⠄⠉⠄⠠',
+		},
 	]
