@@ -114,4 +114,10 @@ tests = [
 		'input': '2.3',
 		'output': '⠆⠨⠒',
 		},
+	{
+		'mode':   'NABCC',
+		'text': 'a\ta',
+		'input': 'a⡀a',
+		'output': '⠁⡀⠁',
+		},
 	]

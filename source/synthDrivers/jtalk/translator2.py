@@ -794,6 +794,8 @@ def japanese_braille_separate(inbuf, logwrite, nabcc=False):
 	text = text.replace('ヱ゛', 'ヴェ')
 	text = text.replace('ヲ゛', 'ヴォ')
 	text = text.replace('ワ゛', 'ヴァ')
+	# tab code
+	text = text.replace('\t', '⡀')
 
 	# 'ふにゃ～'
 	text = text.replace('ゃ～', 'ゃー')
@@ -805,6 +807,12 @@ def japanese_braille_separate(inbuf, logwrite, nabcc=False):
 	Mecab_print(mf, logwrite, output_header = False)
 	li = mecab_to_morphs(mf)
 	mf = None
+
+	for mo in li:
+		if mo.nhyouki == '⡀':
+			mo.hinshi1 = '記号'
+			mo.hinshi2 = '空白'
+			mo.kana = mo.yomi = mo.output = '⡀'
 
 	for mo in li:
 		if mo.hinshi1 == '空白':
