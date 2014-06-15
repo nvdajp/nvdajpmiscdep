@@ -1020,7 +1020,7 @@ def japanese_braille_separate(inbuf, logwrite, nabcc=False):
 
 	# do not translate if string is unicode braille
 	for mo in li:
-		if all((0x2800 <= ord(c) <= 0x28ff) for c in mo.hyouki):
+		if all((0x2800 <= ord(c) <= 0x28ff or c == ' ') for c in mo.hyouki):
 			mo.output = mo.hyouki
 			mo.sepflag = False
 
@@ -1058,7 +1058,7 @@ def translateWithInPos2(inbuf, logwrite=_logwrite, nabcc=False):
 	if not mecab_initialized:
 		initialize()
 	# do not translate if string is unicode braille
-	if all((0x2800 <= ord(c) <= 0x28ff) for c in inbuf):
+	if all((0x2800 <= ord(c) <= 0x28ff or c == ' ') for c in inbuf):
 		outbuf = inbuf
 		inpos2 = [n for n in xrange(len(inbuf))]
 	else:

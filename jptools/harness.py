@@ -575,6 +575,19 @@ tests = [
 		'text': '⠁⡀あ',
 		'input': '⠁⡀ア',
 		'output': '⠁⡀⠁',
+		'comment': 'braille code should not be changed.',
+		},
+	{
+		'text': '⠁⡀',
+		'input': '⠁⡀',
+		'output': '⠁⡀',
+		'comment': 'braille code should not be changed.',
+		},
+	{
+		'text': '⠁⡀ ',
+		'input': '⠁⡀ ',
+		'output': '⠁⡀ ',
+		'comment': 'braille code (with space) should not be changed.',
 		},
 	{
 		'text': '⠠⠡⠢⠣⠤⠥⠦⠧⠨⠩⠪⠫⠬⠭⠮⠯⠰⠱⠲⠳⠴⠵⠶⠷⠸⠹⠺⠻⠼⠽⠾⠿',
