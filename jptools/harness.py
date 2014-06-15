@@ -83,8 +83,13 @@ tests = [
 		},
 	{
 		'text': 'a\ta',
-		'input': 'a⡀a',
-		'output': '⠰⠁⡀⠰⠁',
+		'input': 'a a',
+		'output': '⠰⠁ ⠰⠁',
+		},
+	{
+		'text': 'あ\tあ',
+		'input': 'ア ア',
+		'output': '⠁ ⠁',
 		},
 	{
 		'text': 'ab 123　あab 123　あ',

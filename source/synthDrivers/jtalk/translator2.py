@@ -1020,6 +1020,10 @@ def japanese_braille_separate(inbuf, logwrite, nabcc=False):
 	logwrite('')
 
 	outbuf, inpos2 = morphs_to_string(li, inbuf, logwrite)
+
+	if not nabcc:
+		outbuf = outbuf.replace('⡀', ' ')
+
 	return (outbuf, inpos2)
 
 mecab_initialized = False
