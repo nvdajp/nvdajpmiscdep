@@ -782,6 +782,8 @@ def to_dakuon_kana(s):
 		return DAKUON_DIC[s]
 	return s
 
+TAB_CODE = unichr(0x200b)
+
 def japanese_braille_separate(inbuf, logwrite, nabcc=False):
 	text = inbuf
 	if RE_MB_ALPHA_NUM_SPACE.match(text):
@@ -794,8 +796,9 @@ def japanese_braille_separate(inbuf, logwrite, nabcc=False):
 	text = text.replace('ヱ゛', 'ヴェ')
 	text = text.replace('ヲ゛', 'ヴォ')
 	text = text.replace('ワ゛', 'ヴァ')
+
 	# tab code
-	text = text.replace('\t', '⡀')
+	text = text.replace('\t', TAB_CODE)
 
 	# 'ふにゃ～'
 	text = text.replace('ゃ～', 'ゃー')
@@ -809,7 +812,7 @@ def japanese_braille_separate(inbuf, logwrite, nabcc=False):
 	mf = None
 
 	for mo in li:
-		if '⡀' in mo.nhyouki:
+		if TAB_CODE in mo.nhyouki:
 			mo.hinshi1 = '記号'
 			#mo.hinshi2 = '空白'
 			mo.kana = mo.yomi = mo.output = mo.nhyouki
@@ -1015,14 +1018,22 @@ def japanese_braille_separate(inbuf, logwrite, nabcc=False):
 		next_mo = li[i+1] if i+1 < len(li) else None
 		li[i-1].sepflag = should_separate(prev2_mo, prev_mo, li[i], next_mo, nabcc=nabcc)
 
+	# do not translate if string is unicode braille
+	for mo in li:
+		if all((0x2800 <= ord(c) <= 0x28ff) for c in mo.hyouki):
+			mo.output = mo.hyouki
+			mo.sepflag = False
+
 	for mo in li:
 		mo.write(logwrite)
 	logwrite('')
 
 	outbuf, inpos2 = morphs_to_string(li, inbuf, logwrite)
 
-	if not nabcc:
-		outbuf = outbuf.replace('⡀', ' ')
+	if nabcc:
+		outbuf = outbuf.replace(TAB_CODE, '⡀')
+	else:
+		outbuf = outbuf.replace(TAB_CODE, ' ')
 
 	return (outbuf, inpos2)
 
@@ -1046,7 +1057,12 @@ def terminate():
 def translateWithInPos2(inbuf, logwrite=_logwrite, nabcc=False):
 	if not mecab_initialized:
 		initialize()
-	outbuf, inpos2 = japanese_braille_separate(inbuf, logwrite, nabcc=nabcc)
+	# do not translate if string is unicode braille
+	if all((0x2800 <= ord(c) <= 0x28ff) for c in inbuf):
+		outbuf = inbuf
+		inpos2 = [n for n in xrange(len(inbuf))]
+	else:
+		outbuf, inpos2 = japanese_braille_separate(inbuf, logwrite, nabcc=nabcc)
 	result, inpos1 = translator1.translateWithInPos(outbuf, nabcc=nabcc)
 	result = result.replace('□', ' ')
 	return (outbuf, result, inpos1, inpos2)
