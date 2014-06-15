@@ -1019,10 +1019,13 @@ def japanese_braille_separate(inbuf, logwrite, nabcc=False):
 		li[i-1].sepflag = should_separate(prev2_mo, prev_mo, li[i], next_mo, nabcc=nabcc)
 
 	# do not translate if string is unicode braille
-	for mo in li:
-		if all((0x2800 <= ord(c) <= 0x28ff or c == ' ') for c in mo.hyouki):
-			mo.output = mo.hyouki
+	for i in xrange(0, len(li)):
+		mo = li[i]
+		if all((0x2800 <= ord(c) <= 0x28ff or c == '\u3000') for c in mo.hyouki):
+			mo.output = mo.hyouki.replace('\u3000', ' ')
 			mo.sepflag = False
+			if i > 0:
+				li[i-1].sepflag = False
 
 	for mo in li:
 		mo.write(logwrite)
