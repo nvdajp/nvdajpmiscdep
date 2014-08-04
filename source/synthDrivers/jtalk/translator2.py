@@ -200,13 +200,15 @@ def replace_morphs(li, dic):
 RE_KANSUJI = re.compile('^[一二三四五六七八九〇零十拾百千壱二参]+$')
 
 # http://programminblog.blogspot.jp/2010/11/python.html
-def kansuji2arabic(text):
+def kansuji2arabic(text, logwrite=None):
 	if not RE_KANSUJI.match(text):
-		return None
+		return (0, None) # 漢数字ではない場合
 	result = 0
+	prevDigit = 0
 	digit = 1
 	numgroup = 1
 	kanindex = len(text)
+	if logwrite: logwrite('kansuji2arabic: ' + text)
 	while kanindex > 0:
 		c = text[(kanindex - 1):kanindex]
 		c1 = text[kanindex:(kanindex + 1)]
@@ -244,21 +246,33 @@ def kansuji2arabic(text):
 			elif c in '九':
 				result += 9 * digit * numgroup
 			digit *= 10
+		if logwrite: logwrite('kansuji2arabic c(%s) c1(%s) kanindex(%d) prevDigit(%d) digit(%d) result(%d) numgroup(%d)' % (c, c1, kanindex, prevDigit, digit, result, numgroup))
+		if prevDigit > digit:
+			return (2, None) # およその数で数が重なる場合
+		prevDigit = digit
 	if (digit == 10 and text[:1] in '十拾') or \
 			(digit == 100 and text[:1] in '百') or \
 			(digit == 1000 and text[:1] in '千'):
 		result += digit * numgroup
 	text = '%d' % result
-	return text
+	return (1, text) # 漢数字の場合
 
-def rewrite_number(li):
+def rewrite_number(li, logwrite=None):
 	new_li = []
 	for mo in li:
 		m = copy.deepcopy(mo)
 		if m.hinshi2 != '固有名詞':
-			ret = kansuji2arabic(m.hyouki)
-			if ret:
-				m.output = ret
+			flag, num = kansuji2arabic(m.hyouki, logwrite)
+			if flag == 1:
+				m.output = str(num)
+			elif flag == 2 and len(m.hyouki) >= 2:
+				# 「二十二三」のような場合「二十二」「三」に分割
+				h1 = m.hyouki[:-1]
+				flag1, num1 = kansuji2arabic(h1, logwrite)
+				h2 = m.hyouki[-1:]
+				flag2, num2 = kansuji2arabic(h2, logwrite)
+				if flag1 == 1 and flag2 == 1:
+					m.output = str(num1) + '⠼' + str(num2)
 		new_li.append(m)
 	return new_li
 
@@ -826,7 +840,7 @@ def japanese_braille_separate(inbuf, logwrite, nabcc=False):
 
 	li = replace_morphs(li, CONNECTED_MORPHS)
 	li = replace_digit_morphs(li)
-	li = rewrite_number(li)
+	li = rewrite_number(li, logwrite)
 
 	# before: う,う,助動詞,*,*,*,ウ,ウ,0/1,ウ,0
 	# after:  う,う,助動詞,*,*,*,ウ,ウ,0/1,ー,0
