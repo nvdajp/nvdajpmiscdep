@@ -13,7 +13,10 @@ import os
 import sys
 import wave
 import time
-import pyaudio
+try:
+	import pyaudio
+except:
+	pyaudio = None
 import cProfile
 import pstats
 JT_DIR = os.path.normpath(
@@ -61,6 +64,8 @@ voices = [
 	]
 
 def pa_play(data, samp_rate = 16000):
+	if pyaudio is None:
+		return
 	p = pyaudio.PyAudio()
 	stream = p.open(format = p.get_format_from_width(2),
 		channels = 1, rate = samp_rate, output = True)
