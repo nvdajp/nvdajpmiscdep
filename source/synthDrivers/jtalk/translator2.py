@@ -391,19 +391,26 @@ def replace_alphabet_morphs(li, nabcc=False):
 		else:
 			if alp_morphs:
 				m = concatinate_morphs(alp_morphs)
-				m.hinshi1 = '名詞'
-				m.hinshi2 = 'アルファベット'
-				m.nhyouki = m.output = unicode_normalize(m.nhyouki)
+				m.nhyouki = m.output = unicode_normalize(m.nhyouki)	
+				set_pos_of_alphabets(m)
 				new_li.append(m)
 				alp_morphs = []
 			new_li.append(mo)
 	if alp_morphs:
 		m = concatinate_morphs(alp_morphs)
-		m.hinshi1 = '名詞'
-		m.hinshi2 = 'アルファベット'
 		m.nhyouki = m.output = unicode_normalize(m.nhyouki)
+		set_pos_of_alphabets(m)
 		new_li.append(m)
 	return new_li
+
+def set_pos_of_alphabets(m):
+	if m.nhyouki == ',':
+		m.hinshi1 = '記号'
+		m.hinshi2 = '*'
+	else:
+		m.hinshi1 = '名詞'
+		m.hinshi2 = 'アルファベット'
+
 
 # 日付の和語読み処理
 # すでに output 属性に半角数字が格納されている前提
@@ -839,6 +846,29 @@ def japanese_braille_separate(inbuf, logwrite, nabcc=False):
 			mo.output = mo.nhyouki
 
 	li = replace_morphs(li, CONNECTED_MORPHS)
+
+	# before:
+	# たー,たー,助動詞,*,*,*,*,*,たー,ター,ター,1/2,ター,0
+	# ー,ー,名詞,一般,*,*,*,*,*,,,,,0
+	# after:
+	# た,た,助動詞,*,*,*,*,*,た,タ,タ,1/2,タ,0
+	# ー,ー,名詞,一般,*,*,*,*,*,,,,ー,0
+
+	# before: ３ー,名詞,数,*,*,*,*,３ー,サンー,サンー,1/3,C0
+	# after:  ３,名詞,数,*,*,*,*,３,サン,サン,1/3,C0
+	for pos in xrange(len(li) - 1):
+		mo = li[pos]
+		mo2 = li[pos + 1]
+		if 'ー' in mo.hyouki and mo2.hyouki == 'ー':
+			mo.hyouki = mo.kihon = mo.hyouki.replace('ー','')
+			mo.nhyouki = unicode_normalize(mo.hyouki)
+			mo.kana = mo.kana.replace('ー','')
+			mo.yomi = mo.yomi.replace('ー','')
+			if mo.hinshi2 == '数':
+				mo.output = mo.nhyouki
+			else:
+				mo.output = mo.yomi
+
 	li = replace_digit_morphs(li)
 	li = rewrite_number(li, logwrite)
 
@@ -880,6 +910,13 @@ def japanese_braille_separate(inbuf, logwrite, nabcc=False):
 	for mo in li:
 		if mo.hyouki == '　': # full shape space
 			mo.output = ' '
+
+	# before: ー,ー,名詞,一般,*,*,*,*,*,,,,,0
+	# after:  ー,ー,名詞,一般,*,*,*,*,*,,,,ー,0
+	for mo in li:
+		if mo.hyouki == 'ー' and mo.hinshi1 == '名詞':
+			mo.hinshi1 = '記号'
+			mo.output = 'ー'
 
 	# 数字の前の全角アポストロフィを半角にする
 	# before:

@@ -254,6 +254,7 @@ jp_symbol_dic = {
 	'※':'⠔⠔ ', # 第1星印 35-35 (後ろを1マスあける)
 	'→':' ⠒⠒⠕ ', # 矢印 前後に1マスあける
 	'←':' ⠪⠒⠒ ', # 矢印 前後に1マスあける
+	',':'⠄',
 	}
 info_symbol_dic = {
 	',':'⠂',
@@ -405,8 +406,9 @@ def translateWithInPos(text, nabcc=False):
 			num = capital = False
 			pos += 1
 		#Numeric symbols
-		elif num and text[pos] in num_symbol_dic and \
-				pos+1 < len(text) and text[pos+1].isdigit():
+		elif num and (text[pos] in num_symbol_dic) and \
+				( (pos == len(text) - 1) or \
+					  (pos+1 < len(text) and text[pos+1].isdigit()) ):
 			retval += num_symbol_dic[text[pos]]
 			inPos.extend([pos] * len(num_symbol_dic[text[pos]]))
 			pos += 1
