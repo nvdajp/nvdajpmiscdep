@@ -16,6 +16,7 @@ import synthDriverHandler
 import languageHandler
 from jtalk import jtalkDriver
 from jtalk.jtalkDriver import VoiceProperty
+from jtalk._nvdajp_espeak import isJapaneseLang
 
 class SynthDriver(SynthDriver):
 	"""A Japanese synth driver for NVDAjp.
@@ -57,7 +58,15 @@ class SynthDriver(SynthDriver):
 				p.pitch = self._pitch
 				p.inflection = self._inflection
 				p.characterMode = spellState
-				jtalkDriver.speak(unicode(item), currentLang, index=finalIndex, voiceProperty_=p)
+				msg = unicode(item)
+				isMsgJp = isJapaneseLang(msg)
+				lang = currentLang
+				if isMsgJp:
+					lang = 'ja'
+				elif defaultLanguage != 'ja' and not isMsgJp:
+					lang = defaultLanguage
+				log.debug("lang:%s idx:%s pit:%d inf:%d chr:%d (%s)" % (lang, str(finalIndex), p.pitch, p.inflection, p.characterMode, msg))
+				jtalkDriver.speak(msg, lang, index=finalIndex, voiceProperty_=p)
 			elif isinstance(item,speech.IndexCommand):
 				finalIndex = item.index
 			elif isinstance(item,speech.CharacterModeCommand):
