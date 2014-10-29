@@ -551,6 +551,21 @@ tests = [
 		'output': '⠼⠁⠃⠉⠰⠁',
 		},
 	{
+		'text': 'h26a.pdf',
+		'input': '⠦h26a.pdf⠴',
+		'output': '⠦⠓⠼⠃⠋⠰⠁⠲⠏⠙⠋⠴',
+		},
+	{
+		'text': 'http://h26a.pdf',
+		'input': '⠠⠦http://h26a.pdf⠠⠴',
+		'output': '⠠⠦⠓⠞⠞⠏⠐⠂⠌⠌⠓⠼⠃⠋⠰⠁⠲⠏⠙⠋⠠⠴',
+		},
+	{
+		'text': 'http://0x1b',
+		'input': '⠠⠦http://0x1b⠠⠴',
+		'output': '⠠⠦⠓⠞⠞⠏⠐⠂⠌⠌⠼⠚⠭⠼⠁⠰⠃⠠⠴',
+		},
+	{
 		'input': '123A',
 		'output': '⠼⠁⠃⠉⠰⠠⠁',
 		},

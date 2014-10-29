@@ -437,6 +437,12 @@ def translateWithInPos(text, nabcc=False):
 			if not latin and not quote_mode:
 				retval += '⠰'
 				inPos.append(pos)
+			elif (info_mode or quote_mode) and pos >= 1 and \
+					text[pos-1].isdigit() and \
+					text[pos] in 'abcdefghij':
+				# 外国語引用符または情報処理で数字のあとにａ～ｊが続くときは小文字フラグ
+				retval += '⠰'
+				inPos.append(pos)
 			elif info_mode and pos >= 2 and \
 					text[pos-2].isdigit() and \
 					text[pos-1] == '.' and \
