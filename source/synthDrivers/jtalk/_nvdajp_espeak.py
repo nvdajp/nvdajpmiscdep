@@ -14,7 +14,7 @@ _logwrite = log.debug
 def isJapaneseLang(msg):
 	for i in msg:
 		c = ord(i)
-		if (0x3040 <= c <= 0x30ff) or (0x3100 <= c <= 0x9fff):
+		if (0x3000 <= c <= 0x9fff) or (0xf900 <= c <= 0xfaff) or (0xff00 <= c <= 0xffef):
 			return True
 	return False
 
