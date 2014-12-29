@@ -82,6 +82,7 @@ class SynthDriver(SynthDriver):
 				log.debugWarning("Unsupported speech command: %s"%item)
 			else:
 				log.error("Unknown speech: %s"%item)
+		jtalkDriver.speak(None, None, index=finalIndex)
 
 	def cancel(self):
 		jtalkDriver.stop()

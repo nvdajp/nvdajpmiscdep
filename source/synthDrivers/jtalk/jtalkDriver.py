@@ -179,7 +179,16 @@ def _speak(arg):
 	else:
 		_espeak_speak(msg, lang, index, prop)
 
+# call from BgThread
+def _updateSpeakIndex(index):
+	global currIndex
+	global lastIndex
+	lastIndex = currIndex = index
+
 def speak(msg, lang, index=None, voiceProperty_=None):
+	if msg is None and lang is None:
+		_bgthread.execWhenDone(_updateSpeakIndex, index, mustBeAsync=True)
+		return
 	msg = msg.strip()
 	if len(msg) == 0: return
 	if voiceProperty_ is None: return
