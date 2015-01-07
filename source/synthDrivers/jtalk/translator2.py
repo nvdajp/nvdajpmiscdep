@@ -778,6 +778,7 @@ RE_INFOMATION = re.compile('^[A-Za-z0-9\+\@\/\#\$\%\&\*\;\.\<\>\-\_\{\}\[\] ]+$'
 RE_GAIJI = re.compile('^[A-Za-z][A-Za-z0-9\,\.\+\- ]+$')
 RE_KATAKANA = re.compile('^[ァ-ヾ]+$')
 RE_HIRAGANA = re.compile('^[ぁ-ゞ]+$')
+RE_HALF_KATAKANA = re.compile('^[ｦ-ﾟ]+$') # ff66 .. ff9f
 
 NO_DAKUON_DIC = {
 	'ガ' : 'カ', 'ギ' : 'キ', 'グ' : 'ク', 'ゲ' : 'ケ', 'ゴ' : 'コ',
@@ -807,6 +808,11 @@ TAB_CODE = unichr(0x200b)
 
 def japanese_braille_separate(inbuf, logwrite, nabcc=False):
 	text = inbuf
+	if RE_HALF_KATAKANA.match(text):
+		outbuf = text
+		inpos2 = xrange(len(outbuf))
+		return (outbuf, inpos2)
+
 	if RE_MB_ALPHA_NUM_SPACE.match(text):
 		outbuf = unicode_normalize(text)
 		inpos2 = xrange(len(outbuf))
