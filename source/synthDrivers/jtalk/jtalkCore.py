@@ -346,6 +346,9 @@ def libjt_synthesis(feature,
 		byte_count = ns * sizeof(c_short)
 		buf = string_at(speech_ptr, byte_count)
 		if feed_func_:
-			feed_func_(buf)
+			try:
+				feed_func_(buf)
+			except WindowsError:
+				pass
 	if logwrite_ : logwrite_('libjt_synthesis done.')
 	return buf
