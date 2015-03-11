@@ -175,6 +175,15 @@ tests = [
 		'comment': '記号はUnicode正規化',
 	},
 	{
+		'text': '(日)',
+		'input': '(ニチ)',
+		'output': '⠶⠇⠗⠶',
+		'inpos2': [0,1,2],
+		'inpos1': [0,1,2,3],
+		'inpos':  [0,1,1,1,2],
+		'comment': 'nvdajp ticket34973',
+	},
+	{
 		'text': '[ア]',
 		'input': '[ア]',
 		'output': '⠐⠶⠁⠶⠂',
