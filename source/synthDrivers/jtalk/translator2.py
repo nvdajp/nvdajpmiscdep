@@ -79,6 +79,31 @@ CONNECTED_MORPHS = {
 		['なく', 'ナク', '2/2', None, None, None],
 		['なる', 'ナル', '1/2', '動詞', '自立', None],
 		],
+	'（日）': [
+		['（', '(', '*/*', '記号', '括弧開', '*'],
+		['日', 'ニチ', '1/2', '名詞', '一般', None],
+		['）', ')', '*/*', '記号', '括弧閉', '*'],
+		],
+	'（月）': [
+		['（', '(', '*/*', '記号', '括弧開', '*'],
+		['月', 'ゲツ', '1/2', '名詞', '一般', None],
+		['）', ')', '*/*', '記号', '括弧閉', '*'],
+		],
+	'（火）': [
+		['（', '(', '*/*', '記号', '括弧開', '*'],
+		['火', 'カ', '1/1', '名詞', '一般', None],
+		['）', ')', '*/*', '記号', '括弧閉', '*'],
+		],
+	'（水）': [
+		['（', '(', '*/*', '記号', '括弧開', '*'],
+		['水', 'スイ', '1/2', '名詞', '一般', None],
+		['）', ')', '*/*', '記号', '括弧閉', '*'],
+		],
+	'（木）': [
+		['（', '(', '*/*', '記号', '括弧開', '*'],
+		['木', 'モク', '1/2', '名詞', '一般', None],
+		['）', ')', '*/*', '記号', '括弧閉', '*'],
+		],
 }
 
 class MecabMorph(object):
@@ -166,12 +191,12 @@ def mecab_to_morphs(mf):
 			if len(ar) > 7:
 				mo.kihon = ar[7]
 			if len(ar) > 9:
-				mo.kana = ar[8]
-				mo.yomi = ar[9]
+				mo.kana = unicode_normalize(ar[8]) # "（ニチ）" -> "(ニチ)"
+				mo.yomi = unicode_normalize(ar[9])
 				mo.accent = ar[10]
 				if len(ar) > 12:
 					# Mecab辞書の拡張フィールドの点訳表記があれば使用する
-					mo.output = ar[12]
+					mo.output = unicode_normalize(ar[12])
 				else:
 					mo.output = ar[9]
 					update_phonetic_symbols(mo)
@@ -186,11 +211,13 @@ def replace_morphs(li, dic):
 			new_morphs = dic[mo.hyouki]
 			for i in new_morphs:
 				m = copy.deepcopy(mo)
-				m.hyouki = m.nhyouki = i[0] # に
+				m.hyouki = i[0] # に
+				m.nhyouki = unicode_normalize(i[0]) # に
 				if i[3]: m.hinshi1 = i[3]
 				if i[4]: m.hinshi2 = i[4]
 				if i[5]: m.hinshi3 = i[5]
-				m.output = m.kana = m.yomi = i[1] # ニ
+				m.kana = i[0]
+				m.output = m.yomi = unicode_normalize(i[1]) # ニ
 				m.accent = i[2] # 0/1
 				new_li.append(m)
 		else:
