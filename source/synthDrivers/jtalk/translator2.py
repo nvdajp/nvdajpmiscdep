@@ -540,6 +540,9 @@ def should_separate(prev2_mo, prev_mo, mo, next_mo, nabcc=False):
 	# 0/4月 -> 04月
 	if prev_mo.output.isdigit() and mo.nhyouki[0].isdigit():
 		return False
+	# 3/03
+	if prev_mo.output.isdigit() and mo.nhyouki[0] == '/':
+		return False
 
 	# アラビア数字のあとに単位がきたら続ける
 	# 三十,三十,名詞,数,*,*,30,30,1/4,30,1
