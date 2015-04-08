@@ -915,7 +915,7 @@ def japanese_braille_separate(inbuf, logwrite, nabcc=False):
 	for pos in xrange(len(li) - 1):
 		mo = li[pos]
 		mo2 = li[pos + 1]
-		if mo.yomi in ('オモウ', 'スウ', 'ツクロウ') and mo2.yomi in ('テ', 'タリ'):
+		if mo.hinshi1 == '動詞' and mo.hyouki != '言う' and len(mo.yomi) > 1 and mo.yomi[-1] == 'ウ' and mo2.yomi[:1] in ('タ', 'テ'):
 			mo.output = mo.yomi[:-1] + 'ー'
 
 	li = replace_digit_morphs(li)
