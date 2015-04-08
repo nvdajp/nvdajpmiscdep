@@ -92,15 +92,6 @@ def filter_jdic(s):
 	elif a[0] == 'ゆう' and a[12] == 'ユウ':
 		a[12] = 'ユー'
 		s = ",".join(a)
-	elif a[0] == '思う' and a[12] == 'オモウ':
-		a[12] = 'オモー'
-		s = ",".join(a)
-	elif a[0] == '吸う' and a[12] == 'スウ':
-		a[12] = 'スー'
-		s = ",".join(a)
-	elif a[0] == '繕う' and a[12] == 'ツクロウ':
-		a[12] = 'ツクロー'
-		s = ",".join(a)
 	elif a[0] == 'おおきい' and a[12] == 'オーキイ' and len(a) == 15:
 		a.append(a[11])
 		s = ",".join(a)
@@ -261,6 +252,9 @@ def filter_jdic(s):
 		a.append(a[11])
 		s = ",".join(a)
 	elif a[0] == '大晦日' and a[11] == 'オオミソカ' and len(a) == 15:
+		a.append(a[11])
+		s = ",".join(a)
+	elif a[0] == 'うるう年' and a[11] == 'ウルウドシ' and len(a) == 15:
 		a.append(a[11])
 		s = ",".join(a)
 	elif a[0] == '手作り' and a[11] == 'テヅクリ' and len(a) == 15:

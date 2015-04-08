@@ -905,6 +905,23 @@ def japanese_braille_separate(inbuf, logwrite, nabcc=False):
 			else:
 				mo.output = mo.yomi
 
+	# 動詞のウ音便
+	# before:
+	# 思う,思う,動詞,自立,*,*,五段・ワ行ウ音便,連用タ接続,思う,オモウ,オモウ,2/3,オモウ,0
+	# て,て,助詞,接続助詞,*,*,*,*,て,テ,テ,0/1,テ,0
+	# after:
+	# 思う,思う,動詞,自立,*,*,五段・ワ行ウ音便,連用タ接続,思う,オモウ,オモウ,2/3,オモー,0
+	# て,て,助詞,接続助詞,*,*,*,*,て,テ,テ,0/1,テ,0
+	for pos in xrange(len(li) - 1):
+		mo = li[pos]
+		mo2 = li[pos + 1]
+		if mo.yomi == 'オモウ' and mo2.yomi == 'テ':
+			mo.output = 'オモー'
+		elif mo.yomi == 'スウ' and mo2.yomi == 'タリ':
+			mo.output = 'スー'
+		elif mo.yomi == 'ツクロウ' and mo2.yomi == 'タリ':
+			mo.output = 'ツクロー'
+
 	li = replace_digit_morphs(li)
 	li = rewrite_number(li, logwrite)
 
