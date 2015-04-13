@@ -198,7 +198,7 @@ def mecab_to_morphs(mf):
 					# Mecab辞書の拡張フィールドの点訳表記があれば使用する
 					mo.output = unicode_normalize(ar[12])
 				else:
-					mo.output = ar[9]
+					mo.output = ar[9].replace("’", "")
 					update_phonetic_symbols(mo)
 			mo.sepflag = False
 			li.append(mo)

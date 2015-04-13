@@ -392,6 +392,12 @@ def filter_jdic(s):
 	elif a[0] == '各党' and len(a) == 15:
 		a.append('カク トー')
 		s = ",".join(a)
+	elif a[0] == 'よろしくお願いします' and len(a) == 15:
+		a.append('ヨロシク オネガイ シマス')
+		s = ",".join(a)
+	elif a[0] == 'ありがとうございます' and len(a) == 15:
+		a.append('アリガトー ゴザイマス')
+		s = ",".join(a)
 	elif a[0] == '金' and a[12] == 'キム':
 		s = ""
 	elif a[0] == '湯川' and a[12] == 'ユガワ':
