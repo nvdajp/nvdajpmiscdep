@@ -4862,4 +4862,28 @@ tests = [
 		'text':'ありがとう。',
 		'input':'アリガトー。',
 	},
+	{
+		'text':'JR',
+		'input':'JR',
+	},
+	{
+		'text':'JR北海道',
+		'input':'JR ホッカイドー',
+	},
+	{
+		'text':'iモード',
+		'input':'iモード',
+	},
+	{
+		'text':'N響',
+		'input':'Nキョー',
+	},
+	{
+		'text':'Tシャツ',
+		'input':'Tシャツ',
+	},
+	{
+		'text':'JISマーク',
+		'input':'JIS マーク',
+	},
 ]

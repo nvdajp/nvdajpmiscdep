@@ -1,5 +1,18 @@
 # coding: utf-8
 from __future__ import unicode_literals
+import re
+
+RE_ALPHA = re.compile('^[Ａ-Ｚａ-ｚ]+$')
+RE_NUM_SYMBOL = re.compile('^[０-９・．＆＿＋　／―′－]+$')
+
+def is_alpha_jp_mixed(s):
+	has_alpha = has_jp = False
+	for c in s:
+		if RE_ALPHA.match(c):
+			has_alpha = True
+		elif not RE_NUM_SYMBOL.match(c):
+			has_jp = True
+	return has_alpha and has_jp
 
 # 0:表層形,1:左文脈ID,2:右文脈ID,3:コスト,
 # 4:品詞,5:品詞細分類1,6:品詞細分類2,7:品詞細分類3,
@@ -386,4 +399,16 @@ def filter_jdic(s):
 		# ノノ字点（ののじてん）・同じく記号
 		# 〃	3003	[オナジク]	オナジク
 		s = "" # custom_dic_maker
+	elif a[0] == 'Ｎ響':
+		a.append('Nキョー')
+		s = ",".join(a)
+	elif a[0] == 'ｉモード':
+		a.append('iモード')
+		s = ",".join(a)
+	elif a[0] == 'Ｔシャツ':
+		a.append('Tシャツ')
+		s = ",".join(a)
+	elif is_alpha_jp_mixed(a[0]):
+		#print a[0]
+		s = ""
 	return s
