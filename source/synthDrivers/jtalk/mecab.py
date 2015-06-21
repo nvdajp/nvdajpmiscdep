@@ -253,6 +253,17 @@ def getMoraCount(s):
 # after:
 # 0 ,,,*,*,*,*
 # 1 ｔａｋｅｓ,名詞,一般,*,*,*,*,ｔａｋｅ,テイクス,テイクス,1/4,C0
+#
+# PATTERN 5 "author's"
+# before:
+# 0 ａｕｔｈｏｒ,名詞,一般,*,*,*,*,ａｕｔｈｏｒ,オーサー,オーサー,1/4,C0
+# 1 ’,記号,括弧閉,*,*,*,*,’,’,’,*/*,*
+# 2 ｓ,記号,アルファベット,*,*,*,*,ｓ,エス,エス,1/2,*
+#
+# after:
+# 0 ,,,*,*,*,*
+# 1 ,,,*,*,*,*
+# 2 ａｕｔｈｏｒｓ,名詞,一般,*,*,*,*,ｓ,オーサーズ,オーサーズ,1/5,C0
 
 RE_FULLSHAPE_ALPHA = re.compile(u'^[Ａ-Ｚａ-ｚ]+$')
 
@@ -311,9 +322,34 @@ def Mecab_correctFeatures(mf, CODE_ = CODE):
 					Mecab_setFeature(mf, pos-2, feature, CODE_=CODE_)
 		elif pos > 0 and ar[0] in (u'ｓ', u'ｄ') \
 				and ar[1] == u'記号' and ar[2] == u'アルファベット':
-			# pattern 4
+			# pattern 4 or 5
 			ar2 = Mecab_getFeature(mf, pos-1, CODE_=CODE_).split(',')
-			if len(ar2) > 10 and RE_FULLSHAPE_ALPHA.match(ar2[0]):
+			# pattern 5
+			if pos > 1 and ar2[0] == u"’":
+				ar3 = Mecab_getFeature(mf, pos-2, CODE_=CODE_).split(',')
+				# previous
+				Mecab_setFeature(mf, pos - 2, ',,,*,*,*,*', CODE_=CODE_)
+				Mecab_setFeature(mf, pos - 1, ',,,*,*,*,*', CODE_=CODE_)
+				# current
+				postfix = u''
+				if ar[0] == u'ｓ':
+					postfix = u'ズ'
+					if ar3[0].endswith(u'ｐ') or ar3[0].endswith(u'ｋｅ') or ar3[0].endswith(u'ｒｋ'):
+						postfix = u'ス'
+				elif ar[0] == u'ｄ':
+					postfix = u'ド'
+				hyoki = ar3[0] + ar[0]
+				hin1 = ar3[1]
+				hin2 = ar3[2]
+				yomi = ar3[8] + postfix
+				pron = ar3[9] + postfix
+				mora = getMoraCount(ar3[10]) + 1
+				feature = u'{h},{h1},{h2},*,*,*,*,{h},{y},{p},1/{m},C0'.format(
+					h=hyoki, h1=hin1, h2=hin2, y=yomi, p=pron, m=mora
+				)
+				Mecab_setFeature(mf, pos, feature, CODE_=CODE_)
+			elif len(ar2) > 10 and RE_FULLSHAPE_ALPHA.match(ar2[0]):
+				# pattern 4
 				# previous
 				Mecab_setFeature(mf, pos - 1, ',,,*,*,*,*', CODE_=CODE_)
 				# current
@@ -334,6 +370,7 @@ def Mecab_correctFeatures(mf, CODE_ = CODE):
 					h=hyoki, h1=hin1, h2=hin2, y=yomi, p=pron, m=mora
 				)
 				Mecab_setFeature(mf, pos, feature, CODE_=CODE_)
+
 
 def Mecab_utf8_to_cp932(mf):
 	for pos in xrange(0, mf.size):

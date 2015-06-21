@@ -451,4 +451,6 @@ tasks = [
 
 	{'text':'reserve', 'speech':'リザーブ'},
 	{'text':'reserved', 'speech':'リザーブド'},
+
+	{'text':"for each author's protection", 'speech':'フォー イーチ オーサーズ プロテクション'},
 ]
