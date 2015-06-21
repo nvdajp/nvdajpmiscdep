@@ -15,13 +15,14 @@ import optparse
 import datetime
 import cStringIO
 import timeit
+from harness import tests
+from nabccHarness import tests as nabcc_tests
+tests.extend(nabcc_tests)
+
 jtalk_dir = os.path.normpath(
 	os.path.join(os.getcwdu(), '..', 'source', 'synthDrivers', 'jtalk')
 	)
 sys.path.append(jtalk_dir)
-from harness import tests
-from nabccHarness import tests as nabcc_tests
-tests.extend(nabcc_tests)
 import translator1
 import translator2
 import jtalkDir

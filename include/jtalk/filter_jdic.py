@@ -31,6 +31,8 @@ def filter_jdic(s):
 		s = ",".join(a)
 	elif a[0] == 'ｚ' and a[11] == 'ズィー':
 		s = ""
+	elif a[0] in ('ＨＴＳ', 'Ｈｔｓ', 'ｈｔｓ'):
+		s = ""
 	elif a[0] == '規' and a[11] == 'ブンマワシ':
 		s = ""
 	elif a[0] == '全' and a[11] == 'チョン':

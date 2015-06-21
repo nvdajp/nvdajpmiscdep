@@ -1,2 +1,2 @@
 call userdicBuilder.cmd
-python test.py
+python test.py|nkf

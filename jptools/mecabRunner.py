@@ -7,12 +7,12 @@ from __future__ import unicode_literals
 import os
 import sys
 from glob import glob
+from mecabHarness import tasks
 jt_dir = os.path.normpath(
 	os.path.join(os.getcwdu(), '..', 'source', 'synthDrivers', 'jtalk')
 	)
 sys.path.append(jt_dir)
 from mecab import *
-from mecabHarness import tasks
 import jtalkDir
 
 dic = os.path.join(jt_dir, 'dic')
@@ -22,11 +22,18 @@ user_dics = jtalkDir.user_dics
 def __print(s):
 	print s.encode('utf-8', 'ignore')
 
-buffer = ''
+_buffer = ''
 
+def clear_morph_buffer():
+	global _buffer
+	_buffer = ''
+	
+def print_morph_buffer():
+	__print(_buffer)
+	
 def __print_dummy(s):
-	global buffer
-	buffer += s + '\n'
+	global _buffer
+	_buffer += s + '\n'
 
 def Mecab_get_reading(mf, CODE_=CODE):
 	reading = ''
@@ -50,7 +57,8 @@ def get_reading(msg):
 	mf = MecabFeatures()
 	Mecab_analysis(s, mf)
 	Mecab_correctFeatures(mf)
-	Mecab_print(mf, __print_dummy)
+	Mecab_print(mf, logwrite_=__print_dummy)
+	Mecab_print(mf)
 	reading = Mecab_get_reading(mf)
 	mf = None
 	return reading
@@ -81,12 +89,12 @@ def runTasks(enableUserDic=False):
 				item = [ i['text'], i['speech'] ]
 		else:
 			item = i
-		buffer = ''
+		clear_morph_buffer()
 		result = get_reading(item[0])
 		if item[1] is not None and result[0] != item[1]:
 			__print('')
 			__print('')
-			__print(buffer)
+			print_morph_buffer()
 			__print('input:    ' + item[0])
 			__print('reading expected: ' + item[1])
 			__print('reading result:   ' + result[0])
@@ -94,7 +102,7 @@ def runTasks(enableUserDic=False):
 		if len(item) > 2 and result[1] != item[2]:
 			__print('')
 			__print('')
-			__print(buffer)
+			print_morph_buffer()
 			__print('input:            ' + item[0])
 			__print('braille expected: ' + item[2])
 			__print('braille result:   ' + result[1])
