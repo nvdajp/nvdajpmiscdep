@@ -273,8 +273,14 @@ def _makeFeatureFromLatinWordAndPostfix(org, ar):
 		postfix = u'ズ'
 		if ar[0].endswith(u'ｐ') or ar[0].endswith(u'ｋｅ') or ar[0].endswith(u'ｒｋ'):
 			postfix = u'ス'
-	elif org == u'ｄ':
+	elif org in (u'ｄ', u'ｅｄ'):
 		postfix = u'ド'
+	elif org in (u'ｒ', u'ｅｒ'):
+		postfix = u'ア'
+		if ar[0].endswith(u'ｅ'):
+			postfix = u'ザー'
+			ar[8] = ar[8][:-1]
+			ar[9] = ar[9][:-1]
 	hyoki = ar[0] + org
 	hin1 = ar[1]
 	hin2 = ar[2]
@@ -339,8 +345,7 @@ def Mecab_correctFeatures(mf, CODE_ = CODE):
 						h=hyoki, h1=hin1, h2=hin2, y=yomi, p=pron, m=mora
 					)
 					Mecab_setFeature(mf, pos-2, feature, CODE_=CODE_)
-		elif pos > 0 and ar[0] in (u'ｓ', u'ｄ') \
-				and ar[1] == u'記号' and ar[2] == u'アルファベット':
+		elif pos > 0 and ar[0] in (u'ｓ', u'ｄ', u'ｅｄ', u'ｒ'):
 			# pattern 4 or 5
 			ar2 = Mecab_getFeature(mf, pos-1, CODE_=CODE_).split(',')
 			# pattern 5
