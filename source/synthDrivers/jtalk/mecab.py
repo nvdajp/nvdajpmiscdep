@@ -267,6 +267,25 @@ def getMoraCount(s):
 
 RE_FULLSHAPE_ALPHA = re.compile(u'^[Ａ-Ｚａ-ｚ]+$')
 
+def _makeFeatureFromLatinWordAndPostfix(org, ar):
+	postfix = u''
+	if org == u'ｓ':
+		postfix = u'ズ'
+		if ar[0].endswith(u'ｐ') or ar[0].endswith(u'ｋｅ') or ar[0].endswith(u'ｒｋ'):
+			postfix = u'ス'
+	elif org == u'ｄ':
+		postfix = u'ド'
+	hyoki = ar[0] + org
+	hin1 = ar[1]
+	hin2 = ar[2]
+	yomi = ar[8] + postfix
+	pron = ar[9] + postfix
+	mora = getMoraCount(ar[10]) + 1
+	feature = u'{h},{h1},{h2},*,*,*,*,{h},{y},{p},1/{m},C0'.format(
+		h=hyoki, h1=hin1, h2=hin2, y=yomi, p=pron, m=mora
+	)
+	return feature
+
 def Mecab_correctFeatures(mf, CODE_ = CODE):
 	for pos in xrange(0, mf.size):
 		ar = Mecab_getFeature(mf, pos, CODE_=CODE_).split(',')
@@ -327,49 +346,15 @@ def Mecab_correctFeatures(mf, CODE_ = CODE):
 			# pattern 5
 			if pos > 1 and ar2[0] == u"’":
 				ar3 = Mecab_getFeature(mf, pos-2, CODE_=CODE_).split(',')
-				# previous
 				Mecab_setFeature(mf, pos - 2, ',,,*,*,*,*', CODE_=CODE_)
 				Mecab_setFeature(mf, pos - 1, ',,,*,*,*,*', CODE_=CODE_)
-				# current
-				postfix = u''
-				if ar[0] == u'ｓ':
-					postfix = u'ズ'
-					if ar3[0].endswith(u'ｐ') or ar3[0].endswith(u'ｋｅ') or ar3[0].endswith(u'ｒｋ'):
-						postfix = u'ス'
-				elif ar[0] == u'ｄ':
-					postfix = u'ド'
-				hyoki = ar3[0] + ar[0]
-				hin1 = ar3[1]
-				hin2 = ar3[2]
-				yomi = ar3[8] + postfix
-				pron = ar3[9] + postfix
-				mora = getMoraCount(ar3[10]) + 1
-				feature = u'{h},{h1},{h2},*,*,*,*,{h},{y},{p},1/{m},C0'.format(
-					h=hyoki, h1=hin1, h2=hin2, y=yomi, p=pron, m=mora
-				)
-				Mecab_setFeature(mf, pos, feature, CODE_=CODE_)
+				f = _makeFeatureFromLatinWordAndPostfix(ar[0], ar3)
+				Mecab_setFeature(mf, pos, f, CODE_=CODE_)
 			elif len(ar2) > 10 and RE_FULLSHAPE_ALPHA.match(ar2[0]):
 				# pattern 4
-				# previous
 				Mecab_setFeature(mf, pos - 1, ',,,*,*,*,*', CODE_=CODE_)
-				# current
-				postfix = u''
-				if ar[0] == u'ｓ':
-					postfix = u'ズ'
-					if ar2[0].endswith(u'ｐ') or ar2[0].endswith(u'ｋｅ') or ar2[0].endswith(u'ｒｋ'):
-						postfix = u'ス'
-				elif ar[0] == u'ｄ':
-					postfix = u'ド'
-				hyoki = ar2[0] + ar[0]
-				hin1 = ar2[1]
-				hin2 = ar2[2]
-				yomi = ar2[8] + postfix
-				pron = ar2[9] + postfix
-				mora = getMoraCount(ar2[10]) + 1
-				feature = u'{h},{h1},{h2},*,*,*,*,{h},{y},{p},1/{m},C0'.format(
-					h=hyoki, h1=hin1, h2=hin2, y=yomi, p=pron, m=mora
-				)
-				Mecab_setFeature(mf, pos, feature, CODE_=CODE_)
+				f = _makeFeatureFromLatinWordAndPostfix(ar[0], ar2)
+				Mecab_setFeature(mf, pos, f, CODE_=CODE_)
 
 
 def Mecab_utf8_to_cp932(mf):
