@@ -355,6 +355,11 @@ def Mecab_correctFeatures(mf, CODE_ = CODE):
 				Mecab_setFeature(mf, pos - 1, ',,,*,*,*,*', CODE_=CODE_)
 				f = _makeFeatureFromLatinWordAndPostfix(ar[0], ar2)
 				Mecab_setFeature(mf, pos, f, CODE_=CODE_)
+		elif pos > 0 and ar[0] == u"　" and ar[1] == u'記号' and ar[2] == u'空白':
+			# remove single quote in cases such as "authors' protection"
+			ar2 = Mecab_getFeature(mf, pos-1, CODE_=CODE_).split(',')
+			if ar2[0] == u"’":
+				Mecab_setFeature(mf, pos-1, ',,,*,*,*,*', CODE_=CODE_)
 
 
 def Mecab_utf8_to_cp932(mf):
