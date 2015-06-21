@@ -488,4 +488,6 @@ tasks = [
 	{'text':"being rendered inaccurate", 'speech':'ビイーイング レンダード インアキュレイト'},
 	{'text':"sustained by", 'speech':'サステインド バイ'},
 	{'text':"speech synthesiser", 'speech':'スピーチ シンセサイザー'},
+	{'text':"killed", 'speech':'キルド'},
+	{'text':"see", 'speech':'シー'},
 ]

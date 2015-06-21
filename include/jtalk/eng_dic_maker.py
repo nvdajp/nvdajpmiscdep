@@ -65,6 +65,7 @@ def make_dic(IN_FILE, CODE, THISDIR):
 		['konica', 	'コニカ'],
 		['kinect', 	'キネクト'],
 		['kddi', 	'ケーディーディーアイ'],
+		['killed', 	'キルド'],
 		['manage',  'マネイジ', None, 1000],
 		['micro', 	'マイクロ'],
 		['mozilla', 'モジラ'],
