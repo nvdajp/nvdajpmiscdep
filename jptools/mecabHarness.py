@@ -470,6 +470,7 @@ tasks = [
 	{'text':"interactively", 'speech':'インタラクティブリィ'},
 	{'text':"considered", 'speech':'コンシダード'},
 	{'text':"the offer", 'speech':'ザ オファー'}, # ジ オファー
+	{'text':"run", 'speech':'ラン'},
 	{'text':"runs", 'speech':'ランズ'},
 	{'text':"expressly", 'speech':'エクスプレスリィ'},
 	{'text':"reason", 'speech':'リーズン'},

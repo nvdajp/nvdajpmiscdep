@@ -327,6 +327,8 @@ def isGoodEntry(s):
 		return False
 	if a[0] == 'ｒａｎ' and a[12] == 'ランー':
 		return False
+	if a[0] == 'ｒｕｎ' and a[12] == 'ルンー':
+		return False
 	if a[0] == 'ｈｅ' and a[12] == 'ヘー':
 		return False
 	if a[0] == 'ｉｓｓｉ' and a[12] == 'イッシー':
