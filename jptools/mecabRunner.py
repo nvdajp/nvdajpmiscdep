@@ -92,20 +92,16 @@ def runTasks(enableUserDic=False):
 		clear_morph_buffer()
 		result = get_reading(item[0])
 		if item[1] is not None and result[0] != item[1]:
-			__print('')
-			__print('')
-			print_morph_buffer()
 			__print('input:    ' + item[0])
 			__print('reading expected: ' + item[1])
 			__print('reading result:   ' + result[0])
+			print_morph_buffer()
 			count += 1
 		if len(item) > 2 and result[1] != item[2]:
-			__print('')
-			__print('')
-			print_morph_buffer()
 			__print('input:            ' + item[0])
 			__print('braille expected: ' + item[2])
 			__print('braille result:   ' + result[1])
+			print_morph_buffer()
 			count += 1
 
 	return count

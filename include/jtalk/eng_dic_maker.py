@@ -23,6 +23,7 @@ def make_dic(IN_FILE, CODE, THISDIR):
 		['ass', 	'アス', "1/2", 10000],
 		['azure', 	'アジュール', None, 100],
 		['api',     'エーピーアイ', None, 500],
+		['animations',     'アニメイションズ'],
 		['blank', 	'ブランク'],
 		['biz', 	'ビズ'],
 		['bazaar', 	'バザール'],
@@ -79,6 +80,7 @@ def make_dic(IN_FILE, CODE, THISDIR):
 		['setup',	'セットアップ'],
 		['systems', 'システムズ'],
 		['shared',  'シェアード'],
+		['shares',  'シェアーズ'],
 		['think', 	'シンク'],
 		['talk', 	'トーク'],
 		['tab', 	'タブ'],
@@ -90,6 +92,7 @@ def make_dic(IN_FILE, CODE, THISDIR):
 		['ui', 	'ユーアイ'],
 		['uac', 	'ユーエーシー'],
 		['version', 'バージョン'],
+		['versions', 'バージョンズ'],
 		['vantage', 'バンテージ'],
 		['wave', 	'ウェーブ'],
 		['welcome', 'ウェルカム'],
@@ -201,7 +204,7 @@ def make_dic(IN_FILE, CODE, THISDIR):
 		['users', 'ユーザーズ', "1/5"],
 		['allowed', 'アラウド', "2/4"],
 		['designed', 'デザインド', "2/5"],
-		['database', 'データベース', "1/5"],
+		['database', 'デイタベイス', "1/5"],
 		['butt', 'バットゥ', "1/4", 10000],
 		['opened', 'オープンド', "1/5"],
 		['closed', 'クローズド', "2/5"],
@@ -255,6 +258,9 @@ def make_dic(IN_FILE, CODE, THISDIR):
 	with open(path.join(THISDIR, OUT_FILE), "w") as file:
 		for i in d:
 			k = i[0]
+			# skip such as SHE'LL
+			if "'" in k:
+				continue
 			alpha_count = len(k)
 			k1 = alpha2mb(k.lower())
 			y = i[1]
