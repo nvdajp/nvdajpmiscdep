@@ -337,6 +337,8 @@ def isGoodEntry(s):
 		return False
 	if a[0] == 'ｕｉ' and a[12] == 'ウイー':
 		return False
+	if a[0] == 'ａｈｏ' and a[12] == 'アホー':
+		return False
 	return True
 
 def make_dic(CODE, THISDIR):

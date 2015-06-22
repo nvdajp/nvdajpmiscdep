@@ -185,6 +185,7 @@ def make_dic(IN_FILE, CODE, THISDIR):
 		['fukushima', 	'フクシマ', 		"2/4", 1000],
 		['niigata', 	'ニーガタ', 		"0/4", 1000],
 		['asshuku',		'アッシュク',		"0/4",	],
+		['sumaho',		'スマホ',		"1/3",	],
 		['mei',			'メイ',			"1/2", 100],
 		['meiryo',		'メイリョー',	"1/4"],
 		
