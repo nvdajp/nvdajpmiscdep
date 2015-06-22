@@ -448,6 +448,12 @@ jdic = [
 	 'speech':'ジョー',
 	 'accent':"1/2",
 	 },
+
+	{'text':'揃え',
+	 'pos':"名詞,一般,*,*,*,*",
+	 'speech':'ソロエ',
+	 'accent':"0/3",
+	 },
 ]
 
 class DicItem(object):
