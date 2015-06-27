@@ -142,6 +142,8 @@ def make_dic(IN_FILE, CODE, THISDIR):
 		['app',         'アップ'],
 		['types',       'タイプス'],
 		['mouse',       'マウス', "1/3", 500],
+		['approximately', 'アプロクシメットゥリー', "3/10"],
+		['renderings', 'レンダリングズ'],
 		
 		['pref', 		'プリフ',			"1/3", 1000],
 		['anpi', 		'アンピ',			"1/3", 1000],
