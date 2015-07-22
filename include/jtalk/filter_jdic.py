@@ -39,6 +39,8 @@ def filter_jdic(s):
 		s = ""
 	elif a[0] == '行' and a[6] == '助数詞' and a[11] == 'コウ':
 		s = ""
+	elif a[0] == '柵' and a[11] == 'シガラミ':
+		s = ""
 	elif a[0] == '００７' and a[11] == 'ゼロゼロセブン':
 		s = ""
 	elif a[0] == '未曾有' and a[12] == 'ミゾー':
