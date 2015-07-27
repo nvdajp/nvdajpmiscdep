@@ -99,6 +99,7 @@ def make_dic(IN_FILE, CODE, THISDIR):
 		['version', 'バージョン'],
 		['versions', 'バージョンズ'],
 		['vantage', 'バンテージ'],
+		['waic', 	'ウェイク'],
 		['wave', 	'ウェーブ'],
 		['welcome', 'ウェルカム'],
 		['windows', 'ウィンドウズ'],
@@ -144,6 +145,7 @@ def make_dic(IN_FILE, CODE, THISDIR):
 		['mouse',       'マウス', "1/3", 500],
 		['approximately', 'アプロクシメットゥリー', "3/10"],
 		['renderings', 'レンダリングズ'],
+		['rect', 'レクト'],
 		
 		['pref', 		'プリフ',			"1/3", 1000],
 		['anpi', 		'アンピ',			"1/3", 1000],
@@ -186,6 +188,7 @@ def make_dic(IN_FILE, CODE, THISDIR):
 		['miyagi', 		'ミヤギ',			"1/3", 1000],
 		['fukushima', 	'フクシマ', 		"2/4", 1000],
 		['niigata', 	'ニーガタ', 		"0/4", 1000],
+		['nishimoto', 	'ニシモト'],
 		['asshuku',		'アッシュク',		"0/4",	],
 		['sumaho',		'スマホ',		"1/3",	],
 		['mei',			'メイ',			"1/2", 100],

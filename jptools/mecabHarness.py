@@ -494,4 +494,7 @@ tasks = [
 	{'text':"killed", 'speech':'キルド'},
 	{'text':"see", 'speech':'シー'},
 	{'text':"you should see approximately equivalent renderings", 'speech':'ユー シュドゥ シー アプロクシメットゥリー イクィバレントゥ レンダリングズ'},
+	{'text':"waic", 'speech':'ウェイク'},
+	{'text':"rect", 'speech':'レクト'},
+	{'text':"nishimoto", 'speech':'ニシモト'},
 ]
