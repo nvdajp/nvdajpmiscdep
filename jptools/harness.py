@@ -4942,14 +4942,14 @@ tests = [
 	{
 		'comment':'全角コンマの処理 (ti35452) ',
 		'text':'ａ，ｂ',
-		#'input':'a,b',
-		#'output':'⠰⠁⠄⠰⠃',
+		'input':'a,b',
+		'output':'⠰⠁⠂⠰⠃',
 	},
 	{
 		'comment':'全角コンマの処理 (ti35452) ',
 		'text':'a，b',
-		#'input':'a,b',
-		#'output':'⠰⠁⠄⠰⠃',
+		'input':'a,b',
+		'output':'⠰⠁⠂⠰⠃',
 	},
 	{
 		'comment':'「そうなんです」関連 (ti35430)',

@@ -386,10 +386,18 @@ def translateWithInPos(text, nabcc=False):
 			capital = latin = num = False
 			pos += 1
 		#alpha_symbol_dic (comma in quote)
-		elif quote_mode and text[pos] in alpha_symbol_dic:
+		elif quote_mode and \
+		text[pos] in alpha_symbol_dic:
 			retval += alpha_symbol_dic[text[pos]]
 			inPos.append(pos)
 			pos += 1
+		#alpha_symbol_dic (comma in latin or capital)
+		elif (latin or capital) and \
+		text[pos] in alpha_symbol_dic:
+			retval += alpha_symbol_dic[text[pos]]
+			inPos.append(pos)
+			pos += 1
+			capital = latin = False
 		#nabcc
 		elif nabcc and (text[pos] in nabcc_dic):
 			retval += nabcc_dic[text[pos]]
