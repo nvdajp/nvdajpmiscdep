@@ -105,6 +105,8 @@ def pass2(verboseMode=False):
 		f.write("\n")
 		count = 0
 		for t in tests:
+			if not t.has_key('input'):
+				continue
 			nabcc = False
 			if t.has_key('mode') and t['mode'] == 'NABCC':
 				nabcc = True
