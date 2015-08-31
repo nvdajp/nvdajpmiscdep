@@ -347,11 +347,9 @@ def replace_digit_morphs(li):
 		if mo.hinshi2 == '数' and mo.hyouki == '，':
 			# カンマ
 			new_li.append(concatinate_morphs(num_morphs))
-			num_morphs = []
 			m = copy.deepcopy(mo)
 			m.yomi = m.output = ','
-			num_morphs.append(m)
-			new_li.append(concatinate_morphs(num_morphs))
+			new_li.append(concatinate_morphs([m]))
 			num_morphs = []
 		elif mo.hinshi2 == '数' and not mo.output.isdigit() and \
 				not mo.hyouki in ('・', '万', '億', '兆', '京', '．'):
