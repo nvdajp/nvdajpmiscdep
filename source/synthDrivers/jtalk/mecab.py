@@ -355,7 +355,7 @@ def Mecab_correctFeatures(mf, CODE_ = CODE):
 				Mecab_setFeature(mf, pos - 1, ',,,*,*,*,*', CODE_=CODE_)
 				f = _makeFeatureFromLatinWordAndPostfix(ar[0], ar3)
 				Mecab_setFeature(mf, pos, f, CODE_=CODE_)
-			elif len(ar2) > 10 and RE_FULLSHAPE_ALPHA.match(ar2[0]):
+			elif len(ar2) > 10 and RE_FULLSHAPE_ALPHA.match(ar2[0]) and len(ar2[0]) > 1:
 				# pattern 4
 				Mecab_setFeature(mf, pos - 1, ',,,*,*,*,*', CODE_=CODE_)
 				f = _makeFeatureFromLatinWordAndPostfix(ar[0], ar2)

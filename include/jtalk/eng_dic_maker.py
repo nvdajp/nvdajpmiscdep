@@ -60,6 +60,7 @@ def make_dic(IN_FILE, CODE, THISDIR):
 		['impaired', 'インペアド'],
 		['incorporate', 'インコーポレイト'],
 		['incorporates', 'インコーポレイツ'],
+		['ioc', 	'アイオーシー'],
 		['java', 	'ジャバ'],
 		['jaxa',    'ジャクサ'],
 		['konica', 	'コニカ'],

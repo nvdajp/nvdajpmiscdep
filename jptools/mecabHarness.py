@@ -497,4 +497,9 @@ tasks = [
 	{'text':"waic", 'speech':'ウェイク'},
 	{'text':"rect", 'speech':'レクト'},
 	{'text':"nishimoto", 'speech':'ニシモト'},
+	
+	{'text':"fd", 'speech':'エフディー'},
+	{'text':"sr", 'speech':'エスアール'},
+	{'text':"sp", 'speech':'エスピー'},
+	{'text':"ioc", 'speech':'アイオーシー'},
 ]
