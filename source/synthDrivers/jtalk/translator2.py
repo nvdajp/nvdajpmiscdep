@@ -346,9 +346,13 @@ def replace_digit_morphs(li):
 	for mo in li:
 		if mo.hinshi2 == '数' and mo.hyouki == '，':
 			# カンマ
+			new_li.append(concatinate_morphs(num_morphs))
+			num_morphs = []
 			m = copy.deepcopy(mo)
 			m.yomi = m.output = ','
 			num_morphs.append(m)
+			new_li.append(concatinate_morphs(num_morphs))
+			num_morphs = []
 		elif mo.hinshi2 == '数' and not mo.output.isdigit() and \
 				not mo.hyouki in ('・', '万', '億', '兆', '京', '．'):
 			# 漢数字の結合
@@ -460,13 +464,14 @@ WAGO_DIC = {
 def fix_japanese_date_morphs(li):
 	new_li = []
 	for i in xrange(0, len(li)):
+		prev2_mo = li[i-2] if i-2>=0 else None
 		prev_mo = li[i-1] if i-1>=0 else None
 		mo = li[i]
 		if mo.hyouki == '日' and mo.hinshi3 == '助数詞' and prev_mo is not None:
 			if prev_mo.hyouki in ('14', '24', '十四', '一四', '二四', '二十四'):
 				li[i].output = 'カ'
 				new_li.append(li[i])
-			elif prev_mo.output in WAGO_DIC:
+			elif (prev2_mo is None or prev2_mo.hyouki != '、') and prev_mo.output in WAGO_DIC:
 				m = copy.deepcopy(mo)
 				m.output = WAGO_DIC[prev_mo.output]
 				m.hyouki = m.nhyouki = m.kana = m.yomi = m.output
@@ -1110,6 +1115,17 @@ def japanese_braille_separate(inbuf, logwrite, nabcc=False):
 
 	# 日付の和語読み処理
 	li = fix_japanese_date_morphs(li)
+
+	# 日本語の直後のコンマを '、' で解釈
+	# before: ，,記号,読点,*,*,*,*,，,，,，,*/*,*
+	# after:  、,記号,読点,*,*,*,*,、,、,、,*/*,*
+	for pos in xrange(len(li) - 1):
+		mo = li[pos]
+		mo2 = li[pos + 1]
+		if mo2.hyouki == '，' and not (
+				mo.hinshi2 in ('アルファベット', '数', '括弧閉')
+		):
+			mo2.hyouki = mo2.nhyouki = mo2.output = '、'
 
 	# 分かち書き判定
 	for i in xrange(1, len(li)):
