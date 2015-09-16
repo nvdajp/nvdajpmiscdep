@@ -33,6 +33,7 @@ def make_dic(IN_FILE, CODE, THISDIR):
 		['caps', 	'キャプス'],
 		['cygwin', 	'シグウィン'],
 		['choose',  'チュウズ', None, 1000],
+		['cortana', 'コルタナ'],
 		['delete', 	'デリート'],
 		['del', 	'デリート'],
 		['doxygen', 'ドキシゲン'],

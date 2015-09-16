@@ -502,4 +502,5 @@ tasks = [
 	{'text':"sr", 'speech':'エスアール'},
 	{'text':"sp", 'speech':'エスピー'},
 	{'text':"ioc", 'speech':'アイオーシー'},
+	{'text':"cortana", 'speech':'コルタナ'},
 ]
