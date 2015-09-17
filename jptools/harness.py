@@ -4802,6 +4802,9 @@ tests = [
 	{   'text':'柵門', 'input':'サクモン'},
 	#{   'text':'城柵', 'input':'ジョーサク'},
 
+	# Windows / NVDA のメッセージ
+	{'text':'正しくコピーされました', 'input':'タダシク コピー サレマシタ'},
+
 	{ 'note': '+ 踊り字 +' },
 	# http://ja.wikipedia.org/wiki/%E8%B8%8A%E3%82%8A%E5%AD%97
 
