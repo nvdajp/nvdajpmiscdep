@@ -500,6 +500,7 @@ tasks = [
 	{'text':"nishimoto", 'speech':'ニシモト'},
 	
 	{'text':"fd", 'speech':'エフディー'},
+	{'text':"sd", 'speech':'エスディー'},
 	{'text':"sr", 'speech':'エスアール'},
 	{'text':"sp", 'speech':'エスピー'},
 	{'text':"ioc", 'speech':'アイオーシー'},
