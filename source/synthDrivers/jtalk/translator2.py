@@ -344,7 +344,7 @@ def replace_digit_morphs(li):
 	new_li = []
 	num_morphs = []
 	for mo in li:
-		if mo.hinshi2 == '数' and mo.hyouki == '，':
+		if mo.hinshi2 == '数' and mo.hyouki == '，' and num_morphs:
 			# カンマ
 			new_li.append(concatinate_morphs(num_morphs))
 			m = copy.deepcopy(mo)
