@@ -274,7 +274,13 @@ def _makeFeatureFromLatinWordAndPostfix(org, ar):
 		if ar[0].endswith(u'ｐ') or ar[0].endswith(u'ｋｅ') or ar[0].endswith(u'ｒｋ'):
 			postfix = u'ス'
 	elif org in (u'ｄ', u'ｅｄ'):
-		postfix = u'ド'
+		if ar[0].endswith(u'ｔｅ') and ar[8].endswith(u'ト'):
+			# update アップデート -> updated アップデーティド
+			postfix = u'ティド'
+			ar[8] = ar[8][:-1]
+			ar[9] = ar[9][:-1]
+		else:
+			postfix = u'ド'
 	elif org == u'ｒ':
 		postfix = u'ア'
 		if ar[0].endswith(u'ｓｅ'):
