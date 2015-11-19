@@ -414,6 +414,8 @@ def filter_jdic(s):
 		s = ",".join(a)
 	elif a[0] == '正しく' and a[4] == '副詞' and a[12] == 'マサシク':
 		s = ""
+	elif a[0] == '築' and a[4] == '動詞' and a[12] == 'キズケ':
+		s = ""
 	elif is_alpha_jp_mixed(a[0]):
 		#print a[0]
 		s = ""

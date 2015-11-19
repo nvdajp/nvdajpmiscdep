@@ -297,6 +297,11 @@ tasks = [
 	{'text':'meiryo ui', 'speech':'メイリョー ユーアイ'},
 	{'text':'既定の揃え', 'speech':'キテイノソロエ'},
 	{'text':'正しくコピーされました', 'speech':'タダシクコピーサレマシタ'},
+	{'text':'築3年', 'speech':'チクサンネン' },
+	{'text':'築３年', 'speech':'チクサンネン' },
+	{'text':'築', 'speech':'チク' },
+	{'text':'築ける', 'speech':'キズケル' },
+	{'text':'築る', 'speech':'キズケル' },
 
 	['manage', 'マネイジ'],
 	['choose', 'チュウズ'],
