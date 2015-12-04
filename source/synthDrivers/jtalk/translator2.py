@@ -413,7 +413,7 @@ def replace_alphabet_morphs(li, nabcc=False):
 			alp_morphs.append(mo)
 		elif alp_morphs and mo.nhyouki.isdigit():
 			alp_morphs.append(mo)
-		elif alp_morphs and mo.nhyouki in ',.:;!?@#\\$%&*|+-/=<>"\'^`_~{}[]':
+		elif alp_morphs and mo.nhyouki in ',.:;!?@#\\$%&*|+-/=<>"\'^`_~{}[]，':
 			alp_morphs.append(mo)
 		elif nabcc and mo.nhyouki in '”’‘＿':
 			alp_morphs.append(mo)

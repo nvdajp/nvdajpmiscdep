@@ -510,6 +510,34 @@ tests = [
 		'comment': '情報処理点字を前半のみに使う',
 	},
 	{
+		# https://osdn.jp/ticket/browse.php?group_id=4221&tid=35777
+		'text': r'\1,500',
+		'input': r'⠠⠦\1,500⠠⠴',
+		'output': '⠠⠦⠫⠼⠁⠂⠑⠚⠚⠠⠴',
+		'comment': '情報処理点字を使う。カンマは2で。',
+	},
+	{
+		# https://osdn.jp/ticket/browse.php?group_id=4221&tid=35777
+		'text': r'\1500',
+		'input': r'⠠⠦\1500⠠⠴',
+		'output': '⠠⠦⠫⠼⠁⠑⠚⠚⠠⠴',
+		'comment': '情報処理点字を使う。',
+	},
+	{
+		# https://osdn.jp/ticket/browse.php?group_id=4221&tid=35777
+		'text': r'\ 1500',
+		'input': r'⠠⠦\⠠⠴ 1500',
+		'output': '⠠⠦⠫⠠⠴ ⠼⠁⠑⠚⠚',
+		'comment': '情報処理点字を円マークに使う。',
+	},
+	{
+		# https://osdn.jp/ticket/browse.php?group_id=4221&tid=35777
+		'text': r'\ 1,500',
+		'input': r'⠠⠦\⠠⠴ 1,500',
+		'output': '⠠⠦⠫⠠⠴ ⠼⠁⠄⠑⠚⠚',
+		'comment': '情報処理点字を円マークに使う。',
+	},
+	{
 		'text': 'v1.4',
 		'input': '⠦v1.4⠴',
 		'output': '⠦⠧⠼⠁⠂⠙⠴',
