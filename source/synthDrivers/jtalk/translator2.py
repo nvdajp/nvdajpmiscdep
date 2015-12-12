@@ -533,8 +533,10 @@ def should_separate(prev2_mo, prev_mo, mo, next_mo, nabcc=False):
 		return True
 
 	# 数字の前のマスアケ
-	if prev_mo.nhyouki in ('零下', '西暦', 'ボーイング', 'ベスト', 'ルイ', '先', '振替', 'No.', '一人当り', '全', '満', 'レベル') \
-			and mo.output.isdigit():
+	if prev_mo.nhyouki not in ('-', '，', '.', '’', '、') and \
+		prev_mo.output != '⠼' and \
+		prev_mo.nhyouki not in ('第', '築', '二男', '中') and \
+		mo.output.isdigit():
 		return True
 
 	# 1月/1日
