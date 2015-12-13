@@ -539,4 +539,6 @@ tasks = [
 	{'text':'natsu', 'speech':'ナツ'},
 	{'text':'aki', 'speech':'アキ'},
 	{'text':'fuyu', 'speech':'フユ'},
+	{'text':'higashinihon', 'speech':'ヒガシニホン'},
+	#{'text':'nishinihon', 'speech':'ニシニホン'},
 ]
