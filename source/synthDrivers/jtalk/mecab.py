@@ -381,8 +381,8 @@ def Mecab_correctFeatures(mf, CODE_ = CODE):
 					feature = u'{h},{h1},{h2},*,*,*,*,{h},{y},{p},1/{m},C0'.format(
 						h=hyoki, h1=hin1, h2=hin2, y=yomi, p=pron, m=mora
 					)
-					Mecab_setFeature(mf, pos-1, feature, CODE_=CODE_)
-					Mecab_setFeature(mf, pos, ',,,*,*,*,*', CODE_=CODE_)
+					Mecab_setFeature(mf, pos-1, ',,,*,*,*,*', CODE_=CODE_)
+					Mecab_setFeature(mf, pos, feature, CODE_=CODE_)
 		elif RE_FULLSHAPE_ALPHA.match(ar[0]) and ar[7] == u'*':
 			roma = ar[0]
 			kana = getKanaFromRoma(roma)
