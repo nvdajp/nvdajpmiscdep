@@ -12,6 +12,7 @@ import threading
 import sys
 import re
 from text2mecab import text2mecab
+from roma2kana import getKanaFromRoma
 
 c_double_p = POINTER(c_double)
 c_double_p_p = POINTER(c_double_p) 
@@ -253,14 +254,6 @@ def _makeFeatureFromLatinWordAndPostfix(org, ar):
 	)
 	return feature
 
-def _getKanaFromRoma(roma):
-	# FIXME
-	if roma == u'ｍｉｎａｍｉ':
-		return u'ミナミ'
-	elif roma == u'ｏｋａｙａｍａ':
-		return u'オカヤマ'
-	return None
-
 def Mecab_correctFeatures(mf, CODE_ = CODE):
 	for pos in xrange(0, mf.size):
 		ar = Mecab_getFeature(mf, pos, CODE_=CODE_).split(',')
@@ -372,7 +365,7 @@ def Mecab_correctFeatures(mf, CODE_ = CODE):
 				Mecab_setFeature(mf, pos-1, ',,,*,*,*,*', CODE_=CODE_)
 		elif RE_FULLSHAPE_ALPHA.match(ar[0]) and ar[7] == u'*':
 			roma = ar[0]
-			kana = _getKanaFromRoma(roma)
+			kana = getKanaFromRoma(roma)
 			if kana:
 				c = len(kana)
 				Mecab_setFeature(mf, pos, u'%s,名詞,固有名詞,*,*,*,*,%s,%s,%s,1/%d,C0' % (roma, roma, kana, kana, c), CODE_=CODE_)
