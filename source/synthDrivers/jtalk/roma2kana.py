@@ -228,6 +228,8 @@ romadic = [
 		['u', 			'ウ', 				1],
 		['e', 			'エ', 				1],
 		['o', 			'オ', 				1],
+		#
+		['n', 			'ン', 				1],
 	]
 
 def getKanaFromRoma(roma):
