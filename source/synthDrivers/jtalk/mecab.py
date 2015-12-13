@@ -220,51 +220,6 @@ def getMoraCount(s):
 			return int(m2)
 	return 0
 
-# PATTERN 1
-# before:
-# 1 五絡脈病証,名詞,数,*,*,*,*,*
-#
-# after:
-# 1 五絡脈病証,名詞,普通名詞,*,*,*,*,五絡脈病証,ゴミャクラクビョウショウ,
-# ゴミャクラクビョーショー,1/9,C0
-# 
-# PATTERN 2
-# before:
-# 0 ∫⣿♪　,名詞,サ変接続,*,*,*,*,*
-#
-# after:
-# 0 ∫⣿♪　,名詞,サ変接続,*,*,*,*,∫♪　,セキブンキゴーイチニーサンヨンゴーロクナナ
-# ハチノテンオンプ,セキブンキゴーイチニーサンヨンゴーロクナナハチノテンオンプ,1/29,C0
-# 
-# PATTERN 3
-# before:
-# 0 ま,接頭詞,名詞接続,*,*,*,*,ま,マ,マ,1/1,P2
-# 1 ー,名詞,一般,*,*,*,*,*
-#
-# after:
-# 0 ま,接頭詞,名詞接続,*,*,*,*,まー,マー,マー,1/2,P2
-# 1 ー,名詞,一般,*,*,*,*,*
-#
-# PATTERN 4
-# before:
-# 0 ｔａｋｅ,名詞,一般,*,*,*,*,ｔａｋｅ,テイク,テイク,1/3,C0
-# 1 ｓ,記号,アルファベット,*,*,*,*,ｓ,エス,エス,1/2,*
-#
-# after:
-# 0 ,,,*,*,*,*
-# 1 ｔａｋｅｓ,名詞,一般,*,*,*,*,ｔａｋｅ,テイクス,テイクス,1/4,C0
-#
-# PATTERN 5 "author's"
-# before:
-# 0 ａｕｔｈｏｒ,名詞,一般,*,*,*,*,ａｕｔｈｏｒ,オーサー,オーサー,1/4,C0
-# 1 ’,記号,括弧閉,*,*,*,*,’,’,’,*/*,*
-# 2 ｓ,記号,アルファベット,*,*,*,*,ｓ,エス,エス,1/2,*
-#
-# after:
-# 0 ,,,*,*,*,*
-# 1 ,,,*,*,*,*
-# 2 ａｕｔｈｏｒｓ,名詞,一般,*,*,*,*,ｓ,オーサーズ,オーサーズ,1/5,C0
-
 RE_FULLSHAPE_ALPHA = re.compile(u'^[Ａ-Ｚａ-ｚ]+$')
 
 def _makeFeatureFromLatinWordAndPostfix(org, ar):
@@ -298,15 +253,34 @@ def _makeFeatureFromLatinWordAndPostfix(org, ar):
 	)
 	return feature
 
+def _getKanaFromRoma(roma):
+	# FIXME
+	if roma == u'ｍｉｎａｍｉ':
+		return u'ミナミ'
+	elif roma == u'ｏｋａｙａｍａ':
+		return u'オカヤマ'
+	return None
+
 def Mecab_correctFeatures(mf, CODE_ = CODE):
 	for pos in xrange(0, mf.size):
 		ar = Mecab_getFeature(mf, pos, CODE_=CODE_).split(',')
-		need_fix = False
-		if ar[2] == u'数' and ar[7] == u'*': 
-			need_fix = True
-		if ar[1] == u'名詞' and ar[2] == u'サ変接続' and ar[7] == u'*': 
-			need_fix = True
-		if need_fix:
+		if (ar[2] == u'数' and ar[7] == u'*') or (ar[1] == u'名詞' and ar[2] == u'サ変接続' and ar[7] == u'*'):
+			# PATTERN 1
+			# before:
+			# 1 五絡脈病証,名詞,数,*,*,*,*,*
+			#
+			# after:
+			# 1 五絡脈病証,名詞,普通名詞,*,*,*,*,五絡脈病証,ゴミャクラクビョウショウ,
+			# ゴミャクラクビョーショー,1/9,C0
+			# 
+			# PATTERN 2
+			# before:
+			# 0 ∫⣿♪　,名詞,サ変接続,*,*,*,*,*
+			#
+			# after:
+			# 0 ∫⣿♪　,名詞,サ変接続,*,*,*,*,∫♪　,セキブンキゴーイチニーサンヨンゴーロクナナ
+			# ハチノテンオンプ,セキブンキゴーイチニーサンヨンゴーロクナナハチノテンオンプ,1/29,C0
+			# 
 			hyoki = ar[0]
 			yomi = ''
 			pron = ''
@@ -326,6 +300,15 @@ def Mecab_correctFeatures(mf, CODE_ = CODE):
 			)
 			Mecab_setFeature(mf, pos, feature, CODE_=CODE_)
 		elif pos > 0 and ar[0] == u'ー' and ar[1] == u'名詞' and ar[2] == u'一般':
+			# PATTERN 3
+			# before:
+			# 0 ま,接頭詞,名詞接続,*,*,*,*,ま,マ,マ,1/1,P2
+			# 1 ー,名詞,一般,*,*,*,*,*
+			#
+			# after:
+			# 0 ま,接頭詞,名詞接続,*,*,*,*,まー,マー,マー,1/2,P2
+			# 1 ー,名詞,一般,*,*,*,*,*
+			#
 			ar2 = Mecab_getFeature(mf, pos-1, CODE_=CODE_).split(',')
 			if len(ar2) > 10:
 				hyoki = ar2[0] + u'ー'
@@ -352,17 +335,33 @@ def Mecab_correctFeatures(mf, CODE_ = CODE):
 					)
 					Mecab_setFeature(mf, pos-2, feature, CODE_=CODE_)
 		elif pos > 0 and ar[0] in (u'ｓ', u'ｄ', u'ｅｄ', u'ｒ'):
-			# pattern 4 or 5
 			ar2 = Mecab_getFeature(mf, pos-1, CODE_=CODE_).split(',')
 			# pattern 5
 			if pos > 1 and ar2[0] == u"’":
+				# PATTERN 5 "author's"
+				# before:
+				# 0 ａｕｔｈｏｒ,名詞,一般,*,*,*,*,ａｕｔｈｏｒ,オーサー,オーサー,1/4,C0
+				# 1 ’,記号,括弧閉,*,*,*,*,’,’,’,*/*,*
+				# 2 ｓ,記号,アルファベット,*,*,*,*,ｓ,エス,エス,1/2,*
+				#
+				# after:
+				# 0 ,,,*,*,*,*
+				# 1 ,,,*,*,*,*
+				# 2 ａｕｔｈｏｒｓ,名詞,一般,*,*,*,*,ｓ,オーサーズ,オーサーズ,1/5,C0
 				ar3 = Mecab_getFeature(mf, pos-2, CODE_=CODE_).split(',')
 				Mecab_setFeature(mf, pos - 2, ',,,*,*,*,*', CODE_=CODE_)
 				Mecab_setFeature(mf, pos - 1, ',,,*,*,*,*', CODE_=CODE_)
 				f = _makeFeatureFromLatinWordAndPostfix(ar[0], ar3)
 				Mecab_setFeature(mf, pos, f, CODE_=CODE_)
 			elif len(ar2) > 10 and RE_FULLSHAPE_ALPHA.match(ar2[0]) and len(ar2[0]) > 1:
-				# pattern 4
+				# PATTERN 4
+				# before:
+				# 0 ｔａｋｅ,名詞,一般,*,*,*,*,ｔａｋｅ,テイク,テイク,1/3,C0
+				# 1 ｓ,記号,アルファベット,*,*,*,*,ｓ,エス,エス,1/2,*
+				#
+				# after:
+				# 0 ,,,*,*,*,*
+				# 1 ｔａｋｅｓ,名詞,一般,*,*,*,*,ｔａｋｅ,テイクス,テイクス,1/4,C0
 				Mecab_setFeature(mf, pos - 1, ',,,*,*,*,*', CODE_=CODE_)
 				f = _makeFeatureFromLatinWordAndPostfix(ar[0], ar2)
 				Mecab_setFeature(mf, pos, f, CODE_=CODE_)
@@ -371,6 +370,12 @@ def Mecab_correctFeatures(mf, CODE_ = CODE):
 			ar2 = Mecab_getFeature(mf, pos-1, CODE_=CODE_).split(',')
 			if ar2[0] == u"’":
 				Mecab_setFeature(mf, pos-1, ',,,*,*,*,*', CODE_=CODE_)
+		elif RE_FULLSHAPE_ALPHA.match(ar[0]) and ar[7] == u'*':
+			roma = ar[0]
+			kana = _getKanaFromRoma(roma)
+			if kana:
+				c = len(kana)
+				Mecab_setFeature(mf, pos, u'%s,名詞,固有名詞,*,*,*,*,%s,%s,%s,1/%d,C0' % (roma, roma, kana, kana, c), CODE_=CODE_)
 
 
 def Mecab_utf8_to_cp932(mf):

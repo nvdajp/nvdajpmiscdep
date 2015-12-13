@@ -516,9 +516,19 @@ tasks = [
 	{'text':"updated", 'speech':'アップデーティド'},
 
 	# ti35577
-	{'text':'nippon', 'speech':'ニーッポンー'},
+	{'text':'nippon', 'speech':'ニッポン'},
 	{'text':'tokyo', 'speech':'トウキョウ'},
-	{'text':'kyoto', 'speech':'キョートゥー'},
-	{'text':'osaka', 'speech':'オサーカー'},
-	{'text':'kanagawa', 'speech':'カンーアガーワー'},
+	#{'text':'kyoto', 'speech':'キョートゥー'},
+	#{'text':'osaka', 'speech':'オサーカー'},
+	#{'text':'kanagawa', 'speech':'カンーアガーワー'},
+	#{'text':'hiroshima', 'speech':'ヒロシマ'},
+	{'text':'okayama', 'speech':'オカヤマ'},
+	#{'text':'yamaguchi', 'speech':'ヤマグチ'},
+	#{'text':'shimane', 'speech':'シマネ'},
+	#{'text':'tottori', 'speech':'トットリ'},
+	{'text':'nishi', 'speech':'ニシ'},
+	{'text':'higashi', 'speech':'ヒガシ'},
+	{'text':'minami', 'speech':'ミナミ'},
+	#{'text':'kita', 'speech':'キタ'},
+	{'text':'kit a', 'speech':'キットゥ エイ'},
 ]

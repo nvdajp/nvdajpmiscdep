@@ -191,6 +191,7 @@ def make_dic(IN_FILE, CODE, THISDIR):
 		['fukushima', 	'フクシマ', 		"2/4", 1000],
 		['niigata', 	'ニーガタ', 		"0/4", 1000],
 		['nishimoto', 	'ニシモト'],
+		['nippon',		'ニッポン', "3/4", None, '固有名詞'],
 		['asshuku',		'アッシュク',		"0/4",	],
 		['sumaho',		'スマホ',		"1/3",	],
 		['mei',			'メイ',			"1/2", 100],
@@ -305,11 +306,12 @@ def make_dic(IN_FILE, CODE, THISDIR):
 			cost = DEFAULT_COST
 			if alpha_count <= 2: cost = cost * 5
 			# override by entry
-			if len(i) >= 3:
-				if i[2] != None: pros = i[2]
-			if len(i) >= 4: cost = i[3]
+			hin1 = '一般'
+			if len(i) >= 3 and i[2] is not None: pros = i[2]
+			if len(i) >= 4 and i[3] is not None: cost = i[3]
+			if len(i) >= 5 and i[4] is not None: hin1 = i[4]
 			# 表層形,左文脈ID,右文脈ID,コスト,品詞,品詞細分類1,品詞細分類2,品詞細分類3,活用形,活用型,原形,読み,発音
-			s = "%s,,,%d,名詞,一般,*,*,*,*,%s,%s,%s,%s,C0\n" % (k1,cost,k1,y,y,pros)
+			s = "%s,,,%d,名詞,%s,*,*,*,*,%s,%s,%s,%s,C0\n" % (k1,cost,hin1,k1,y,y,pros)
 			file.write(s.encode(CODE))
 
 if __name__ == '__main__':

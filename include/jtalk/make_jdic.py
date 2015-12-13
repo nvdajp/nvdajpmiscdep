@@ -13,7 +13,6 @@ import errno
 import eng_dic_maker
 import tankan_dic_maker
 import custom_dic_maker
-import roma_dic_maker
 from filter_jdic import filter_jdic
 
 # MECAB_DICT_INDEX と OUTDIR は libopenjtalk/mecab-naist-jdic/_temp が基準
@@ -43,7 +42,6 @@ mkdir_p(TEMPDIR)
 eng_dic_maker.make_dic(ENGDIC, CODE, THISDIR)
 tankan_dic_maker.make_dic(CODE, CS_FILE, THISDIR)
 custom_dic_maker.make_dic(CODE, THISDIR)
-roma_dic_maker.make_dic(CODE, THISDIR)
 
 def convert_file(src_file, src_enc, dest_file, dest_enc):
 	print "converting %s to %s" % (src_file, dest_file)
@@ -72,7 +70,7 @@ def convert_jdic_file(src_file, src_enc, dest_file, dest_enc):
 
 files = ['dicrc',
 		 'nvdajp-eng-dic.csv','nvdajp-tankan-dic.csv',
-		 'nvdajp-custom-dic.csv','nvdajp-roma-dic.csv',
+		 'nvdajp-custom-dic.csv',
 		 ]
 
 euc_files = ['char.def','feature.def','left-id.def','matrix.def',
