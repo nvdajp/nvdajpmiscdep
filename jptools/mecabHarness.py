@@ -524,11 +524,11 @@ tasks = [
 	{'text':'hiroshima', 'speech':'ヒロシマ'},
 	{'text':'okayama', 'speech':'オカヤマ'},
 	{'text':'yamaguchi', 'speech':'ヤマグチ'},
-	#{'text':'shimane', 'speech':'シマネ'},
+	{'text':'shimane', 'speech':'シマネ'},
 	{'text':'tottori', 'speech':'トットリ'},
 	{'text':'nishi', 'speech':'ニシ'},
 	{'text':'higashi', 'speech':'ヒガシ'},
 	{'text':'minami', 'speech':'ミナミ'},
-	#{'text':'kita', 'speech':'キタ'},
+	{'text':'kita', 'speech':'キタ'},
 	{'text':'kit a', 'speech':'キットゥ エイ'},
 ]

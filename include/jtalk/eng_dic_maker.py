@@ -192,6 +192,8 @@ def make_dic(IN_FILE, CODE, THISDIR):
 		['niigata', 	'ニーガタ', 		"0/4", 1000],
 		['nishimoto', 	'ニシモト'],
 		['nippon',		'ニッポン', "3/4", None, '固有名詞'],
+		['shimane',		'シマネ', "1/3"],
+		['kita',		'キタ', "0/2"],
 		['asshuku',		'アッシュク',		"0/4",	],
 		['sumaho',		'スマホ',		"1/3",	],
 		['mei',			'メイ',			"1/2", 100],

@@ -363,6 +363,26 @@ def Mecab_correctFeatures(mf, CODE_ = CODE):
 			ar2 = Mecab_getFeature(mf, pos-1, CODE_=CODE_).split(',')
 			if ar2[0] == u"’":
 				Mecab_setFeature(mf, pos-1, ',,,*,*,*,*', CODE_=CODE_)
+		elif pos > 0 and RE_FULLSHAPE_ALPHA.match(ar[0]):
+			# 0 ｓｈｉ,名詞,一般,*,*,*,*,ｓｈｉ,シ,シ,1/1,C0
+			# 1 ｍａｎｅ,名詞,一般,*,*,*,*,ｍａｎｅ,メイン,メイン,1/3,C0
+			#
+			# 0 ｋｉｔ,名詞,一般,*,*,*,*,ｋｉｔ,キットゥ,キットゥ,1/4,C0
+			# 1 ａ,記号,アルファベット,*,*,*,*,ａ,エイ,エイ,1/2,*
+			ar2 = Mecab_getFeature(mf, pos-1, CODE_=CODE_).split(',')
+			if RE_FULLSHAPE_ALPHA.match(ar2[0]):
+				hyoki = ar2[0] + ar[0]
+				hin1 = ar[1]
+				hin2 = ar[2]
+				yomi = getKanaFromRoma(hyoki)
+				if yomi:
+					pron = yomi
+					mora = len(yomi)
+					feature = u'{h},{h1},{h2},*,*,*,*,{h},{y},{p},1/{m},C0'.format(
+						h=hyoki, h1=hin1, h2=hin2, y=yomi, p=pron, m=mora
+					)
+					Mecab_setFeature(mf, pos-1, feature, CODE_=CODE_)
+					Mecab_setFeature(mf, pos, ',,,*,*,*,*', CODE_=CODE_)
 		elif RE_FULLSHAPE_ALPHA.match(ar[0]) and ar[7] == u'*':
 			roma = ar[0]
 			kana = getKanaFromRoma(roma)
