@@ -531,4 +531,12 @@ tasks = [
 	{'text':'minami', 'speech':'ミナミ'},
 	{'text':'kita', 'speech':'キタ'},
 	{'text':'kit a', 'speech':'キットゥ エイ'},
+	{'text':'ue', 'speech':'ウエ'},
+	{'text':'shita', 'speech':'シタ'},
+	{'text':'migi', 'speech':'ミギ'},
+	{'text':'hidari', 'speech':'ヒダリ'},
+	{'text':'haru', 'speech':'ハル'},
+	{'text':'natsu', 'speech':'ナツ'},
+	{'text':'aki', 'speech':'アキ'},
+	{'text':'fuyu', 'speech':'フユ'},
 ]
