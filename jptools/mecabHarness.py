@@ -514,4 +514,11 @@ tasks = [
 	{'text':"dated", 'speech':'デイティドゥ'},
 	{'text':"created", 'speech':'クリエイティドゥ'},
 	{'text':"updated", 'speech':'アップデーティド'},
+
+	# ti35577
+	{'text':'nippon', 'speech':'ニーッポンー'},
+	{'text':'tokyo', 'speech':'トウキョウ'},
+	{'text':'kyoto', 'speech':'キョートゥー'},
+	{'text':'osaka', 'speech':'オサーカー'},
+	{'text':'kanagawa', 'speech':'カンーアガーワー'},
 ]
