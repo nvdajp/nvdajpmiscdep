@@ -257,6 +257,14 @@ def _makeFeatureFromLatinWordAndPostfix(org, ar):
 def Mecab_correctFeatures(mf, CODE_ = CODE):
 	for pos in xrange(0, mf.size):
 		ar = Mecab_getFeature(mf, pos, CODE_=CODE_).split(',')
+		if pos >= 1:
+			ar2 = Mecab_getFeature(mf, pos-1, CODE_=CODE_).split(',')
+		else:
+			ar2 = None
+		if pos >= 2:
+			ar3 = Mecab_getFeature(mf, pos-2, CODE_=CODE_).split(',')
+		else:
+			ar3 = None
 		if (ar[2] == u'数' and ar[7] == u'*') or (ar[1] == u'名詞' and ar[2] == u'サ変接続' and ar[7] == u'*'):
 			# PATTERN 1
 			# before:
@@ -292,7 +300,7 @@ def Mecab_correctFeatures(mf, CODE_ = CODE):
 				h=hyoki, y=yomi, p=pron, m=mora
 			)
 			Mecab_setFeature(mf, pos, feature, CODE_=CODE_)
-		elif pos > 0 and ar[0] == u'ー' and ar[1] == u'名詞' and ar[2] == u'一般':
+		elif ar2 and ar[0] == u'ー' and ar[1] == u'名詞' and ar[2] == u'一般':
 			# PATTERN 3
 			# before:
 			# 0 ま,接頭詞,名詞接続,*,*,*,*,ま,マ,マ,1/1,P2
@@ -302,7 +310,6 @@ def Mecab_correctFeatures(mf, CODE_ = CODE):
 			# 0 ま,接頭詞,名詞接続,*,*,*,*,まー,マー,マー,1/2,P2
 			# 1 ー,名詞,一般,*,*,*,*,*
 			#
-			ar2 = Mecab_getFeature(mf, pos-1, CODE_=CODE_).split(',')
 			if len(ar2) > 10:
 				hyoki = ar2[0] + u'ー'
 				hin1 = ar2[1]
@@ -314,23 +321,20 @@ def Mecab_correctFeatures(mf, CODE_ = CODE):
 					h=hyoki, h1=hin1, h2=hin2, y=yomi, p=pron, m=mora
 				)
 				Mecab_setFeature(mf, pos-1, feature, CODE_=CODE_)
-			elif pos >= 2:
-				ar3 = Mecab_getFeature(mf, pos-2, CODE_=CODE_).split(',')
-				if len(ar3) > 10 and ar3[1] != u'記号':
-					hyoki = ar3[0] + ar2[0] + u'ー'
-					hin1 = ar3[1]
-					hin2 = ar3[2]
-					yomi = ar3[8] + ar2[0] + u'ー'
-					pron = ar3[9] + ar2[0] + u'ー'
-					mora = getMoraCount(ar3[10]) + len(ar2[0]) + 1
-					feature = u'{h},{h1},{h2},*,*,*,*,{h},{y},{p},1/{m},C0'.format(
-						h=hyoki, h1=hin1, h2=hin2, y=yomi, p=pron, m=mora
-					)
-					Mecab_setFeature(mf, pos-2, feature, CODE_=CODE_)
-		elif pos > 0 and ar[0] in (u'ｓ', u'ｄ', u'ｅｄ', u'ｒ'):
-			ar2 = Mecab_getFeature(mf, pos-1, CODE_=CODE_).split(',')
+			elif ar3 and len(ar3) > 10 and ar3[1] != u'記号':
+				hyoki = ar3[0] + ar2[0] + u'ー'
+				hin1 = ar3[1]
+				hin2 = ar3[2]
+				yomi = ar3[8] + ar2[0] + u'ー'
+				pron = ar3[9] + ar2[0] + u'ー'
+				mora = getMoraCount(ar3[10]) + len(ar2[0]) + 1
+				feature = u'{h},{h1},{h2},*,*,*,*,{h},{y},{p},1/{m},C0'.format(
+					h=hyoki, h1=hin1, h2=hin2, y=yomi, p=pron, m=mora
+				)
+				Mecab_setFeature(mf, pos-2, feature, CODE_=CODE_)
+		elif ar2 and ar[0] in (u'ｓ', u'ｄ', u'ｅｄ', u'ｒ'):
 			# pattern 5
-			if pos > 1 and ar2[0] == u"’":
+			if ar3 and ar2[0] == u"’":
 				# PATTERN 5 "author's"
 				# before:
 				# 0 ａｕｔｈｏｒ,名詞,一般,*,*,*,*,ａｕｔｈｏｒ,オーサー,オーサー,1/4,C0
@@ -341,7 +345,6 @@ def Mecab_correctFeatures(mf, CODE_ = CODE):
 				# 0 ,,,*,*,*,*
 				# 1 ,,,*,*,*,*
 				# 2 ａｕｔｈｏｒｓ,名詞,一般,*,*,*,*,ｓ,オーサーズ,オーサーズ,1/5,C0
-				ar3 = Mecab_getFeature(mf, pos-2, CODE_=CODE_).split(',')
 				Mecab_setFeature(mf, pos - 2, ',,,*,*,*,*', CODE_=CODE_)
 				Mecab_setFeature(mf, pos - 1, ',,,*,*,*,*', CODE_=CODE_)
 				f = _makeFeatureFromLatinWordAndPostfix(ar[0], ar3)
@@ -358,31 +361,28 @@ def Mecab_correctFeatures(mf, CODE_ = CODE):
 				Mecab_setFeature(mf, pos - 1, ',,,*,*,*,*', CODE_=CODE_)
 				f = _makeFeatureFromLatinWordAndPostfix(ar[0], ar2)
 				Mecab_setFeature(mf, pos, f, CODE_=CODE_)
-		elif pos > 0 and ar[0] == u"　" and ar[1] == u'記号' and ar[2] == u'空白':
+		elif ar2 and ar[0] == u"　" and ar[1] == u'記号' and ar[2] == u'空白':
 			# remove single quote in cases such as "authors' protection"
-			ar2 = Mecab_getFeature(mf, pos-1, CODE_=CODE_).split(',')
 			if ar2[0] == u"’":
 				Mecab_setFeature(mf, pos-1, ',,,*,*,*,*', CODE_=CODE_)
-		elif pos > 0 and RE_FULLSHAPE_ALPHA.match(ar[0]):
+		elif ar2 and RE_FULLSHAPE_ALPHA.match(ar[0]) and RE_FULLSHAPE_ALPHA.match(ar2[0]):
 			# 0 ｓｈｉ,名詞,一般,*,*,*,*,ｓｈｉ,シ,シ,1/1,C0
 			# 1 ｍａｎｅ,名詞,一般,*,*,*,*,ｍａｎｅ,メイン,メイン,1/3,C0
 			#
 			# 0 ｋｉｔ,名詞,一般,*,*,*,*,ｋｉｔ,キットゥ,キットゥ,1/4,C0
 			# 1 ａ,記号,アルファベット,*,*,*,*,ａ,エイ,エイ,1/2,*
-			ar2 = Mecab_getFeature(mf, pos-1, CODE_=CODE_).split(',')
-			if RE_FULLSHAPE_ALPHA.match(ar2[0]):
-				hyoki = ar2[0] + ar[0]
-				hin1 = ar[1]
-				hin2 = ar[2]
-				yomi = getKanaFromRoma(hyoki)
-				if yomi:
-					pron = yomi
-					mora = len(yomi)
-					feature = u'{h},{h1},{h2},*,*,*,*,{h},{y},{p},1/{m},C0'.format(
-						h=hyoki, h1=hin1, h2=hin2, y=yomi, p=pron, m=mora
-					)
-					Mecab_setFeature(mf, pos-1, ',,,*,*,*,*', CODE_=CODE_)
-					Mecab_setFeature(mf, pos, feature, CODE_=CODE_)
+			hyoki = ar2[0] + ar[0]
+			hin1 = u'名詞'
+			hin2 = u'固有名詞'
+			yomi = getKanaFromRoma(hyoki)
+			if yomi:
+				pron = yomi
+				mora = len(yomi)
+				feature = u'{h},{h1},{h2},*,*,*,*,{h},{y},{p},1/{m},C0'.format(
+					h=hyoki, h1=hin1, h2=hin2, y=yomi, p=pron, m=mora
+				)
+				Mecab_setFeature(mf, pos-1, ',,,*,*,*,*', CODE_=CODE_)
+				Mecab_setFeature(mf, pos, feature, CODE_=CODE_)
 		elif RE_FULLSHAPE_ALPHA.match(ar[0]) and ar[7] == u'*':
 			roma = ar[0]
 			kana = getKanaFromRoma(roma)

@@ -543,4 +543,7 @@ tasks = [
 	{'text':'nishini', 'speech':'ニシニ'},
 	{'text':'nishiniho', 'speech':'ニシニホ'},
 	{'text':'nishinihon', 'speech':'ニシニホン'},
+	{'text':'roma2kana', 'speech':'ロマニカナ'},
+	{'text':'2kana', 'speech':'ニカナ'},
+	{'text':'20kana', 'speech':'ニゼロカナ'},
 ]
