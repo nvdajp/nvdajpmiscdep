@@ -550,4 +550,7 @@ tasks = [
 	#{'text':'nikkansports', 'speech':''},
 	{'text':'inside', 'speech':'インサイドゥ'},
 	#{'text':'dtmstation', 'speech':''},
+	{'text':'git', 'speech':'ギットゥ'},
+	{'text':'automation', 'speech':'オートメイション'},
+	{'text':'ui automation', 'speech':'ユーアイ オートメイション'},
 ]

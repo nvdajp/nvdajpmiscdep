@@ -279,6 +279,7 @@ def make_dic(IN_FILE, CODE, THISDIR):
 		['usa',	'ユーエスエー', "0/6"],
 		['unenforceable', 'アンエンフォーサブル'],
 		['visum', 'ビズム'],
+		['git', 'ギットゥ'],
 	]
 	k = {}
 	for i in d:
