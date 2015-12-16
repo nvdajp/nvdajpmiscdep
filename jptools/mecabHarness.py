@@ -546,4 +546,8 @@ tasks = [
 	{'text':'roma2kana', 'speech':'ロマニカナ'},
 	{'text':'2kana', 'speech':'ニカナ'},
 	{'text':'20kana', 'speech':'ニゼロカナ'},
+	#{'text':'postseven', 'speech':''},
+	#{'text':'nikkansports', 'speech':''},
+	{'text':'inside', 'speech':'インサイドゥ'},
+	#{'text':'dtmstation', 'speech':''},
 ]

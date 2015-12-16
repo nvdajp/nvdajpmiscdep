@@ -303,7 +303,7 @@ def make_dic(IN_FILE, CODE, THISDIR):
 			y = i[1]
 			# default pros
 			mora_count = len(y)
-			pros = "1/%d" % mora_count
+			pros = "0/%d" % mora_count
 			# default cost
 			cost = DEFAULT_COST
 			if alpha_count <= 2: cost = cost * 5

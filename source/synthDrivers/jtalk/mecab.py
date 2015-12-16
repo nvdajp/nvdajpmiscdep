@@ -249,7 +249,7 @@ def _makeFeatureFromLatinWordAndPostfix(org, ar):
 	yomi = ar[8] + postfix
 	pron = ar[9] + postfix
 	mora = getMoraCount(ar[10]) + 1
-	feature = u'{h},{h1},{h2},*,*,*,*,{h},{y},{p},1/{m},C0'.format(
+	feature = u'{h},{h1},{h2},*,*,*,*,{h},{y},{p},0/{m},C0'.format(
 		h=hyoki, h1=hin1, h2=hin2, y=yomi, p=pron, m=mora
 	)
 	return feature
@@ -296,7 +296,7 @@ def Mecab_correctFeatures(mf, CODE_ = CODE):
 						pron += ar2[9]
 						mora += getMoraCount(ar2[10])
 			nbmf = None
-			feature = u'{h},名詞,普通名詞,*,*,*,*,{h},{y},{p},1/{m},C0'.format(
+			feature = u'{h},名詞,普通名詞,*,*,*,*,{h},{y},{p},0/{m},C0'.format(
 				h=hyoki, y=yomi, p=pron, m=mora
 			)
 			Mecab_setFeature(mf, pos, feature, CODE_=CODE_)
@@ -317,7 +317,7 @@ def Mecab_correctFeatures(mf, CODE_ = CODE):
 				yomi = ar2[8] + u'ー'
 				pron = ar2[9] + u'ー'
 				mora = getMoraCount(ar2[10]) + 1
-				feature = u'{h},{h1},{h2},*,*,*,*,{h},{y},{p},1/{m},C0'.format(
+				feature = u'{h},{h1},{h2},*,*,*,*,{h},{y},{p},0/{m},C0'.format(
 					h=hyoki, h1=hin1, h2=hin2, y=yomi, p=pron, m=mora
 				)
 				Mecab_setFeature(mf, pos-1, feature, CODE_=CODE_)
@@ -328,7 +328,7 @@ def Mecab_correctFeatures(mf, CODE_ = CODE):
 				yomi = ar3[8] + ar2[0] + u'ー'
 				pron = ar3[9] + ar2[0] + u'ー'
 				mora = getMoraCount(ar3[10]) + len(ar2[0]) + 1
-				feature = u'{h},{h1},{h2},*,*,*,*,{h},{y},{p},1/{m},C0'.format(
+				feature = u'{h},{h1},{h2},*,*,*,*,{h},{y},{p},0/{m},C0'.format(
 					h=hyoki, h1=hin1, h2=hin2, y=yomi, p=pron, m=mora
 				)
 				Mecab_setFeature(mf, pos-2, feature, CODE_=CODE_)
@@ -378,7 +378,7 @@ def Mecab_correctFeatures(mf, CODE_ = CODE):
 			if yomi:
 				pron = yomi
 				mora = len(yomi)
-				feature = u'{h},{h1},{h2},*,*,*,*,{h},{y},{p},1/{m},C0'.format(
+				feature = u'{h},{h1},{h2},*,*,*,*,{h},{y},{p},0/{m},C0'.format(
 					h=hyoki, h1=hin1, h2=hin2, y=yomi, p=pron, m=mora
 				)
 				Mecab_setFeature(mf, pos-1, ',,,*,*,*,*', CODE_=CODE_)
@@ -388,7 +388,7 @@ def Mecab_correctFeatures(mf, CODE_ = CODE):
 			kana = getKanaFromRoma(roma)
 			if kana:
 				c = len(kana)
-				Mecab_setFeature(mf, pos, u'%s,名詞,固有名詞,*,*,*,*,%s,%s,%s,1/%d,C0' % (roma, roma, kana, kana, c), CODE_=CODE_)
+				Mecab_setFeature(mf, pos, u'%s,名詞,固有名詞,*,*,*,*,%s,%s,%s,0/%d,C0' % (roma, roma, kana, kana, c), CODE_=CODE_)
 
 
 def Mecab_utf8_to_cp932(mf):
