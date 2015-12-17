@@ -466,6 +466,12 @@ jdic = [
 	 'speech':'セイガ',
 	 'accent':"1/3",
 	 },
+
+	{'text':'下準備',
+	 'pos':"名詞,サ変接続,*,*,*,*",
+	 'speech':'シタジュンビ',
+	 'accent':"3/5",
+	 },
 ]
 
 class DicItem(object):
