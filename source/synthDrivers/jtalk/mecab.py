@@ -334,7 +334,7 @@ def Mecab_correctFeatures(mf, CODE_ = CODE):
 				Mecab_setFeature(mf, pos-2, feature, CODE_=CODE_)
 		elif ar2 and ar[0] in (u'ｓ', u'ｄ', u'ｅｄ', u'ｒ'):
 			# pattern 5
-			if ar3 and ar2[0] == u"’":
+			if ar3 and ar2[0] in ("'", u"’"):
 				# PATTERN 5 "author's"
 				# before:
 				# 0 ａｕｔｈｏｒ,名詞,一般,*,*,*,*,ａｕｔｈｏｒ,オーサー,オーサー,1/4,C0
@@ -361,10 +361,6 @@ def Mecab_correctFeatures(mf, CODE_ = CODE):
 				Mecab_setFeature(mf, pos - 1, ',,,*,*,*,*', CODE_=CODE_)
 				f = _makeFeatureFromLatinWordAndPostfix(ar[0], ar2)
 				Mecab_setFeature(mf, pos, f, CODE_=CODE_)
-		elif ar2 and ar[0] == u"　" and ar[1] == u'記号' and ar[2] == u'空白':
-			# remove single quote in cases such as "authors' protection"
-			if ar2[0] == u"’":
-				Mecab_setFeature(mf, pos-1, ',,,*,*,*,*', CODE_=CODE_)
 		elif ar2 and RE_FULLSHAPE_ALPHA.match(ar[0]) and RE_FULLSHAPE_ALPHA.match(ar2[0]):
 			# 0 ｓｈｉ,名詞,一般,*,*,*,*,ｓｈｉ,シ,シ,1/1,C0
 			# 1 ｍａｎｅ,名詞,一般,*,*,*,*,ｍａｎｅ,メイン,メイン,1/3,C0

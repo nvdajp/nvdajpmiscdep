@@ -145,4 +145,40 @@ tests = [
 		'input':'3/03',
 		'output': '⠒⠌⠴⠒',
 	},
+	{
+		'mode':   'NABCC',
+		'text': '"\'"',
+		'input': '"\'"',
+		'output': '⠐⠄⠐',
+	},
+	{
+		'mode':   'NABCC',
+		'text': '"\'" ',
+		'input': '"\'" ',
+		'output': '⠐⠄⠐ ',
+	},
+	{
+		'mode':   'NABCC',
+		'text': "u'コーテーション",
+		'input': "u' コーテーション",
+		'output': '⠥⠄ ⠪⠒⠟⠒⠈⠺⠴',
+	},
+	{
+		'mode':   'NABCC',
+		'text': "u'コーテーション'",
+		'input': "u' コーテーション '",
+		'output': '⠥⠄ ⠪⠒⠟⠒⠈⠺⠴ ⠄',
+	},
+	{
+		'mode':   'NABCC',
+		'text': "u' コーテーション' ",
+		'input': "u' コーテーション ' ",
+		'output': '⠥⠄ ⠪⠒⠟⠒⠈⠺⠴ ⠄ ',
+	},
+	{
+		'mode':   'NABCC',
+		'text': "u'コーテーション' ",
+		'input': "u' コーテーション ' ",
+		'output': '⠥⠄ ⠪⠒⠟⠒⠈⠺⠴ ⠄ ',
+	},
 	]

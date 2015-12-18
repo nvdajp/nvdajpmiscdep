@@ -484,7 +484,7 @@ def fix_japanese_date_morphs(li):
 			new_li.append(li[i])
 	return new_li
 
-def should_separate(prev2_mo, prev_mo, mo, next_mo, nabcc=False):
+def should_separate(prev2_mo, prev_mo, mo, next_mo, nabcc=False, logwrite=_logwrite):
 	if mo.hyouki == 'ー': return False
 	if prev_mo.hyouki == 'ー': return False
 	if mo.hyouki in 'ぁぃぅぇぉっゃゅょゎァィゥェォッャュョヮヵヶ': return False
@@ -540,7 +540,7 @@ def should_separate(prev2_mo, prev_mo, mo, next_mo, nabcc=False):
 		return True
 
 	# 1月/1日
-	if prev_mo.nhyouki[0].isdigit() and prev_mo.nhyouki[-1] == '月' and mo.output.isdigit():
+	if prev_mo.nhyouki and prev_mo.nhyouki[0].isdigit() and prev_mo.nhyouki[-1] == '月' and mo.output.isdigit():
 		return True
 	# 0/4月 -> 04月
 	if prev_mo.output.isdigit() and mo.nhyouki[0].isdigit():
@@ -1132,7 +1132,7 @@ def japanese_braille_separate(inbuf, logwrite, nabcc=False):
 		prev2_mo = li[i-2] if i-2 >= 0 else None
 		prev_mo = li[i-1]
 		next_mo = li[i+1] if i+1 < len(li) else None
-		li[i-1].sepflag = should_separate(prev2_mo, prev_mo, li[i], next_mo, nabcc=nabcc)
+		li[i-1].sepflag = should_separate(prev2_mo, prev_mo, li[i], next_mo, nabcc=nabcc, logwrite=logwrite)
 
 	# do not translate if string is unicode braille
 	for i in xrange(0, len(li)):

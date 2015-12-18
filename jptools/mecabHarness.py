@@ -462,7 +462,7 @@ tasks = [
 	{'text':'reserved', 'speech':'リザーブド'},
 
 	{'text':"for each author's protection", 'speech':'フォー イーチ オーサーズ プロテクション'},
-	{'text':"for each authors' protection", 'speech':'フォー イーチ オーサーズ プロテクション'},
+	{'text':"for each authors' protection", 'speech':"フォー イーチ オーサーズ’ プロテクション"},
 	{'text':"using it", 'speech':'ユージング イットゥ'},
 	{'text':"distributable", 'speech':'ディストリビュータブル'},
 	{'text':"usa", 'speech':'ユーエスエー'},
@@ -553,4 +553,7 @@ tasks = [
 	{'text':'git', 'speech':'ギットゥ'},
 	{'text':'automation', 'speech':'オートメイション'},
 	{'text':'ui automation', 'speech':'ユーアイ オートメイション'},
+	{'text': "u' コーテーション' ",
+	 'speech':"ユー’ コーテーション’ ",
+	 'braille':"ユー/’/ /コーテーション/’"},
 ]
