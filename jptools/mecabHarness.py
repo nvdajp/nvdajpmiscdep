@@ -556,4 +556,5 @@ tasks = [
 	{'text': "u' コーテーション' ",
 	 'speech':"ユー’ コーテーション’ ",
 	 'braille':"ユー/’/ /コーテーション/’"},
+	{'text':'outputting', 'speech':'アウトプッティング'}
 ]
