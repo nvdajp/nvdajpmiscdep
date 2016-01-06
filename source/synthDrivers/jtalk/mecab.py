@@ -13,6 +13,7 @@ import sys
 import re
 from text2mecab import text2mecab
 from roma2kana import getKanaFromRoma
+from _nvdajp_spellchar import convert as convertSpellChar
 
 c_double_p = POINTER(c_double)
 c_double_p_p = POINTER(c_double_p) 
@@ -224,33 +225,37 @@ def getMoraCount(s):
 RE_FULLSHAPE_ALPHA = re.compile(u'^[Ａ-Ｚａ-ｚ]+$')
 
 def _makeFeatureFromLatinWordAndPostfix(org, ar):
+	_hyoki = ar[0]
+	_yomi = ar[8] if len(ar) > 8 else convertSpellChar(_hyoki).replace(' ', '')
+	_pron = ar[9] if len(ar) > 9 else convertSpellChar(_hyoki).replace(' ', '')
+	hin1 = ar[1]
+	hin2 = ar[2]
+	hin3 = ar[3]
 	postfix = u''
 	if org == u'ｓ':
 		postfix = u'ズ'
-		if ar[0].endswith(u'ｐ') or ar[0].endswith(u'ｋｅ') or ar[0].endswith(u'ｒｋ'):
+		if _hyoki.endswith(u'ｐ') or _hyoki.endswith(u'ｋｅ') or _hyoki.endswith(u'ｒｋ'):
 			postfix = u'ス'
 	elif org in (u'ｄ', u'ｅｄ'):
-		if ar[0].endswith(u'ｔｅ') and ar[8].endswith(u'ト'):
+		if _hyoki.endswith(u'ｔｅ') and _yomi.endswith(u'ト'):
 			# update アップデート -> updated アップデーティド
 			postfix = u'ティド'
-			ar[8] = ar[8][:-1]
-			ar[9] = ar[9][:-1]
+			_yomi = _yomi[:-1]
+			_pron = _pron[:-1]
 		else:
 			postfix = u'ド'
 	elif org == u'ｒ':
 		postfix = u'ア'
-		if ar[0].endswith(u'ｓｅ'):
+		if _hyoki.endswith(u'ｓｅ'):
 			postfix = u'ザー'
-			ar[8] = ar[8][:-1]
-			ar[9] = ar[9][:-1]
-	hyoki = ar[0] + org
-	hin1 = ar[1]
-	hin2 = ar[2]
-	yomi = ar[8] + postfix
-	pron = ar[9] + postfix
-	mora = getMoraCount(ar[10]) + 1
-	feature = u'{h},{h1},{h2},*,*,*,*,{h},{y},{p},0/{m},C0'.format(
-		h=hyoki, h1=hin1, h2=hin2, y=yomi, p=pron, m=mora
+			_yomi = _yomi[:-1]
+			_pron = _pron[:-1]
+	hyoki = _hyoki + org
+	yomi = _yomi + postfix
+	pron = _pron + postfix
+	mora = getMoraCount(ar[10]) + 1 if len(ar) > 10 else len(pron)
+	feature = u'{h},{h1},{h2},{h3},*,*,*,{h},{y},{p},0/{m},C0'.format(
+		h=hyoki, h1=hin1, h2=hin2, h3=hin3, y=yomi, p=pron, m=mora
 	)
 	return feature
 
