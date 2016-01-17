@@ -144,7 +144,7 @@ def _jtalk_speak(msg, index=None, prop=None):
 				if DEBUG: logwrite("libjt_synthesis done")
 			del a
 		del mf
-	player.sync()
+	player.idle()
 	lastIndex = currIndex
 	currIndex = None
 	setSpeaking(False)
