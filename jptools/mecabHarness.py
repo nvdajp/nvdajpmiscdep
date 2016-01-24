@@ -556,5 +556,9 @@ tasks = [
 	{'text': "u' コーテーション' ",
 	 'speech':"ユー’ コーテーション’ ",
 	 'braille':"ユー/’/ /コーテーション/’"},
-	{'text':'outputting', 'speech':'アウトプッティング'}
+	{'text':'outputting', 'speech':'アウトプッティング'},
+	{'text':'unveils', 'speech':'アンベイルズ'},
+	{'text':'drawing', 'speech':'ドゥローイング'},
+	{'text':'undefined', 'speech':'アンデファインドゥ'},
+	{'text':'completely', 'speech':'コンプリートリィ'},
 ]
