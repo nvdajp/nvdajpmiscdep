@@ -213,6 +213,8 @@ def make_dic(IN_FILE, CODE, THISDIR):
 		['previously', 'プリビアスリ'],
 		['permission', 'パーミッション'],
 		['page',		'ページ', 			"1/3", 600],
+
+		['quickly', 'クイックリィ'],
 		
 		['radio', 	'ラジオ', "1/3", 800],
 		['redistributable', 'リディストリビュータブル', "6/10"],

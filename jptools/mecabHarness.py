@@ -561,4 +561,6 @@ tasks = [
 	{'text':'drawing', 'speech':'ドゥローイング'},
 	{'text':'undefined', 'speech':'アンデファインドゥ'},
 	{'text':'completely', 'speech':'コンプリートリィ'},
+	{'text':'quick', 'speech':'クイック'},
+	{'text':'quickly', 'speech':'クイックリィ'},
 ]
