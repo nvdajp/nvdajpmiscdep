@@ -563,4 +563,5 @@ tasks = [
 	{'text':'completely', 'speech':'コンプリートリィ'},
 	{'text':'quick', 'speech':'クイック'},
 	{'text':'quickly', 'speech':'クイックリィ'},
+	{'text':'nvaccess', 'speech':'エヌブイアクセス'},
 ]

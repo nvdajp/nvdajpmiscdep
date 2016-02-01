@@ -197,6 +197,7 @@ def make_dic(IN_FILE, CODE, THISDIR):
 		['niigata', 	'ニーガタ', 		"0/4", 1000],
 		['nishimoto', 	'ニシモト'],
 		['nippon',		'ニッポン', "3/4", None, '固有名詞'],
+		['nvaccess',	'エヌブイアクセス', "5/8", None, '固有名詞'],
 		
 		['open', 	'オープン'],
 		['office', 	'オフィス'],
