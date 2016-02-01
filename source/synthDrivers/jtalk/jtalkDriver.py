@@ -112,6 +112,8 @@ def _jtalk_speak(msg, index=None, prop=None):
 	ls = 0.015 * (prop.pitch - 50.0 + voice_args['pitch_bias']) # 50 = no shift
 	lo = ls + voice_args['lf0_base'] * (1 - la)
 	if DEBUG: logwrite("lo:%f la:%f" % (lo, la))
+	lastIndex = currIndex
+	currIndex = None
 	for t in string.split(msg):
 		if DEBUG: logwrite("unicode (%s)" % t)
 		s = text2mecab(t)
@@ -145,8 +147,6 @@ def _jtalk_speak(msg, index=None, prop=None):
 			del a
 		del mf
 	player.idle()
-	lastIndex = currIndex
-	currIndex = None
 	setSpeaking(False)
 	currentEngine = 0
 
