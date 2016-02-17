@@ -223,6 +223,11 @@ tests = [
 		'comment': 'nvdajp ticket34973',
 	},
 	{
+		'text': '(1)',
+		'input': '(1)',
+		'output': '⠶⠼⠁⠶',
+	},
+	{
 		'text': '[ア]',
 		'input': '[ア]',
 		'output': '⠐⠶⠁⠶⠂',

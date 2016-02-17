@@ -50,6 +50,24 @@ tests = [
 		},
 	{
 		'mode':   'NABCC',
+		'text': '(1)',
+		'input': '(1)',
+		'output': '⠷⠂⠾',
+	},
+	{
+		'mode':   'NABCC',
+		'text': '[1]',
+		'input': '[1]',
+		'output': '⡪⠂⡻',
+	},
+	{
+		'mode':   'NABCC',
+		'text': '_1',
+		'input': '_1',
+		'output': '⠸⠂',
+	},
+	{
+		'mode':   'NABCC',
 		'text':  '_<=>%+~`',
 		'input':  '_<=>%+~`',
 		'output': '⠸⠣⠿⠜⠩⠬⠘⠈',
