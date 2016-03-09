@@ -1,4 +1,5 @@
 rem all-clean
+del *.pyc
 
 cd ..\python-jtalk
 call clean.cmd

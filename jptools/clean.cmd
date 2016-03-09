@@ -1,3 +1,10 @@
+del __*.txt
+del *.pyc
+del jtusr.dic
+del ..\source\synthDrivers\jtalk\*.pyc
+del ..\source\synthDrivers\jtalk\dic\DIC_VERSION
+del ..\source\synthDrivers\jtalk\dic\*.dic
+del ..\source\synthDrivers\jtalk\libopenjtalk.dll
 cd ..\include\jtalk
 call all-clean.cmd
 cd ..\..\jptools
