@@ -1,5 +1,5 @@
-libmecab.dll is from mecab-0.98.exe
-available at http://sourceforge.net/projects/mecab/
+libmecab.dll is from mecab-0.996.exe
+available at http://taku910.github.io/mecab/
 
 ==========
 
