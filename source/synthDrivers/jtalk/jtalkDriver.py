@@ -56,7 +56,7 @@ _jtalk_voices = [
 	 "samp_rate": 48000,
 	 "fperiod": 240,
 	 "lf0_base": 5.86,
-	 "pitch_bias": -10,
+	 "pitch_bias": -20,
 	 "speaker_attenuation": 0.5,
 	 "htsvoice": os.path.join(jtalk_dir, 'mei', 'mei_happy.htsvoice'),
 	 "espeak_variant": "f1"},
