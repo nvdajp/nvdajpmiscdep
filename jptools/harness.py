@@ -540,6 +540,26 @@ tests = [
 		'comment': '情報処理点字を円マークに使う。',
 	},
 	{
+		# https://osdn.jp/ticket/browse.php?group_id=4221&tid=36052
+		'text': r'\1,500.01',
+		'input': r'⠠⠦\1,500.01⠠⠴',
+		'output': '⠠⠦⠫⠼⠁⠂⠑⠚⠚⠲⠼⠚⠁⠠⠴',
+		'comment': '半角円マークがあるので情報処理点字を使う。カンマは2、ピリオドは256。',
+	},
+	{
+		# https://osdn.jp/ticket/browse.php?group_id=4221&tid=36052
+		'text': r'1,500.01',
+		'input': r'1,500.01',
+		'output': '⠼⠁⠄⠑⠚⠚⠂⠚⠁',
+		'comment': 'カンマは3、ピリオドは2。',
+	},
+	{
+		# https://osdn.jp/ticket/browse.php?group_id=4221&tid=36052
+		'text': r'21:46',
+		'input': r'21:46',
+		'output': '⠼⠃⠁⠐⠂⠼⠙⠋',
+	},
+	{
 		'text': 'v1.4',
 		'input': '⠦v1.4⠴',
 		'output': '⠦⠧⠼⠁⠂⠙⠴',

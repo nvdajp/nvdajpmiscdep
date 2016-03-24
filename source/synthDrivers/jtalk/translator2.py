@@ -533,7 +533,7 @@ def should_separate(prev2_mo, prev_mo, mo, next_mo, nabcc=False, logwrite=_logwr
 		return True
 
 	# 数字の前のマスアケ
-	if prev_mo.nhyouki not in ('-', '，', '.', '’', '、') and \
+	if prev_mo.nhyouki not in ('-', '，', '.', '’', '、', ':', '：') and \
 		prev_mo.output != '⠼' and \
 		not nabcc and \
 		prev_mo.nhyouki not in ('(', '第', '築', '二男', '中') and \
