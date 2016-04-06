@@ -391,3 +391,27 @@ def libjt_synthesis(feature,
 				pass
 	if logwrite_ : logwrite_('libjt_synthesis done.')
 	return buf
+
+def libjt_set_alpha(d):
+	global libjt, engine
+	libjt.HTS_Engine_set_alpha(engine, d)
+
+def libjt_get_alpha():
+	global libjt, engine
+	return libjt.HTS_Engine_get_alpha(engine)
+
+def libjt_set_beta(d):
+	global libjt, engine
+	libjt.HTS_Engine_set_beta(engine, d)
+
+def libjt_get_beta():
+	global libjt, engine
+	return libjt.HTS_Engine_get_beta(engine)
+
+def libjt_set_gv_interpolation_weight(a, b, d):
+	global libjt, engine
+	libjt.HTS_Engine_set_gv_interpolation_weight(engine, a, b, d)
+
+def libjt_get_gv_interpolation_weight(a, b):
+	global libjt, engine
+	return libjt.HTS_Engine_get_gv_interpolation_weight(engine, a, b)

@@ -39,6 +39,8 @@ _jtalk_voices = [
 	 "pitch_bias": 0,
 	 "speaker_attenuation": 1.0,
 	 "htsvoice": os.path.join(jtalk_dir, 'm001', 'm001.htsvoice'),
+	 "alpha": 0.55,
+	 "beta": 0.00,
 	 "espeak_variant": "max"},
 	{"id": "V2",
 	 "name": "mei",
@@ -49,6 +51,8 @@ _jtalk_voices = [
 	 "pitch_bias": -10,
 	 "speaker_attenuation": 0.5,
 	 "htsvoice": os.path.join(jtalk_dir, 'mei', 'mei_normal.htsvoice'),
+	 "alpha": 0.62, # 0.55,
+	 "beta": 0.05, # 0.00,
 	 "espeak_variant": "f1"},
 	{"id": "V2H",
 	 "name": "mei_h",
@@ -59,6 +63,8 @@ _jtalk_voices = [
 	 "pitch_bias": -20,
 	 "speaker_attenuation": 0.5,
 	 "htsvoice": os.path.join(jtalk_dir, 'mei', 'mei_happy.htsvoice'),
+	 "alpha": 0.62, # 0.55,
+	 "beta": 0.05, # 0.00,
 	 "espeak_variant": "f1"},
 	{"id": "V3",
 	 "name": "lite",
@@ -69,6 +75,8 @@ _jtalk_voices = [
 	 "pitch_bias": 0,
 	 "speaker_attenuation": 1.0,
 	 "htsvoice": os.path.join(jtalk_dir, 'lite', 'voice.htsvoice'),
+	 "alpha": 0.42,
+	 "beta": 0.00,
 	 "espeak_variant": "max"},
 ]
 default_jtalk_voice = _jtalk_voices[1] # V2
@@ -267,6 +275,8 @@ def initialize(voice = default_jtalk_voice):
 		log.info("loaded " + voice_args['htsvoice'])
 	else:
 		log.error("load error " + voice_args['htsvoice'])
+	libjt_set_alpha(voice_args['alpha'])
+	libjt_set_beta(voice_args['beta'])
 
 def terminate():
 	global player

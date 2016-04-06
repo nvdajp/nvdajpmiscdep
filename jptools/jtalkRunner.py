@@ -36,7 +36,10 @@ voices = [
 	 "fperiod": 240,
 	 "lf0_base":5.0,
 	 "speaker_attenuation":1.0,
+	 "pitch_bias": 0,
 	 "htsvoice": os.path.join(JT_DIR, 'm001', 'm001.htsvoice'),
+	 "alpha": 0.55,
+	 "beta": 0.00,
 	 #"espeak_variant": "max",
 	 },
 	{"id": "V2",
@@ -45,11 +48,26 @@ voices = [
 	 "samp_rate": 48000,
 	 "fperiod": 240,
 	 "lf0_base": 5.86,
-	 "pitch_bias": -10,
+	 "pitch_bias": -20,
 	 "speaker_attenuation": 0.5,
 	 "htsvoice": os.path.join(JT_DIR, 'mei', 'mei_normal.htsvoice'),
+	 "alpha": 0.62,
+	 "beta": 0.05,
 	 #"espeak_variant": "f1",
 	 },
+	{"id": "V2H",
+	 "name": "mei_h",
+	 "lang":"ja",
+	 "samp_rate": 48000,
+	 "fperiod": 240,
+	 "lf0_base": 5.86,
+	 "pitch_bias": -30,
+	 "speaker_attenuation": 0.5,
+	 "htsvoice": os.path.join(JT_DIR, 'mei', 'mei_happy.htsvoice'),
+	 "alpha": 0.62,
+	 "beta": 0.05,
+	 #"espeak_variant": "f1"
+	},
 	{"id": "V3",
 	 "name": "lite",
 	 "lang":"ja",
@@ -59,6 +77,8 @@ voices = [
 	 "pitch_bias": 0,
 	 "speaker_attenuation": 1.0,
 	 "htsvoice": os.path.join(JT_DIR, 'lite', 'voice.htsvoice'),
+	 "alpha": 0.42,
+	 "beta": 0.00,
 	 #"espeak_variant": "max",
 	 },
 	]
@@ -153,15 +173,22 @@ def main(do_play = False, do_write = True, do_log = False):
 	libjt_initialize(JT_DLL)
 	v = voices[1]
 	libjt_load(v['htsvoice'])
+	libjt_set_alpha(v['alpha'])
+	libjt_set_beta(v['beta'])
+	print('alpha:%f beta:%f' % (libjt_get_alpha(), libjt_get_beta()))
+	#print('GV-weight 0-0:%f' % (libjt_get_gv_interpolation_weight(0, 0),))
+	#libjt_set_beta(0.40)
+	#libjt_set_gv_interpolation_weight(0, 0, 2)
+	#libjt_set_gv_interpolation_weight(0, 1, 2)
 	Mecab_initialize(__print, JT_DIR, os.path.join(JT_DIR, 'dic'))
 
 	msgs = [
 		"Huawei's",
 		"Huawei's new Swarovski-bedazzled Jewel watch — CES 2016",
-		'100.25ドル。ウェルカムトゥー nvda テンキーのinsertキーと、メインのinsertキーの両方が、nvdaキーとして動作します',
+		'ウェルカムトゥーnvdaテンキーのinsertキーとメインのinsertキーの両方がnvdaキーとして動作します',
 		'マーク。まーく。',
 		]
-	s = msgs[0]
+	s = msgs[2]
 	fperiod = v['fperiod']
 	do_synthesis(s, v, do_play, do_write, do_log, fperiod, pitch=50, inflection=50)
 	return 0
