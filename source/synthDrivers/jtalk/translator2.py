@@ -496,6 +496,10 @@ def should_separate(prev2_mo, prev_mo, mo, next_mo, nabcc=False, logwrite=_logwr
 		if mo.hinshi2 == '括弧開': return True
 		if mo.hinshi1 == '名詞': return True
 
+	# 日/独/伊/3国同盟
+	if prev_mo.hinshi2 == '固有名詞' and prev_mo.hinshi3 == '地域' and \
+			mo.hinshi1 == '名詞' and mo.hinshi2 == '一般':
+		return True
 	# 東京/都 千代田/区
 	if prev_mo.hinshi2 == '接尾' and prev_mo.hinshi3 == '地域' and \
 			mo.hinshi2 == '固有名詞' and mo.hinshi3 == '地域':
@@ -618,6 +622,10 @@ def should_separate(prev2_mo, prev_mo, mo, next_mo, nabcc=False, logwrite=_logwr
 	# カナ名詞の後のアルファベット名詞
 	if prev_mo.hinshi1 == '名詞' and is_alpha(mo.nhyouki):
 		return False
+
+	# とは/言う/ものの
+	if prev_mo.hyouki == '言う' and mo.hyouki == 'ものの':
+		return True
 
 	# (あける)
 	# 映画,映画,名詞,一般,*,*,エイガ,エイガ,0/3,エイガ,1

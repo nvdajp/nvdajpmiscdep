@@ -416,6 +416,58 @@ def filter_jdic(s):
 		s = ""
 	elif a[0] == '築' and a[4] == '動詞' and a[12] == 'キズケ':
 		s = ""
+	elif a[0] == '今' and a[4] == '接頭詞' and a[12] == 'コン':
+		s = ""
+	elif a[0] == '少し' and a[4] == '形容詞' and a[12] == 'スクナシ':
+		s = ""
+	elif a[0] == '後' and a[4] == '接頭詞' and a[12] == 'コー':
+		s = ""
+	elif a[0] == '居' and a[4] == '名詞' and a[12] == 'キョ':
+		s = ""
+	elif a[0] == 'いう' and a[4] == '形容詞' and a[12] == 'イー':
+		s = ""
+	elif a[0] == '暇' and a[4] == '名詞' and a[12] == 'イトマ':
+		s = ""
+	elif a[0] == '継子' and a[4] == '名詞' and a[12] == 'ケイシ':
+		s = ""
+	elif a[0] == '無し' and a[12] == 'ムシ' and len(a) == 15:
+		s = ""
+	elif a[0] == 'こういう' and a[12] == 'コーユウ' and len(a) == 15:
+		a.append('コー イウ')
+		s = ",".join(a)
+	elif a[0] == '日本一' and a[12] == 'ニッポンイチ' and len(a) == 15:
+		a[11] = a[12] = 'ニホンイチ'
+		a.append('ニホン1')
+		s = ",".join(a)
+	elif a[0] == '一線' and a[12] == 'イッセン' and len(a) == 15:
+		a.append('1セン')
+		s = ",".join(a)
+	elif a[0] == '一双' and a[12] == 'イッソー' and len(a) == 15:
+		a.append('1ソー')
+		s = ",".join(a)
+	elif a[0] == '一言一行' and a[12] == 'イチゲンイッコー' and len(a) == 15:
+		a.append('1ゲン 1コー')
+		s = ",".join(a)
+	elif a[0] == '一語' and a[12] == 'イチゴ' and len(a) == 15:
+		a.append('1ゴ')
+		s = ",".join(a)
+	elif a[0] == '一転機' and a[12] == 'イッテンキ' and len(a) == 15:
+		a.append('1テンキ')
+		s = ",".join(a)
+	elif a[0] == '一転機' and a[12] == 'イチテンキ' and len(a) == 15:
+		s = ""
+	elif a[0] == '一道' and a[12] == 'イチドー' and len(a) == 15:
+		a.append('1ドー')
+		s = ",".join(a)
+	elif a[0] == '一昨昨年' and a[12] == 'サキオトトシ':
+		a[11] = a[12] = 'イッサクサクネン'
+		s = ",".join(a)
+	elif a[0] == '一昨日' and a[12] == 'オトトイ':
+		a[11] = a[12] = 'イッサクジツ'
+		s = ",".join(a)
+	elif a[0] == '犬追物' and a[11] == 'イヌオウモノ' and a[12] == 'イヌオーモノ':
+		a[12] = a[11]
+		s = ",".join(a)
 	elif is_alpha_jp_mixed(a[0]):
 		#print a[0]
 		s = ""
