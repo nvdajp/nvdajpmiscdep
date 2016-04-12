@@ -710,6 +710,10 @@ def should_separate(prev2_mo, prev_mo, mo, next_mo, nabcc=False, logwrite=_logwr
 	if prev_mo.hyouki == 'です' and mo.hyouki == 'こと':
 		return False
 
+	# 一脈/相通じる/ものが/ある
+	if prev_mo.hyouki == '相通じる' and mo.hyouki == 'もの':
+		return True
+
 	# 「この程」「この度」
 	# 「そのくせ」
 	# 後ろの語と結びついて1語になっている場合は続ける

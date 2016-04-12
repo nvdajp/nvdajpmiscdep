@@ -459,6 +459,8 @@ def filter_jdic(s):
 	elif a[0] == '一道' and a[12] == 'イチドー' and len(a) == 15:
 		a.append('1ドー')
 		s = ",".join(a)
+	elif a[0] == '一分一厘' and a[12] == 'イチブイチリン' and len(a) == 15:
+		s = ""
 	elif a[0] == '一昨昨年' and a[12] == 'サキオトトシ':
 		a[11] = a[12] = 'イッサクサクネン'
 		s = ",".join(a)
