@@ -432,6 +432,13 @@ def filter_jdic(s):
 		s = ""
 	elif a[0] == '無し' and a[12] == 'ムシ' and len(a) == 15:
 		s = ""
+	elif a[0] == '一塊' and a[12] == 'ヒトカタマリ' and len(a) == 15:
+		a[11] = a[12] = 'イッカイ'
+		s = ",".join(a)
+	elif a[0] == '白一色' and a[12] == 'ハクイッショク' and len(a) == 15:
+		a[11] = a[12] = 'シロイッショク'
+		a.append('シロ 1ショク')
+		s = ",".join(a)
 	elif a[0] == 'こういう' and a[12] == 'コーユウ' and len(a) == 15:
 		a.append('コー イウ')
 		s = ",".join(a)
@@ -454,10 +461,67 @@ def filter_jdic(s):
 	elif a[0] == '一転機' and a[12] == 'イッテンキ' and len(a) == 15:
 		a.append('1テンキ')
 		s = ",".join(a)
+	elif a[0] == '一酸化' and a[12] == 'イッサンカ' and len(a) == 15:
+		a.append('1サンカ')
+		s = ",".join(a)
+	elif a[0] == '一子' and a[12] == 'イッシ' and len(a) == 15:
+		a.append('1シ')
+		s = ",".join(a)
+	elif a[0] == 'もうける' and a[12] == 'モウケル' and len(a) == 15:
+		a.append('モーケル')
+		s = ",".join(a)
+	elif a[0] == '一死' and a[12] == 'イッシ' and len(a) == 15:
+		a.append('1シ')
+		s = ",".join(a)
+	elif a[0] == '七生' and a[12] == 'シチショー' and len(a) == 15:
+		a.append('7ショー')
+		s = ",".join(a)
 	elif a[0] == '一転機' and a[12] == 'イチテンキ' and len(a) == 15:
 		s = ""
 	elif a[0] == '一道' and a[12] == 'イチドー' and len(a) == 15:
 		a.append('1ドー')
+		s = ",".join(a)
+	elif a[0] == '一周' and a[12] == 'イッシュー' and len(a) == 15:
+		a.append('1シュー')
+		s = ",".join(a)
+	elif a[0] == '一唱三嘆' and a[12] == 'イッショーサンタン' and len(a) == 15:
+		a.append('1ショー 3タン')
+		s = ",".join(a)
+	elif a[0] == '一神教' and a[12] == 'イッシンキョー' and len(a) == 15:
+		a.append('1シンキョー')
+		s = ",".join(a)
+	elif a[0] == '一世一元' and a[12] == 'イッセイイチゲン' and len(a) == 15:
+		a.append('1セイ 1ゲン')
+		s = ",".join(a)
+	elif a[0] == '一石二鳥' and a[12] == 'イッセキニチョー' and len(a) == 15:
+		a.append('1セキ 2チョー')
+		s = ",".join(a)
+	elif a[0] == '一白' and a[12] == 'イッパク' and len(a) == 15:
+		a.append('1パク')
+		s = ",".join(a)
+	elif a[0] == '一夫一妻' and a[12] == 'イップイッサイ' and len(a) == 15:
+		a.append('1プ 1サイ')
+		s = ",".join(a)
+	elif a[0] == '一紙半銭' and a[12] == 'イッシハンセン' and len(a) == 15:
+		a.append('イッシ ハンセン')
+		s = ",".join(a)
+	elif a[0] == '一所懸命' and a[12] == 'イッショケンメイ' and len(a) == 15:
+		a.append('イッショ ケンメイ')
+		s = ",".join(a)
+	elif a[0] == '一生懸命' and a[12] == 'イッショーケンメイ' and len(a) == 15:
+		a.append('イッショー ケンメイ')
+		s = ",".join(a)
+	elif a[0] == '一心不乱' and a[12] == 'イッシンフラン' and len(a) == 15:
+		a.append('イッシン フラン')
+		s = ",".join(a)
+	elif a[0] == '一進一退' and a[12] == 'イッシンイッタイ' and len(a) == 15:
+		a.append('イッシン イッタイ')
+		s = ",".join(a)
+	elif a[0] == '一顰一笑' and a[12] == 'イッピンイッショー' and len(a) == 15:
+		a.append('イッピン イッショー')
+		s = ",".join(a)
+	elif a[0] == '命知らず' and a[12] == 'イノチシラズ' and len(a) == 15:
+		a.append('イノチ シラズ')
 		s = ",".join(a)
 	elif a[0] == '一分一厘' and a[12] == 'イチブイチリン' and len(a) == 15:
 		s = ""

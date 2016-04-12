@@ -496,6 +496,14 @@ def should_separate(prev2_mo, prev_mo, mo, next_mo, nabcc=False, logwrite=_logwr
 		if mo.hinshi2 == '括弧開': return True
 		if mo.hinshi1 == '名詞': return True
 
+	# 後白河
+	if prev_mo.hyouki == '後' and mo.hyouki == '白河':
+		return False
+
+	# 京丹後市
+	if prev_mo.hyouki == '京丹後' and mo.hyouki == '市':
+		return False
+
 	# 日/独/伊/3国同盟
 	if prev_mo.hinshi2 == '固有名詞' and prev_mo.hinshi3 == '地域' and \
 			mo.hinshi1 == '名詞' and mo.hinshi2 == '一般':
@@ -713,6 +721,26 @@ def should_separate(prev2_mo, prev_mo, mo, next_mo, nabcc=False, logwrite=_logwr
 	# 一脈/相通じる/ものが/ある
 	if prev_mo.hyouki == '相通じる' and mo.hyouki == 'もの':
 		return True
+
+	# 一審/判決
+	if prev_mo.hyouki == '審' and mo.hyouki == '判決':
+		return True
+
+	# 意図/不明
+	if prev_mo.hyouki == '意図' and mo.hyouki == '不明':
+		return True
+
+	# 意味/不明
+	if prev_mo.hyouki == '意味' and mo.hyouki == '不明':
+		return True
+
+	# 今/現在
+	if prev_mo.hyouki == '今' and mo.hyouki == '現在':
+		return True
+
+	# 否が/応でも
+	if prev_mo.hyouki == '応' and mo.hyouki == 'でも':
+		return False
 
 	# 「この程」「この度」
 	# 「そのくせ」
