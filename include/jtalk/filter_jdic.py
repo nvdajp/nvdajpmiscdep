@@ -502,6 +502,9 @@ def filter_jdic(s):
 	elif a[0] == '一夫一妻' and a[12] == 'イップイッサイ' and len(a) == 15:
 		a.append('1プ 1サイ')
 		s = ",".join(a)
+	elif a[0] == '五条' and a[12] == 'ゴジョー' and len(a) == 15:
+		a.append('5ジョー')
+		s = ",".join(a)
 	elif a[0] == '一紙半銭' and a[12] == 'イッシハンセン' and len(a) == 15:
 		a.append('イッシ ハンセン')
 		s = ",".join(a)
@@ -533,6 +536,18 @@ def filter_jdic(s):
 		s = ",".join(a)
 	elif a[0] == '犬追物' and a[11] == 'イヌオウモノ' and a[12] == 'イヌオーモノ':
 		a[12] = a[11]
+		s = ",".join(a)
+	elif a[0] == 'ううん' and a[12] == 'ウーン' and len(a) == 15:
+		a.append('ウウン')
+		s = ",".join(a)
+	elif a[0] == '閏年' and a[12] == 'ウルードシ' and len(a) == 15:
+		a.append('ウルウドシ')
+		s = ",".join(a)
+	elif a[0] == '凡河内躬恒' and a[12] == 'オーシコーチノミツネ' and len(a) == 15:
+		a.append('オオシコーチノ ミツネ')
+		s = ",".join(a)
+	elif a[0] == '太安万侶' and a[11] == 'オオノヤスマロ' and len(a) == 15:
+		a.append('オオノ ヤスマロ')
 		s = ",".join(a)
 	elif is_alpha_jp_mixed(a[0]):
 		#print a[0]

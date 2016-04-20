@@ -156,7 +156,7 @@ def update_phonetic_symbols(mo):
 		# ５、長音の書き表し方 (1), (2)
 		# before: ああ,ああ,感動詞,*,*,*,アア,アー,1/2,アー,0
 		# after:  ああ,ああ,感動詞,*,*,*,アア,アー,1/2,アア,0
-		if mo.yomi[p] == 'ー' and mo.kana[p] in 'アイエ':
+		if mo.yomi[p] == 'ー' and mo.kana[p] in 'アイエオ':
 			mo.output = mo.output[:p] + mo.kana[p] + mo.output[p+1:]
 
 		# 点訳のてびき第3版 第2章 その1 1 6
@@ -503,6 +503,10 @@ def should_separate(prev2_mo, prev_mo, mo, next_mo, nabcc=False, logwrite=_logwr
 	# 京丹後市
 	if prev_mo.hyouki == '京丹後' and mo.hyouki == '市':
 		return False
+
+	# 伊豆/大島
+	if prev_mo.hinshi2 == '固有名詞' and mo.hinshi2 == '固有名詞':
+		return True
 
 	# 日/独/伊/3国同盟
 	if prev_mo.hinshi2 == '固有名詞' and prev_mo.hinshi3 == '地域' and \
