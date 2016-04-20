@@ -530,6 +530,16 @@ def should_separate(prev2_mo, prev_mo, mo, next_mo, nabcc=False, logwrite=_logwr
 	if prev_mo.hinshi1 == '名詞' and mo.hyouki == '所により':
 		return True
 
+	# 右/斜め/上
+	if prev_mo.hyouki == '右' and mo.hyouki == '斜め':
+		return True
+	if prev_mo.hyouki == '斜め' and mo.hyouki == '上':
+		return True
+
+	# 一番/上
+	if prev_mo.hyouki == '一番' and mo.hinshi1 == '名詞':
+		return True
+
 	# 一時/雨
 	if prev_mo.hyouki == '一時' and mo.hyouki == '雨':
 		return True

@@ -549,6 +549,10 @@ def filter_jdic(s):
 	elif a[0] == '太安万侶' and a[11] == 'オオノヤスマロ' and len(a) == 15:
 		a.append('オオノ ヤスマロ')
 		s = ",".join(a)
+	elif a[0] == '上' and a[4] == '名詞' and a[5] == '接尾' and a[11] == 'ジョウ' and len(a) == 15:
+		s = ""
+	elif a[0] == '上' and a[4] == '名詞' and a[5] == '非自立' and a[11] == 'ジョウ' and len(a) == 15:
+		s = ""
 	elif is_alpha_jp_mixed(a[0]):
 		#print a[0]
 		s = ""
