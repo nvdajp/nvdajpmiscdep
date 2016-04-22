@@ -156,7 +156,7 @@ def update_phonetic_symbols(mo):
 		# ５、長音の書き表し方 (1), (2)
 		# before: ああ,ああ,感動詞,*,*,*,アア,アー,1/2,アー,0
 		# after:  ああ,ああ,感動詞,*,*,*,アア,アー,1/2,アア,0
-		if mo.yomi[p] == 'ー' and mo.kana[p] in 'アイエオ':
+		if mo.yomi[p] == 'ー' and p < len(mo.kana) and mo.kana[p] in 'アイエオ':
 			mo.output = mo.output[:p] + mo.kana[p] + mo.output[p+1:]
 
 		# 点訳のてびき第3版 第2章 その1 1 6
@@ -192,13 +192,14 @@ def mecab_to_morphs(mf):
 				mo.kihon = ar[7]
 			if len(ar) > 9:
 				mo.kana = unicode_normalize(ar[8]) # "（ニチ）" -> "(ニチ)"
-				mo.yomi = unicode_normalize(ar[9])
+				# ありがとうございますー,感動詞,*,*,*,*,*,ありがとうございますー,アリガトウゴザイマスー,アリガトーゴザイマス’ー,0/1,C0
+				mo.yomi = unicode_normalize(ar[9]).replace("’", "")
 				mo.accent = ar[10]
 				if len(ar) > 12:
 					# Mecab辞書の拡張フィールドの点訳表記があれば使用する
 					mo.output = unicode_normalize(ar[12])
 				else:
-					mo.output = ar[9].replace("’", "")
+					mo.output = mo.yomi
 					update_phonetic_symbols(mo)
 			mo.sepflag = False
 			li.append(mo)
