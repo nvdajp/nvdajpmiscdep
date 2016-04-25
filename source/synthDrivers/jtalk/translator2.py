@@ -505,6 +505,10 @@ def should_separate(prev2_mo, prev_mo, mo, next_mo, nabcc=False, logwrite=_logwr
 		else:
 			return False
 
+	# 扱い始め
+	if prev_mo.hinshi1 == '名詞' and mo.hyouki == '始め':
+		return False
+
 	# 後白河
 	if prev_mo.hyouki == '後' and mo.hyouki == '白河':
 		return False
@@ -534,6 +538,25 @@ def should_separate(prev2_mo, prev_mo, mo, next_mo, nabcc=False, logwrite=_logwr
 	if prev_mo.hinshi2 == '固有名詞' and prev_mo.hinshi3 == '地域' and \
 			(mo.hinshi2 == '数' or mo.hyouki in ('岬', '峠', '半島')):
 		return True
+
+	# 複合名詞 3拍+3拍
+	if prev_mo.hinshi1 == '名詞' and prev_mo.hinshi2 == '一般' and len(prev_mo.yomi) >= 3 and \
+	   mo.hinshi1 == '名詞' and mo.hinshi2 == '一般' and len(mo.yomi) >= 3:
+		return True
+
+	# ２字漢語 母子/年金
+	if len(prev_mo.hyouki) == 2 and len(prev_mo.yomi) == 2 and not RE_KATAKANA.match(mo.nhyouki) and \
+	   mo.hinshi1 == '名詞' and mo.hinshi2 == '一般' and len(mo.yomi) >= 3:
+		return True
+
+	# そう+な+ん+です+もの
+	# そう+なん+だって
+	if prev_mo.hyouki == 'な' and mo.hyouki == 'ん':
+		return False
+	if prev_mo.hyouki == 'です' and mo.hyouki == 'もの':
+		return False
+	if prev_mo.hyouki == 'そう' and mo.hyouki == 'なん':
+		return False
 
 	# 晴れ/所に より
 	if prev_mo.hinshi1 == '名詞' and mo.hyouki == '所により':
