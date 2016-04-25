@@ -497,6 +497,14 @@ def should_separate(prev2_mo, prev_mo, mo, next_mo, nabcc=False, logwrite=_logwr
 		if mo.hinshi2 == '括弧開': return True
 		if mo.hinshi1 == '名詞': return True
 
+	# 面白おかしい (点訳のてびき第3版 第3章 その2 10. 複合形容詞は続ける)
+	# 例外 多かれ/少なかれ
+	if prev_mo.hinshi1 == '形容詞' and mo.hinshi1 == '形容詞':
+		if prev_mo.type2 == '命令ｅ' and mo.type2 == '命令ｅ':
+			return True
+		else:
+			return False
+
 	# 後白河
 	if prev_mo.hyouki == '後' and mo.hyouki == '白河':
 		return False
