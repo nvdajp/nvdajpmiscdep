@@ -560,6 +560,12 @@ tests = [
 		'output': '⠼⠃⠁⠐⠂⠼⠙⠋',
 	},
 	{
+		# https://osdn.jp/ticket/browse.php?group_id=4221&tid=36052
+		'text': r'２１：４６',
+		'input': r'21:46',
+		'output': '⠼⠃⠁⠐⠂⠼⠙⠋',
+	},
+	{
 		'text': 'v1.4',
 		'input': '⠦v1.4⠴',
 		'output': '⠦⠧⠼⠁⠂⠙⠴',
