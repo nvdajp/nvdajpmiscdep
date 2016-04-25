@@ -486,121 +486,16 @@ def fix_japanese_date_morphs(li):
 	return new_li
 
 def should_separate(prev2_mo, prev_mo, mo, next_mo, nabcc=False, logwrite=_logwrite):
+	#
+	# 記号と数字 (False)
+	#
 	if mo.hyouki == 'ー': return False
 	if prev_mo.hyouki == 'ー': return False
-	if mo.hyouki in 'ぁぃぅぇぉっゃゅょゎァィゥェォッャュョヮヵヶ': return False
 
-	# )( -> あける
-	# )陽が -> あける
-	# '02 -> あけない
-	if prev_mo.hinshi2 == '括弧閉' and prev_mo.nhyouki != "’":
-		if mo.hinshi2 == '括弧開': return True
-		if mo.hinshi1 == '名詞': return True
+	# ち,ち,名詞,一般,*,*,チ,チ,0/1,チ,0
+	# ゅうりっぷ,ゅうりっぷ,名詞,一般,*,*,,,,ュウリップ,0
+	if mo.hyouki[0] in 'ぁぃぅぇぉっゃゅょゎァィゥェォッャュョヮヵヶ': return False
 
-	# 面白おかしい (点訳のてびき第3版 第3章 その2 10. 複合形容詞は続ける)
-	# 例外 多かれ/少なかれ
-	if prev_mo.hinshi1 == '形容詞' and mo.hinshi1 == '形容詞':
-		if prev_mo.type2 == '命令ｅ' and mo.type2 == '命令ｅ':
-			return True
-		else:
-			return False
-
-	# 扱い始め
-	if prev_mo.hinshi1 == '名詞' and mo.hyouki == '始め':
-		return False
-
-	# 後白河
-	if prev_mo.hyouki == '後' and mo.hyouki == '白河':
-		return False
-
-	# 京丹後市
-	if prev_mo.hyouki == '京丹後' and mo.hyouki == '市':
-		return False
-
-	# 伊豆/大島
-	if prev_mo.hinshi2 == '固有名詞' and mo.hinshi2 == '固有名詞':
-		return True
-
-	# 日/独/伊/3国同盟
-	if prev_mo.hinshi2 == '固有名詞' and prev_mo.hinshi3 == '地域' and \
-			mo.hinshi1 == '名詞' and mo.hinshi2 == '一般':
-		return True
-	# 東京/都 千代田/区
-	if prev_mo.hinshi2 == '接尾' and prev_mo.hinshi3 == '地域' and \
-			mo.hinshi2 == '固有名詞' and mo.hinshi3 == '地域':
-		return True
-	# 東京/都 交通/局
-	if prev_mo.hinshi2 == '接尾' and prev_mo.hinshi3 == '地域' and \
-			mo.hinshi1 == '名詞' and mo.hinshi2 == '一般':
-		return True
-	# 永田町 １
-	# 「岬」「峠」「半島」はマス空けが原則
-	if prev_mo.hinshi2 == '固有名詞' and prev_mo.hinshi3 == '地域' and \
-			(mo.hinshi2 == '数' or mo.hyouki in ('岬', '峠', '半島')):
-		return True
-
-	# 複合名詞 3拍+3拍
-	if prev_mo.hinshi1 == '名詞' and prev_mo.hinshi2 == '一般' and len(prev_mo.yomi) >= 3 and \
-	   mo.hinshi1 == '名詞' and mo.hinshi2 == '一般' and len(mo.yomi) >= 3:
-		return True
-
-	# ２字漢語 母子/年金
-	if len(prev_mo.hyouki) == 2 and len(prev_mo.yomi) == 2 and not RE_KATAKANA.match(mo.nhyouki) and \
-	   mo.hinshi1 == '名詞' and mo.hinshi2 == '一般' and len(mo.yomi) >= 3:
-		return True
-
-	# そう+な+ん+です+もの
-	# そう+なん+だって
-	if prev_mo.hyouki == 'な' and mo.hyouki == 'ん':
-		return False
-	if prev_mo.hyouki == 'です' and mo.hyouki == 'もの':
-		return False
-	if prev_mo.hyouki == 'そう' and mo.hyouki == 'なん':
-		return False
-
-	# 晴れ/所に より
-	if prev_mo.hinshi1 == '名詞' and mo.hyouki == '所により':
-		return True
-
-	# 右/斜め/上
-	if prev_mo.hyouki == '右' and mo.hyouki == '斜め':
-		return True
-	if prev_mo.hyouki == '斜め' and mo.hyouki == '上':
-		return True
-
-	# 一番/上
-	if prev_mo.hyouki == '一番' and mo.hinshi1 == '名詞':
-		return True
-
-	# 一時/雨
-	if prev_mo.hyouki == '一時' and mo.hyouki == '雨':
-		return True
-
-	# 副,知事
-	if prev_mo.hyouki == '副' and mo.hinshi1 == '名詞' and mo.hinshi2 == '一般':
-		return False
-
-	# 世界/初
-	if prev_mo.hinshi1 == '名詞' and prev_mo.hinshi2 == '一般' and mo.hyouki == '初' :
-		return True
-
-	# 障害,者/協会
-	if prev2_mo and prev2_mo.hinshi1 == '名詞' and \
-			prev_mo.hyouki == '者' and \
-			mo.hinshi1 == '名詞':
-		return True
-
-	# 数字の前のマスアケ
-	if prev_mo.nhyouki not in ('-', '，', '.', '’', '、', ':', '：') and \
-		prev_mo.output != '⠼' and \
-		not nabcc and \
-		prev_mo.nhyouki not in ('(', '第', '築', '二男', '中') and \
-		mo.output.isdigit():
-		return True
-
-	# 1月/1日
-	if prev_mo.nhyouki and prev_mo.nhyouki[0].isdigit() and prev_mo.nhyouki[-1] == '月' and mo.output.isdigit():
-		return True
 	# 0/4月 -> 04月
 	if prev_mo.output.isdigit() and mo.nhyouki[0].isdigit():
 		return False
@@ -620,6 +515,41 @@ def should_separate(prev2_mo, prev_mo, mo, next_mo, nabcc=False, logwrite=_logwr
 	if prev_mo.hyouki == '数' and prev_mo.yomi == 'スー' and mo.hyouki == '％':
 		return False
 
+	# カナ名詞の後のアルファベット名詞
+	if prev_mo.hinshi1 == '名詞' and is_alpha(mo.nhyouki):
+		return False
+
+	#
+	# 記号と数字 (True)
+	#
+	# 括弧開の前
+	# (あける)
+	# 映画,映画,名詞,一般,*,*,エイガ,エイガ,0/3,エイガ,1
+	# 「,「,記号,括弧開,*,*,「,「,*/*,「,0
+	# (あけない)
+	# 機関,名詞,一般,*,*,*,*,機関,キカン,キカン,1/3,C1
+	# （,記号,括弧開,*,*,*,*,（,（,（,*/*,*
+	if prev_mo.hinshi1 == '名詞' and mo.hinshi2 == '括弧開' and mo.nhyouki != '(': return True
+
+	# )( -> あける
+	# )陽が -> あける
+	# '02 -> あけない
+	if prev_mo.hinshi2 == '括弧閉' and prev_mo.nhyouki != "’":
+		if mo.hinshi2 == '括弧開': return True
+		if mo.hinshi1 == '名詞': return True
+
+	# 数字の前のマスアケ
+	if prev_mo.nhyouki not in ('-', '，', '.', '’', '、', ':', '：') and \
+		prev_mo.output != '⠼' and \
+		not nabcc and \
+		prev_mo.nhyouki not in ('(', '第', '築', '二男', '中') and \
+		mo.output.isdigit():
+		return True
+
+	# 1月/1日
+	if prev_mo.nhyouki and prev_mo.nhyouki[0].isdigit() and prev_mo.nhyouki[-1] == '月' and mo.output.isdigit():
+		return True
+
 	# 三,三,名詞,数,*,*,サン,サン,0/2,3,0
 	# 兆,兆,名詞,数,*,*,チョウ,チョー,1/2,チョー,1
 	# 二千四百,二千四百,名詞,数,*,*,ニセンヨンヒャク,ニセンヨンヒャク,1/1,2400,0
@@ -627,34 +557,8 @@ def should_separate(prev2_mo, prev_mo, mo, next_mo, nabcc=False, logwrite=_logwr
 	if prev_mo.hyouki in ('億', '兆', '京') and mo.output.isdigit():
 		return True
 
-	# ち,ち,名詞,一般,*,*,チ,チ,0/1,チ,0
-	# ゅうりっぷ,ゅうりっぷ,名詞,一般,*,*,,,,ュウリップ,0
-	if mo.hyouki[0] in 'ぁぃぅぇぉっゃゅょゎァィゥェォッャュョヮヵヶ': return False
-
 	# 外国語引用符、マスアケ、助詞、助動詞
 	if prev_mo.output and prev_mo.output.endswith('⠴') and mo.hinshi1 in ('助詞', '助動詞'): return True
-
-	# 複合語（接頭語・接尾語・造語要素）【備考１】
-	# 接頭語・接尾語・造語要素であっても、意味の理解を助ける場合には、
-	# 発音上の切れ目を考慮して区切って書いてよい。
-	if prev_mo.hyouki not in ('お', 'ご', '旧') and prev_mo.hinshi1 == '接頭詞' and mo.hinshi1 == '名詞' and mo.hinshi2 != '数': return True
-
-	if prev_mo.hinshi1 == '名詞' and prev_mo.hinshi2 == '接尾':
-		# 助数詞のあとにアラビア数字が来たらマスアケ
-		# case 1:
-		#  零,零,名詞,数,*,*,0,0,1/2,0,0
-		#  時,時,名詞,接尾,助数詞,*,ジ,ジ,1/1,ジ,1
-		#  十五,十五,名詞,数,*,*,15,15,1/3,15,0
-		#  分,分,名詞,接尾,助数詞,*,フン,フン,1/2,フン,0
-		# case 2:
-		#  一,一,名詞,数,*,*,イチ,イチ,2/2,1,0
-		#  人,人,名詞,接尾,助数詞,*,ニン,ニン,1/2,ニン,0
-		#  当り,当り,名詞,接尾,一般,*,アタリ,アタリ,1/3,アタリ,1
-		#  １,1,名詞,数,*,*,イチ,イチ,2/2,1,0
-		#  ０,0,名詞,数,*,*,ゼロ,ゼロ,1/2,0,0
-		#  個,個,名詞,接尾,助数詞,*,コ,コ,1/1,コ,0
-		if mo.output.isdigit(): return True
-		if mo.hinshi1 == '動詞' and mo.hinshi2 == '非自立': return False
 
 	# アルファベットの後の助詞、助動詞
 	# ＣＤ,CD,名詞,一般,*,*,シーディー,シーディー,3/4,シーディー,0
@@ -673,21 +577,160 @@ def should_separate(prev2_mo, prev_mo, mo, next_mo, nabcc=False, logwrite=_logwr
 	if prev_mo.nhyouki == '#' and mo.hinshi1 == '助詞':
 		return True
 
-	# カナ名詞の後のアルファベット名詞
-	if prev_mo.hinshi1 == '名詞' and is_alpha(mo.nhyouki):
+	#
+	# 特定の表記 (False)
+	#
+
+	# 扱い始め
+	if prev_mo.hinshi1 == '名詞' and mo.hyouki == '始め':
 		return False
+
+	# 後白河
+	if prev_mo.hyouki == '後' and prev_mo.yomi == 'ゴ':
+		return False
+
+	# 京丹後市
+	if mo.hyouki == '市' and mo.yomi == 'シ':
+		return False
+
+	# そう.な.ん.です.もの
+	# そう.なん.だって
+	if prev_mo.hyouki == 'な' and mo.hyouki == 'ん':
+		return False
+	if prev_mo.hyouki == 'です' and mo.hyouki == 'もの':
+		return False
+	if prev_mo.hyouki == 'そう' and mo.hyouki == 'なん':
+		return False
+
+	# 副,知事
+	if prev_mo.hyouki == '副' and mo.hinshi1 == '名詞' and mo.hinshi2 == '一般':
+		return False
+
+	# 「・・ですこと」の「こと」は接尾語なので前に続ける
+	if prev_mo.hyouki == 'です' and mo.hyouki == 'こと':
+		return False
+
+	# 否が/応でも
+	if prev_mo.hyouki == '応' and mo.hyouki == 'でも':
+		return False
+
+	# 「この程」「この度」
+	# 「そのくせ」
+	# 後ろの語と結びついて1語になっている場合は続ける
+	if prev_mo.hyouki == 'この' and mo.hyouki in ('程', '度'):
+		return False
+	if prev_mo.hyouki == 'その' and mo.hyouki in ('くせ', 'うち', 'まま'):
+		return False
+	if prev_mo.hyouki == 'わが' and mo.hyouki == 'まま':
+		return False
+
+	# 労,せ,ず
+	if prev_mo.hinshi1 == '名詞' and mo.hyouki == 'せ' and mo.kihon == 'する':
+		return False
+
+	if prev_mo.hinshi1 == '形容詞' and mo.hyouki == 'ん': return False # いいんですけど
+
+	if prev_mo.hinshi1 == '動詞' and prev_mo.hyouki == '見': return False # 見/まごう
+
+	# お兄さん, お姉さん
+	if prev_mo.hinshi1 == '接頭詞' and prev_mo.hyouki == 'お': return False
+	
+	if prev_mo.hinshi1 == '助詞' and mo.hyouki == 'よう': return False # のように
+	
+	#
+	# 特定の表記 (True)
+	#
+
+	# 晴れ/所に より
+	if prev_mo.hinshi1 == '名詞' and mo.hyouki == '所により':
+		return True
+
+	# 右/斜め/上
+	if mo.hyouki == '斜め':
+		return True
+	if prev_mo.hyouki == '斜め':
+		return True
+
+	# 一番/上
+	if prev_mo.hyouki == '一番' and mo.hinshi1 == '名詞':
+		return True
+
+	# 一時/雨
+	if prev_mo.hyouki == '一時' and mo.hinshi1 == '名詞':
+		return True
+
+	# 世界/初
+	if prev_mo.hinshi1 == '名詞' and prev_mo.hinshi2 == '一般' and mo.hyouki == '初' :
+		return True
+
+	# 障害,者/協会
+	if prev2_mo and prev2_mo.hinshi1 == '名詞' and \
+			prev_mo.hyouki == '者' and \
+			mo.hinshi1 == '名詞':
+		return True
 
 	# とは/言う/ものの
 	if prev_mo.hyouki == '言う' and mo.hyouki == 'ものの':
 		return True
 
-	# (あける)
-	# 映画,映画,名詞,一般,*,*,エイガ,エイガ,0/3,エイガ,1
-	# 「,「,記号,括弧開,*,*,「,「,*/*,「,0
-	# (あけない)
-	# 機関,名詞,一般,*,*,*,*,機関,キカン,キカン,1/3,C1
-	# （,記号,括弧開,*,*,*,*,（,（,（,*/*,*
-	if prev_mo.hinshi1 == '名詞' and mo.hinshi2 == '括弧開' and mo.nhyouki != '(': return True
+	# 一脈/相通じる/ものが/ある
+	if prev_mo.hyouki == '相通じる' and mo.hyouki == 'もの':
+		return True
+
+	# 一審/判決
+	if prev_mo.hyouki == '審' and mo.hyouki == '判決':
+		return True
+
+	# 意図/不明
+	# 意味/不明
+	if mo.hyouki == '不明':
+		return True
+
+	# 今/現在
+	if prev_mo.hyouki == '今' and mo.hyouki == '現在':
+		return True
+
+	if prev_mo.hinshi1 == '接頭詞' and prev_mo.hyouki == '超' and mo.hinshi1 == '名詞': return True
+	
+	if prev_mo.hinshi1 == '助動詞' and prev_mo.hyouki == 'で' and mo.hinshi1 == '助動詞': return True
+
+	# 複合語（接頭語・接尾語・造語要素）【備考１】
+	# 接頭語・接尾語・造語要素であっても、意味の理解を助ける場合には、
+	# 発音上の切れ目を考慮して区切って書いてよい。
+	if prev_mo.hyouki not in ('お', 'ご', '旧') and prev_mo.hinshi1 == '接頭詞' and mo.hinshi1 == '名詞' and mo.hinshi2 != '数': return True
+
+	#
+	# 特定の表記と品詞による規則
+	#
+
+	# 地域
+	# 永田町 １
+	# 「岬」「峠」「半島」はマス空けが原則
+	if prev_mo.hinshi2 == '固有名詞' and prev_mo.hinshi3 == '地域' and \
+			(mo.hinshi2 == '数' or mo.hyouki in ('岬', '峠', '半島')):
+		return True
+
+	# 伊豆/大島
+	if prev_mo.hinshi2 == '固有名詞' and mo.hinshi2 == '固有名詞':
+		return True
+
+	# 日/独/伊/3国同盟
+	if prev_mo.hinshi2 == '固有名詞' and prev_mo.hinshi3 == '地域' and \
+			mo.hinshi1 == '名詞' and mo.hinshi2 == '一般':
+		return True
+	# 東京/都 千代田/区
+	if prev_mo.hinshi2 == '接尾' and prev_mo.hinshi3 == '地域' and \
+			mo.hinshi2 == '固有名詞' and mo.hinshi3 == '地域':
+		return True
+	# 東京/都 交通/局
+	if prev_mo.hinshi2 == '接尾' and prev_mo.hinshi3 == '地域' and \
+			mo.hinshi1 == '名詞' and mo.hinshi2 == '一般':
+		return True
+
+	# ２字漢語 母子/年金
+	if len(prev_mo.hyouki) == 2 and len(prev_mo.yomi) == 2 and not RE_KATAKANA.match(mo.nhyouki) and \
+	   mo.hinshi1 == '名詞' and mo.hinshi2 == '一般' and len(mo.yomi) >= 3:
+		return True
 
 	# 間違い,間違い,名詞,ナイ形容詞語幹,*,*,マチガイ,マチガイ,3/4,マチガイ,1
 	# なし,なし,助動詞,*,*,*,ナシ,ナシ,0/2,ナシ,0
@@ -703,9 +746,9 @@ def should_separate(prev2_mo, prev_mo, mo, next_mo, nabcc=False, logwrite=_logwr
 	# なく,なく,助動詞,*,*,*,ナク,ナク,0/2,ナク,1
 	#
 	# 「問題ない」の「ない」は「点訳のてびき」では形容詞だがMecabでは助動詞
+	# 形容詞「ない」は区切る
+	# ただし前の語と複合している場合は前に続ける
 	if mo.hinshi1 == '形容詞' and mo.kihon in ('ない', '無い'):
-		# 形容詞「ない」は区切る
-		# ただし前の語と複合している場合は前に続ける
 		if prev_mo.kihon in ('隈', '心置き', '満遍'):
 			return False
 		return True
@@ -734,10 +777,6 @@ def should_separate(prev2_mo, prev_mo, mo, next_mo, nabcc=False, logwrite=_logwr
 			mo.kihon == 'なさる':
 		return True
 
-	# 労,せ,ず
-	if prev_mo.hinshi1 == '名詞' and mo.hyouki == 'せ' and mo.kihon == 'する':
-		return False
-
 	# 不幸,に,し,て
 	# 今,に,し,て
 	# 居,ながら,に,し,て
@@ -760,54 +799,16 @@ def should_separate(prev2_mo, prev_mo, mo, next_mo, nabcc=False, logwrite=_logwr
 			if prev2_mo and prev2_mo.hyouki == '私' and prev_mo.hyouki == 'を':
 				return False
 
-	# 「・・ですこと」の「こと」は接尾語なので前に続ける
-	if prev_mo.hyouki == 'です' and mo.hyouki == 'こと':
-		return False
-
-	# 一脈/相通じる/ものが/ある
-	if prev_mo.hyouki == '相通じる' and mo.hyouki == 'もの':
-		return True
-
-	# 一審/判決
-	if prev_mo.hyouki == '審' and mo.hyouki == '判決':
-		return True
-
-	# 意図/不明
-	if prev_mo.hyouki == '意図' and mo.hyouki == '不明':
-		return True
-
-	# 意味/不明
-	if prev_mo.hyouki == '意味' and mo.hyouki == '不明':
-		return True
-
-	# 今/現在
-	if prev_mo.hyouki == '今' and mo.hyouki == '現在':
-		return True
-
-	# 否が/応でも
-	if prev_mo.hyouki == '応' and mo.hyouki == 'でも':
-		return False
-
-	# 「この程」「この度」
-	# 「そのくせ」
-	# 後ろの語と結びついて1語になっている場合は続ける
-	if prev_mo.hyouki == 'この' and mo.hyouki in ('程', '度'):
-		return False
-	if prev_mo.hyouki == 'その' and mo.hyouki in ('くせ', 'うち', 'まま'):
-		return False
-	if prev_mo.hyouki == 'わが' and mo.hyouki == 'まま':
-		return False
-
 	# 人名に続く「さん」「様」「君」「殿」「氏（し）」「氏（うじ）」は区切って書く
 	# (名詞,固有名詞,人名 -> 名詞,接尾,人名)
 	if prev_mo.hinshi2 == '固有名詞' and prev_mo.hinshi3 == '人名' and ((mo.hinshi2 == '接尾' and mo.hinshi3 == '人名') or (mo.hyouki in ('さん', '知事'))):
 		return True
 
+	# 人名に造語要素が続く場合で、2拍以下の場合は続ける
+	# 自立性が強く、意味の理解を助ける場合は、前を区切って書く
+	# 複合名詞内部の2拍以下は切らない
 	if prev_mo.hinshi1 == '名詞' and mo.hinshi1 == '名詞':
 		if mo.hinshi2 == '数': return False
-		# 人名に造語要素が続く場合で、2拍以下の場合は
-		# 続けるのが原則ですが、自立性が強く、意味の理解を助ける
-		# 場合は、前を区切って書く
 		if (prev_mo.hinshi4 in ('姓', '名') or prev_mo.hinshi3 == '人名'):
 			if mo.hyouki in ('嬢',):
 				return False
@@ -815,36 +816,54 @@ def should_separate(prev2_mo, prev_mo, mo, next_mo, nabcc=False, logwrite=_logwr
 				mo.hyouki in ('訳', '作', '談', '曲', '記', '絵', 'アナ', 'プロ')
 				):
 				return True
-		# 複合名詞内部の2拍以下は切らない
 		if not prev_mo.hinshi2 in ('数', 'アルファベット') and not mo.hinshi2 in ('数', 'アルファベット'):
 			if len(prev_mo.yomi) <= 2 and len(mo.yomi) >= 3: return False
 			if len(prev_mo.yomi) >= 3 and len(mo.yomi) <= 2: return False
 		if mo.hinshi2 != '接尾': return True
 
-	if prev_mo.hinshi1 == '形容詞' and mo.hyouki == 'ん': return False # いいんですけど
-
-	if prev_mo.hinshi1 == '動詞' and prev_mo.hyouki == '見': return False # 見/まごう
 	if prev_mo.hinshi1 == '動詞' and prev_mo.hinshi2 == '自立':
 		if mo.hyouki == 'および': return True
+		if mo.hinshi1 == '動詞' and mo.hinshi2 == '非自立': return False
+
+	#
+	# 品詞による規則
+	#
+
+	# 面白おかしい (点訳のてびき第3版 第3章 その2 10. 複合形容詞は続ける)
+	# 例外 多かれ/少なかれ
+	if prev_mo.hinshi1 == '形容詞' and mo.hinshi1 == '形容詞':
+		if prev_mo.type2 == '命令ｅ' and mo.type2 == '命令ｅ':
+			return True
+		else:
+			return False
+
+	# 助数詞のあとにアラビア数字が来たらマスアケ
+	# case 1:
+	#  零,零,名詞,数,*,*,0,0,1/2,0,0
+	#  時,時,名詞,接尾,助数詞,*,ジ,ジ,1/1,ジ,1
+	#  十五,十五,名詞,数,*,*,15,15,1/3,15,0
+	#  分,分,名詞,接尾,助数詞,*,フン,フン,1/2,フン,0
+	# case 2:
+	#  一,一,名詞,数,*,*,イチ,イチ,2/2,1,0
+	#  人,人,名詞,接尾,助数詞,*,ニン,ニン,1/2,ニン,0
+	#  当り,当り,名詞,接尾,一般,*,アタリ,アタリ,1/3,アタリ,1
+	#  １,1,名詞,数,*,*,イチ,イチ,2/2,1,0
+	#  ０,0,名詞,数,*,*,ゼロ,ゼロ,1/2,0,0
+	#  個,個,名詞,接尾,助数詞,*,コ,コ,1/1,コ,0
+	if prev_mo.hinshi1 == '名詞' and prev_mo.hinshi2 == '接尾':
+		if mo.output.isdigit(): return True
 		if mo.hinshi1 == '動詞' and mo.hinshi2 == '非自立': return False
 
 	# その,その,連体詞,*,*,*,ソノ,ソノ,0/2,ソノ,1
 	# よう,よう,名詞,非自立,助動詞語幹,*,ヨウ,ヨー,1/2,ヨー,0
 	if prev_mo.hinshi1 == '連体詞' and mo.hinshi3 == '助動詞語幹': return False
 
-	if prev_mo.hinshi1 == '接頭詞' and prev_mo.hyouki == '超' and mo.hinshi1 == '名詞': return True
-	
-	# お兄さん, お姉さん
-	if prev_mo.hinshi1 == '接頭詞' and prev_mo.hyouki == 'お': return False
 	# 新/東京/名所
 	if prev_mo.hinshi1 == '接頭詞' and prev_mo.hinshi2 == '名詞接続' and \
 			mo.hinshi1 == '名詞' and mo.hinshi2 == '固有名詞':
 		return True
 	if prev_mo.hinshi1 == '接頭詞' and mo.hinshi1 == '名詞': return False
 
-	if prev_mo.hinshi1 == '助動詞' and prev_mo.hyouki == 'で' and mo.hinshi1 == '助動詞': return True
-
-	if prev_mo.hinshi1 == '助詞' and mo.hyouki == 'よう': return False # のように
 	if prev_mo.hinshi1 == '助詞' and mo.hinshi1 == '接頭詞': return True
 
 	if prev_mo.is_substantive_word() and mo.is_independent_word(): return True
