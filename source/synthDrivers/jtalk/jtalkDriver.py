@@ -48,23 +48,12 @@ _jtalk_voices = [
 	 "samp_rate": 48000,
 	 "fperiod": 240,
 	 "lf0_base": 5.86,
-	 "pitch_bias": -10,
+	 "pitch_bias": -20,
+	 "inflection_bias": -10,
 	 "speaker_attenuation": 0.5,
 	 "htsvoice": os.path.join(jtalk_dir, 'mei', 'mei_normal.htsvoice'),
-	 "alpha": 0.62, # 0.55,
-	 "beta": 0.05, # 0.00,
-	 "espeak_variant": "f1"},
-	{"id": "V2H",
-	 "name": "mei_h",
-	 "lang":"ja",
-	 "samp_rate": 48000,
-	 "fperiod": 240,
-	 "lf0_base": 5.86,
-	 "pitch_bias": -20,
-	 "speaker_attenuation": 0.5,
-	 "htsvoice": os.path.join(jtalk_dir, 'mei', 'mei_happy.htsvoice'),
-	 "alpha": 0.62, # 0.55,
-	 "beta": 0.05, # 0.00,
+	 "alpha": 0.60, # 0.55,
+	 "beta": 0.04, # 0.00,
 	 "espeak_variant": "f1"},
 	{"id": "V3",
 	 "name": "lite",
@@ -126,7 +115,7 @@ def _jtalk_speak(msg, index=None, prop=None):
 	currentEngine = 2
 	if DEBUG: logwrite("p:%d i:%d msg:%s" % (prop.pitch, prop.inflection, msg))
 	level =	int(max_level * speaker_attenuation)
-	la = 0.020 * prop.inflection # 50 = original range
+	la = 0.020 * (prop.inflection + voice_args.get('inflection_bias', 0)) # 50 = original range
 	ls = 0.015 * (prop.pitch - 50.0 + voice_args['pitch_bias']) # 50 = no shift
 	lo = ls + voice_args['lf0_base'] * (1 - la)
 	if DEBUG: logwrite("lo:%f la:%f" % (lo, la))
