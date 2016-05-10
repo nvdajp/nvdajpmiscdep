@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 #A part of NonVisual Desktop Access (NVDA)
 # speech engine nvdajp_jtalk
-# Copyright (C) 2010-2014 Takuya Nishimoto (nishimotz.com)
+# Copyright (C) 2010-2016 Takuya Nishimoto (nishimotz.com)
 
 from logHandler import log
 import time
@@ -28,7 +28,7 @@ DEBUG = False
 
 RATE_BOOST_MULTIPLIER = 1.5
 
-# math.log(150) = 5.0, math.log(350) = 5.86
+# math.log(150) = 5.0, math.log(350) = 5.9
 _jtalk_voices = [
 	{"id": "V1",
 	 "name": "m001",
@@ -47,11 +47,11 @@ _jtalk_voices = [
 	 "lang":"ja",
 	 "samp_rate": 48000,
 	 "fperiod": 240,
-	 "lf0_base": 5.86,
-	 "pitch_bias": -20,
+	 "lf0_base": 5.9,
+	 "pitch_bias": -25,
 	 "inflection_bias": -10,
 	 "speaker_attenuation": 0.5,
-	 "htsvoice": os.path.join(jtalk_dir, 'mei', 'mei_normal.htsvoice'),
+	 "htsvoice": os.path.join(jtalk_dir, 'mei', 'mei_happy.htsvoice'),
 	 "alpha": 0.60, # 0.55,
 	 "beta": 0.04, # 0.00,
 	 "espeak_variant": "f1"},
