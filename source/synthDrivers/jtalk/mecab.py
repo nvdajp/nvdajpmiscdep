@@ -224,7 +224,7 @@ def getMoraCount(s):
 
 RE_FULLSHAPE_ALPHA = re.compile(u'^[Ａ-Ｚａ-ｚ]+$')
 
-def _makeFeatureFromLatinWordAndPostfix(org, ar):
+def _makeFeatureFromLatinWordAndPostfix(org, ar, symbol=''):
 	_hyoki = ar[0]
 	_yomi = ar[8] if len(ar) > 8 else convertSpellChar(_hyoki).replace(' ', '')
 	_pron = ar[9] if len(ar) > 9 else convertSpellChar(_hyoki).replace(' ', '')
@@ -254,7 +254,7 @@ def _makeFeatureFromLatinWordAndPostfix(org, ar):
 		postfix = u'ティング'
 		_yomi = _yomi[:-1]
 		_pron = _pron[:-1]
-	hyoki = _hyoki + org
+	hyoki = _hyoki + symbol + org
 	yomi = _yomi + postfix
 	pron = _pron + postfix
 	mora = getMoraCount(ar[10]) + 1 if len(ar) > 10 else len(pron)
@@ -356,7 +356,7 @@ def Mecab_correctFeatures(mf, CODE_ = CODE):
 				# 2 ａｕｔｈｏｒｓ,名詞,一般,*,*,*,*,ｓ,オーサーズ,オーサーズ,1/5,C0
 				Mecab_setFeature(mf, pos - 2, ',,,*,*,*,*', CODE_=CODE_)
 				Mecab_setFeature(mf, pos - 1, ',,,*,*,*,*', CODE_=CODE_)
-				f = _makeFeatureFromLatinWordAndPostfix(ar[0], ar3)
+				f = _makeFeatureFromLatinWordAndPostfix(ar[0], ar3, symbol=u"'")
 				Mecab_setFeature(mf, pos, f, CODE_=CODE_)
 			elif len(ar2) > 10 and RE_FULLSHAPE_ALPHA.match(ar2[0]) and len(ar2[0]) > 1:
 				# PATTERN 4

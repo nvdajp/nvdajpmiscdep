@@ -293,6 +293,8 @@ num_symbol_dic = {
 	}
 alpha_symbol_dic = {
 	',':'⠂',
+	"'":'⠄',
+	#'?':'⠦',
 	}
 alpha_dic = {
 	'a':'⠁',

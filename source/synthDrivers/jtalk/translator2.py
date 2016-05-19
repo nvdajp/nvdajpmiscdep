@@ -913,10 +913,10 @@ def morphs_to_string(li, inbuf, logwrite):
 			inpos2.pop()
 	return (outbuf, inpos2)
 
-RE_MB_ALPHA_NUM_SPACE = re.compile('^[0-9A-Za-z ０-９Ａ-Ｚａ-ｚ　]+$')
+RE_MB_ALPHA_NUM_SPACE = re.compile('^[0-9A-Za-z\- ０-９Ａ-Ｚａ-ｚ　]+$')
 RE_ASCII_CHARS = re.compile('^[A-Za-z0-9\.\,\-\+\:\/\~\?\&\%\#\*\$\; ]+$')
 RE_INFOMATION = re.compile('^[A-Za-z0-9\+\@\/\#\$\%\&\*\;\.\<\>\-\_\{\}\[\] ]+$')
-RE_GAIJI = re.compile('^[A-Za-z][A-Za-z0-9\,\.\+\- ]+$')
+RE_GAIJI = re.compile('^[A-Za-z][A-Za-z0-9\,\.\+\-\'\!\? ]+$')
 RE_KATAKANA = re.compile('^[ァ-ヾ]+$')
 RE_HIRAGANA = re.compile('^[ぁ-ゞ]+$')
 RE_HALF_KATAKANA = re.compile('^[ｦ-ﾟ]+$') # ff66 .. ff9f
@@ -934,6 +934,9 @@ DAKUON_DIC = {
 	'タ' : 'ダ', 'チ' : 'ヂ', 'ツ' : 'ヅ', 'テ' : 'デ', 'ト' : 'ド',
 	'ハ' : 'バ', 'ヒ' : 'ビ', 'フ' : 'ブ', 'ヘ' : 'ベ', 'ホ' : 'ボ',
 	}
+
+def is_gaiji(s):
+	return RE_GAIJI.match(s)
 
 def to_no_dakuon_kana(s):
 	if s in NO_DAKUON_DIC:
@@ -957,6 +960,12 @@ def japanese_braille_separate(inbuf, logwrite, nabcc=False):
 	if RE_MB_ALPHA_NUM_SPACE.match(text):
 		outbuf = unicode_normalize(text)
 		inpos2 = xrange(len(outbuf))
+		return (outbuf, inpos2)
+
+	if is_gaiji(text) and ' ' in text:
+		outbuf = '⠦' + unicode_normalize(text) + '⠴'
+		inpos2 = [0] + range(len(outbuf))
+		inpos2.append(inpos2[-1])
 		return (outbuf, inpos2)
 
 	# 'あ゛ー' Unicode 正規化されて空白が入るので事前に補正する
@@ -1191,8 +1200,13 @@ def japanese_braille_separate(inbuf, logwrite, nabcc=False):
 				mo.output = '⠠⠦' + mo.nhyouki + '⠠⠴'
 		# 外国語引用符
 		# 空白をはさまない1単語は外国語引用符ではなく外字符で
-		elif RE_GAIJI.match(mo.nhyouki) and \
-				(' ' in mo.nhyouki) or ('.' in mo.nhyouki and len(mo.nhyouki) > 3):
+		elif (
+			RE_GAIJI.match(mo.nhyouki) and \
+			((' ' in mo.nhyouki) or ("'" in mo.nhyouki))
+		) or (
+			('.' in mo.nhyouki) and \
+			len(mo.nhyouki) > 3
+		):
 			if nabcc:
 				mo.output = mo.nhyouki
 			else:

@@ -429,6 +429,11 @@ tests = [
 		'comment': '情報処理点字',
 	},
 	{
+		'input': '⠠⠦?⠠⠴',
+		'output': '⠠⠦⠐⠦⠠⠴',
+		'comment': '情報処理点字',
+	},
+	{
 		'text': ',.:;!?@#\\$%&*|+-/=<>^_~',
 		'input': '⠠⠦,.:;!?@#\\$%&*|+-/=<>^_~⠠⠴',
 		'output': '⠠⠦⠂⠲⠐⠂⠆⠖⠐⠦⠪⠩⠫⠹⠻⠯⠡⠳⠬⠤⠌⠒⠒⠔⠔⠢⠢⠘⠐⠤⠐⠉⠠⠴',
@@ -3485,6 +3490,29 @@ tests = [
  	{
 		'text': 'Windows Live メール',
 		'input': '⠦Windows Live⠴ メール',
+	},
+	{
+		'text': "Hello! It's Patty. Is Kate there",
+		'input': "⠦Hello! It's Patty. Is Kate there⠴",
+		'output': '⠦⠠⠓⠑⠇⠇⠕⠖  ⠠⠊⠞⠄⠎ ⠠⠏⠁⠞⠞⠽⠲ ⠠⠊⠎ ⠠⠅⠁⠞⠑ ⠞⠓⠑⠗⠑⠴',
+	},
+	{
+		'text': "Is Kate there?",
+		'input': "⠦Is Kate there?⠴",
+		# 'output': '⠦⠠⠊⠎ ⠠⠅⠁⠞⠑ ⠞⠓⠑⠗⠑⠦⠴',
+	},
+	{
+		'text': "what's new",
+		'input': "⠦what's new⠴",
+		'output': '⠦⠺⠓⠁⠞⠄⠎ ⠝⠑⠺⠴',
+		'inpos2': [0,0,1,2,3,4,5,6,7,8,9,10,11,11],
+		'inpos1': [0,1,2,3,4,5,6,7,8,9,10,11],
+		'inpos':  [0,0,1,2,3,4,5,6,7,8,9,10],
+	},
+	{
+		'text': "how are you",
+		'input': "how are you",
+		'output': '⠰⠓⠕⠺ ⠰⠁⠗⠑ ⠰⠽⠕⠥',
 	},
 	{ 'note': '３．一般書に挿入されているドイツ語やフランス語など' },
 
