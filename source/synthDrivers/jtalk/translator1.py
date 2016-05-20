@@ -432,7 +432,7 @@ def translateWithInPos(text, nabcc=False):
 			retval += a
 			inPos.extend([pos] * len(a))
 			capital = False
-			if t in ('-', ','):
+			if t not in ('/',):
 				latin = False
 			latin_sym = True
 			pos += 1
