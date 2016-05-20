@@ -494,7 +494,7 @@ def should_separate(prev2_mo, prev_mo, mo, next_mo, nabcc=False, logwrite=_logwr
 
 	# ち,ち,名詞,一般,*,*,チ,チ,0/1,チ,0
 	# ゅうりっぷ,ゅうりっぷ,名詞,一般,*,*,,,,ュウリップ,0
-	if mo.hyouki[0] in 'ぁぃぅぇぉっゃゅょゎァィゥェォッャュョヮヵヶ': return False
+	if mo.hyouki and (mo.hyouki[0] in 'ぁぃぅぇぉっゃゅょゎァィゥェォッャュョヮヵヶ'): return False
 
 	# 0/4月 -> 04月
 	if prev_mo.output.isdigit() and mo.nhyouki[0].isdigit():
@@ -962,8 +962,12 @@ def japanese_braille_separate(inbuf, logwrite, nabcc=False):
 		inpos2 = xrange(len(outbuf))
 		return (outbuf, inpos2)
 
-	if is_gaiji(text) and ' ' in text:
-		outbuf = '⠦' + unicode_normalize(text) + '⠴'
+	if is_gaiji(text) and ' ' in text.rstrip():
+		rspaces = ''
+		while text[-1] == ' ':
+			rspaces += ' '
+			text = text[:-1]
+		outbuf = '⠦' + unicode_normalize(text) + '⠴' + rspaces
 		inpos2 = [0] + range(len(outbuf))
 		inpos2.append(inpos2[-1])
 		return (outbuf, inpos2)

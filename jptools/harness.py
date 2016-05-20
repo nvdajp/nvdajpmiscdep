@@ -3510,6 +3510,11 @@ tests = [
 		'inpos':  [0,0,1,2,3,4,5,6,7,8,9,10],
 	},
 	{
+		'text': "what's new ",
+		'input': "⠦what's new⠴ ",
+		'output': '⠦⠺⠓⠁⠞⠄⠎ ⠝⠑⠺⠴ ',
+	},
+	{
 		'text': "how are you",
 		'input': "how are you",
 		'output': '⠰⠓⠕⠺ ⠰⠁⠗⠑ ⠰⠽⠕⠥',
