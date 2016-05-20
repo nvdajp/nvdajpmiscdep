@@ -9,6 +9,7 @@
 from __future__ import unicode_literals
 import unicodedata
 import re
+from copy import deepcopy
 
 kana1_dic = {
 	'ア':'⠁',
@@ -177,7 +178,42 @@ kana2_dic = {
 	'ヴェ':'⠲⠯',
 	'ヴォ':'⠲⠮',
 	}
-jp_symbol_dic = {
+info_symbol_dic = {
+	'!':'⠖',
+	'"':'⠶',
+	'#':'⠩',
+	'$':'⠹',
+	'%':'⠻',
+	'&':'⠯',
+	"'":'⠄',
+	'(':'⠦',
+	')':'⠴',
+	'*':'⠡',
+	'+':'⠬',
+	',':'⠂',
+	'-':'⠤',
+	'.':'⠲',
+	'/':'⠌',
+	':':'⠐⠂',
+	';':'⠆',
+	'<':'⠔⠔',
+	'=':'⠒⠒',
+	'>':'⠢⠢',
+	'?':'⠐⠦',
+	'@':'⠪',
+	'[':'⠷',
+	'\\':'⠫', # yen mark
+	']':'⠾',
+	'^':'⠘',
+	'_':'⠐⠤',
+	'`':'⠐⠑',
+	'{':'⠣',
+	'|':'⠳',
+	'}':'⠜',
+	'~':'⠐⠉',
+}
+jp_symbol_dic = deepcopy(info_symbol_dic)
+jp_symbol_dic.update({
 	'+':'⠢',
 	'-':'⠤',
 	':':'⠐⠂',
@@ -256,25 +292,7 @@ jp_symbol_dic = {
 	'←':' ⠪⠒⠒ ', # 矢印 前後に1マスあける
 	',':'⠄',
 	'〒':'⠰⠶⠬⠒⠐⠧⠴ ⠐⠥⠴⠐⠪⠒⠶⠆', # ⠰⠶ユービン バンゴー⠶⠆
-	}
-info_symbol_dic = {
-	',':'⠂',
-	'?':'⠐⠦',
-	'+':'⠬',
-	"'":'⠄',
-	'.':'⠲',
-	'!':'⠖',
-	'(':'⠦',
-	')':'⠴',
-	'{':'⠣',
-	'}':'⠜',
-	'[':'⠷',
-	']':'⠾',
-	'%': '⠻',
-	'&':'⠯',
-	'#':'⠩',
-	'*':'⠡',
-	}
+})
 num_dic = {
 	'0':'⠚',
 	'1':'⠁',
@@ -291,11 +309,20 @@ num_symbol_dic = {
 	'.':'⠂',
 	',':'⠄',
 	}
-alpha_symbol_dic = {
+alpha_symbol_dic = deepcopy(info_symbol_dic)
+alpha_symbol_dic.update({
+	'.':'⠲',
 	',':'⠂',
 	"'":'⠄',
-	#'?':'⠦',
-	}
+	'?':'⠦',
+	'!':'⠖',
+	'(':'⠶',
+	')':'⠶',
+	'/':'⠌',
+	'+':'⠢',
+	'%':'⠰⠏',
+	'*':'⠔⠔',
+})
 alpha_dic = {
 	'a':'⠁',
 	'b':'⠃',
@@ -373,6 +400,7 @@ def translateWithInPos(text, nabcc=False):
 	retval = ''
 	pos = 0
 	latin = False # 外字符モード
+	latin_sym = False # 外国語の記号の直後
 	num = False # 数符モード
 	capital = False # 二重大文字符モード
 	quote_mode = False # 外国語引用符モード
@@ -386,28 +414,38 @@ def translateWithInPos(text, nabcc=False):
 			retval += ' '
 			inPos.append(pos)
 			capital = latin = num = False
+			latin_sym = False
 			pos += 1
 		#alpha_symbol_dic (comma in quote)
-		elif quote_mode and \
+		elif quote_mode and not info_mode and \
 		text[pos] in alpha_symbol_dic:
-			retval += alpha_symbol_dic[text[pos]]
-			inPos.append(pos)
+			a = alpha_symbol_dic[text[pos]]
+			retval += a
+			inPos.extend([pos] * len(a))
+			latin_sym = True
 			pos += 1
 		#alpha_symbol_dic (comma in latin or capital)
-		elif (latin or capital) and \
+		elif (latin or capital) and not info_mode and \
 		text[pos] in alpha_symbol_dic:
-			retval += alpha_symbol_dic[text[pos]]
-			inPos.append(pos)
+			t = text[pos]
+			a = alpha_symbol_dic[t]
+			retval += a
+			inPos.extend([pos] * len(a))
+			capital = False
+			if t in ('-', ','):
+				latin = False
+			latin_sym = True
 			pos += 1
-			capital = latin = False
 		#nabcc
 		elif nabcc and (text[pos] in nabcc_dic):
 			retval += nabcc_dic[text[pos]]
 			inPos.append(pos)
+			latin_sym = False
 			pos += 1
 		#Numeric
 		elif text[pos] in num_dic:
 			latin = False
+			latin_sym = False
 			if not num:
 				retval += '⠼'
 				inPos.append(pos)
@@ -422,7 +460,10 @@ def translateWithInPos(text, nabcc=False):
 		elif info_mode and text[pos] in info_symbol_dic:
 			retval += info_symbol_dic[text[pos]]
 			inPos.extend([pos] * len(info_symbol_dic[text[pos]]))
-			num = capital = False
+			if text[pos] not in (',', '.'):
+				num = False
+			capital = False
+			latin_sym = False
 			pos += 1
 		#Numeric symbols
 		elif num and (text[pos] in num_symbol_dic) and \
@@ -430,6 +471,7 @@ def translateWithInPos(text, nabcc=False):
 					  (pos+1 < len(text) and text[pos+1].isdigit()) ):
 			retval += num_symbol_dic[text[pos]]
 			inPos.extend([pos] * len(num_symbol_dic[text[pos]]))
+			latin_sym = False
 			pos += 1
 		# halfshape apostrophe symbol
 		elif text[pos] == "'":
@@ -437,18 +479,21 @@ def translateWithInPos(text, nabcc=False):
 				retval += '⠼⠄'
 				inPos.extend([pos, pos])
 				num = True
+			latin_sym = False
 			pos += 1
 		# slash symbol
 		elif text[pos] == '/':
 			retval += '⠌'
 			inPos.append(pos)
 			num = capital = False
+			latin_sym = False
 			pos += 1
 		#Japanese symbols
-		elif text[pos] in jp_symbol_dic:
+		elif text[pos] in jp_symbol_dic and not (quote_mode or info_mode):
 			retval += jp_symbol_dic[text[pos]]
 			inPos.extend([pos] * len(jp_symbol_dic[text[pos]]))
 			latin = num = False
+			latin_sym = False
 			pos += 1
 		# lower/upper case alphabet
 		elif text[pos] in alpha_dic or text[pos] in alpha_cap_dic:
@@ -497,9 +542,10 @@ def translateWithInPos(text, nabcc=False):
 				retval += alpha_dic[text[pos].lower()]
 				inPos.append(pos)
 				pos += 1
+			latin_sym = False
 		#Two kana characters
 		elif pos+1 < len(text) and text[pos:pos+2] in kana2_dic:
-			if latin:
+			if latin and not latin_sym:
 				retval += '⠤'
 				inPos.append(pos - 1) # つなぎ符は直前の文字に対応
 			elif num and is_ara(text[pos:pos+1]):
@@ -508,10 +554,11 @@ def translateWithInPos(text, nabcc=False):
 			retval += kana2_dic[text[pos:pos+2]]
 			inPos.extend([pos, pos+1])
 			latin = num = False
+			latin_sym = False
 			pos += 2
 		#One kana character
 		elif text[pos] in kana1_dic:
-			if latin:
+			if latin and not latin_sym:
 				retval += '⠤'
 				inPos.append(pos - 1) # つなぎ符は直前の文字に対応
 			elif num:
@@ -525,6 +572,7 @@ def translateWithInPos(text, nabcc=False):
 			retval += kana1_dic[text[pos]]
 			inPos.extend([pos] * len(kana1_dic[text[pos]]))
 			latin = num = False
+			latin_sym = False
 			pos += 1
 		#Braille should not be changed
 		elif 0x2800 <= ord(text[pos]) and ord(text[pos]) <= 0x28ff:
@@ -552,10 +600,12 @@ def translateWithInPos(text, nabcc=False):
 			else:
 				retval += text[pos]
 				inPos.append(pos)
+			latin_sym = False
 			pos += 1
 		#Exception
 		else:
 			latin = num = False
+			latin_sym = False
 			retval += '□'
 			inPos.append(pos)
 			pos += 1

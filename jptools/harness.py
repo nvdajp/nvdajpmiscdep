@@ -443,6 +443,11 @@ tests = [
 		'comment': '情報処理点字 バックスラッシュではなく円記号',
 	},
 	{
+		'input':  '⠦,.:;!?@#\\$%&*+-/=⠴',
+		'output': '⠦⠂⠲⠐⠂⠆⠖⠦⠪⠩⠫⠹⠰⠏⠯⠔⠔⠢⠤⠌⠒⠒⠴',
+		'comment': '外国語引用符 英語（グレード1）日本点字表記法2001年版 p.179 パーセント(%)は 56-1234 を使用。プラス(+)は 26 を使用。',
+	},
+	{
 		'text': '"\'`',
 		'input': '”’‘',
 		#'output': '⠶⠄⠐⠑',
@@ -548,15 +553,15 @@ tests = [
 		# https://osdn.jp/ticket/browse.php?group_id=4221&tid=36052
 		'text': r'\1,500.01',
 		'input': r'⠠⠦\1,500.01⠠⠴',
-		'output': '⠠⠦⠫⠼⠁⠂⠑⠚⠚⠲⠼⠚⠁⠠⠴',
-		'comment': '半角円マークがあるので情報処理点字を使う。カンマは2、ピリオドは256。',
+		'output': '⠠⠦⠫⠼⠁⠂⠑⠚⠚⠲⠚⠁⠠⠴',
+		'comment': '半角円マークがあるので情報処理点字を使う。カンマは2、ピリオドは256。数符の効力は数字及びコンマ・ピリオドで継続、それ以外の記号やマスあけで終わるとする。',
 	},
 	{
 		# https://osdn.jp/ticket/browse.php?group_id=4221&tid=36052
 		'text': r'1,500.01',
 		'input': r'1,500.01',
 		'output': '⠼⠁⠄⠑⠚⠚⠂⠚⠁',
-		'comment': 'カンマは3、ピリオドは2。',
+		'comment': '日本点字なのでカンマは3、ピリオドは2。',
 	},
 	{
 		# https://osdn.jp/ticket/browse.php?group_id=4221&tid=36052
@@ -573,11 +578,11 @@ tests = [
 	{
 		'text': 'v1.4',
 		'input': '⠦v1.4⠴',
-		'output': '⠦⠧⠼⠁⠂⠙⠴',
+		'output': '⠦⠧⠼⠁⠲⠙⠴',
 		'inpos2': [0,0,1,2,3,3],
 		'inpos1': [0,1,2,2,3,4,5],
 		'inpos':  [0,0,1,1,2,3,3],
-		'comment': 'nvdajp ticket 28226 (comment 2012-05-16)',
+		'comment': 'nvdajp ticket 28226 (comment 2012-05-16) / 改定 ti36052 小数点はピリオド 256 を使用。',
 	},
 	{
 		'text': 'c:\\',
@@ -3492,14 +3497,9 @@ tests = [
 		'input': '⠦Windows Live⠴ メール',
 	},
 	{
-		'text': "Hello! It's Patty. Is Kate there",
-		'input': "⠦Hello! It's Patty. Is Kate there⠴",
-		'output': '⠦⠠⠓⠑⠇⠇⠕⠖  ⠠⠊⠞⠄⠎ ⠠⠏⠁⠞⠞⠽⠲ ⠠⠊⠎ ⠠⠅⠁⠞⠑ ⠞⠓⠑⠗⠑⠴',
-	},
-	{
-		'text': "Is Kate there?",
-		'input': "⠦Is Kate there?⠴",
-		# 'output': '⠦⠠⠊⠎ ⠠⠅⠁⠞⠑ ⠞⠓⠑⠗⠑⠦⠴',
+		'text': "Hello! It's Patty. Is Kate there?",
+		'input': "⠦Hello! It's Patty. Is Kate there?⠴",
+		'output': '⠦⠠⠓⠑⠇⠇⠕⠖ ⠠⠊⠞⠄⠎ ⠠⠏⠁⠞⠞⠽⠲ ⠠⠊⠎ ⠠⠅⠁⠞⠑ ⠞⠓⠑⠗⠑⠦⠴',
 	},
 	{
 		'text': "what's new",
