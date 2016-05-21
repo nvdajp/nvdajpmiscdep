@@ -199,4 +199,28 @@ tests = [
 		'input': "u' コーテーション ' ",
 		'output': '⠥⠄ ⠪⠒⠟⠒⠈⠺⠴ ⠄ ',
 	},
+	{
+		'mode':   'NABCC',
+		'text': "Hello! It's Patty. Is Kate there?",
+		'input': "Hello! It's Patty. Is Kate there?",
+		'output': '⡓⠑⠇⠇⠕⠮ ⡊⠞⠄⠎ ⡏⠁⠞⠞⠽⠨ ⡊⠎ ⡅⠁⠞⠑ ⠞⠓⠑⠗⠑⠹',
+	},
+	{
+		'mode':   'NABCC',
+		'text': "what's new",
+		'input': "what's new",
+		'output': '⠺⠓⠁⠞⠄⠎ ⠝⠑⠺',
+	},
+	{
+		'mode':   'NABCC',
+		'text': "what's new ",
+		'input': "what's new ",
+		'output': '⠺⠓⠁⠞⠄⠎ ⠝⠑⠺ ',
+	},
+	{
+		'mode':   'NABCC',
+		'text': "how are you",
+		'input': "how are you",
+		'output': '⠓⠕⠺ ⠁⠗⠑ ⠽⠕⠥',
+	},
 	]

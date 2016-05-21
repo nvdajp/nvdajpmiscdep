@@ -957,12 +957,12 @@ def japanese_braille_separate(inbuf, logwrite, nabcc=False):
 		inpos2 = xrange(len(outbuf))
 		return (outbuf, inpos2)
 
-	if RE_MB_ALPHA_NUM_SPACE.match(text):
+	if not nabcc and RE_MB_ALPHA_NUM_SPACE.match(text):
 		outbuf = unicode_normalize(text)
 		inpos2 = xrange(len(outbuf))
 		return (outbuf, inpos2)
 
-	if is_gaiji(text) and ' ' in text.rstrip():
+	if not nabcc and is_gaiji(text) and ' ' in text.rstrip():
 		rspaces = ''
 		while text[-1] == ' ':
 			rspaces += ' '
