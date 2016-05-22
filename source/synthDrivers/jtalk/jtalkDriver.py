@@ -53,7 +53,7 @@ _jtalk_voices = [
 	 "speaker_attenuation": 0.5,
 	 "htsvoice": os.path.join(jtalk_dir, 'mei', 'mei_happy.htsvoice'),
 	 "alpha": 0.60, # 0.55,
-	 "beta": 0.04, # 0.00,
+	 "beta": 0.00,
 	 "espeak_variant": "f1"},
 	{"id": "V3",
 	 "name": "lite",
