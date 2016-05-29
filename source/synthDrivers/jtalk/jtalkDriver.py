@@ -67,6 +67,19 @@ _jtalk_voices = [
 	 "alpha": 0.42,
 	 "beta": 0.00,
 	 "espeak_variant": "max"},
+	{"id": "V4",
+	 "name": "tohoku-f01",
+	 "lang":"ja",
+	 "samp_rate": 48000,
+	 "fperiod": 240,
+	 "lf0_base": 5.9,
+	 "pitch_bias": -25,
+	 "inflection_bias": -10,
+	 "speaker_attenuation": 0.5,
+	 "htsvoice": os.path.join(jtalk_dir, 'tohokuf01', 'tohoku-f01-neutral.htsvoice'),
+	 "alpha": 0.55,
+	 "beta": 0.00,
+	 "espeak_variant": "f1"},
 ]
 default_jtalk_voice = _jtalk_voices[1] # V2
 voice_args = None
