@@ -19,7 +19,7 @@ except:
 	pyaudio = None
 import cProfile
 import pstats
-JT_DIR = os.path.normpath(
+jtalk_dir = JT_DIR = os.path.normpath(
 	os.path.join(os.getcwdu(), '..', 'source', 'synthDrivers', 'jtalk')
 	)
 sys.path.append(JT_DIR)
@@ -30,31 +30,30 @@ JT_DLL = os.path.join(JT_DIR, 'libopenjtalk.dll')
 
 voices = [
 	{"id": "V1",
-	 "name": "m1",
+	 "name": "m001",
 	 "lang":"ja",
 	 "samp_rate": 48000,
 	 "fperiod": 240,
-	 "lf0_base":5.0,
-	 "speaker_attenuation":1.0,
+	 "lf0_base": 5.0,
 	 "pitch_bias": 0,
-	 "htsvoice": os.path.join(JT_DIR, 'm001', 'm001.htsvoice'),
+	 "speaker_attenuation": 1.0,
+	 "htsvoice": os.path.join(jtalk_dir, 'm001', 'm001.htsvoice'),
 	 "alpha": 0.55,
 	 "beta": 0.00,
-	 #"espeak_variant": "max",
-	 },
+	 "espeak_variant": "max"},
 	{"id": "V2",
 	 "name": "mei",
 	 "lang":"ja",
 	 "samp_rate": 48000,
 	 "fperiod": 240,
-	 "lf0_base": 5.86,
-	 "pitch_bias": -20,
-	 "speaker_attenuation": 0.5,
-	 "htsvoice": os.path.join(JT_DIR, 'mei', 'mei_happy.htsvoice'),
-	 "alpha": 0.62,
-	 "beta": 0.05,
-	 #"espeak_variant": "f1",
-	 },
+	 "lf0_base": 5.9,
+	 "pitch_bias": -25,
+	 "inflection_bias": -10,
+	 "speaker_attenuation": 0.8,
+	 "htsvoice": os.path.join(jtalk_dir, 'mei', 'mei_happy.htsvoice'),
+	 "alpha": 0.60, # 0.55,
+	 "beta": 0.00,
+	 "espeak_variant": "f1"},
 	{"id": "V3",
 	 "name": "lite",
 	 "lang":"ja",
@@ -63,11 +62,23 @@ voices = [
 	 "lf0_base": 5.0,
 	 "pitch_bias": 0,
 	 "speaker_attenuation": 1.0,
-	 "htsvoice": os.path.join(JT_DIR, 'lite', 'voice.htsvoice'),
+	 "htsvoice": os.path.join(jtalk_dir, 'lite', 'voice.htsvoice'),
 	 "alpha": 0.42,
 	 "beta": 0.00,
-	 #"espeak_variant": "max",
-	 },
+	 "espeak_variant": "max"},
+	{"id": "V4",
+	 "name": "tohoku-f01",
+	 "lang":"ja",
+	 "samp_rate": 48000,
+	 "fperiod": 240,
+	 "lf0_base": 5.9,
+	 "pitch_bias": 0,
+	 "inflection_bias": 0,
+	 "speaker_attenuation": 0.8,
+	 "htsvoice": os.path.join(jtalk_dir, 'tohokuf01', 'tohoku-f01-neutral.htsvoice'),
+	 "alpha": 0.54,
+	 "beta": 0.00,
+	 "espeak_variant": "f1"},
 	]
 
 def pa_play(data, samp_rate = 16000):
@@ -99,7 +110,10 @@ def print_code(msg):
 		s += '%04x ' % ord(c)
 	print(s)
 
+count = 0
+	
 def do_synthesis(msg, voice_args, do_play, do_write, do_log, fperiod, pitch=50, inflection=50, vol=50):
+	global count
 	msg = jtalkPrepare.convert(msg)
 	s = text2mecab(msg)
 	__print("utf-8: (%s)" % s.decode('utf-8', 'ignore'))
@@ -107,14 +121,13 @@ def do_synthesis(msg, voice_args, do_play, do_write, do_log, fperiod, pitch=50, 
 	Mecab_analysis(s, mf)
 	Mecab_print(mf, __print)
 	Mecab_correctFeatures(mf)
-	ar = Mecab_splitFeatures(mf)
+	ar = [mf] #ar = Mecab_splitFeatures(mf)
 	__print('array size %d' % len(ar))
 	max_level = int(326.67 * int(vol) + 100) # 100..32767
 	level =	int(max_level * voice_args['speaker_attenuation'])
 	lf0_amp = 0.020 * inflection # 50 = original range
 	ls = 0.015 * (pitch - 50.0 + voice_args['pitch_bias']) # 50 = no shift
 	lf0_offset = ls + voice_args['lf0_base'] * (1 - lf0_amp)
-	count = 0
 	for a in ar:
 		count += 1
 		__print('feature size %d' % a.size)
@@ -158,7 +171,7 @@ def main(do_play = False, do_write = True, do_log = False):
 	jpcommon = JPCommon()
 	engine = HTS_Engine()
 	libjt_initialize(JT_DLL)
-	v = voices[1]
+	v = voices[3]
 	libjt_load(v['htsvoice'])
 	libjt_set_alpha(v['alpha'])
 	libjt_set_beta(v['beta'])
@@ -170,14 +183,12 @@ def main(do_play = False, do_write = True, do_log = False):
 	Mecab_initialize(__print, JT_DIR, os.path.join(JT_DIR, 'dic'))
 
 	msgs = [
-		"Huawei's",
-		"Huawei's new Swarovski-bedazzled Jewel watch — CES 2016",
-		'ウェルカムトゥーnvdaテンキーのinsertキーとメインのinsertキーの両方がnvdaキーとして動作します',
-		'マーク。まーく。',
+		'welcome to nvda',
+		'テンキーのinsertキーとメインのinsertキーの両方がnvdaキーとして動作します。',
 		]
-	s = msgs[2]
 	fperiod = v['fperiod']
-	do_synthesis(s, v, do_play, do_write, do_log, fperiod, pitch=50, inflection=50)
+	for s in msgs:
+		do_synthesis(s, v, do_play, do_write, do_log, fperiod, pitch=50, inflection=50)
 	return 0
 
 if __name__ == '__main__':
