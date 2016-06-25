@@ -274,7 +274,30 @@ def Mecab_correctFeatures(mf, CODE_ = CODE):
 			ar3 = Mecab_getFeature(mf, pos-2, CODE_=CODE_).split(',')
 		else:
 			ar3 = None
-		if (ar[2] == u'数' and ar[7] == u'*') or (ar[1] == u'名詞' and ar[2] == u'サ変接続' and ar[7] == u'*'):
+		if ar3 and ar2 and RE_FULLSHAPE_ALPHA.match(ar3[0]) and RE_FULLSHAPE_ALPHA.match(ar2[0]) and RE_FULLSHAPE_ALPHA.match(ar[0]):
+			# nvdajp/nvdajpmiscdep#28
+			# before:
+			# 0 ｓ,記号,アルファベット,*,*,*,*,ｓ,エス,エス,1/2,*
+			# 1 ａｔｏｋ,名詞,一般,*,*,*,*,ａｔｏｋ,エイトック,エイトック,0/5,C0
+			# 2 ｏ,記号,アルファベット,*,*,*,*,ｏ,オー,オー,1/2,*
+			# after:
+			# 0 ,,,*,*,*,*
+			# 1 ,,,*,*,*,*
+			# 2 ｓａｔｏｋｏ,名詞,固有名詞,*,*,*,*,ｓａｔｏｋｏ,サトコ,サトコ,0/3,C0
+			hyoki = ar3[0] + ar2[0] + ar[0]
+			hin1 = u'名詞'
+			hin2 = u'固有名詞'
+			yomi = getKanaFromRoma(hyoki)
+			if yomi:
+				pron = yomi
+				mora = len(yomi)
+				feature = u'{h},{h1},{h2},*,*,*,*,{h},{y},{p},0/{m},C0'.format(
+					h=hyoki, h1=hin1, h2=hin2, y=yomi, p=pron, m=mora
+				)
+				Mecab_setFeature(mf, pos-2, ',,,*,*,*,*', CODE_=CODE_)
+				Mecab_setFeature(mf, pos-1, ',,,*,*,*,*', CODE_=CODE_)
+				Mecab_setFeature(mf, pos, feature, CODE_=CODE_)
+		elif (ar[2] == u'数' and ar[7] == u'*') or (ar[1] == u'名詞' and ar[2] == u'サ変接続' and ar[7] == u'*'):
 			# PATTERN 1
 			# before:
 			# 1 五絡脈病証,名詞,数,*,*,*,*,*
