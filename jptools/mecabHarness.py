@@ -573,4 +573,14 @@ tasks = [
 	{'text':'satoru', 'speech':'サトル'},
 	{'text':'azusa', 'speech':'アズサ'},
 	{'text':'akira', 'speech':'アキラ'},
+
+	{'text':'罰', 'speech':'バツ', 'braille':'バツ'},
+	{'text':'殺', 'speech':'サツ', 'braille':'サツ'},
+#	{'text':'重殺', 'speech':'ジューサツ', 'braille':''},
+#	{'text':'挟殺', 'speech':'キョーサツ', 'braille':''},
+#	{'text':'捕殺', 'speech':'ホサツ', 'braille':''},
+#	{'text':'殺ダニ剤', 'speech':'サツダニザイ', 'braille':''},
+#	{'text':'天中殺', 'speech':'テンチューサツ', 'braille':''},
+#	{'text':'殺処分', 'speech':'サッショブン', 'braille':''},
+#	{'text':'殺人鬼', 'speech':'サツジンキ', 'braille':''},
 ]
