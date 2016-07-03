@@ -576,11 +576,11 @@ tasks = [
 
 	{'text':'罰', 'speech':'バツ', 'braille':'バツ'},
 	{'text':'殺', 'speech':'サツ', 'braille':'サツ'},
-#	{'text':'重殺', 'speech':'ジューサツ', 'braille':''},
-#	{'text':'挟殺', 'speech':'キョーサツ', 'braille':''},
-#	{'text':'捕殺', 'speech':'ホサツ', 'braille':''},
-#	{'text':'殺ダニ剤', 'speech':'サツダニザイ', 'braille':''},
-#	{'text':'天中殺', 'speech':'テンチューサツ', 'braille':''},
-#	{'text':'殺処分', 'speech':'サッショブン', 'braille':''},
-#	{'text':'殺人鬼', 'speech':'サツジンキ', 'braille':''},
+	{'text':'重殺', 'speech':'ジューサツ', 'braille':'ジューサツ'},
+	{'text':'挟殺', 'speech':'キョーサツ', 'braille':'キョーサツ'},
+	{'text':'捕殺', 'speech':'ホサツ', 'braille':'ホサツ'},
+	{'text':'殺ダニ剤', 'speech':'サツダニザイ', 'braille':'サツ/ダニ/ザイ'},
+	{'text':'天中殺', 'speech':'テンチューサツ', 'braille':'テンチューサツ'},
+	{'text':'殺処分', 'speech':'サツショブン', 'braille':'サツ/ショブン'},
+	{'text':'殺人鬼', 'speech':'サツジンキ', 'braille':'サツジン キ'},
 ]
