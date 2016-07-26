@@ -14,6 +14,7 @@ jt_dir = os.path.normpath(
 sys.path.append(jt_dir)
 from mecab import *
 import jtalkDir
+from _nvdajp_unicode import unicode_normalize
 
 dic = os.path.join(jt_dir, 'dic')
 user_dics_org = jtalkDir.user_dics_org
@@ -44,7 +45,7 @@ def Mecab_get_reading(mf, CODE_=CODE):
 		if len(ar) > 9:
 			rd = ar[9].replace('\u3000', ' ')
 		elif ar[0] != 'ー':
-			rd = ar[0]
+			rd = unicode_normalize(ar[0])
 		reading += rd
 		if len(ar) > 12:
 			braille += ar[12] + r"/"

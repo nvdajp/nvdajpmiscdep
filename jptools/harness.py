@@ -5495,4 +5495,10 @@ tests = [
 		'text':'リエカエリ,  聞きたかったことを隣のテーブルのお姉さまが店員に聞いてくれた。ラッキー＆ありがとうございますー 9分前,  モバツイ / www.movatwi.jp',
 		'input':'リエカエリ、  キキタカッタ コトヲ トナリノ テーブルノ オアネサマガ テンインニ キイテ クレタ。ラッキー & アリガトゴザイマスー 9フン マエ、  モバツイ ⠦/ www.movatwi.jp⠴',
 	},
+	{
+		'text':'Pokémon GO',
+		'input':'⠦Pokemon GO⠴',
+		'output':'⠦⠠⠏⠕⠅⠑⠍⠕⠝ ⠠⠠⠛⠕⠴',
+		'comment':'https://osdn.jp/ticket/browse.php?group_id=4221&tid=36480',
+	},
 ]

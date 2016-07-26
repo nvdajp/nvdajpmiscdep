@@ -25,5 +25,6 @@ def unicode_normalize(s):
 	s = s.replace('\u2212', '-')  # 0x2212 MUNUS SIGN to 0x002D HYPHEN-MINUS
 	s = s.replace('\u00a5', '\\') # 0x00A5 YEN SIGN
 	s = s.replace('\u301c', '~')  # 0x301C WAVE DASH
+	s = s.replace('é', 'e')       # 0x00e9
 	return s
 

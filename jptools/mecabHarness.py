@@ -583,4 +583,11 @@ tasks = [
 	{'text':'天中殺', 'speech':'テンチューサツ', 'braille':'テンチューサツ'},
 	{'text':'殺処分', 'speech':'サツショブン', 'braille':'サツ/ショブン'},
 	{'text':'殺人鬼', 'speech':'サツジンキ', 'braille':'サツジン キ'},
+
+	{
+		'text':'pokémon go',
+		'speech':'pokemon ゴー',
+		'braille':'pokemon/ /ゴー',
+		'comment':'https://osdn.jp/ticket/browse.php?group_id=4221&tid=36480',
+	},
 ]
