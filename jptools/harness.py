@@ -5501,4 +5501,22 @@ tests = [
 		'output':'⠦⠠⠏⠕⠅⠑⠍⠕⠝ ⠠⠠⠛⠕⠴',
 		'comment':'https://osdn.jp/ticket/browse.php?group_id=4221&tid=36480',
 	},
+	{
+		'text':'café',
+		'input':'cafe',
+		'output':'⠰⠉⠁⠋⠑',
+		'comment':'https://osdn.jp/ticket/browse.php?group_id=4221&tid=36480',
+	},
+	{
+		'text':'caffè',
+		'input':'caffe',
+		'output':'⠰⠉⠁⠋⠋⠑',
+		'comment':'https://osdn.jp/ticket/browse.php?group_id=4221&tid=36480',
+	},
+	{
+		'text':'Café',
+		'input':'Cafe',
+		'output':'⠰⠠⠉⠁⠋⠑',
+		'comment':'https://osdn.jp/ticket/browse.php?group_id=4221&tid=36480',
+	},
 ]
