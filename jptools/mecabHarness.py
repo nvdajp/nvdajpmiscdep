@@ -566,6 +566,7 @@ tasks = [
 	{'text':'quick', 'speech':'クイック'},
 	{'text':'quickly', 'speech':'クイックリィ'},
 	{'text':'nvaccess', 'speech':'エヌブイアクセス'},
+	{'text':'runtime', 'speech':'ランタイム'},
 
 	# nvdajp/nvdajpmiscdep#28
 	{'text':'satoko', 'speech':'サトコ'},

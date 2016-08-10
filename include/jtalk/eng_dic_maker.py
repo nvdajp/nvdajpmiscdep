@@ -224,6 +224,7 @@ def make_dic(IN_FILE, CODE, THISDIR):
 		['resample', 'リサンプル'],
 		['reuse', 'リユーズ'],
 		['runs', 'ランズ'],
+		['runtime', 'ランタイム', '3/5'],
 		['rendered', 'レンダード'],
 		['required', 'リクワイアード', '3/7'],
 		
