@@ -248,6 +248,7 @@ def make_dic(IN_FILE, CODE, THISDIR):
 		['sjis', 		'エスジス', 			"0/4", 1000],
 		['saigai', 		'サイガイ', None, 1000],
 		['sumaho',		'スマホ',		"1/3",	],
+		['smap',		'スマップ',		"2/4",	],
 		
 		['think', 	'シンク'],
 		['threatened', 'スレッテンド'],

@@ -575,6 +575,9 @@ tasks = [
 	{'text':'azusa', 'speech':'アズサ'},
 	{'text':'akira', 'speech':'アキラ'},
 
+	# nvdajp/nvdajpmiscdep#33
+	{'text':'smap', 'speech':'スマップ'},
+
 	{'text':'罰', 'speech':'バツ', 'braille':'バツ'},
 	{'text':'殺', 'speech':'サツ', 'braille':'サツ'},
 	{'text':'重殺', 'speech':'ジューサツ', 'braille':'ジューサツ'},
