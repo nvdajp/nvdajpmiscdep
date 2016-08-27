@@ -594,4 +594,8 @@ tasks = [
 		'braille':'pokemon/ /ゴー',
 		'comment':'https://osdn.jp/ticket/browse.php?group_id=4221&tid=36480',
 	},
+
+	{'text':'長押し', 'speech':'ナガオシ', 'braille':'ナガオシ'},
+	{'text':'長押しの指を離す', 'speech':'ナガオシノユビヲハナス', 'braille':'ナガオシ/ノ/ユビ/ヲ/ハナス'},
+	{'text':'長押しで移動', 'speech':'ナガオシデイドー', 'braille':'ナガオシ/デ/イドー'},
 ]
