@@ -472,8 +472,10 @@ def fix_japanese_date_morphs(li):
 				new_li.append(li[i])
 			elif (prev2_mo is None or prev2_mo.hyouki != '、') and prev_mo.output in WAGO_DIC:
 				m = copy.deepcopy(mo)
+				m.hyouki = prev_mo.hyouki + mo.hyouki
+				m.nhyouki = prev_mo.nhyouki + mo.nhyouki
 				m.output = WAGO_DIC[prev_mo.output]
-				m.hyouki = m.nhyouki = m.kana = m.yomi = m.output
+				m.kana = m.yomi = m.output
 				m.hinshi2 = '日付'
 				m.hinshi3 = '*'
 				# FIXME: m.accent
