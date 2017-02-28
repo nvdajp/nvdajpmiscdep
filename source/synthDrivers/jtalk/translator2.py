@@ -923,6 +923,7 @@ RE_GAIJI = re.compile('^[A-Za-z][A-Za-z0-9\,\.\+\-\'\!\? ]+$')
 RE_KATAKANA = re.compile('^[ァ-ヾ]+$')
 RE_HIRAGANA = re.compile('^[ぁ-ゞ]+$')
 RE_HALF_KATAKANA = re.compile('^[ｦ-ﾟ]+$') # ff66 .. ff9f
+RE_DIGIT_SINGLE_ALPHA = re.compile('^[0-9]+\'[A-Za-z]+$')
 
 NO_DAKUON_DIC = {
 	'ガ' : 'カ', 'ギ' : 'キ', 'グ' : 'ク', 'ゲ' : 'ケ', 'ゴ' : 'コ',
@@ -995,6 +996,7 @@ def japanese_braille_separate(inbuf, logwrite, nabcc=False):
 	li = mecab_to_morphs(mf)
 	mf = None
 
+	li = [mo for mo in li if mo.hyouki]
 	for mo in li:
 		if TAB_CODE in mo.nhyouki:
 			mo.hinshi1 = '記号'
@@ -1215,7 +1217,8 @@ def japanese_braille_separate(inbuf, logwrite, nabcc=False):
 			('.' in mo.nhyouki) and \
 			len(mo.nhyouki) > 3
 		) or (
-			mo.nhyouki == "0's" # FIXME
+			# "0's", "80's"
+			RE_DIGIT_SINGLE_ALPHA.match(mo.nhyouki)
 		):
 			if nabcc:
 				mo.output = mo.nhyouki

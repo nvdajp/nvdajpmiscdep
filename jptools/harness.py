@@ -5570,16 +5570,16 @@ tests = [
 		'input':"⠦0's⠴",
 		'output':'⠦⠼⠚⠄⠎⠴',
 	},
-	#{
-	#	'comment':'https://github.com/nvdajp/nvdajpmiscdep/issues/36',
-	#	'text':"80's",
-	#	'input':"⠦80's⠴",
-	#	'output':'⠦⠼⠓⠚⠄⠎⠴',
-	#},
-	#{
-	#	'comment':'https://github.com/nvdajp/nvdajpmiscdep/issues/36',
-	#	'text':"今更使ってみたけど、80'sを再現できる",
-	#	'input':"イマサラ ツカッテ ミタケド、⠦80's⠴ヲ サイゲン デキル",
-	#	'output':'⠃⠵⠱⠑ ⠝⠡⠂⠟ ⠷⠕⠫⠐⠞⠰ ⠦⠼⠓⠚⠄⠎⠴⠔ ⠱⠃⠐⠫⠴ ⠐⠟⠣⠙',
-	#},
+	{
+		'comment':'https://github.com/nvdajp/nvdajpmiscdep/issues/36',
+		'text':"80's",
+		'input':"⠦80's⠴",
+		'output':'⠦⠼⠓⠚⠄⠎⠴',
+	},
+	{
+		'comment':'https://github.com/nvdajp/nvdajpmiscdep/issues/36',
+		'text':"今更使ってみたけど、80'sを再現できる",
+		'input':"イマサラ ツカッテ ミタケド、⠦80's⠴ ヲ サイゲン デキル",
+		'output':'⠃⠵⠱⠑ ⠝⠡⠂⠟ ⠷⠕⠫⠐⠞⠰ ⠦⠼⠓⠚⠄⠎⠴ ⠔ ⠱⠃⠐⠫⠴ ⠐⠟⠣⠙',
+	},
 ]
