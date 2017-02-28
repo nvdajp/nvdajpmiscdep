@@ -5564,4 +5564,22 @@ tests = [
 		'output':'⠰⠠⠉⠁⠋⠑',
 		'comment':'https://osdn.jp/ticket/browse.php?group_id=4221&tid=36480',
 	},
+	{
+		'comment':'https://github.com/nvdajp/nvdajpmiscdep/issues/36',
+		'text':"0's",
+		'input':"⠦0's⠴",
+		'output':'⠦⠼⠚⠄⠎⠴',
+	},
+	#{
+	#	'comment':'https://github.com/nvdajp/nvdajpmiscdep/issues/36',
+	#	'text':"80's",
+	#	'input':"⠦80's⠴",
+	#	'output':'⠦⠼⠓⠚⠄⠎⠴',
+	#},
+	#{
+	#	'comment':'https://github.com/nvdajp/nvdajpmiscdep/issues/36',
+	#	'text':"今更使ってみたけど、80'sを再現できる",
+	#	'input':"イマサラ ツカッテ ミタケド、⠦80's⠴ヲ サイゲン デキル",
+	#	'output':'⠃⠵⠱⠑ ⠝⠡⠂⠟ ⠷⠕⠫⠐⠞⠰ ⠦⠼⠓⠚⠄⠎⠴⠔ ⠱⠃⠐⠫⠴ ⠐⠟⠣⠙',
+	#},
 ]

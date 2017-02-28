@@ -312,6 +312,7 @@ def concatinate_morphs(li):
 		s += i.hyouki
 		y += i.yomi
 	mo.hyouki = mo.nhyouki = s
+	#mo.nhyouki = unicode_normalize(mo.nhyouki)
 	mo.yomi = mo.kana = mo.output = y
 	return mo
 
@@ -397,11 +398,11 @@ def replace_alphabet_morphs(li, nabcc=False):
 			next_mo = None
 		if is_alpha(mo.nhyouki):
 			alp_morphs.append(mo)
-		elif mo.nhyouki in r',+@/#$%&*;<':
+		elif mo.nhyouki and mo.nhyouki in r',+@/#$%&*;<':
 			alp_morphs.append(mo)
 		elif mo.nhyouki == '\\':
 			alp_morphs.append(mo)
-		elif mo.nhyouki[0] in r',+@/#$%&*;' and \
+		elif mo.nhyouki and mo.nhyouki[0] in r',+@/#$%&*;' and \
 				RE_ASCII_SYMBOLS.match(mo.nhyouki):
 			alp_morphs.append(mo)
 		elif alp_morphs and mo.nhyouki in ',.' and \
@@ -499,10 +500,10 @@ def should_separate(prev2_mo, prev_mo, mo, next_mo, nabcc=False, logwrite=_logwr
 	if mo.hyouki and (mo.hyouki[0] in 'ぁぃぅぇぉっゃゅょゎァィゥェォッャュョヮヵヶ'): return False
 
 	# 0/4月 -> 04月
-	if prev_mo.output.isdigit() and mo.nhyouki[0].isdigit():
+	if prev_mo.output.isdigit() and mo.nhyouki and mo.nhyouki[0].isdigit():
 		return False
 	# 3/03
-	if prev_mo.output.isdigit() and mo.nhyouki[0] == '/':
+	if prev_mo.output.isdigit() and mo.nhyouki and mo.nhyouki[0] == '/':
 		return False
 
 	# アラビア数字のあとに単位がきたら続ける
@@ -541,7 +542,7 @@ def should_separate(prev2_mo, prev_mo, mo, next_mo, nabcc=False, logwrite=_logwr
 		if mo.hinshi1 == '名詞': return True
 
 	# 数字の前のマスアケ
-	if prev_mo.nhyouki not in ('-', '，', '.', '’', '、', ':', '：') and \
+	if prev_mo.nhyouki not in ('-', '，', '.', '’', '、', ':', '：', ',') and \
 		prev_mo.output != '⠼' and \
 		not nabcc and \
 		prev_mo.nhyouki not in ('(', '第', '築', '二男', '中') and \
@@ -1197,6 +1198,7 @@ def japanese_braille_separate(inbuf, logwrite, nabcc=False):
 			mo.output = ','
 
 	for mo in li:
+		mo.nhyouki = unicode_normalize(mo.nhyouki)
 		# 情報処理点字の開始記号と終了記号
 		if RE_INFOMATION.match(mo.nhyouki) and \
 				('@' in mo.nhyouki) or ('://' in mo.nhyouki) or ('\\' in mo.nhyouki):
@@ -1212,6 +1214,8 @@ def japanese_braille_separate(inbuf, logwrite, nabcc=False):
 		) or (
 			('.' in mo.nhyouki) and \
 			len(mo.nhyouki) > 3
+		) or (
+			mo.nhyouki == "0's" # FIXME
 		):
 			if nabcc:
 				mo.output = mo.nhyouki
