@@ -1,2 +1,2 @@
 call userdicBuilder.cmd
-python test.py|nkf
+python test.py > __test_log.txt
