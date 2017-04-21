@@ -234,6 +234,13 @@ tests = [
 	{
 		'comment':'https://github.com/nvdajp/nvdajpmiscdep/issues/37',
 		'mode':'NABCC',
+		'text':'ff754fc..263b1af',
+		'input':'ff754fc..263b1af',
+		'output':'⠋⠋⠶⠢⠲⠋⠉⠨⠨⠆⠖⠒⠃⠂⠁⠋',
+	},
+	{
+		'comment':'https://github.com/nvdajp/nvdajpmiscdep/issues/37',
+		'mode':'NABCC',
 		'text':'[0-9A-Za-z]',
 		'input':'[0-9A-Za-z]',
 		'output':'⡪⠴⠤⠔⡁⠤⡵⠁⠤⠵⡻',
