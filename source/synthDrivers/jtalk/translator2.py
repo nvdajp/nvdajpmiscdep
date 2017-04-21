@@ -924,7 +924,7 @@ def morphs_to_string(li, inbuf, logwrite):
 
 RE_MB_ALPHA_NUM_SPACE = re.compile('^[0-9A-Za-z\- ０-９Ａ-Ｚａ-ｚ　]+$')
 RE_ASCII_CHARS = re.compile('^[A-Za-z0-9\.\,\-\+\:\/\~\?\&\%\#\*\$\; ]+$')
-RE_INFOMATION = re.compile('^[A-Za-z0-9\+\@\/\#\$\%\&\*\;\.\<\>\-\_\{\}\[\] ]+$')
+RE_INFORMATION = re.compile('^[A-Za-z0-9\+\@\/\#\$\%\&\*\;\.\<\>\-\_\{\}\[\] ]+$')
 RE_GAIJI = re.compile('^[A-Za-z][A-Za-z0-9\,\.\+\-\'\!\? ]+$')
 RE_KATAKANA = re.compile('^[ァ-ヾ]+$')
 RE_HIRAGANA = re.compile('^[ぁ-ゞ]+$')
@@ -1208,7 +1208,7 @@ def japanese_braille_separate(inbuf, logwrite, nabcc=False):
 	for mo in li:
 		mo.nhyouki = unicode_normalize(mo.nhyouki)
 		# 情報処理点字の開始記号と終了記号
-		if RE_INFOMATION.match(mo.nhyouki) and \
+		if RE_INFORMATION.match(mo.nhyouki) and \
 				('@' in mo.nhyouki) or ('://' in mo.nhyouki) or ('\\' in mo.nhyouki):
 			if nabcc:
 				mo.output = mo.nhyouki
