@@ -5585,7 +5585,7 @@ tests = [
 	# NABCCの場合に数字に続いてアルファベットがあるとスペースが入る
 	{
 		'text':'30adac67',
-		#'input':'30adac67',
+		'input':'30adac67',
 	},
 	{
 		'text':'[0-9A-Za-z]',
