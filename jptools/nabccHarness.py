@@ -225,18 +225,21 @@ tests = [
 	},
 	# 数字に続いてアルファベットがあるとスペースが入る
 	{
+		'comment':'https://github.com/nvdajp/nvdajpmiscdep/issues/37',
 		'mode':'NABCC',
 		'text':'30adac67',
 		'input':'30adac67',
 		'output':'⠒⠴⠁⠙⠁⠉⠖⠶',
 	},
 	{
+		'comment':'https://github.com/nvdajp/nvdajpmiscdep/issues/37',
 		'mode':'NABCC',
 		'text':'[0-9A-Za-z]',
 		'input':'[0-9A-Za-z]',
 		'output':'⡪⠴⠤⠔⡁⠤⡵⠁⠤⠵⡻',
 	},
 	{
+		'comment':'https://github.com/nvdajp/nvdajpmiscdep/issues/37',
 		'mode':'NABCC',
 		'text':'47news:',
 		'input':'47news:',

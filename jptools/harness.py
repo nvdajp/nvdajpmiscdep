@@ -5584,15 +5584,18 @@ tests = [
 	},
 	# NABCCの場合に数字に続いてアルファベットがあるとスペースが入る
 	{
+		'comment':'https://github.com/nvdajp/nvdajpmiscdep/issues/37',
 		'text':'30adac67',
 		'input':'30adac67',
 	},
 	{
+		'comment':'https://github.com/nvdajp/nvdajpmiscdep/issues/37',
 		'text':'[0-9A-Za-z]',
-		#'input':'⠦[0-9A-Za-z]⠴',
+		'input':'⠠⠦[0-9A-Za-z]⠠⠴',
 	},
 	{
+		'comment':'https://github.com/nvdajp/nvdajpmiscdep/issues/37',
 		'text':'47news:',
-		#'input':'⠦47news:⠴',
+		'input':'47 news:',
 	},
 ]
