@@ -419,6 +419,8 @@ def replace_alphabet_morphs(li, nabcc=False):
 			alp_morphs.append(mo)
 		elif nabcc and mo.nhyouki in '”’‘＿':
 			alp_morphs.append(mo)
+		elif not alp_morphs and mo.nhyouki in '[]':
+			alp_morphs.append(mo)
 		else:
 			if alp_morphs:
 				m = concatinate_morphs(alp_morphs)
@@ -438,7 +440,7 @@ def set_pos_of_alphabets(m):
 	if m.nhyouki == ',':
 		m.hinshi1 = '記号'
 		m.hinshi2 = '*'
-	else:
+	elif m.nhyouki not in '[]':
 		m.hinshi1 = '名詞'
 		m.hinshi2 = 'アルファベット'
 
@@ -540,6 +542,10 @@ def should_separate(prev2_mo, prev_mo, mo, next_mo, nabcc=False, logwrite=_logwr
 	if prev_mo.hinshi2 == '括弧閉' and prev_mo.nhyouki != "’":
 		if mo.hinshi2 == '括弧開': return True
 		if mo.hinshi1 == '名詞': return True
+
+	# 数字の後のアルファベット
+	if nabcc and prev_mo.hinshi2 == '数' and mo.hinshi2 == 'アルファベット':
+		return False
 
 	# 数字の前のマスアケ
 	if prev_mo.nhyouki not in ('-', '，', '.', '’', '、', ':', '：', ',') and \
