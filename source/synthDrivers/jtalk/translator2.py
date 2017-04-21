@@ -544,8 +544,11 @@ def should_separate(prev2_mo, prev_mo, mo, next_mo, nabcc=False, logwrite=_logwr
 		if mo.hinshi1 == '名詞': return True
 
 	# 数字の後のアルファベット
-	if nabcc and prev_mo.hinshi2 == '数' and mo.hinshi2 == 'アルファベット':
-		return False
+	if prev_mo.hinshi2 == '数' and mo.hinshi2 == 'アルファベット':
+		if nabcc:
+			return False
+		elif RE_ASCII_CHARS.match(mo.nhyouki):
+			return False
 
 	# 数字の前のマスアケ
 	if prev_mo.nhyouki not in ('-', '，', '.', '’', '、', ':', '：', ',') and \

@@ -5596,6 +5596,6 @@ tests = [
 	{
 		'comment':'https://github.com/nvdajp/nvdajpmiscdep/issues/37',
 		'text':'47news:',
-		'input':'47 news:',
+		'input':'47news:',
 	},
 ]
