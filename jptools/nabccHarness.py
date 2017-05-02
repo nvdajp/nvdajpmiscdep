@@ -252,4 +252,22 @@ tests = [
 		'input':'47news:',
 		'output':'⠲⠶⠝⠑⠺⠎⠱',
 	},
-	]
+	{
+		'mode': 'NABCC',
+		'text': "Here's",
+		'input': "Here's",
+		'output': '⡓⠑⠗⠑⠄⠎',
+	},
+	{
+		'mode': 'NABCC',
+		'text': "There's",
+		'input': "There's",
+		'output': '⡞⠓⠑⠗⠑⠄⠎',
+	},
+	{
+		'mode': 'NABCC',
+		'text': "Mother's",
+		'input': "Mother's",
+		'output': '⡍⠕⠞⠓⠑⠗⠄⠎',
+	},
+]

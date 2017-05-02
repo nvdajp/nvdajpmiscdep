@@ -372,10 +372,10 @@ def replace_digit_morphs(li):
 		new_li.append(concatinate_morphs(num_morphs))
 	return new_li
 
-RE_ALPHA = re.compile('^[A-Za-z]+$')
+RE_ALPHA_OR_SINGLE = re.compile('^[A-Za-z\']+$')
 
-def is_alpha(s):
-	return RE_ALPHA.match(s)
+def is_alpha_or_single(s):
+	return RE_ALPHA_OR_SINGLE.match(s)
 
 RE_ASCII_SYMBOLS = re.compile('^[\,\.\:\;\!\?\@\#\\\$\%\&\*\|\+\-\/\=\<\>\"\'\^\`\_\~]+$')
 
@@ -396,7 +396,7 @@ def replace_alphabet_morphs(li, nabcc=False):
 			next_mo = li[pos + 1]
 		else:
 			next_mo = None
-		if is_alpha(mo.nhyouki):
+		if is_alpha_or_single(mo.nhyouki):
 			alp_morphs.append(mo)
 		elif mo.nhyouki and mo.nhyouki in r',+@/#$%&*;<':
 			alp_morphs.append(mo)
@@ -411,7 +411,7 @@ def replace_alphabet_morphs(li, nabcc=False):
 					 (not next_mo)):
 			alp_morphs.append(mo)
 		elif alp_morphs and mo.nhyouki == ' ' and \
-				next_mo and is_alpha(next_mo.nhyouki):
+				next_mo and is_alpha_or_single(next_mo.nhyouki):
 			alp_morphs.append(mo)
 		elif alp_morphs and mo.nhyouki.isdigit():
 			alp_morphs.append(mo)
@@ -521,7 +521,7 @@ def should_separate(prev2_mo, prev_mo, mo, next_mo, nabcc=False, logwrite=_logwr
 		return False
 
 	# カナ名詞の後のアルファベット名詞
-	if prev_mo.hinshi1 == '名詞' and is_alpha(mo.nhyouki):
+	if prev_mo.hinshi1 == '名詞' and is_alpha_or_single(mo.nhyouki):
 		return False
 
 	#
@@ -575,7 +575,7 @@ def should_separate(prev2_mo, prev_mo, mo, next_mo, nabcc=False, logwrite=_logwr
 	# アルファベットの後の助詞、助動詞
 	# ＣＤ,CD,名詞,一般,*,*,シーディー,シーディー,3/4,シーディー,0
 	# を,を,助詞,格助詞,一般,*,ヲ,ヲ,0/1,ヲ,0
-	if is_alpha(prev_mo.nhyouki) and mo.hinshi1 in ('助詞', '助動詞'):
+	if is_alpha_or_single(prev_mo.nhyouki) and mo.hinshi1 in ('助詞', '助動詞'):
 		return True
 	if nabcc:
 		if prev_mo.hinshi2 == 'アルファベット' and mo.hinshi1 in ('助詞', '助動詞'):
