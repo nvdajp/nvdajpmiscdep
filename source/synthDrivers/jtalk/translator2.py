@@ -528,6 +528,9 @@ def should_separate(prev2_mo, prev_mo, mo, next_mo, nabcc=False, logwrite=_logwr
 	# 334万画素 334マンガソ
 	if prev_mo.hyouki == '万' and mo.hyouki == '画素': return False
 
+	# 薄ら笑い ウスラワライ
+	if prev_mo.hyouki == '薄ら' and mo.hinshi1 == '名詞': return False
+
 	#
 	# 記号と数字 (True)
 	#
