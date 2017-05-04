@@ -403,6 +403,12 @@ def filter_jdic(s):
 	elif a[0] == 'もうすぐ' and a[12] == 'モースグ':
 		a.append('モー スグ')
 		s = ",".join(a)
+	elif a[0] == 'リニアモーターカー' and a[12] == 'リニアモーターカー':
+		a.append('リニア モーターカー')
+		s = ",".join(a)
+	elif a[0] == 'プレイガイド' and a[12] == 'プレイガイド':
+		a.append('プレイ ガイド')
+		s = ",".join(a)
 	elif a[0] == '仝':
 		# 同上記号
 		# 仝	4edd	[ドージョー]	ドージョー
@@ -560,6 +566,33 @@ def filter_jdic(s):
 	elif a[0] == '上' and a[4] == '名詞' and a[5] == '接尾' and a[11] == 'ジョウ' and len(a) == 15:
 		s = ""
 	elif a[0] == '上' and a[4] == '名詞' and a[5] == '非自立' and a[11] == 'ジョウ' and len(a) == 15:
+		s = ""
+	elif a[0] == '傀儡' and a[12] == 'クグツ' and len(a) == 15:
+		s = ""
+	elif a[0] == '鍛冶' and a[12] == 'タンヤ' and len(a) == 15:
+		s = ""
+	elif a[0] == '自分勝手' and a[12] == 'ジブンガッテ' and len(a) == 15:
+		s = ""
+	elif a[0] == '仮名' and a[12] == 'カメイ' and len(a) == 15:
+		s = ""
+	elif a[0] == '仮名' and a[12] == 'ガナ' and len(a) == 15:
+		s = ""
+	elif a[0] == '桃栗三年柿八年' and a[12] == 'モモクリサンネンカキハチネン' and len(a) == 15:
+		a.append('モモ クリ 3ネン カキ 8ネン')
+		s = ",".join(a)
+	elif a[0] == 'カリ肥料' and a[12] == 'カリヒリョー' and len(a) == 15:
+		a.append('カリ ヒリョー')
+		s = ",".join(a)
+	elif a[0] == '画竜点睛' and a[12] == 'ガリョーテンセイ' and len(a) == 15:
+		a.append('ガリョー テンセイ')
+		s = ",".join(a)
+	elif a[0] == '感無量' and a[12] == 'カンムリョー' and len(a) == 15:
+		a.append('カン ムリョー')
+		s = ",".join(a)
+	elif a[0] == '寒冷前線' and a[12] == 'カンレイゼンセン' and len(a) == 15:
+		a.append('カンレイ ゼンセン')
+		s = ",".join(a)
+	elif a[0] == '乞食' and a[12] == 'ホイト' and len(a) == 15:
 		s = ""
 	elif is_alpha_jp_mixed(a[0]):
 		#print a[0]

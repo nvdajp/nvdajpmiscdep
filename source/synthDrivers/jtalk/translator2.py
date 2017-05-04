@@ -515,6 +515,7 @@ def should_separate(prev2_mo, prev_mo, mo, next_mo, nabcc=False, logwrite=_logwr
 		if mo.hinshi3 == '助数詞': return False
 		if mo.hyouki == 'センチメートル': return False
 		if mo.nhyouki == '#': return False
+		if mo.hyouki == '楽章': return False
 
 	# 数%
 	if prev_mo.hyouki == '数' and prev_mo.yomi == 'スー' and mo.hyouki == '％':
@@ -523,6 +524,9 @@ def should_separate(prev2_mo, prev_mo, mo, next_mo, nabcc=False, logwrite=_logwr
 	# カナ名詞の後のアルファベット名詞
 	if prev_mo.hinshi1 == '名詞' and is_alpha_or_single(mo.nhyouki):
 		return False
+
+	# 334万画素 334マンガソ
+	if prev_mo.hyouki == '万' and mo.hyouki == '画素': return False
 
 	#
 	# 記号と数字 (True)
@@ -605,6 +609,24 @@ def should_separate(prev2_mo, prev_mo, mo, next_mo, nabcc=False, logwrite=_logwr
 	if mo.hyouki == '市' and mo.yomi == 'シ':
 		return False
 
+	# 金の減り.加減 カネノ ヘリカゲン
+	# 馬鹿さ.加減 バカサ カゲン
+	if mo.hyouki == '加減' and mo.yomi == 'カゲン':
+		if len(prev_mo.output.split(' ')[-1]) < 3:
+			return False
+	# 仮名文字 カナモジ
+	# 仮名タイプ カナタイプ
+	# 仮名変換 カナ ヘンカン
+	if prev_mo.hyouki == '仮名' and prev_mo.output == 'カナ':
+		if len(mo.output.split(' ')[-1]) <= 3:
+			return False
+		else:
+			return True
+	# 漢字仮名交じり文 カンジ カナマジリブン
+	if mo.hyouki == '仮名' and mo.output == 'カナ':
+		if prev_mo.hyouki == '漢字':
+			return True
+
 	# そう.な.ん.です.もの
 	# そう.なん.だって
 	if prev_mo.hyouki == 'な' and mo.hyouki == 'ん':
@@ -616,6 +638,10 @@ def should_separate(prev2_mo, prev_mo, mo, next_mo, nabcc=False, logwrite=_logwr
 
 	# 副,知事
 	if prev_mo.hyouki == '副' and mo.hinshi1 == '名詞' and mo.hinshi2 == '一般':
+		return False
+
+	# 鍛冶,職人 カジショクニン
+	if len(prev_mo.output) <= 2 and mo.hyouki == '職人':
 		return False
 
 	# 「・・ですこと」の「こと」は接尾語なので前に続ける
@@ -700,6 +726,10 @@ def should_separate(prev2_mo, prev_mo, mo, next_mo, nabcc=False, logwrite=_logwr
 
 	# 今/現在
 	if prev_mo.hyouki == '今' and mo.hyouki == '現在':
+		return True
+
+	# 癌予防 ガン ヨボー
+	if prev_mo.hyouki == '癌' and mo.hyouki == '予防':
 		return True
 
 	if prev_mo.hinshi1 == '接頭詞' and prev_mo.hyouki == '超' and mo.hinshi1 == '名詞': return True
