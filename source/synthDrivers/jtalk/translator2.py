@@ -577,6 +577,10 @@ def should_separate(prev2_mo, prev_mo, mo, next_mo, nabcc=False, logwrite=_logwr
 	if prev_mo.hyouki == '回' and mo.hyouki == 'こっきり':
 		return True
 
+	# Ｈ形コンベアー Hガタ コンベアー
+	if prev_mo.hyouki[-1] == '形' and mo.hyouki == 'コンベアー':
+		return True
+
 	# 外国語引用符、マスアケ、助詞、助動詞
 	if prev_mo.output and prev_mo.output.endswith('⠴') and mo.hinshi1 in ('助詞', '助動詞'): return True
 
