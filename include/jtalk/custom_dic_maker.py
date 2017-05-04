@@ -864,6 +864,16 @@ jdic = [
 	 'braille':'ウスラ',
 	 'accent':"0/3",
 	 },
+	{'text':'カリ塩',
+	 'pos':"名詞,一般,*,*,*,*",
+	 'braille':'カリエン',
+	 'accent':"2/4",
+	 },
+	{'text':'クレオソート丸',
+	 'pos':"名詞,一般,*,*,*,*",
+	 'braille':'クレオソートガン',
+	 'accent':"0/8",
+	 },
 ]
 
 class DicItem(object):
