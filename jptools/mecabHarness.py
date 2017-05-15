@@ -578,6 +578,26 @@ tasks = [
 	# nvdajp/nvdajpmiscdep#33
 	{'text':'smap', 'speech':'スマップ'},
 
+	# nvdajp/nvdajpmiscdep#39
+	{'text':'game', 'speech':'ゲイム'},
+	{'text':'gaming', 'speech':'ゲイミング'},
+	{'text':'meter', 'speech':'ミーター'},
+	{'text':'metered', 'speech':'ミータードゥ'},
+	{'text':'theme', 'speech':'スィーム'},
+	{'text':'themes', 'speech':'スィームズ'},
+	{'text':'ink', 'speech':'インク'},
+	{'text':'inking', 'speech':'インキング'},
+	{'text':'task', 'speech':'タスク'},
+	{'text':'tasks', 'speech':'タスクス'},
+	{'text':"that's", 'speech':'ザッツ'},
+	{'text':"don't", 'speech':'ドント'},
+	{'text':"explicit", 'speech':'イクスプリシットゥ'},
+	{'text':"don't explicitly", 'speech':'ドント イクスプリシットリィ'},
+	{'text':"updates", 'speech':'アップデーツ'},
+	{'text':"uninstall", 'speech':'アンインストール'},
+	{'text':"backup", 'speech':'バックアップ'},
+	{'text':"backups", 'speech':'バックアップス'},
+
 	{'text':'罰', 'speech':'バツ', 'braille':'バツ'},
 	{'text':'殺', 'speech':'サツ', 'braille':'サツ'},
 	{'text':'重殺', 'speech':'ジューサツ', 'braille':'ジューサツ'},

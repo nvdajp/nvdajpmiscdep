@@ -45,6 +45,7 @@ def make_dic(IN_FILE, CODE, THISDIR):
 		['bazaar', 	'バザール'],
 		['blog', 		'ブログ', None, 1000],
 		['butt', 'バットゥ', "1/4", 10000],
+		['backups', 'バックアップス'],
 		
 		['cam', 	'キャム'],
 		['ctrl', 	'コントロール'],
@@ -97,6 +98,7 @@ def make_dic(IN_FILE, CODE, THISDIR):
 		['editable', 'エディタブル', '1/5'],
 		['everyone', 'エブリワン', "1/5"],
 		['euc', 		'イーユーシー', 		"1/6", 1000],
+		['explicitly', 		'イクスプリシットリィ'],
 		
 		['firefox', 'ファイアフォックス'],
 		['for', 	'フォー'],
@@ -120,6 +122,7 @@ def make_dic(IN_FILE, CODE, THISDIR):
 		#['genpatsu',	'ゲンパツ',		"1/4", 1000],
 		['git', 'ギットゥ'],
 		['gpu', 'ジーピーユー'],
+		['gaming', 'ゲイミング'],
 		
 		['home', 	'ホーム'],
 		['hub', 	'ハブ'],
@@ -146,6 +149,7 @@ def make_dic(IN_FILE, CODE, THISDIR):
 		#['it', 			'アイティー', 			"3/4", 1000],
 		['ime',			'アイエムイー', 		"0/6", 600],
 		['iwate', 		'イワテ', None, 1000],
+		['inking', 		'インキング'],
 		
 		['java', 	'ジャバ'],
 		['jaxa',    'ジャクサ'],
@@ -187,6 +191,7 @@ def make_dic(IN_FILE, CODE, THISDIR):
 		['miyagi', 		'ミヤギ',			"1/3", 1000],
 		['mei',			'メイ',			"1/2", 100],
 		['meiryo',		'メイリョー',	"1/4"],
+		['metered',		'ミータードゥ'],
 		
 		['notepad', 	'ノートパッド', None, 1000],
 		['nullsoft', 	'ヌルソフト', None, 1000],
@@ -270,6 +275,8 @@ def make_dic(IN_FILE, CODE, THISDIR):
 		['toggles', 'トグルズ'],
 		['tsukuba', 	'ツクバ', None, 1000],
 		['tochigi', 	'トチギ', None, 1000],
+		['themes', 	'スィームズ'],
+		['tasks', 	'タスクス'],
 		
 		['update', 	'アップデート'],
 		['ui', 	'ユーアイ'],
@@ -286,6 +293,8 @@ def make_dic(IN_FILE, CODE, THISDIR):
 		['unlocks', 'アンロックス'],
 		['usb', 		'ユーエスビー',		"1/6", 1000],
 		['users', 'ユーザーズ', "1/5"],
+		['updates', 'アップデーツ'],
+		['uninstall', 'アンインストール'],
 		
 		['version', 'バージョン'],
 		['versions', 'バージョンズ'],
