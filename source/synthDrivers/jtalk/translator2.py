@@ -624,6 +624,14 @@ def should_separate(prev2_mo, prev_mo, mo, next_mo, nabcc=False, logwrite=_logwr
 	if mo.hyouki == '卿' and mo.yomi == 'キョー':
 		return False
 
+	# 京言葉
+	if prev_mo.hyouki == '京' and prev_mo.yomi == 'キョー':
+		return False
+
+	# V字
+	if prev_mo.hinshi2 == 'アルファベット' and mo.hyouki == '字':
+		return False
+
 	# 金の減り.加減 カネノ ヘリカゲン
 	# 馬鹿さ.加減 バカサ カゲン
 	if mo.hyouki == '加減' and mo.yomi == 'カゲン':
