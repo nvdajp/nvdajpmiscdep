@@ -603,6 +603,240 @@ def filter_jdic(s):
 	elif a[0] == '塩化ナトリウム' and a[12] == 'エンカナトリューム' and len(a) == 15:
 		a.append('エンカ ナトリウム')
 		s = ",".join(a)
+	elif a[0] == '朴の木' and a[12] == 'ホーノキ' and len(a) == 15:
+		a.append('ホオノ キ')
+		s = ",".join(a)
+	elif a[0] == '松の木' and a[12] == 'マツノキ' and len(a) == 15:
+		a.append('マツノ キ')
+		s = ",".join(a)
+	elif a[0] == '気に入る' and a[12] == 'キニイル' and len(a) == 15:
+		a.append('キニ イル')
+		s = ",".join(a)
+	elif a[0] == 'やる気' and a[12] == 'ヤルキ' and len(a) == 15:
+		a.append('ヤル キ')
+		s = ",".join(a)
+	elif a[0] == '一基' and a[12] == 'イッキ' and len(a) == 15:
+		a.append('1キ')
+		s = ",".join(a)
+	elif a[0] == '日本書紀' and a[12] == 'ニホンショキ' and len(a) == 15:
+		a.append('ニホン ショキ')
+		s = ",".join(a)
+	elif a[0] == '軌を一に' and a[12] == 'キヲイツニ' and len(a) == 15:
+		a.append('キヲ イツニ')
+		s = ",".join(a)
+	elif a[0] == '私儀' and a[12] == 'ワタクシギ' and len(a) == 15:
+		a.append('ワタクシ ギ')
+		s = ",".join(a)
+	elif a[0] == '第一義' and a[12] == 'ダイイチギ' and len(a) == 15:
+		a.append('ダイ1ギ')
+		s = ",".join(a)
+	elif a[0] == 'キーパンチャー' and a[12] == 'キーパンチャー' and len(a) == 15:
+		a.append('キー パンチャー')
+		s = ",".join(a)
+	elif a[0] == 'キーポイント' and a[12] == 'キーポイント' and len(a) == 15:
+		a.append('キー ポイント')
+		s = ",".join(a)
+	elif a[0] == 'キーホルダー' and a[12] == 'キーホルダー' and len(a) == 15:
+		a.append('キー ホルダー')
+		s = ",".join(a)
+	elif a[0] == 'マスターキー' and a[12] == 'マスターキー' and len(a) == 15:
+		a.append('マスター キー')
+		s = ",".join(a)
+	elif a[0] == '幾何級数' and a[12] == 'キカキュースー' and len(a) == 15:
+		a.append('キカ キュースー')
+		s = ",".join(a)
+	elif a[0] == '危機一髪' and a[12] == 'キキイッパツ' and len(a) == 15:
+		a.append('キキ イッパツ')
+		s = ",".join(a)
+	elif a[0] == '奇奇怪怪' and a[12] == 'キキカイカイ' and len(a) == 15:
+		a.append('キキ カイカイ')
+		s = ",".join(a)
+	elif a[0] == '菊の節句' and a[12] == 'キクノセック' and len(a) == 15:
+		a.append('キクノ セック')
+		s = ",".join(a)
+	elif a[0] == '一杯機嫌' and a[12] == 'イッパイキゲン' and len(a) == 15:
+		a.append('1パイ キゲン')
+		s = ",".join(a)
+	elif a[0] == '刻み煙草' and a[12] == 'キザミタバコ' and len(a) == 15:
+		a.append('キザミ タバコ')
+		s = ",".join(a)
+	elif a[0] == '起死回生' and a[12] == 'キシカイセイ' and len(a) == 15:
+		a.append('キシ カイセイ')
+		s = ",".join(a)
+	elif a[0] == '起承転結' and a[12] == 'キショーテンケツ' and len(a) == 15:
+		a.append('キショー テンケツ')
+		s = ",".join(a)
+	elif a[0] == '木曽福島' and a[12] == 'キソフクシマ' and len(a) == 15:
+		a.append('キソ フクシマ')
+		s = ",".join(a)
+	elif a[0] == '奇想天外' and a[12] == 'キソーテンガイ' and len(a) == 15:
+		a.append('キソー テンガイ')
+		s = ",".join(a)
+	elif a[0] == '規則正しい' and a[12] == 'キソクタダシイ' and len(a) == 15:
+		a.append('キソク タダシイ')
+		s = ",".join(a)
+	elif a[0] == '着た切り雀' and a[12] == 'キタキリスズメ' and len(a) == 15:
+		a.append('キタキリ スズメ')
+		s = ",".join(a)
+	elif a[0] == 'キックボクシング' and a[12] == 'キックボクシング' and len(a) == 15:
+		a.append('キック ボクシング')
+		s = ",".join(a)
+	elif a[0] == '帝国ホテル' and a[12] == 'テイコクホテル' and len(a) == 15:
+		a.append('テイコク ホテル')
+		s = ",".join(a)
+	elif a[0] == '狐の嫁入り' and a[12] == 'キツネノヨメイリ' and len(a) == 15:
+		a.append('キツネノ ヨメイリ')
+		s = ",".join(a)
+	elif a[0] == '喜怒哀楽' and a[12] == 'キドアイラク' and len(a) == 15:
+		a.append('キド アイラク')
+		s = ",".join(a)
+	elif a[0] == '木戸御免' and a[12] == 'キドゴメン' and len(a) == 15:
+		a.append('キド ゴメン')
+		s = ",".join(a)
+	elif a[0] == '昨日今日' and a[12] == 'キノーキョー' and len(a) == 15:
+		a.append('キノー キョー')
+		s = ",".join(a)
+	elif a[0] == '甲子' and a[12] == 'キノエネ' and len(a) == 15:
+		a.append('キノエ ネ')
+		s = ",".join(a)
+	elif a[0] == '気に入り' and a[12] == 'キニイリ' and len(a) == 15:
+		a.append('キニ イリ')
+		s = ",".join(a)
+	elif a[0] == '木の芽' and a[12] == 'キノメ' and len(a) == 15:
+		a.append('キノ メ')
+		s = ",".join(a)
+	elif a[0] == '寄付行為' and a[12] == 'キフコーイ' and len(a) == 15:
+		a.append('キフ コーイ')
+		s = ",".join(a)
+	elif a[0] == 'ギブアンドテイク' and a[12] == 'ギブアンドテイク' and len(a) == 15:
+		a.append('ギブ アンド テイク')
+		s = ",".join(a)
+	elif a[0] == 'ギフトチェック' and a[12] == 'ギフトチェック' and len(a) == 15:
+		a.append('ギフト チェック')
+		s = ",".join(a)
+	elif a[0] == '気味が悪い' and a[12] == 'キミガワルイ' and len(a) == 15:
+		a.append('キミガ ワルイ')
+		s = ",".join(a)
+	elif a[0] == '君が代' and a[12] == 'キミガヨ' and len(a) == 15:
+		a.append('キミガ ヨ')
+		s = ",".join(a)
+	elif a[0] == '気持ちよい' and a[12] == 'キモチヨイ' and len(a) == 15:
+		a.append('キモチ ヨイ')
+		s = ",".join(a)
+	elif a[0] == '三角' and a[12] == 'サンカク' and len(a) == 15:
+		a.append('3カク')
+		s = ",".join(a)
+	elif a[0] == 'オールスターキャスト' and a[12] == 'オールスターキャスト' and len(a) == 15:
+		a.append('オール スター キャスト')
+		s = ",".join(a)
+	elif a[0] == 'キャッシュカード' and a[12] == 'キャッシュカード' and len(a) == 15:
+		a.append('キャッシュ カード')
+		s = ",".join(a)
+	elif a[0] == 'キャッチフレーズ' and a[12] == 'キャッチフレーズ' and len(a) == 15:
+		a.append('キャッチ フレーズ')
+		s = ",".join(a)
+	elif a[0] == 'キャッチボール' and a[12] == 'キャッチボール' and len(a) == 15:
+		a.append('キャッチ ボール')
+		s = ",".join(a)
+	elif a[0] == 'キャッチャーボート' and a[12] == 'キャッチャーボート' and len(a) == 15:
+		a.append('キャッチャー ボート')
+		s = ",".join(a)
+	elif a[0] == 'ナイトキャップ' and a[12] == 'ナイトキャップ' and len(a) == 15:
+		a.append('ナイト キャップ')
+		s = ",".join(a)
+	elif a[0] == 'アイスキャンデー' and a[12] == 'アイスキャンデー' and len(a) == 15:
+		a.append('アイス キャンデー')
+		s = ",".join(a)
+	elif a[0] == 'キャンプファイア' and a[12] == 'キャンプファイア' and len(a) == 15:
+		a.append('キャンプ ファイア')
+		s = ",".join(a)
+	elif a[0] == 'ライトヘビー' and a[12] == 'ライトヘビー' and len(a) == 15:
+		a.append('ライト ヘビー')
+		s = ",".join(a)
+	elif a[0] == '万事休す' and a[12] == 'バンジキュース' and len(a) == 15:
+		a.append('バンジ キュース')
+		s = ",".join(a)
+	elif a[0] == '旧石器時代' and a[12] == 'キューセッキジダイ' and len(a) == 15:
+		a.append('キューセッキ ジダイ')
+		s = ",".join(a)
+	elif a[0] == '急転直下' and a[12] == 'キューテンチョッカ' and len(a) == 15:
+		a.append('キューテン チョッカ')
+		s = ",".join(a)
+	elif a[0] == '三拝九拝' and a[12] == 'サンパイキューハイ' and len(a) == 15:
+		a.append('3パイ 9ハイ')
+		s = ",".join(a)
+	elif a[0] == '器用貧乏' and a[12] == 'キヨービンボー' and len(a) == 15:
+		a.append('キヨー ビンボー')
+		s = ",".join(a)
+	elif a[0] == '狂言回し' and a[12] == 'キョーゲンマワシ' and len(a) == 15:
+		a.append('キョーゲン マワシ')
+		s = ",".join(a)
+	elif a[0] == '当たり狂言' and a[12] == 'アタリキョーゲン' and len(a) == 15:
+		a.append('アタリ キョーゲン')
+		s = ",".join(a)
+	elif a[0] == '驚天動地' and a[12] == 'キョーテンドーチ' and len(a) == 15:
+		a.append('キョーテン ドーチ')
+		s = ",".join(a)
+	elif a[0] == '興味津々' and a[12] == 'キョーミシンシン' and len(a) == 15:
+		a.append('キョーミ シンシン')
+		s = ",".join(a)
+	elif a[0] == '虚虚実実' and a[12] == 'キョキョジツジツ' and len(a) == 15:
+		a.append('キョキョ ジツジツ')
+		s = ",".join(a)
+	elif a[0] == '挙国一致' and a[12] == 'キョコクイッチ' and len(a) == 15:
+		a.append('キョコク イッチ')
+		s = ",".join(a)
+	elif a[0] == 'きりきりしゃんと' and a[12] == 'キリキリシャント' and len(a) == 15:
+		a.append('キリキリ シャント')
+		s = ",".join(a)
+	elif a[0] == 'キリスト教徒' and a[12] == 'キリストキョート' and len(a) == 15:
+		a.append('キリスト キョート')
+		s = ",".join(a)
+	elif a[0] == '桐一葉' and a[12] == 'キリヒトハ' and len(a) == 15:
+		a.append('キリ ヒトハ')
+		s = ",".join(a)
+	elif a[0] == 'きりりしゃんと' and a[12] == 'キリリシャント' and len(a) == 15:
+		a.append('キリリ シャント')
+		s = ",".join(a)
+	elif a[0] == '極まりない' and a[12] == 'キワマリナイ' and len(a) == 15:
+		a.append('キワマリ ナイ')
+		s = ",".join(a)
+	elif a[0] == '感極まっ' and a[12] == 'カンキワマッ' and len(a) == 15:
+		a.append('カン キワマッ')
+		s = ",".join(a)
+	elif a[0] == '金一封' and a[12] == 'キンイップー' and len(a) == 15:
+		a.append('キン イップー')
+		s = ",".join(a)
+	elif a[0] == '金科玉条' and a[12] == 'キンカギョクジョー' and len(a) == 15:
+		a.append('キンカ ギョクジョー')
+		s = ",".join(a)
+	elif a[0] == '欣喜雀躍' and a[12] == 'キンキジャクヤク' and len(a) == 15:
+		a.append('キンキ ジャクヤク')
+		s = ",".join(a)
+	elif a[0] == 'キングコング' and a[12] == 'キングコング' and len(a) == 15:
+		a.append('キング コング')
+		s = ",".join(a)
+	elif a[0] == '近郷近在' and a[12] == 'キンゴーキンザイ' and len(a) == 15:
+		a.append('キンゴー キンザイ')
+		s = ",".join(a)
+	elif a[0] == '日本銀行' and a[12] == 'ニッポンギンコー' and len(a) == 15:
+		a.append('ニッポン ギンコー')
+		s = ",".join(a)
+	elif a[0] == '筋ジストロフィー' and a[12] == 'キンジストロフィー' and len(a) == 15:
+		a.append('キン ジストロフィー')
+		s = ",".join(a)
+	elif a[0] == '近所合壁' and a[12] == 'キンジョガッペキ' and len(a) == 15:
+		a.append('キンジョ ガッペキ')
+		s = ",".join(a)
+	elif a[0] == '琴の琴' and a[12] == 'キンノコト' and len(a) == 15:
+		a.append('キンノ コト')
+		s = ",".join(a)
+	elif a[0] == '吟遊詩人' and a[12] == 'ギンユーシジン' and len(a) == 15:
+		a.append('ギンユー シジン')
+		s = ",".join(a)
+	elif a[0] == '金襴緞子' and a[12] == 'キンランドンス' and len(a) == 15:
+		a.append('キンラン ドンス')
+		s = ",".join(a)
 	elif is_alpha_jp_mixed(a[0]):
 		#print a[0]
 		s = ""

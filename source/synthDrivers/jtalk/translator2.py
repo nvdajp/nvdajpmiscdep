@@ -620,6 +620,10 @@ def should_separate(prev2_mo, prev_mo, mo, next_mo, nabcc=False, logwrite=_logwr
 	if mo.hyouki == '市' and mo.yomi == 'シ':
 		return False
 
+	# 岩倉卿
+	if mo.hyouki == '卿' and mo.yomi == 'キョー':
+		return False
+
 	# 金の減り.加減 カネノ ヘリカゲン
 	# 馬鹿さ.加減 バカサ カゲン
 	if mo.hyouki == '加減' and mo.yomi == 'カゲン':
@@ -741,6 +745,23 @@ def should_separate(prev2_mo, prev_mo, mo, next_mo, nabcc=False, logwrite=_logwr
 
 	# 癌予防 ガン ヨボー
 	if prev_mo.hyouki == '癌' and mo.hyouki == '予防':
+		return True
+
+	# 旧華族 キュー カゾク
+	# 旧街道 キューカイドー 点訳のてびき第3版 第3章 その2 2
+	if prev_mo.hyouki == '旧' and mo.hyouki != '街道':
+		return True
+
+	# 禁転載 キン テンサイ
+	if prev_mo.hyouki == '禁' and prev_mo.output == 'キン':
+		return True
+
+	# 休暇届 キューカ トドケ
+	if mo.hyouki == '届' and mo.output == 'トドケ':
+		return True
+
+	# 500円強 500エン キョー
+	if mo.hyouki == '強' and mo.output == 'キョー':
 		return True
 
 	if prev_mo.hinshi1 == '接頭詞' and prev_mo.hyouki == '超' and mo.hinshi1 == '名詞': return True
