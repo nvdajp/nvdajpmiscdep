@@ -784,8 +784,8 @@ def should_separate(prev2_mo, prev_mo, mo, next_mo, nabcc=False, logwrite=_logwr
 		return False
 
 	# 京丹後市
-	if mo.hyouki == '市' and mo.yomi == 'シ':
-		return False
+	#if mo.hyouki == '市' and mo.yomi == 'シ':
+	#	return False
 
 	# 岩倉卿
 	if mo.hyouki == '卿' and mo.yomi == 'キョー':
