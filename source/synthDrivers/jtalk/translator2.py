@@ -524,9 +524,8 @@ def should_separate(prev2_mo, prev_mo, mo, next_mo, nabcc=False, logwrite=_logwr
 	# カナ名詞の後のアルファベット名詞
 	if prev_mo.hinshi1 == '名詞' and is_alpha_or_single(mo.nhyouki):
 		# キラーＴ細胞 キラー Tサイボー
-		if prev_mo.hyouki == 'キラー':
-			return True
-		return False
+		if prev_mo.hyouki != 'キラー':
+			return False
 
 	# V字
 	if prev_mo.hinshi2 == 'アルファベット' and mo.hyouki == '字':
