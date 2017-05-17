@@ -576,7 +576,7 @@ def should_separate(prev2_mo, prev_mo, mo, next_mo, nabcc=False, logwrite=_logwr
 
 	# 新/東京/名所
 	if prev_mo.hinshi1 == '接頭詞' and prev_mo.hinshi2 == '名詞接続' and \
-			mo.hinshi1 == '名詞' and mo.hinshi2 == '固有名詞':
+		mo.hinshi1 == '名詞' and mo.hinshi2 == '固有名詞':
 		# 後白河
 		if not (prev_mo.hyouki == '後' and prev_mo.yomi == 'ゴ'):
 			return True
@@ -589,13 +589,19 @@ def should_separate(prev2_mo, prev_mo, mo, next_mo, nabcc=False, logwrite=_logwr
 	# 複合語（接頭語・接尾語・造語要素）【備考１】
 	# 接頭語・接尾語・造語要素であっても、意味の理解を助ける場合には、
 	# 発音上の切れ目を考慮して区切って書いてよい。
-	if prev_mo.hinshi1 == '接頭詞' and prev_mo.hyouki not in ('お', 'ご', '旧', '後', '副', '大') and mo.hinshi1 == '名詞' and mo.hinshi2 != '数':
+	if prev_mo.hinshi1 == '接頭詞' and \
+		prev_mo.hyouki not in ('お', 'ご', '旧', '後', '副', '大') and \
+		mo.hinshi1 == '名詞' and \
+		mo.hinshi2 != '数':
 		return True
 
 	# 人名に続く「さん」「様」「君」「殿」「氏（し）」「氏（うじ）」は区切って書く
 	# (名詞,固有名詞,人名 -> 名詞,接尾,人名)
-	if prev_mo.hinshi2 == '固有名詞' and prev_mo.hinshi3 == '人名' and ((mo.hinshi2 == '接尾' and mo.hinshi3 == '人名') or (mo.hyouki in ('さん', '知事'))):
-		return True
+	if prev_mo.hinshi2 == '固有名詞' and prev_mo.hinshi3 == '人名':
+		if mo.hinshi2 == '接尾' and mo.hinshi3 == '人名':
+			return True
+		if mo.hyouki in ('さん', '知事'):
+			return True
 
 	# 地域
 	# 永田町 １
@@ -799,7 +805,8 @@ def should_separate(prev2_mo, prev_mo, mo, next_mo, nabcc=False, logwrite=_logwr
 	# False
 	################################
 
-	if prev_mo.hyouki == 'ー': return False
+	if prev_mo.hyouki == 'ー':
+		return False
 
 	# ち,ち,名詞,一般,*,*,チ,チ,0/1,チ,0
 	# ゅうりっぷ,ゅうりっぷ,名詞,一般,*,*,,,,ュウリップ,0
@@ -954,28 +961,6 @@ def should_separate(prev2_mo, prev_mo, mo, next_mo, nabcc=False, logwrite=_logwr
 	if prev_mo.hinshi1 == '接頭詞' and prev_mo.hyouki == '大' and mo.hinshi1 == '名詞':
 		return False
 
-	# 不幸,に,し,て
-	# 今,に,し,て
-	# 居,ながら,に,し,て
-	# 労,せ,ず,し,て
-	# 若く,し,て
-	# 私,を,し,て
-	# 「して」が文語的表現の助詞である場合は前に続けて書く
-	if mo.hyouki == 'し' and mo.kihon == 'する':
-		if prev_mo.hyouki == 'ず' and prev_mo.hinshi1 == '助動詞':
-			return False
-		if prev_mo.hinshi1 == '形容詞' and prev_mo.type2 == '連用テ接続':
-			return False
-		if prev_mo.hinshi2 == '接続助詞':
-			return False
-		if prev_mo.type1 == '文語・ベシ':
-			return False
-		if next_mo and next_mo.hyouki == 'て':
-			if prev_mo.hyouki == 'に' and prev_mo.hinshi1 == '助詞':
-				return False
-			if prev2_mo and prev2_mo.hyouki == '私' and prev_mo.hyouki == 'を':
-				return False
-
 	# 鍛冶,職人 カジショクニン
 	if len(prev_mo.output) <= 2 and mo.hyouki == '職人':
 		return False
@@ -1001,6 +986,28 @@ def should_separate(prev2_mo, prev_mo, mo, next_mo, nabcc=False, logwrite=_logwr
 
 	if mo.hinshi1 == '形容詞' and mo.kihon in ('ない', '無い', '悪い'):
 		return False
+
+	# 不幸,に,し,て
+	# 今,に,し,て
+	# 居,ながら,に,し,て
+	# 労,せ,ず,し,て
+	# 若く,し,て
+	# 私,を,し,て
+	# 「して」が文語的表現の助詞である場合は前に続けて書く
+	if mo.hyouki == 'し' and mo.kihon == 'する':
+		if prev_mo.hyouki == 'ず' and prev_mo.hinshi1 == '助動詞':
+			return False
+		if prev_mo.hinshi1 == '形容詞' and prev_mo.type2 == '連用テ接続':
+			return False
+		if prev_mo.hinshi2 == '接続助詞':
+			return False
+		if prev_mo.type1 == '文語・ベシ':
+			return False
+		if next_mo and next_mo.hyouki == 'て':
+			if prev_mo.hyouki == 'に' and prev_mo.hinshi1 == '助詞':
+				return False
+			if prev2_mo and prev2_mo.hyouki == '私' and prev_mo.hyouki == 'を':
+				return False
 
 	################################
 	# False/True
