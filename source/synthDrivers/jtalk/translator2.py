@@ -502,14 +502,17 @@ def should_separate(prev2_mo, prev_mo, mo, next_mo, nabcc=False, logwrite=_logwr
 	# (あけない)
 	# 機関,名詞,一般,*,*,*,*,機関,キカン,キカン,1/3,C1
 	# （,記号,括弧開,*,*,*,*,（,（,（,*/*,*
-	if prev_mo.hinshi1 == '名詞' and mo.hinshi2 == '括弧開' and mo.nhyouki != '(': return True
+	if prev_mo.hinshi1 == '名詞' and mo.hinshi2 == '括弧開' and mo.nhyouki != '(':
+		return True
 
 	# )( -> あける
 	# )陽が -> あける
 	# '02 -> あけない
 	if prev_mo.hinshi2 == '括弧閉' and prev_mo.nhyouki != "’":
-		if mo.hinshi2 == '括弧開': return True
-		if mo.hinshi1 == '名詞': return True
+		if mo.hinshi2 == '括弧開':
+			return True
+		if mo.hinshi1 == '名詞':
+			return True
 
 	# 数字の前のマスアケ
 	mo_output_isdigit = mo.output.isdigit()
@@ -532,7 +535,8 @@ def should_separate(prev2_mo, prev_mo, mo, next_mo, nabcc=False, logwrite=_logwr
 
 	# 外国語引用符、マスアケ、助詞、助動詞
 	is_mo_hinshi1_joshi_or_jodoshi = (mo.hinshi1 in ('助詞', '助動詞'))
-	if is_mo_hinshi1_joshi_or_jodoshi and prev_mo.output and prev_mo.output.endswith('⠴'): return True
+	if is_mo_hinshi1_joshi_or_jodoshi and prev_mo.output and prev_mo.output.endswith('⠴'):
+		return True
 
 	# アルファベットの後の助詞、助動詞
 	# ＣＤ,CD,名詞,一般,*,*,シーディー,シーディー,3/4,シーディー,0
@@ -748,7 +752,8 @@ def should_separate(prev2_mo, prev_mo, mo, next_mo, nabcc=False, logwrite=_logwr
 
 	# ち,ち,名詞,一般,*,*,チ,チ,0/1,チ,0
 	# ゅうりっぷ,ゅうりっぷ,名詞,一般,*,*,,,,ュウリップ,0
-	if mo.hyouki and (mo.hyouki[0] in 'ぁぃぅぇぉっゃゅょゎァィゥェォッャュョヮヵヶ'): return False
+	if mo.hyouki and (mo.hyouki[0] in 'ぁぃぅぇぉっゃゅょゎァィゥェォッャュョヮヵヶ'):
+		return False
 
 	# 0/4月 -> 04月
 	prev_mo_output_isdigit = prev_mo.output.isdigit()
@@ -762,10 +767,14 @@ def should_separate(prev2_mo, prev_mo, mo, next_mo, nabcc=False, logwrite=_logwr
 	# 三十,三十,名詞,数,*,*,30,30,1/4,30,1
 	# センチメートル,センチメートル,名詞,一般,*,*,センチメートル,センチメートル,4/7,センチメートル,0
 	if prev_mo_output_isdigit:
-		if mo.hinshi3 == '助数詞': return False
-		if mo.hyouki == 'センチメートル': return False
-		if mo.nhyouki == '#': return False
-		if mo.hyouki == '楽章': return False
+		if mo.hinshi3 == '助数詞':
+			return False
+		if mo.hyouki == 'センチメートル':
+			return False
+		if mo.nhyouki == '#':
+			return False
+		if mo.hyouki == '楽章':
+			return False
 
 	# 数%
 	if prev_mo.hyouki == '数' and prev_mo.yomi == 'スー' and mo.hyouki == '％':
@@ -796,7 +805,7 @@ def should_separate(prev2_mo, prev_mo, mo, next_mo, nabcc=False, logwrite=_logwr
 		if mo.hinshi2 == '数':
 			return False
 		if (prev_mo.hinshi4 in ('姓', '名') or prev_mo.hinshi3 == '人名'):
-			if mo.hyouki in ('嬢',):
+			if mo.hyouki == '嬢':
 				return False
 		if not prev_mo.hinshi2 in ('数', 'アルファベット') and not mo.hinshi2 in ('数', 'アルファベット', '接尾'):
 			if prev_mo.hyouki == 'フェア' and mo.hyouki == 'キャッチ':
@@ -813,19 +822,24 @@ def should_separate(prev2_mo, prev_mo, mo, next_mo, nabcc=False, logwrite=_logwr
 			return False
 
 	if prev_mo.hinshi1 == '動詞' and prev_mo.hinshi2 == '自立':
-		if mo.hinshi1 == '動詞' and mo.hinshi2 == '非自立': return False
+		if mo.hinshi1 == '動詞' and mo.hinshi2 == '非自立':
+			return False
 
-	if prev_mo.hinshi1 == '接頭詞' and mo.hinshi1 == '名詞': return False
+	if prev_mo.hinshi1 == '接頭詞' and mo.hinshi1 == '名詞':
+		return False
 
 	# その,その,連体詞,*,*,*,ソノ,ソノ,0/2,ソノ,1
 	# よう,よう,名詞,非自立,助動詞語幹,*,ヨウ,ヨー,1/2,ヨー,0
-	if prev_mo.hinshi1 == '連体詞' and mo.hinshi3 == '助動詞語幹': return False
+	if prev_mo.hinshi1 == '連体詞' and mo.hinshi3 == '助動詞語幹':
+		return False
 
 	# 334万画素 334マンガソ
-	if prev_mo.hyouki == '万' and mo.hyouki == '画素': return False
+	if prev_mo.hyouki == '万' and mo.hyouki == '画素':
+		return False
 
 	# 薄ら笑い ウスラワライ
-	if prev_mo.hyouki == '薄ら' and mo.hinshi1 == '名詞': return False
+	if prev_mo.hyouki == '薄ら' and mo.hinshi1 == '名詞':
+		return False
 
 	# 扱い始め
 	if prev_mo.hinshi1 == '名詞' and mo.hyouki == '始め':
@@ -870,23 +884,33 @@ def should_separate(prev2_mo, prev_mo, mo, next_mo, nabcc=False, logwrite=_logwr
 	if prev_mo.hinshi1 == '名詞' and mo.hyouki == 'せ' and mo.kihon == 'する':
 		return False
 
-	if prev_mo.hinshi1 == '形容詞' and mo.hyouki == 'ん': return False # いいんですけど
+	# いいんですけど
+	if prev_mo.hinshi1 == '形容詞' and mo.hyouki == 'ん':
+		return False
 
-	if prev_mo.hinshi1 == '動詞' and prev_mo.hyouki == '見': return False # 見/まごう
+	# 見/まごう
+	if prev_mo.hinshi1 == '動詞' and prev_mo.hyouki == '見':
+		return False
 
 	# お兄さん, お姉さん
-	if prev_mo.hinshi1 == '接頭詞' and prev_mo.hyouki == 'お': return False
-	
-	if prev_mo.hinshi1 == '助詞' and mo.hyouki == 'よう': return False # のように
+	if prev_mo.hinshi1 == '接頭詞' and prev_mo.hyouki == 'お':
+		return False
+
+	# のように
+	if prev_mo.hinshi1 == '助詞' and mo.hyouki == 'よう':
+		return False
 	
 	# 利かぬ気, 利かん気
-	if prev_mo.hinshi1 == '助動詞' and mo.hyouki == '気': return False
+	if prev_mo.hinshi1 == '助動詞' and mo.hyouki == '気':
+		return False
 
 	# 器量よし
-	if prev_mo.hinshi1 == '名詞' and mo.hyouki == 'よし': return False
+	if prev_mo.hinshi1 == '名詞' and mo.hyouki == 'よし':
+		return False
 
 	# 行ったきり
-	if prev_mo.hinshi1 == '助動詞' and mo.hyouki == 'きり': return False
+	if prev_mo.hinshi1 == '助動詞' and mo.hyouki == 'きり':
+		return False
 
 	if prev_mo.hinshi1 == '接頭詞' and prev_mo.hyouki == '大' and mo.hinshi1 == '名詞':
 		return False
@@ -965,8 +989,10 @@ def should_separate(prev2_mo, prev_mo, mo, next_mo, nabcc=False, logwrite=_logwr
 				return True
 			if mo.hyouki in ('危機', '機器', '記紀', '記事', '義務'):
 				return True
-			if len(prev_mo.yomi) <= 2 and len(mo.yomi) >= 3: return False
-			if len(prev_mo.yomi) >= 3 and len(mo.yomi) <= 2: return False
+			if len(prev_mo.yomi) <= 2 and len(mo.yomi) >= 3:
+				return False
+			if len(prev_mo.yomi) >= 3 and len(mo.yomi) <= 2:
+				return False
 
 	# 間違い,間違い,名詞,ナイ形容詞語幹,*,*,マチガイ,マチガイ,3/4,マチガイ,1
 	# なし,なし,助動詞,*,*,*,ナシ,ナシ,0/2,ナシ,0
@@ -997,10 +1023,10 @@ def should_separate(prev2_mo, prev_mo, mo, next_mo, nabcc=False, logwrite=_logwr
 		if prev_mo.hinshi2 == '副助詞': # じゃない
 			return True
 		if prev_mo.hinshi1 == '動詞' and prev_mo.hinshi2 == '非自立' and \
-				prev_mo.kihon in ('てる'): # てない
+				prev_mo.kihon == 'てる': # てない
 			return True
 		if prev_mo.hinshi1 == '助動詞' and \
-				prev_mo.kihon in ('だ'): # でない
+				prev_mo.kihon == 'だ': # でない
 			return True
 		return False
 
@@ -1008,8 +1034,10 @@ def should_separate(prev2_mo, prev_mo, mo, next_mo, nabcc=False, logwrite=_logwr
 	if prev_mo.hinshi1 == '形容詞' and mo.hinshi1 == '形容詞':
 		return False
 
-	if prev_mo.is_substantive_word() and mo.is_independent_word(): return True
-	if prev_mo.is_independent_word() and mo.is_independent_word(): return True
+	if prev_mo.is_substantive_word() and mo.is_independent_word():
+		return True
+	if prev_mo.is_independent_word() and mo.is_independent_word():
+		return True
 	return False
 
 def morphs_to_string(li, inbuf, logwrite):
