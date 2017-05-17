@@ -511,22 +511,22 @@ def should_separate(prev2_mo, prev_mo, mo, next_mo, nabcc=False, logwrite=_logwr
 		if mo.hinshi1 == '名詞': return True
 
 	# 数字の前のマスアケ
-	if prev_mo.nhyouki not in ('-', '，', '.', '’', '、', ':', '：', ',', 'ー') and \
-		prev_mo.output != '⠼' and \
+	mo_output_isdigit = mo.output.isdigit()
+	if mo_output_isdigit and \
 		not nabcc and \
-		prev_mo.nhyouki not in ('(', '第', '築', '二男', '中') and \
-		mo.output.isdigit():
+		prev_mo.output != '⠼' and \
+		prev_mo.nhyouki not in ('-', '，', '.', '’', '、', ':', '：', ',', 'ー', '(', '第', '築', '二男', '中'):
 		return True
 
 	# 1月/1日
-	if prev_mo.nhyouki and prev_mo.nhyouki[0].isdigit() and prev_mo.nhyouki[-1] == '月' and mo.output.isdigit():
+	if prev_mo.nhyouki and prev_mo.nhyouki[0].isdigit() and prev_mo.nhyouki[-1] == '月' and mo_output_isdigit:
 		return True
 
 	# 三,三,名詞,数,*,*,サン,サン,0/2,3,0
 	# 兆,兆,名詞,数,*,*,チョウ,チョー,1/2,チョー,1
 	# 二千四百,二千四百,名詞,数,*,*,ニセンヨンヒャク,ニセンヨンヒャク,1/1,2400,0
 	# 万,万,名詞,数,*,*,マン,マン,1/2,マン,0
-	if prev_mo.hyouki in ('億', '兆', '京') and mo.output.isdigit():
+	if prev_mo.hyouki in ('億', '兆', '京') and mo_output_isdigit:
 		return True
 
 	# 1回こっきり 1カイ コッキリ
@@ -538,15 +538,17 @@ def should_separate(prev2_mo, prev_mo, mo, next_mo, nabcc=False, logwrite=_logwr
 		return True
 
 	# 外国語引用符、マスアケ、助詞、助動詞
-	if prev_mo.output and prev_mo.output.endswith('⠴') and mo.hinshi1 in ('助詞', '助動詞'): return True
+	is_mo_hinshi1_joshi_or_jodoshi = (mo.hinshi1 in ('助詞', '助動詞'))
+	if prev_mo.output and prev_mo.output.endswith('⠴') and is_mo_hinshi1_joshi_or_jodoshi: return True
 
 	# アルファベットの後の助詞、助動詞
 	# ＣＤ,CD,名詞,一般,*,*,シーディー,シーディー,3/4,シーディー,0
 	# を,を,助詞,格助詞,一般,*,ヲ,ヲ,0/1,ヲ,0
-	if is_alpha_or_single(prev_mo.nhyouki) and mo.hinshi1 in ('助詞', '助動詞'):
+	is_prev_mo_nhyouki_alpha_or_single = is_alpha_or_single(prev_mo.nhyouki)
+	if is_prev_mo_nhyouki_alpha_or_single and is_mo_hinshi1_joshi_or_jodoshi:
 		return True
 	if nabcc:
-		if prev_mo.hinshi2 == 'アルファベット' and mo.hinshi1 in ('助詞', '助動詞'):
+		if prev_mo.hinshi2 == 'アルファベット' and is_mo_hinshi1_joshi_or_jodoshi:
 			return True
 
 	# ピリオドの後の助詞
@@ -571,7 +573,7 @@ def should_separate(prev2_mo, prev_mo, mo, next_mo, nabcc=False, logwrite=_logwr
 	#  ０,0,名詞,数,*,*,ゼロ,ゼロ,1/2,0,0
 	#  個,個,名詞,接尾,助数詞,*,コ,コ,1/1,コ,0
 	if prev_mo.hinshi1 == '名詞' and prev_mo.hinshi2 == '接尾':
-		if mo.output.isdigit(): return True
+		if mo_output_isdigit: return True
 
 	#
 	# 特定の表記 (True)
@@ -725,16 +727,17 @@ def should_separate(prev2_mo, prev_mo, mo, next_mo, nabcc=False, logwrite=_logwr
 	if mo.hyouki and (mo.hyouki[0] in 'ぁぃぅぇぉっゃゅょゎァィゥェォッャュョヮヵヶ'): return False
 
 	# 0/4月 -> 04月
-	if prev_mo.output.isdigit() and mo.nhyouki and mo.nhyouki[0].isdigit():
+	prev_mo_output_isdigit = prev_mo.output.isdigit()
+	if prev_mo_output_isdigit and mo.nhyouki and mo.nhyouki[0].isdigit():
 		return False
 	# 3/03
-	if prev_mo.output.isdigit() and mo.nhyouki and mo.nhyouki[0] == '/':
+	if prev_mo_output_isdigit and mo.nhyouki and mo.nhyouki[0] == '/':
 		return False
 
 	# アラビア数字のあとに単位がきたら続ける
 	# 三十,三十,名詞,数,*,*,30,30,1/4,30,1
 	# センチメートル,センチメートル,名詞,一般,*,*,センチメートル,センチメートル,4/7,センチメートル,0
-	if prev_mo.output.isdigit():
+	if prev_mo_output_isdigit:
 		if mo.hinshi3 == '助数詞': return False
 		if mo.hyouki == 'センチメートル': return False
 		if mo.nhyouki == '#': return False
@@ -762,7 +765,7 @@ def should_separate(prev2_mo, prev_mo, mo, next_mo, nabcc=False, logwrite=_logwr
 			return False
 
 	# アルファベットの後の名詞
-	if is_alpha_or_single(prev_mo.nhyouki) and mo.hyouki == '細胞':
+	if is_prev_mo_nhyouki_alpha_or_single and mo.hyouki == '細胞':
 		return False
 
 	#
