@@ -519,14 +519,14 @@ def should_separate(prev2_mo, prev_mo, mo, next_mo, nabcc=False, logwrite=_logwr
 		return True
 
 	# 1月/1日
-	if prev_mo.nhyouki and prev_mo.nhyouki[0].isdigit() and prev_mo.nhyouki[-1] == '月' and mo_output_isdigit:
+	if mo_output_isdigit and prev_mo.nhyouki and prev_mo.nhyouki[0].isdigit() and prev_mo.nhyouki[-1] == '月':
 		return True
 
 	# 三,三,名詞,数,*,*,サン,サン,0/2,3,0
 	# 兆,兆,名詞,数,*,*,チョウ,チョー,1/2,チョー,1
 	# 二千四百,二千四百,名詞,数,*,*,ニセンヨンヒャク,ニセンヨンヒャク,1/1,2400,0
 	# 万,万,名詞,数,*,*,マン,マン,1/2,マン,0
-	if prev_mo.hyouki in ('億', '兆', '京') and mo_output_isdigit:
+	if mo_output_isdigit and prev_mo.hyouki in ('億', '兆', '京'):
 		return True
 
 	# 1回こっきり 1カイ コッキリ
