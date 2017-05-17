@@ -567,6 +567,16 @@ def should_separate(prev2_mo, prev_mo, mo, next_mo, nabcc=False, logwrite=_logwr
 	if mo_output_isdigit and prev_mo.hinshi1 == '名詞' and prev_mo.hinshi2 == '接尾':
 		return True
 
+	if prev_mo.hinshi1 == '助詞' and mo.hinshi1 == '接頭詞':
+		return True
+
+	# 新/東京/名所
+	if prev_mo.hinshi1 == '接頭詞' and prev_mo.hinshi2 == '名詞接続' and \
+			mo.hinshi1 == '名詞' and mo.hinshi2 == '固有名詞':
+		# 後白河
+		if not (prev_mo.hyouki == '後' and prev_mo.yomi == 'ゴ'):
+			return True
+
 	# 複合語（接頭語・接尾語・造語要素）【備考１】
 	# 接頭語・接尾語・造語要素であっても、意味の理解を助ける場合には、
 	# 発音上の切れ目を考慮して区切って書いてよい。
@@ -829,8 +839,8 @@ def should_separate(prev2_mo, prev_mo, mo, next_mo, nabcc=False, logwrite=_logwr
 		return False
 
 	# 後白河
-	if prev_mo.hyouki == '後' and prev_mo.yomi == 'ゴ':
-		return False
+	#if prev_mo.hyouki == '後' and prev_mo.yomi == 'ゴ':
+	#	return False
 
 	# 岩倉卿
 	if mo.hyouki == '卿' and mo.yomi == 'キョー':
@@ -1021,11 +1031,11 @@ def should_separate(prev2_mo, prev_mo, mo, next_mo, nabcc=False, logwrite=_logwr
 		return True
 
 	# 新/東京/名所
-	if prev_mo.hinshi1 == '接頭詞' and prev_mo.hinshi2 == '名詞接続' and \
-			mo.hinshi1 == '名詞' and mo.hinshi2 == '固有名詞':
-		return True
+	#if prev_mo.hinshi1 == '接頭詞' and prev_mo.hinshi2 == '名詞接続' and \
+	#		mo.hinshi1 == '名詞' and mo.hinshi2 == '固有名詞':
+	#	return True
 
-	if prev_mo.hinshi1 == '助詞' and mo.hinshi1 == '接頭詞': return True
+	#if prev_mo.hinshi1 == '助詞' and mo.hinshi1 == '接頭詞': return True
 
 	if prev_mo.is_substantive_word() and mo.is_independent_word(): return True
 	if prev_mo.is_independent_word() and mo.is_independent_word(): return True
