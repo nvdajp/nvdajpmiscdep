@@ -628,10 +628,6 @@ def should_separate(prev2_mo, prev_mo, mo, next_mo, nabcc=False, logwrite=_logwr
 	if prev_mo.hinshi1 == '接頭詞' and mo.hinshi1 == '名詞':
 		if prev_mo.hyouki == '大': return False
 	
-	#
-	# 特定の表記と品詞による規則 False
-	#
-
 	# 不幸,に,し,て
 	# 今,に,し,て
 	# 居,ながら,に,し,て
