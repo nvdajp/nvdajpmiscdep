@@ -684,7 +684,8 @@ def should_separate(prev2_mo, prev_mo, mo, next_mo, nabcc=False, logwrite=_logwr
 	# 日/独/伊/3国同盟
 	if prev_mo.hinshi2 == '固有名詞' and prev_mo.hinshi3 == '地域' and \
 			mo.hinshi1 == '名詞' and mo.hinshi2 == '一般':
-		if not (mo.hyouki == '卿' and mo.yomi == 'キョー') and not (mo.hyouki == '市' and mo.yomi == 'シ'):
+		if not (mo.hyouki == '卿' and mo.yomi == 'キョー') and \
+		   not (mo.hyouki == '市' and mo.yomi == 'シ'):
 			return True
 
 	# 東京/都 千代田/区
