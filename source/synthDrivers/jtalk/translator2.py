@@ -743,16 +743,33 @@ def should_separate(prev2_mo, prev_mo, mo, next_mo, nabcc=False, logwrite=_logwr
 		if len(mo.output.split(' ')[-1]) >= 4:
 			return True
 
+	if prev_mo.hyouki == '擬似' and mo.hyouki == 'コレラ':
+		return True
+	if prev_mo.hyouki == '火事' and mo.hyouki == '見舞い':
+		return True
+	if prev_mo.hyouki in ('危機', '機器', '記紀', '記事', '義務'):
+		return True
+	if mo.hyouki in ('危機', '機器', '記紀', '記事', '義務'):
+		return True
+
+	# 人名に造語要素が続く場合で、2拍以下の場合は続ける
+	# 自立性が強く、意味の理解を助ける場合は、前を区切って書く
+	if prev_mo.hinshi1 == '名詞' and mo.hinshi1 == '名詞':
+		if (prev_mo.hinshi4 in ('姓', '名') or prev_mo.hinshi3 == '人名'):
+			if mo.hinshi2 == '接尾' and mo.hinshi3 == '人名':
+				return True
+			if mo.hyouki in ('訳', '作', '談', '曲', '記', '絵', 'アナ', 'プロ'):
+				return True
+
 	################################
 	# False
 	################################
 
-	if mo.hyouki == 'ー': return False
 	if prev_mo.hyouki == 'ー': return False
 
 	# ち,ち,名詞,一般,*,*,チ,チ,0/1,チ,0
 	# ゅうりっぷ,ゅうりっぷ,名詞,一般,*,*,,,,ュウリップ,0
-	if mo.hyouki and (mo.hyouki[0] in 'ぁぃぅぇぉっゃゅょゎァィゥェォッャュョヮヵヶ'):
+	if mo.hyouki and (mo.hyouki[0] in 'ーぁぃぅぇぉっゃゅょゎァィゥェォッャュョヮヵヶ'):
 		return False
 
 	# 0/4月 -> 04月
@@ -762,22 +779,15 @@ def should_separate(prev2_mo, prev_mo, mo, next_mo, nabcc=False, logwrite=_logwr
 	# 3/03
 	if prev_mo_output_isdigit and mo.nhyouki and mo.nhyouki[0] == '/':
 		return False
+	if prev_mo_output_isdigit and mo.hinshi3 == '助数詞':
+		return False
+	if prev_mo_output_isdigit and mo.nhyouki == '#':
+		return False
 
 	# アラビア数字のあとに単位がきたら続ける
 	# 三十,三十,名詞,数,*,*,30,30,1/4,30,1
 	# センチメートル,センチメートル,名詞,一般,*,*,センチメートル,センチメートル,4/7,センチメートル,0
-	if prev_mo_output_isdigit:
-		if mo.hinshi3 == '助数詞':
-			return False
-		if mo.hyouki == 'センチメートル':
-			return False
-		if mo.nhyouki == '#':
-			return False
-		if mo.hyouki == '楽章':
-			return False
-
-	# 数%
-	if prev_mo.hyouki == '数' and prev_mo.yomi == 'スー' and mo.hyouki == '％':
+	if prev_mo_output_isdigit and mo.hyouki in ('センチメートル', '楽章'):
 		return False
 
 	# カナ名詞の後のアルファベット名詞
@@ -786,8 +796,9 @@ def should_separate(prev2_mo, prev_mo, mo, next_mo, nabcc=False, logwrite=_logwr
 		if prev_mo.hyouki != 'キラー':
 			return False
 
+	# アルファベットの後の名詞
 	# V字
-	if prev_mo.hinshi2 == 'アルファベット' and mo.hyouki == '字':
+	if is_prev_mo_nhyouki_alpha_or_single and mo.hyouki in ('細胞', '字'):
 		return False
 
 	# 数字の後のアルファベット
@@ -797,25 +808,10 @@ def should_separate(prev2_mo, prev_mo, mo, next_mo, nabcc=False, logwrite=_logwr
 		elif RE_ASCII_CHARS.match(mo.nhyouki):
 			return False
 
-	# アルファベットの後の名詞
-	if is_prev_mo_nhyouki_alpha_or_single and mo.hyouki == '細胞':
+	if prev_mo.hinshi1 == '名詞' and mo.hinshi1 == '名詞' and mo.hinshi2 == '数':
 		return False
-
-	if prev_mo.hinshi1 == '名詞' and mo.hinshi1 == '名詞':
-		if mo.hinshi2 == '数':
-			return False
-		if (prev_mo.hinshi4 in ('姓', '名') or prev_mo.hinshi3 == '人名'):
-			if mo.hyouki == '嬢':
-				return False
-		if not prev_mo.hinshi2 in ('数', 'アルファベット') and not mo.hinshi2 in ('数', 'アルファベット', '接尾'):
-			if prev_mo.hyouki == 'フェア' and mo.hyouki == 'キャッチ':
-				return False
-			if prev_mo.hyouki == '擬古' and mo.hyouki == '文':
-				return False
-			if prev_mo.hyouki == '白' and mo.hyouki == '生地':
-				return False
-			if prev_mo.hyouki == '今日' and mo.hyouki == '限り':
-				return False
+	if mo.hyouki == '嬢' and (prev_mo.hinshi4 in ('姓', '名') or prev_mo.hinshi3 == '人名'):
+		return False
 
 	if mo.hinshi1 == '形容詞' and mo.kihon in ('ない', '無い', '悪い', '無し'):
 		if prev_mo.kihon in ('隈', '心置き', '満遍', '決まり', '限'):
@@ -831,6 +827,19 @@ def should_separate(prev2_mo, prev_mo, mo, next_mo, nabcc=False, logwrite=_logwr
 	# その,その,連体詞,*,*,*,ソノ,ソノ,0/2,ソノ,1
 	# よう,よう,名詞,非自立,助動詞語幹,*,ヨウ,ヨー,1/2,ヨー,0
 	if prev_mo.hinshi1 == '連体詞' and mo.hinshi3 == '助動詞語幹':
+		return False
+
+	# 数%
+	if prev_mo.hyouki == '数' and prev_mo.yomi == 'スー' and mo.hyouki == '％':
+		return False
+
+	if prev_mo.hyouki == 'フェア' and mo.hyouki == 'キャッチ':
+		return False
+	if prev_mo.hyouki == '擬古' and mo.hyouki == '文':
+		return False
+	if prev_mo.hyouki == '白' and mo.hyouki == '生地':
+		return False
+	if prev_mo.hyouki == '今日' and mo.hyouki == '限り':
 		return False
 
 	# 334万画素 334マンガソ
@@ -965,30 +974,15 @@ def should_separate(prev2_mo, prev_mo, mo, next_mo, nabcc=False, logwrite=_logwr
 	   not RE_KATAKANA.match(mo.nhyouki):
 		return True
 
-	# 人名に造語要素が続く場合で、2拍以下の場合は続ける
-	# 自立性が強く、意味の理解を助ける場合は、前を区切って書く
 	# 複合名詞内部の2拍以下は切らない
 	if prev_mo.hinshi1 == '名詞' and mo.hinshi1 == '名詞':
-		if (prev_mo.hinshi4 in ('姓', '名') or prev_mo.hinshi3 == '人名'):
-			if ((mo.hinshi2 == '接尾' and mo.hinshi3 == '人名') or
-				mo.hyouki in ('訳', '作', '談', '曲', '記', '絵', 'アナ', 'プロ')
-				):
-				return True
 		if not prev_mo.hinshi2 in ('数', 'アルファベット') and not mo.hinshi2 in ('数', 'アルファベット', '接尾'):
-			if prev_mo.hyouki == '擬似' and mo.hyouki == 'コレラ':
-				return True
-			if prev_mo.hyouki == '火事' and mo.hyouki == '見舞い':
-				return True
 			if len(prev_mo.yomi) >= 4 and len(mo.yomi) >= 2:
 				if mo.hyouki != '鍛冶':
 					return True
 			if len(mo.yomi) >= 4:
 				if prev_mo.hyouki not in ('右', '花'):
 					return True
-			if prev_mo.hyouki in ('危機', '機器', '記紀', '記事', '義務'):
-				return True
-			if mo.hyouki in ('危機', '機器', '記紀', '記事', '義務'):
-				return True
 			if len(prev_mo.yomi) <= 2 and len(mo.yomi) >= 3:
 				return False
 			if len(prev_mo.yomi) >= 3 and len(mo.yomi) <= 2:
