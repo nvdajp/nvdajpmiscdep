@@ -610,19 +610,19 @@ def should_separate(prev2_mo, prev_mo, mo, next_mo, nabcc=False, logwrite=_logwr
 
 	# 日/独/伊/3国同盟
 	if prev_mo.hinshi2 == '固有名詞' and prev_mo.hinshi3 == '地域' and \
-			mo.hinshi1 == '名詞' and mo.hinshi2 == '一般':
+		mo.hinshi1 == '名詞' and mo.hinshi2 == '一般':
 		if not (mo.hyouki == '卿' and mo.yomi == 'キョー') and \
-		   not (mo.hyouki == '市' and mo.yomi == 'シ'):
+			not (mo.hyouki == '市' and mo.yomi == 'シ'):
 			return True
 
 	# 東京/都 千代田/区
 	if prev_mo.hinshi2 == '接尾' and prev_mo.hinshi3 == '地域' and \
-			mo.hinshi2 == '固有名詞' and mo.hinshi3 == '地域':
+		mo.hinshi2 == '固有名詞' and mo.hinshi3 == '地域':
 		return True
 
 	# 東京/都 交通/局
 	if prev_mo.hinshi2 == '接尾' and prev_mo.hinshi3 == '地域' and \
-			mo.hinshi1 == '名詞' and mo.hinshi2 == '一般':
+		mo.hinshi1 == '名詞' and mo.hinshi2 == '一般':
 		return True
 
 	# 聞き捨てならない キキズテ ナラナイ
@@ -632,8 +632,8 @@ def should_separate(prev2_mo, prev_mo, mo, next_mo, nabcc=False, logwrite=_logwr
 	# お,黙り,なさい
 	# 「お」がついて名詞化した語に「なさい・なさる」が続く場合は区切ってよい
 	if prev2_mo and prev2_mo.hinshi1 == '接頭詞' and prev2_mo.hyouki == 'お' and \
-			prev_mo.hinshi1 == '動詞' and prev_mo.type2 == '連用形' and \
-			mo.kihon == 'なさる':
+		prev_mo.hinshi1 == '動詞' and prev_mo.type2 == '連用形' and \
+		mo.kihon == 'なさる':
 		return True
 
 	if prev_mo.hinshi1 == '動詞' and prev_mo.hinshi2 == '自立' and mo.hyouki == 'および':
@@ -641,8 +641,8 @@ def should_separate(prev2_mo, prev_mo, mo, next_mo, nabcc=False, logwrite=_logwr
 
 	# 障害,者/協会
 	if prev2_mo and prev2_mo.hinshi1 == '名詞' and \
-			prev_mo.hyouki == '者' and \
-			mo.hinshi1 == '名詞':
+		prev_mo.hyouki == '者' and \
+		mo.hinshi1 == '名詞':
 		return True
 
 	# 世界/初
@@ -781,15 +781,18 @@ def should_separate(prev2_mo, prev_mo, mo, next_mo, nabcc=False, logwrite=_logwr
 		if prev_mo.hinshi1 == '形容詞' and prev_mo.kihon == '良い':
 			return True
 		if prev_mo.hinshi1 == '名詞' and prev_mo.hinshi2 == 'ナイ形容詞語幹' and \
-				prev_mo.kihon in ('問題', '間違い'):
+			prev_mo.kihon in ('問題', '間違い'):
 			return True
 		if prev_mo.hinshi2 == '副助詞': # じゃない
 			return True
 		if prev_mo.hinshi1 == '動詞' and prev_mo.hinshi2 == '非自立' and \
-				prev_mo.kihon == 'てる': # てない
+			prev_mo.kihon == 'てる': # てない
 			return True
 		if prev_mo.hinshi1 == '助動詞' and \
-				prev_mo.kihon == 'だ': # でない
+			prev_mo.kihon == 'だ': # でない
+			return True
+	if mo.hinshi1 == '形容詞' and mo.kihon in ('ない', '無い', '悪い'):
+		if prev_mo.kihon not in ('隈', '心置き', '満遍', '決まり', '限'):
 			return True
 
 	################################
@@ -843,10 +846,6 @@ def should_separate(prev2_mo, prev_mo, mo, next_mo, nabcc=False, logwrite=_logwr
 		return False
 	if mo.hyouki == '嬢' and (prev_mo.hinshi4 in ('姓', '名') or prev_mo.hinshi3 == '人名'):
 		return False
-
-	if mo.hinshi1 == '形容詞' and mo.kihon in ('ない', '無い', '悪い', '無し'):
-		if prev_mo.kihon in ('隈', '心置き', '満遍', '決まり', '限'):
-			return False
 
 	if prev_mo.hinshi1 == '動詞' and prev_mo.hinshi2 == '自立':
 		if mo.hinshi1 == '動詞' and mo.hinshi2 == '非自立':
@@ -1000,12 +999,12 @@ def should_separate(prev2_mo, prev_mo, mo, next_mo, nabcc=False, logwrite=_logwr
 	if prev_mo.hinshi1 == '形容詞' and mo.hinshi1 == '形容詞':
 		return False
 
+	if mo.hinshi1 == '形容詞' and mo.kihon in ('ない', '無い', '悪い'):
+		return False
+
 	################################
 	# False/True
 	################################
-
-	if mo.hinshi1 == '形容詞' and mo.kihon in ('ない', '無い', '悪い'):
-		return True
 
 	# ２字漢語 母子/年金
 	if mo.hinshi1 == '名詞' and mo.hinshi2 == '一般' and \
