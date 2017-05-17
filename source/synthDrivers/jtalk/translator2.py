@@ -776,7 +776,9 @@ def should_separate(prev2_mo, prev_mo, mo, next_mo, nabcc=False, logwrite=_logwr
 	if prev_mo.hyouki == '父' and mo.hinshi2 == '固有名詞':
 		return True
 
-	if prev_mo.hinshi1 == '接頭詞' and prev_mo.hyouki == '超' and mo.hinshi1 == '名詞': return True
+	if prev_mo.hinshi1 == '接頭詞' and mo.hinshi1 == '名詞':
+		if prev_mo.hyouki == '超': return True
+		if prev_mo.hyouki == '大': return False
 	
 	if prev_mo.hinshi1 == '助動詞' and prev_mo.hyouki == 'で' and mo.hinshi1 == '助動詞': return True
 
@@ -902,9 +904,13 @@ def should_separate(prev2_mo, prev_mo, mo, next_mo, nabcc=False, logwrite=_logwr
 				mo.hyouki in ('訳', '作', '談', '曲', '記', '絵', 'アナ', 'プロ')
 				):
 				return True
-		if not prev_mo.hinshi2 in ('数', 'アルファベット') and not mo.hinshi2 in ('数', 'アルファベット'):
+		if not prev_mo.hinshi2 in ('数', 'アルファベット') and not mo.hinshi2 in ('数', 'アルファベット', '接尾'):
 			if prev_mo.hyouki == 'キー' and mo.hyouki == 'ボックス':
 				return True
+			if prev_mo.hyouki == 'コントロール' and mo.hyouki == 'キー':
+				return True
+			#if len(prev_mo.yomi) >= 4: return True
+			#if len(mo.yomi) >= 4: return True
 			if len(prev_mo.yomi) <= 2 and len(mo.yomi) >= 3: return False
 			if len(prev_mo.yomi) >= 3 and len(mo.yomi) <= 2: return False
 		if mo.hinshi2 != '接尾': return True
