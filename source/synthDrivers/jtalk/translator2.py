@@ -823,6 +823,10 @@ def should_separate(prev2_mo, prev_mo, mo, next_mo, nabcc=False, logwrite=_logwr
 	   mo.hinshi1 == '名詞' and mo.hinshi2 == '一般' and len(mo.yomi) >= 3:
 		return True
 
+	# 聞き捨てならない キキズテ ナラナイ
+	if prev_mo.hinshi1 == '動詞' and mo.hinshi1 == '動詞' and mo.hyouki == 'なら':
+		return True
+
 	# 間違い,間違い,名詞,ナイ形容詞語幹,*,*,マチガイ,マチガイ,3/4,マチガイ,1
 	# なし,なし,助動詞,*,*,*,ナシ,ナシ,0/2,ナシ,0
 	#
