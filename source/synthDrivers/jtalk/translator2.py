@@ -585,10 +585,6 @@ def should_separate(prev2_mo, prev_mo, mo, next_mo, nabcc=False, logwrite=_logwr
 	if prev_mo.hyouki == '副' and mo.hinshi1 == '名詞' and mo.hinshi2 == '一般':
 		return False
 
-	# 鍛冶,職人 カジショクニン
-	if len(prev_mo.output) <= 2 and mo.hyouki == '職人':
-		return False
-
 	# 「・・ですこと」の「こと」は接尾語なので前に続ける
 	if prev_mo.hyouki == 'です' and mo.hyouki == 'こと':
 		return False
@@ -880,6 +876,10 @@ def should_separate(prev2_mo, prev_mo, mo, next_mo, nabcc=False, logwrite=_logwr
 	#
 	# モーラ数・文字数依存 False/True
 	#
+
+	# 鍛冶,職人 カジショクニン
+	if len(prev_mo.output) <= 2 and mo.hyouki == '職人':
+		return False
 
 	# 金の減り.加減 カネノ ヘリカゲン
 	# 馬鹿さ.加減 バカサ カゲン
