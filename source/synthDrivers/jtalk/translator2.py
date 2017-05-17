@@ -1,7 +1,7 @@
 # coding: UTF-8
 #translator2.py (Japanese Braille translator Phase 2)
 #A part of NonVisual Desktop Access (NVDA)
-#Copyright (C) 2012-2014 Takuya Nishimoto (NVDA Japanese Team)
+#Copyright (C) 2012-2017 Takuya Nishimoto (NVDA Japanese Team)
 #This file is covered by the GNU General Public License.
 #See the file COPYING for more details.
 
