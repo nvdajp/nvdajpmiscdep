@@ -1013,12 +1013,12 @@ def should_separate(prev2_mo, prev_mo, mo, next_mo, nabcc=False, logwrite=_logwr
 	# False/True
 	################################
 
-	# ２字漢語 母子/年金
+	# ２字漢語 母子/年金 幾何/模様 基礎/医学 騎馬/武者
 	if mo.hinshi1 == '名詞' and mo.hinshi2 == '一般' and \
-	   len(prev_mo.hyouki) == 2 and \
-	   len(prev_mo.yomi) == 2 and \
-	   len(mo.yomi) >= 3 and \
-	   not RE_KATAKANA.match(mo.nhyouki):
+		len(prev_mo.hyouki) == 2 and \
+		len(prev_mo.yomi) == 2 and \
+		len(mo.yomi) >= 3 and \
+		not RE_KATAKANA.match(mo.nhyouki):
 		return True
 
 	# 複合名詞内部の2拍以下は切らない
