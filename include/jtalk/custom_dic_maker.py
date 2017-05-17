@@ -909,6 +909,16 @@ jdic = [
 	 'braille':'イッペン',
 	 'accent':"3/4",
 	 },
+	{'text':'ギアボックス',
+	 'pos':"名詞,一般,*,*,*,*",
+	 'braille':'ギア ボックス',
+	 'accent':"3/6",
+	 },
+	{'text':'セカンドギア',
+	 'pos':"名詞,一般,*,*,*,*",
+	 'braille':'セカンド ギア',
+	 'accent':"5/6",
+	 },
 ]
 
 class DicItem(object):

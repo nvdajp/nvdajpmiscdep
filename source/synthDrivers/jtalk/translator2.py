@@ -772,6 +772,10 @@ def should_separate(prev2_mo, prev_mo, mo, next_mo, nabcc=False, logwrite=_logwr
 	if mo.hyouki == '強' and mo.output == 'キョー':
 		return True
 
+	# 父太郎 チチ タロー
+	if prev_mo.hyouki == '父' and mo.hinshi2 == '固有名詞':
+		return True
+
 	if prev_mo.hinshi1 == '接頭詞' and prev_mo.hyouki == '超' and mo.hinshi1 == '名詞': return True
 	
 	if prev_mo.hinshi1 == '助動詞' and prev_mo.hyouki == 'で' and mo.hinshi1 == '助動詞': return True
