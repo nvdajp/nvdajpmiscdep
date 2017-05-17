@@ -843,8 +843,8 @@ def should_separate(prev2_mo, prev_mo, mo, next_mo, nabcc=False, logwrite=_logwr
 	# 「問題ない」の「ない」は「点訳のてびき」では形容詞だがMecabでは助動詞
 	# 形容詞「ない」は区切る
 	# ただし前の語と複合している場合は前に続ける
-	if mo.hinshi1 == '形容詞' and mo.kihon in ('ない', '無い', '悪い'):
-		if prev_mo.kihon in ('隈', '心置き', '満遍', '決まり'):
+	if mo.hinshi1 == '形容詞' and mo.kihon in ('ない', '無い', '悪い', '無し'):
+		if prev_mo.kihon in ('隈', '心置き', '満遍', '決まり', '限'):
 			return False
 		return True
 	if mo.hinshi1 == '助動詞' and mo.kihon in ('ない', '無い'):
