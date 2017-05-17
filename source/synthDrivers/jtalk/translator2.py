@@ -604,6 +604,10 @@ def should_separate(prev2_mo, prev_mo, mo, next_mo, nabcc=False, logwrite=_logwr
 	if prev_mo.nhyouki == '#' and mo.hinshi1 == '助詞':
 		return True
 
+	# 40キロ レース
+	if prev_mo.hinshi3 == '助数詞' and mo.hyouki == 'レース':
+		return True
+
 	#
 	# 特定の表記 (False)
 	#
@@ -700,6 +704,12 @@ def should_separate(prev2_mo, prev_mo, mo, next_mo, nabcc=False, logwrite=_logwr
 	
 	# 利かぬ気, 利かん気
 	if prev_mo.hinshi1 == '助動詞' and mo.hyouki == '気': return False
+
+	# 器量よし
+	if prev_mo.hinshi1 == '名詞' and mo.hyouki == 'よし': return False
+
+	# 行ったきり
+	if prev_mo.hinshi1 == '助動詞' and mo.hyouki == 'きり': return False
 
 	#
 	# 特定の表記 (True)
