@@ -529,14 +529,6 @@ def should_separate(prev2_mo, prev_mo, mo, next_mo, nabcc=False, logwrite=_logwr
 	if mo_output_isdigit and prev_mo.hyouki in ('億', '兆', '京'):
 		return True
 
-	# 1回こっきり 1カイ コッキリ
-	if prev_mo.hyouki == '回' and mo.hyouki == 'こっきり':
-		return True
-
-	# Ｈ形コンベアー Hガタ コンベアー
-	if prev_mo.hyouki[-1] == '形' and mo.hyouki == 'コンベアー':
-		return True
-
 	# 外国語引用符、マスアケ、助詞、助動詞
 	is_mo_hinshi1_joshi_or_jodoshi = (mo.hinshi1 in ('助詞', '助動詞'))
 	if is_mo_hinshi1_joshi_or_jodoshi and prev_mo.output and prev_mo.output.endswith('⠴'): return True
@@ -578,6 +570,14 @@ def should_separate(prev2_mo, prev_mo, mo, next_mo, nabcc=False, logwrite=_logwr
 	#
 	# 特定の表記 (True)
 	#
+
+	# 1回こっきり 1カイ コッキリ
+	if prev_mo.hyouki == '回' and mo.hyouki == 'こっきり':
+		return True
+
+	# Ｈ形コンベアー Hガタ コンベアー
+	if prev_mo.hyouki[-1] == '形' and mo.hyouki == 'コンベアー':
+		return True
 
 	# 40キロ レース
 	if prev_mo.hinshi3 == '助数詞' and mo.hyouki == 'レース':
@@ -926,7 +926,7 @@ def should_separate(prev2_mo, prev_mo, mo, next_mo, nabcc=False, logwrite=_logwr
 			return False
 
 	#
-	# モーラ数・文字数依存 False/True
+	# False/True
 	#
 
 	# 仮名文字 カナモジ
@@ -936,8 +936,11 @@ def should_separate(prev2_mo, prev_mo, mo, next_mo, nabcc=False, logwrite=_logwr
 		return False
 
 	# ２字漢語 母子/年金
-	if len(prev_mo.hyouki) == 2 and len(prev_mo.yomi) == 2 and not RE_KATAKANA.match(mo.nhyouki) and \
-	   mo.hinshi1 == '名詞' and mo.hinshi2 == '一般' and len(mo.yomi) >= 3:
+	if mo.hinshi1 == '名詞' and mo.hinshi2 == '一般' and \
+	   len(prev_mo.hyouki) == 2 and \
+	   len(prev_mo.yomi) == 2 and \
+	   len(mo.yomi) >= 3 and \
+	   not RE_KATAKANA.match(mo.nhyouki):
 		return True
 
 	# 人名に造語要素が続く場合で、2拍以下の場合は続ける
