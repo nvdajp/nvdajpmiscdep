@@ -491,9 +491,10 @@ def fix_japanese_date_morphs(li):
 	return new_li
 
 def should_separate(prev2_mo, prev_mo, mo, next_mo, nabcc=False, logwrite=_logwrite):
-	#
-	# 記号と数字 (True)
-	#
+	################################
+	# True
+	################################
+
 	# 括弧開の前
 	# (あける)
 	# 映画,映画,名詞,一般,*,*,エイガ,エイガ,0/3,エイガ,1
@@ -539,9 +540,8 @@ def should_separate(prev2_mo, prev_mo, mo, next_mo, nabcc=False, logwrite=_logwr
 	is_prev_mo_nhyouki_alpha_or_single = is_alpha_or_single(prev_mo.nhyouki)
 	if is_prev_mo_nhyouki_alpha_or_single and is_mo_hinshi1_joshi_or_jodoshi:
 		return True
-	if nabcc:
-		if prev_mo.hinshi2 == 'アルファベット' and is_mo_hinshi1_joshi_or_jodoshi:
-			return True
+	if nabcc and prev_mo.hinshi2 == 'アルファベット' and is_mo_hinshi1_joshi_or_jodoshi:
+		return True
 
 	# ピリオドの後の助詞
 	if prev_mo.nhyouki.endswith('.') and mo.hinshi1 == '助詞':
@@ -575,6 +575,11 @@ def should_separate(prev2_mo, prev_mo, mo, next_mo, nabcc=False, logwrite=_logwr
 			mo.hinshi1 == '名詞' and mo.hinshi2 == '固有名詞':
 		# 後白河
 		if not (prev_mo.hyouki == '後' and prev_mo.yomi == 'ゴ'):
+			return True
+
+	# 多かれ/少なかれ
+	if prev_mo.hinshi1 == '形容詞' and mo.hinshi1 == '形容詞':
+		if prev_mo.type2 == '命令ｅ' and mo.type2 == '命令ｅ':
 			return True
 
 	# 複合語（接頭語・接尾語・造語要素）【備考１】
@@ -627,8 +632,8 @@ def should_separate(prev2_mo, prev_mo, mo, next_mo, nabcc=False, logwrite=_logwr
 			mo.kihon == 'なさる':
 		return True
 
-	if prev_mo.hinshi1 == '動詞' and prev_mo.hinshi2 == '自立':
-		if mo.hyouki == 'および': return True
+	if prev_mo.hinshi1 == '動詞' and prev_mo.hinshi2 == '自立' and mo.hyouki == 'および':
+		return True
 
 	# 障害,者/協会
 	if prev2_mo and prev2_mo.hinshi1 == '名詞' and \
@@ -637,12 +642,8 @@ def should_separate(prev2_mo, prev_mo, mo, next_mo, nabcc=False, logwrite=_logwr
 		return True
 
 	# 世界/初
-	if prev_mo.hinshi1 == '名詞' and prev_mo.hinshi2 == '一般' and mo.hyouki == '初' :
+	if prev_mo.hinshi1 == '名詞' and prev_mo.hinshi2 == '一般' and mo.hyouki == '初':
 		return True
-
-	#
-	# 特定の表記 (True)
-	#
 
 	# 40キロ レース
 	if prev_mo.hinshi3 == '助数詞' and mo.hyouki == 'レース':
@@ -738,9 +739,10 @@ def should_separate(prev2_mo, prev_mo, mo, next_mo, nabcc=False, logwrite=_logwr
 		if len(mo.output.split(' ')[-1]) >= 4:
 			return True
 
-	#
-	# 記号と数字 (False)
-	#
+	################################
+	# False
+	################################
+
 	if mo.hyouki == 'ー': return False
 	if prev_mo.hyouki == 'ー': return False
 
@@ -813,20 +815,11 @@ def should_separate(prev2_mo, prev_mo, mo, next_mo, nabcc=False, logwrite=_logwr
 	if prev_mo.hinshi1 == '動詞' and prev_mo.hinshi2 == '自立':
 		if mo.hinshi1 == '動詞' and mo.hinshi2 == '非自立': return False
 
-	# 面白おかしい (点訳のてびき第3版 第3章 その2 10. 複合形容詞は続ける)
-	# 例外 多かれ/少なかれ
-	if prev_mo.hinshi1 == '形容詞' and mo.hinshi1 == '形容詞':
-		if not (prev_mo.type2 == '命令ｅ' and mo.type2 == '命令ｅ'):
-			return False
 	if prev_mo.hinshi1 == '接頭詞' and mo.hinshi1 == '名詞': return False
 
 	# その,その,連体詞,*,*,*,ソノ,ソノ,0/2,ソノ,1
 	# よう,よう,名詞,非自立,助動詞語幹,*,ヨウ,ヨー,1/2,ヨー,0
 	if prev_mo.hinshi1 == '連体詞' and mo.hinshi3 == '助動詞語幹': return False
-
-	#
-	# 特定の表記 (False)
-	#
 
 	# 334万画素 334マンガソ
 	if prev_mo.hyouki == '万' and mo.hyouki == '画素': return False
@@ -837,10 +830,6 @@ def should_separate(prev2_mo, prev_mo, mo, next_mo, nabcc=False, logwrite=_logwr
 	# 扱い始め
 	if prev_mo.hinshi1 == '名詞' and mo.hyouki == '始め':
 		return False
-
-	# 後白河
-	#if prev_mo.hyouki == '後' and prev_mo.yomi == 'ゴ':
-	#	return False
 
 	# 岩倉卿
 	if mo.hyouki == '卿' and mo.yomi == 'キョー':
@@ -924,10 +913,6 @@ def should_separate(prev2_mo, prev_mo, mo, next_mo, nabcc=False, logwrite=_logwr
 			if prev2_mo and prev2_mo.hyouki == '私' and prev_mo.hyouki == 'を':
 				return False
 
-	#
-	# モーラ数・文字数依存 False
-	#
-
 	# 鍛冶,職人 カジショクニン
 	if len(prev_mo.output) <= 2 and mo.hyouki == '職人':
 		return False
@@ -938,9 +923,9 @@ def should_separate(prev2_mo, prev_mo, mo, next_mo, nabcc=False, logwrite=_logwr
 		if len(prev_mo.output.split(' ')[-1]) < 3:
 			return False
 
-	#
+	################################
 	# False/True
-	#
+	################################
 
 	# 仮名文字 カナモジ
 	# 仮名タイプ カナタイプ
@@ -983,9 +968,6 @@ def should_separate(prev2_mo, prev_mo, mo, next_mo, nabcc=False, logwrite=_logwr
 			if len(prev_mo.yomi) <= 2 and len(mo.yomi) >= 3: return False
 			if len(prev_mo.yomi) >= 3 and len(mo.yomi) <= 2: return False
 
-	#
-	# 品詞による規則 False/True
-	#
 	# 間違い,間違い,名詞,ナイ形容詞語幹,*,*,マチガイ,マチガイ,3/4,マチガイ,1
 	# なし,なし,助動詞,*,*,*,ナシ,ナシ,0/2,ナシ,0
 	#
@@ -1022,20 +1004,9 @@ def should_separate(prev2_mo, prev_mo, mo, next_mo, nabcc=False, logwrite=_logwr
 			return True
 		return False
 
-	#if prev_mo.hinshi1 == '動詞' and prev_mo.hinshi2 == '自立':
-	#	if mo.hyouki == 'および': return True
-
 	# 面白おかしい (点訳のてびき第3版 第3章 その2 10. 複合形容詞は続ける)
-	# 例外 多かれ/少なかれ
 	if prev_mo.hinshi1 == '形容詞' and mo.hinshi1 == '形容詞':
-		return True
-
-	# 新/東京/名所
-	#if prev_mo.hinshi1 == '接頭詞' and prev_mo.hinshi2 == '名詞接続' and \
-	#		mo.hinshi1 == '名詞' and mo.hinshi2 == '固有名詞':
-	#	return True
-
-	#if prev_mo.hinshi1 == '助詞' and mo.hinshi1 == '接頭詞': return True
+		return False
 
 	if prev_mo.is_substantive_word() and mo.is_independent_word(): return True
 	if prev_mo.is_independent_word() and mo.is_independent_word(): return True
