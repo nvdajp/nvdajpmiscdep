@@ -761,6 +761,37 @@ def should_separate(prev2_mo, prev_mo, mo, next_mo, nabcc=False, logwrite=_logwr
 			if mo.hyouki in ('訳', '作', '談', '曲', '記', '絵', 'アナ', 'プロ'):
 				return True
 
+	#
+	# 味気,味気,名詞,ナイ形容詞語幹,*,*,アジケ,アジケ,0/3,アジケ,0
+	# ない,ない,助動詞,*,*,*,ナイ,ナイ,1/2,ナイ,0
+	#
+	# 良く,形容詞,自立,*,*,形容詞・アウオ段,連用テ接続,良い,ヨク,ヨク,1/2,C3
+	# ない,助動詞,*,*,*,特殊・ナイ,基本形,ない,ナイ,ナイ,1/2,動詞%F3@0/形容詞%F2@1
+	#
+	# で,で,助動詞,*,*,*,デ,デ,1/1,デ,0
+	# は,は,助詞,係助詞,*,*,ハ,ワ,0/1,ワ,1
+	# なく,なく,助動詞,*,*,*,ナク,ナク,0/2,ナク,1
+	#
+	# 「問題ない」の「ない」は「点訳のてびき」では形容詞だがMecabでは助動詞
+	# 形容詞「ない」は区切る
+	# ただし前の語と複合している場合は前に続ける
+	if mo.hinshi1 == '助動詞' and mo.kihon in ('ない', '無い'):
+		if prev_mo.hinshi1 == '助詞' and prev_mo.kihon == 'は':
+			return True
+		if prev_mo.hinshi1 == '形容詞' and prev_mo.kihon == '良い':
+			return True
+		if prev_mo.hinshi1 == '名詞' and prev_mo.hinshi2 == 'ナイ形容詞語幹' and \
+				prev_mo.kihon in ('問題', '間違い'):
+			return True
+		if prev_mo.hinshi2 == '副助詞': # じゃない
+			return True
+		if prev_mo.hinshi1 == '動詞' and prev_mo.hinshi2 == '非自立' and \
+				prev_mo.kihon == 'てる': # てない
+			return True
+		if prev_mo.hinshi1 == '助動詞' and \
+				prev_mo.kihon == 'だ': # でない
+			return True
+
 	################################
 	# False
 	################################
@@ -956,15 +987,18 @@ def should_separate(prev2_mo, prev_mo, mo, next_mo, nabcc=False, logwrite=_logwr
 		if len(prev_mo.output.split(' ')[-1]) < 3:
 			return False
 
-	################################
-	# False/True
-	################################
+	if mo.hinshi1 == '助動詞' and mo.kihon in ('ない', '無い'):
+		return False
 
 	# 仮名文字 カナモジ
 	# 仮名タイプ カナタイプ
 	# 仮名変換 カナ ヘンカン
 	if prev_mo.hyouki == '仮名' and prev_mo.output == 'カナ':
 		return False
+
+	################################
+	# False/True
+	################################
 
 	# ２字漢語 母子/年金
 	if mo.hinshi1 == '名詞' and mo.hinshi2 == '一般' and \
@@ -988,41 +1022,8 @@ def should_separate(prev2_mo, prev_mo, mo, next_mo, nabcc=False, logwrite=_logwr
 			if len(prev_mo.yomi) >= 3 and len(mo.yomi) <= 2:
 				return False
 
-	# 間違い,間違い,名詞,ナイ形容詞語幹,*,*,マチガイ,マチガイ,3/4,マチガイ,1
-	# なし,なし,助動詞,*,*,*,ナシ,ナシ,0/2,ナシ,0
-	#
-	# 味気,味気,名詞,ナイ形容詞語幹,*,*,アジケ,アジケ,0/3,アジケ,0
-	# ない,ない,助動詞,*,*,*,ナイ,ナイ,1/2,ナイ,0
-	#
-	# 良く,形容詞,自立,*,*,形容詞・アウオ段,連用テ接続,良い,ヨク,ヨク,1/2,C3
-	# ない,助動詞,*,*,*,特殊・ナイ,基本形,ない,ナイ,ナイ,1/2,動詞%F3@0/形容詞%F2@1
-	#
-	# で,で,助動詞,*,*,*,デ,デ,1/1,デ,0
-	# は,は,助詞,係助詞,*,*,ハ,ワ,0/1,ワ,1
-	# なく,なく,助動詞,*,*,*,ナク,ナク,0/2,ナク,1
-	#
-	# 「問題ない」の「ない」は「点訳のてびき」では形容詞だがMecabでは助動詞
-	# 形容詞「ない」は区切る
-	# ただし前の語と複合している場合は前に続ける
-	if mo.hinshi1 == '形容詞' and mo.kihon in ('ない', '無い', '悪い', '無し'):
+	if mo.hinshi1 == '形容詞' and mo.kihon in ('ない', '無い', '悪い'):
 		return True
-	if mo.hinshi1 == '助動詞' and mo.kihon in ('ない', '無い'):
-		if prev_mo.hinshi1 == '助詞' and prev_mo.kihon == 'は':
-			return True
-		if prev_mo.hinshi1 == '形容詞' and prev_mo.kihon == '良い':
-			return True
-		if prev_mo.hinshi1 == '名詞' and prev_mo.hinshi2 == 'ナイ形容詞語幹' and \
-				prev_mo.kihon in ('問題', '間違い'):
-			return True
-		if prev_mo.hinshi2 == '副助詞': # じゃない
-			return True
-		if prev_mo.hinshi1 == '動詞' and prev_mo.hinshi2 == '非自立' and \
-				prev_mo.kihon == 'てる': # てない
-			return True
-		if prev_mo.hinshi1 == '助動詞' and \
-				prev_mo.kihon == 'だ': # でない
-			return True
-		return False
 
 	# 面白おかしい (点訳のてびき第3版 第3章 その2 10. 複合形容詞は続ける)
 	if prev_mo.hinshi1 == '形容詞' and mo.hinshi1 == '形容詞':
