@@ -805,8 +805,8 @@ def should_separate(prev2_mo, prev_mo, mo, next_mo, nabcc=False, logwrite=_logwr
 		return False
 
 	# 副,知事
-	if prev_mo.hyouki == '副' and mo.hinshi1 == '名詞' and mo.hinshi2 == '一般':
-		return False
+	#if prev_mo.hyouki == '副' and mo.hinshi1 == '名詞' and mo.hinshi2 == '一般':
+	#	return False
 
 	# 「・・ですこと」の「こと」は接尾語なので前に続ける
 	if prev_mo.hyouki == 'です' and mo.hyouki == 'こと':
