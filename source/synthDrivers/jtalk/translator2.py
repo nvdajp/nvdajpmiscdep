@@ -523,6 +523,9 @@ def should_separate(prev2_mo, prev_mo, mo, next_mo, nabcc=False, logwrite=_logwr
 
 	# カナ名詞の後のアルファベット名詞
 	if prev_mo.hinshi1 == '名詞' and is_alpha_or_single(mo.nhyouki):
+		# キラーＴ細胞 キラー Tサイボー
+		if prev_mo.hyouki == 'キラー':
+			return True
 		return False
 
 	# 334万画素 334マンガソ
@@ -587,6 +590,9 @@ def should_separate(prev2_mo, prev_mo, mo, next_mo, nabcc=False, logwrite=_logwr
 	# 外国語引用符、マスアケ、助詞、助動詞
 	if prev_mo.output and prev_mo.output.endswith('⠴') and mo.hinshi1 in ('助詞', '助動詞'): return True
 
+	# アルファベットの後の名詞
+	if is_alpha_or_single(prev_mo.nhyouki) and mo.hyouki == '細胞':
+		return False
 	# アルファベットの後の助詞、助動詞
 	# ＣＤ,CD,名詞,一般,*,*,シーディー,シーディー,3/4,シーディー,0
 	# を,を,助詞,格助詞,一般,*,ヲ,ヲ,0/1,ヲ,0
