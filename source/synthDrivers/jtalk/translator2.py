@@ -996,6 +996,10 @@ def should_separate(prev2_mo, prev_mo, mo, next_mo, nabcc=False, logwrite=_logwr
 	if prev_mo.hyouki == '仮名' and prev_mo.output == 'カナ':
 		return False
 
+	# 面白おかしい (点訳のてびき第3版 第3章 その2 10. 複合形容詞は続ける)
+	if prev_mo.hinshi1 == '形容詞' and mo.hinshi1 == '形容詞':
+		return False
+
 	################################
 	# False/True
 	################################
@@ -1024,10 +1028,6 @@ def should_separate(prev2_mo, prev_mo, mo, next_mo, nabcc=False, logwrite=_logwr
 
 	if mo.hinshi1 == '形容詞' and mo.kihon in ('ない', '無い', '悪い'):
 		return True
-
-	# 面白おかしい (点訳のてびき第3版 第3章 その2 10. 複合形容詞は続ける)
-	if prev_mo.hinshi1 == '形容詞' and mo.hinshi1 == '形容詞':
-		return False
 
 	if prev_mo.is_substantive_word() and mo.is_independent_word():
 		return True
