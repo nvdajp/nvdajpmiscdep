@@ -544,88 +544,6 @@ def should_separate(prev2_mo, prev_mo, mo, next_mo, nabcc=False, logwrite=_logwr
 		return False
 
 	#
-	# 記号と数字 (True)
-	#
-	# 括弧開の前
-	# (あける)
-	# 映画,映画,名詞,一般,*,*,エイガ,エイガ,0/3,エイガ,1
-	# 「,「,記号,括弧開,*,*,「,「,*/*,「,0
-	# (あけない)
-	# 機関,名詞,一般,*,*,*,*,機関,キカン,キカン,1/3,C1
-	# （,記号,括弧開,*,*,*,*,（,（,（,*/*,*
-	if prev_mo.hinshi1 == '名詞' and mo.hinshi2 == '括弧開' and mo.nhyouki != '(': return True
-
-	# )( -> あける
-	# )陽が -> あける
-	# '02 -> あけない
-	if prev_mo.hinshi2 == '括弧閉' and prev_mo.nhyouki != "’":
-		if mo.hinshi2 == '括弧開': return True
-		if mo.hinshi1 == '名詞': return True
-
-	# 数字の前のマスアケ
-	if prev_mo.nhyouki not in ('-', '，', '.', '’', '、', ':', '：', ',') and \
-		prev_mo.output != '⠼' and \
-		not nabcc and \
-		prev_mo.nhyouki not in ('(', '第', '築', '二男', '中') and \
-		mo.output.isdigit():
-		return True
-
-	# 1月/1日
-	if prev_mo.nhyouki and prev_mo.nhyouki[0].isdigit() and prev_mo.nhyouki[-1] == '月' and mo.output.isdigit():
-		return True
-
-	# 三,三,名詞,数,*,*,サン,サン,0/2,3,0
-	# 兆,兆,名詞,数,*,*,チョウ,チョー,1/2,チョー,1
-	# 二千四百,二千四百,名詞,数,*,*,ニセンヨンヒャク,ニセンヨンヒャク,1/1,2400,0
-	# 万,万,名詞,数,*,*,マン,マン,1/2,マン,0
-	if prev_mo.hyouki in ('億', '兆', '京') and mo.output.isdigit():
-		return True
-
-	# 1回こっきり 1カイ コッキリ
-	if prev_mo.hyouki == '回' and mo.hyouki == 'こっきり':
-		return True
-
-	# Ｈ形コンベアー Hガタ コンベアー
-	if prev_mo.hyouki[-1] == '形' and mo.hyouki == 'コンベアー':
-		return True
-
-	# 外国語引用符、マスアケ、助詞、助動詞
-	if prev_mo.output and prev_mo.output.endswith('⠴') and mo.hinshi1 in ('助詞', '助動詞'): return True
-
-	# アルファベットの後の助詞、助動詞
-	# ＣＤ,CD,名詞,一般,*,*,シーディー,シーディー,3/4,シーディー,0
-	# を,を,助詞,格助詞,一般,*,ヲ,ヲ,0/1,ヲ,0
-	if is_alpha_or_single(prev_mo.nhyouki) and mo.hinshi1 in ('助詞', '助動詞'):
-		return True
-	if nabcc:
-		if prev_mo.hinshi2 == 'アルファベット' and mo.hinshi1 in ('助詞', '助動詞'):
-			return True
-
-	# ピリオドの後の助詞
-	if prev_mo.nhyouki.endswith('.') and mo.hinshi1 == '助詞':
-		return True
-
-	# ナンバーマークの後の助詞
-	if prev_mo.nhyouki == '#' and mo.hinshi1 == '助詞':
-		return True
-
-	# 助数詞のあとにアラビア数字が来たらマスアケ
-	# case 1:
-	#  零,零,名詞,数,*,*,0,0,1/2,0,0
-	#  時,時,名詞,接尾,助数詞,*,ジ,ジ,1/1,ジ,1
-	#  十五,十五,名詞,数,*,*,15,15,1/3,15,0
-	#  分,分,名詞,接尾,助数詞,*,フン,フン,1/2,フン,0
-	# case 2:
-	#  一,一,名詞,数,*,*,イチ,イチ,2/2,1,0
-	#  人,人,名詞,接尾,助数詞,*,ニン,ニン,1/2,ニン,0
-	#  当り,当り,名詞,接尾,一般,*,アタリ,アタリ,1/3,アタリ,1
-	#  １,1,名詞,数,*,*,イチ,イチ,2/2,1,0
-	#  ０,0,名詞,数,*,*,ゼロ,ゼロ,1/2,0,0
-	#  個,個,名詞,接尾,助数詞,*,コ,コ,1/1,コ,0
-	if prev_mo.hinshi1 == '名詞' and prev_mo.hinshi2 == '接尾':
-		if mo.output.isdigit(): return True
-
-	#
 	# 特定の表記 (False)
 	#
 
@@ -713,9 +631,116 @@ def should_separate(prev2_mo, prev_mo, mo, next_mo, nabcc=False, logwrite=_logwr
 	if prev_mo.hinshi1 == '助動詞' and mo.hyouki == 'きり': return False
 
 	if prev_mo.hinshi1 == '接頭詞' and mo.hinshi1 == '名詞':
-		#if prev_mo.hyouki == '超': return True
 		if prev_mo.hyouki == '大': return False
 	
+	#
+	# 特定の表記と品詞による規則 False
+	#
+
+	# 不幸,に,し,て
+	# 今,に,し,て
+	# 居,ながら,に,し,て
+	# 労,せ,ず,し,て
+	# 若く,し,て
+	# 私,を,し,て
+	# 「して」が文語的表現の助詞である場合は前に続けて書く
+	if mo.hyouki == 'し' and mo.kihon == 'する':
+		if prev_mo.hyouki == 'ず' and prev_mo.hinshi1 == '助動詞':
+			return False
+		if prev_mo.hinshi1 == '形容詞' and prev_mo.type2 == '連用テ接続':
+			return False
+		if prev_mo.hinshi2 == '接続助詞':
+			return False
+		if prev_mo.type1 == '文語・ベシ':
+			return False
+		if next_mo and next_mo.hyouki == 'て':
+			if prev_mo.hyouki == 'に' and prev_mo.hinshi1 == '助詞':
+				return False
+			if prev2_mo and prev2_mo.hyouki == '私' and prev_mo.hyouki == 'を':
+				return False
+
+	#
+	# 記号と数字 (True)
+	#
+	# 括弧開の前
+	# (あける)
+	# 映画,映画,名詞,一般,*,*,エイガ,エイガ,0/3,エイガ,1
+	# 「,「,記号,括弧開,*,*,「,「,*/*,「,0
+	# (あけない)
+	# 機関,名詞,一般,*,*,*,*,機関,キカン,キカン,1/3,C1
+	# （,記号,括弧開,*,*,*,*,（,（,（,*/*,*
+	if prev_mo.hinshi1 == '名詞' and mo.hinshi2 == '括弧開' and mo.nhyouki != '(': return True
+
+	# )( -> あける
+	# )陽が -> あける
+	# '02 -> あけない
+	if prev_mo.hinshi2 == '括弧閉' and prev_mo.nhyouki != "’":
+		if mo.hinshi2 == '括弧開': return True
+		if mo.hinshi1 == '名詞': return True
+
+	# 数字の前のマスアケ
+	if prev_mo.nhyouki not in ('-', '，', '.', '’', '、', ':', '：', ',') and \
+		prev_mo.output != '⠼' and \
+		not nabcc and \
+		prev_mo.nhyouki not in ('(', '第', '築', '二男', '中') and \
+		mo.output.isdigit():
+		return True
+
+	# 1月/1日
+	if prev_mo.nhyouki and prev_mo.nhyouki[0].isdigit() and prev_mo.nhyouki[-1] == '月' and mo.output.isdigit():
+		return True
+
+	# 三,三,名詞,数,*,*,サン,サン,0/2,3,0
+	# 兆,兆,名詞,数,*,*,チョウ,チョー,1/2,チョー,1
+	# 二千四百,二千四百,名詞,数,*,*,ニセンヨンヒャク,ニセンヨンヒャク,1/1,2400,0
+	# 万,万,名詞,数,*,*,マン,マン,1/2,マン,0
+	if prev_mo.hyouki in ('億', '兆', '京') and mo.output.isdigit():
+		return True
+
+	# 1回こっきり 1カイ コッキリ
+	if prev_mo.hyouki == '回' and mo.hyouki == 'こっきり':
+		return True
+
+	# Ｈ形コンベアー Hガタ コンベアー
+	if prev_mo.hyouki[-1] == '形' and mo.hyouki == 'コンベアー':
+		return True
+
+	# 外国語引用符、マスアケ、助詞、助動詞
+	if prev_mo.output and prev_mo.output.endswith('⠴') and mo.hinshi1 in ('助詞', '助動詞'): return True
+
+	# アルファベットの後の助詞、助動詞
+	# ＣＤ,CD,名詞,一般,*,*,シーディー,シーディー,3/4,シーディー,0
+	# を,を,助詞,格助詞,一般,*,ヲ,ヲ,0/1,ヲ,0
+	if is_alpha_or_single(prev_mo.nhyouki) and mo.hinshi1 in ('助詞', '助動詞'):
+		return True
+	if nabcc:
+		if prev_mo.hinshi2 == 'アルファベット' and mo.hinshi1 in ('助詞', '助動詞'):
+			return True
+
+	# ピリオドの後の助詞
+	if prev_mo.nhyouki.endswith('.') and mo.hinshi1 == '助詞':
+		return True
+
+	# ナンバーマークの後の助詞
+	if prev_mo.nhyouki == '#' and mo.hinshi1 == '助詞':
+		return True
+
+	# 助数詞のあとにアラビア数字が来たらマスアケ
+	# case 1:
+	#  零,零,名詞,数,*,*,0,0,1/2,0,0
+	#  時,時,名詞,接尾,助数詞,*,ジ,ジ,1/1,ジ,1
+	#  十五,十五,名詞,数,*,*,15,15,1/3,15,0
+	#  分,分,名詞,接尾,助数詞,*,フン,フン,1/2,フン,0
+	# case 2:
+	#  一,一,名詞,数,*,*,イチ,イチ,2/2,1,0
+	#  人,人,名詞,接尾,助数詞,*,ニン,ニン,1/2,ニン,0
+	#  当り,当り,名詞,接尾,一般,*,アタリ,アタリ,1/3,アタリ,1
+	#  １,1,名詞,数,*,*,イチ,イチ,2/2,1,0
+	#  ０,0,名詞,数,*,*,ゼロ,ゼロ,1/2,0,0
+	#  個,個,名詞,接尾,助数詞,*,コ,コ,1/1,コ,0
+	if prev_mo.hinshi1 == '名詞' and prev_mo.hinshi2 == '接尾':
+		if mo.output.isdigit(): return True
+
 	#
 	# 特定の表記 (True)
 	#
@@ -805,7 +830,6 @@ def should_separate(prev2_mo, prev_mo, mo, next_mo, nabcc=False, logwrite=_logwr
 
 	if prev_mo.hinshi1 == '接頭詞' and mo.hinshi1 == '名詞':
 		if prev_mo.hyouki == '超': return True
-		#if prev_mo.hyouki == '大': return False
 	
 	if prev_mo.hinshi1 == '助動詞' and prev_mo.hyouki == 'で' and mo.hinshi1 == '助動詞': return True
 
@@ -855,33 +879,7 @@ def should_separate(prev2_mo, prev_mo, mo, next_mo, nabcc=False, logwrite=_logwr
 		return True
 
 	#
-	# 特定の表記と品詞による規則 False
-	#
-
-	# 不幸,に,し,て
-	# 今,に,し,て
-	# 居,ながら,に,し,て
-	# 労,せ,ず,し,て
-	# 若く,し,て
-	# 私,を,し,て
-	# 「して」が文語的表現の助詞である場合は前に続けて書く
-	if mo.hyouki == 'し' and mo.kihon == 'する':
-		if prev_mo.hyouki == 'ず' and prev_mo.hinshi1 == '助動詞':
-			return False
-		if prev_mo.hinshi1 == '形容詞' and prev_mo.type2 == '連用テ接続':
-			return False
-		if prev_mo.hinshi2 == '接続助詞':
-			return False
-		if prev_mo.type1 == '文語・ベシ':
-			return False
-		if next_mo and next_mo.hyouki == 'て':
-			if prev_mo.hyouki == 'に' and prev_mo.hinshi1 == '助詞':
-				return False
-			if prev2_mo and prev2_mo.hyouki == '私' and prev_mo.hyouki == 'を':
-				return False
-
-	#
-	# モーラ数・文字数依存
+	# モーラ数・文字数依存 False/True
 	#
 
 	# 金の減り.加減 カネノ ヘリカゲン
@@ -943,7 +941,7 @@ def should_separate(prev2_mo, prev_mo, mo, next_mo, nabcc=False, logwrite=_logwr
 			if len(prev_mo.yomi) >= 3 and len(mo.yomi) <= 2: return False
 
 	#
-	# 品詞による規則
+	# 品詞による規則 False/True
 	#
 	# 間違い,間違い,名詞,ナイ形容詞語幹,*,*,マチガイ,マチガイ,3/4,マチガイ,1
 	# なし,なし,助動詞,*,*,*,ナシ,ナシ,0/2,ナシ,0
