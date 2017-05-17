@@ -840,6 +840,42 @@ def filter_jdic(s):
 	elif a[0] == '一朝' and a[12] == 'イッチョー' and len(a) == 15:
 		a.append('1チョー')
 		s = ",".join(a)
+	elif a[0] == '三面' and a[12] == 'サンメン' and len(a) == 15:
+		a.append('3メン')
+		s = ",".join(a)
+	elif a[0] == '十二宮' and a[12] == 'ジューニキュー' and len(a) == 15:
+		a.append('12キュー')
+		s = ",".join(a)
+	elif a[0] == '九紫' and a[12] == 'キューシ' and len(a) == 15:
+		a.append('9シ')
+		s = ",".join(a)
+	elif a[0] == '九星' and a[12] == 'キューセイ' and len(a) == 15:
+		a.append('9セイ')
+		s = ",".join(a)
+	elif a[0] == '三碧' and a[12] == 'サンペキ' and len(a) == 15:
+		a.append('3ペキ')
+		s = ",".join(a)
+	elif a[0] == '四緑' and a[12] == 'シロク' and len(a) == 15:
+		a.append('4ロク')
+		s = ",".join(a)
+	elif a[0] == '五黄' and a[12] == 'ゴオー' and len(a) == 15:
+		a.append('5オー')
+		s = ",".join(a)
+	elif a[0] == '六白' and a[12] == 'ロッパク' and len(a) == 15:
+		a.append('6パク')
+		s = ",".join(a)
+	elif a[0] == '七赤' and a[12] == 'シチセキ' and len(a) == 15:
+		a.append('7セキ')
+		s = ",".join(a)
+	elif a[0] == '八白' and a[12] == 'ハッパク' and len(a) == 15:
+		a.append('8パク')
+		s = ",".join(a)
+	elif a[0] == '九紫' and a[12] == 'キューシ' and len(a) == 15:
+		a.append('9シ')
+		s = ",".join(a)
+	elif a[0] == '九族' and a[12] == 'キューゾク' and len(a) == 15:
+		a.append('9ゾク')
+		s = ",".join(a)
 	elif is_alpha_jp_mixed(a[0]):
 		#print a[0]
 		s = ""
