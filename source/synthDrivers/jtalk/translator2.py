@@ -567,9 +567,76 @@ def should_separate(prev2_mo, prev_mo, mo, next_mo, nabcc=False, logwrite=_logwr
 	if mo_output_isdigit and prev_mo.hinshi1 == '名詞' and prev_mo.hinshi2 == '接尾':
 		return True
 
+	# 複合語（接頭語・接尾語・造語要素）【備考１】
+	# 接頭語・接尾語・造語要素であっても、意味の理解を助ける場合には、
+	# 発音上の切れ目を考慮して区切って書いてよい。
+	if prev_mo.hinshi1 == '接頭詞' and prev_mo.hyouki not in ('お', 'ご', '旧', '後', '副', '大') and mo.hinshi1 == '名詞' and mo.hinshi2 != '数':
+		return True
+
+	# 人名に続く「さん」「様」「君」「殿」「氏（し）」「氏（うじ）」は区切って書く
+	# (名詞,固有名詞,人名 -> 名詞,接尾,人名)
+	if prev_mo.hinshi2 == '固有名詞' and prev_mo.hinshi3 == '人名' and ((mo.hinshi2 == '接尾' and mo.hinshi3 == '人名') or (mo.hyouki in ('さん', '知事'))):
+		return True
+
+	# 地域
+	# 永田町 １
+	# 「岬」「峠」「半島」はマス空けが原則
+	if prev_mo.hinshi2 == '固有名詞' and prev_mo.hinshi3 == '地域' and \
+			(mo.hinshi2 == '数' or mo.hyouki in ('岬', '峠', '半島')):
+		return True
+
+	# 伊豆/大島
+	if prev_mo.hinshi2 == '固有名詞' and mo.hinshi2 == '固有名詞':
+		return True
+
+	# 日/独/伊/3国同盟
+	if prev_mo.hinshi2 == '固有名詞' and prev_mo.hinshi3 == '地域' and \
+			mo.hinshi1 == '名詞' and mo.hinshi2 == '一般':
+		if not (mo.hyouki == '卿' and mo.yomi == 'キョー') and \
+		   not (mo.hyouki == '市' and mo.yomi == 'シ'):
+			return True
+
+	# 東京/都 千代田/区
+	if prev_mo.hinshi2 == '接尾' and prev_mo.hinshi3 == '地域' and \
+			mo.hinshi2 == '固有名詞' and mo.hinshi3 == '地域':
+		return True
+
+	# 東京/都 交通/局
+	if prev_mo.hinshi2 == '接尾' and prev_mo.hinshi3 == '地域' and \
+			mo.hinshi1 == '名詞' and mo.hinshi2 == '一般':
+		return True
+
+	# 聞き捨てならない キキズテ ナラナイ
+	if prev_mo.hinshi1 == '動詞' and mo.hinshi1 == '動詞' and mo.hyouki == 'なら':
+		return True
+
+	# お,黙り,なさい
+	# 「お」がついて名詞化した語に「なさい・なさる」が続く場合は区切ってよい
+	if prev2_mo and prev2_mo.hinshi1 == '接頭詞' and prev2_mo.hyouki == 'お' and \
+			prev_mo.hinshi1 == '動詞' and prev_mo.type2 == '連用形' and \
+			mo.kihon == 'なさる':
+		return True
+
+	if prev_mo.hinshi1 == '動詞' and prev_mo.hinshi2 == '自立':
+		if mo.hyouki == 'および': return True
+
+	# 障害,者/協会
+	if prev2_mo and prev2_mo.hinshi1 == '名詞' and \
+			prev_mo.hyouki == '者' and \
+			mo.hinshi1 == '名詞':
+		return True
+
+	# 世界/初
+	if prev_mo.hinshi1 == '名詞' and prev_mo.hinshi2 == '一般' and mo.hyouki == '初' :
+		return True
+
 	#
 	# 特定の表記 (True)
 	#
+
+	# 40キロ レース
+	if prev_mo.hinshi3 == '助数詞' and mo.hyouki == 'レース':
+		return True
 
 	# 1回こっきり 1カイ コッキリ
 	if prev_mo.hyouki == '回' and mo.hyouki == 'こっきり':
@@ -577,10 +644,6 @@ def should_separate(prev2_mo, prev_mo, mo, next_mo, nabcc=False, logwrite=_logwr
 
 	# Ｈ形コンベアー Hガタ コンベアー
 	if prev_mo.hyouki[-1] == '形' and mo.hyouki == 'コンベアー':
-		return True
-
-	# 40キロ レース
-	if prev_mo.hinshi3 == '助数詞' and mo.hyouki == 'レース':
 		return True
 
 	# 漢字仮名交じり文 カンジ カナマジリブン
@@ -604,16 +667,6 @@ def should_separate(prev2_mo, prev_mo, mo, next_mo, nabcc=False, logwrite=_logwr
 
 	# 一時/雨
 	if prev_mo.hyouki == '一時' and mo.hinshi1 == '名詞':
-		return True
-
-	# 世界/初
-	if prev_mo.hinshi1 == '名詞' and prev_mo.hinshi2 == '一般' and mo.hyouki == '初' :
-		return True
-
-	# 障害,者/協会
-	if prev2_mo and prev2_mo.hinshi1 == '名詞' and \
-			prev_mo.hyouki == '者' and \
-			mo.hinshi1 == '名詞':
 		return True
 
 	# とは/言う/ものの
@@ -666,56 +719,6 @@ def should_separate(prev2_mo, prev_mo, mo, next_mo, nabcc=False, logwrite=_logwr
 		return True
 	
 	if prev_mo.hinshi1 == '助動詞' and prev_mo.hyouki == 'で' and mo.hinshi1 == '助動詞':
-		return True
-
-	# 複合語（接頭語・接尾語・造語要素）【備考１】
-	# 接頭語・接尾語・造語要素であっても、意味の理解を助ける場合には、
-	# 発音上の切れ目を考慮して区切って書いてよい。
-	if prev_mo.hinshi1 == '接頭詞' and prev_mo.hyouki not in ('お', 'ご', '旧', '後', '副', '大') and mo.hinshi1 == '名詞' and mo.hinshi2 != '数':
-		return True
-
-	# 地域
-	# 永田町 １
-	# 「岬」「峠」「半島」はマス空けが原則
-	if prev_mo.hinshi2 == '固有名詞' and prev_mo.hinshi3 == '地域' and \
-			(mo.hinshi2 == '数' or mo.hyouki in ('岬', '峠', '半島')):
-		return True
-
-	# 伊豆/大島
-	if prev_mo.hinshi2 == '固有名詞' and mo.hinshi2 == '固有名詞':
-		return True
-
-	# 日/独/伊/3国同盟
-	if prev_mo.hinshi2 == '固有名詞' and prev_mo.hinshi3 == '地域' and \
-			mo.hinshi1 == '名詞' and mo.hinshi2 == '一般':
-		if not (mo.hyouki == '卿' and mo.yomi == 'キョー') and \
-		   not (mo.hyouki == '市' and mo.yomi == 'シ'):
-			return True
-
-	# 東京/都 千代田/区
-	if prev_mo.hinshi2 == '接尾' and prev_mo.hinshi3 == '地域' and \
-			mo.hinshi2 == '固有名詞' and mo.hinshi3 == '地域':
-		return True
-
-	# 東京/都 交通/局
-	if prev_mo.hinshi2 == '接尾' and prev_mo.hinshi3 == '地域' and \
-			mo.hinshi1 == '名詞' and mo.hinshi2 == '一般':
-		return True
-
-	# 聞き捨てならない キキズテ ナラナイ
-	if prev_mo.hinshi1 == '動詞' and mo.hinshi1 == '動詞' and mo.hyouki == 'なら':
-		return True
-
-	# お,黙り,なさい
-	# 「お」がついて名詞化した語に「なさい・なさる」が続く場合は区切ってよい
-	if prev2_mo and prev2_mo.hinshi1 == '接頭詞' and prev2_mo.hyouki == 'お' and \
-			prev_mo.hinshi1 == '動詞' and prev_mo.type2 == '連用形' and \
-			mo.kihon == 'なさる':
-		return True
-
-	# 人名に続く「さん」「様」「君」「殿」「氏（し）」「氏（うじ）」は区切って書く
-	# (名詞,固有名詞,人名 -> 名詞,接尾,人名)
-	if prev_mo.hinshi2 == '固有名詞' and prev_mo.hinshi3 == '人名' and ((mo.hinshi2 == '接尾' and mo.hinshi3 == '人名') or (mo.hyouki in ('さん', '知事'))):
 		return True
 
 	# 仮名文字 カナモジ
@@ -1009,8 +1012,8 @@ def should_separate(prev2_mo, prev_mo, mo, next_mo, nabcc=False, logwrite=_logwr
 			return True
 		return False
 
-	if prev_mo.hinshi1 == '動詞' and prev_mo.hinshi2 == '自立':
-		if mo.hyouki == 'および': return True
+	#if prev_mo.hinshi1 == '動詞' and prev_mo.hinshi2 == '自立':
+	#	if mo.hyouki == 'および': return True
 
 	# 面白おかしい (点訳のてびき第3版 第3章 その2 10. 複合形容詞は続ける)
 	# 例外 多かれ/少なかれ
