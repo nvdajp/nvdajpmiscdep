@@ -539,7 +539,7 @@ def should_separate(prev2_mo, prev_mo, mo, next_mo, nabcc=False, logwrite=_logwr
 
 	# 外国語引用符、マスアケ、助詞、助動詞
 	is_mo_hinshi1_joshi_or_jodoshi = (mo.hinshi1 in ('助詞', '助動詞'))
-	if prev_mo.output and prev_mo.output.endswith('⠴') and is_mo_hinshi1_joshi_or_jodoshi: return True
+	if is_mo_hinshi1_joshi_or_jodoshi and prev_mo.output and prev_mo.output.endswith('⠴'): return True
 
 	# アルファベットの後の助詞、助動詞
 	# ＣＤ,CD,名詞,一般,*,*,シーディー,シーディー,3/4,シーディー,0
@@ -572,8 +572,8 @@ def should_separate(prev2_mo, prev_mo, mo, next_mo, nabcc=False, logwrite=_logwr
 	#  １,1,名詞,数,*,*,イチ,イチ,2/2,1,0
 	#  ０,0,名詞,数,*,*,ゼロ,ゼロ,1/2,0,0
 	#  個,個,名詞,接尾,助数詞,*,コ,コ,1/1,コ,0
-	if prev_mo.hinshi1 == '名詞' and prev_mo.hinshi2 == '接尾':
-		if mo_output_isdigit: return True
+	if mo_output_isdigit and prev_mo.hinshi1 == '名詞' and prev_mo.hinshi2 == '接尾':
+		return True
 
 	#
 	# 特定の表記 (True)
@@ -662,15 +662,17 @@ def should_separate(prev2_mo, prev_mo, mo, next_mo, nabcc=False, logwrite=_logwr
 	if prev_mo.hyouki == '父' and mo.hinshi2 == '固有名詞':
 		return True
 
-	if prev_mo.hinshi1 == '接頭詞' and mo.hinshi1 == '名詞':
-		if prev_mo.hyouki == '超': return True
+	if prev_mo.hinshi1 == '接頭詞' and prev_mo.hyouki == '超' and mo.hinshi1 == '名詞':
+		return True
 	
-	if prev_mo.hinshi1 == '助動詞' and prev_mo.hyouki == 'で' and mo.hinshi1 == '助動詞': return True
+	if prev_mo.hinshi1 == '助動詞' and prev_mo.hyouki == 'で' and mo.hinshi1 == '助動詞':
+		return True
 
 	# 複合語（接頭語・接尾語・造語要素）【備考１】
 	# 接頭語・接尾語・造語要素であっても、意味の理解を助ける場合には、
 	# 発音上の切れ目を考慮して区切って書いてよい。
-	if prev_mo.hyouki not in ('お', 'ご', '旧', '後', '副', '大') and prev_mo.hinshi1 == '接頭詞' and mo.hinshi1 == '名詞' and mo.hinshi2 != '数': return True
+	if prev_mo.hinshi1 == '接頭詞' and prev_mo.hyouki not in ('お', 'ご', '旧', '後', '副', '大') and mo.hinshi1 == '名詞' and mo.hinshi2 != '数':
+		return True
 
 	# 地域
 	# 永田町 １
