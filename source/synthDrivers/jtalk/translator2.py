@@ -910,6 +910,16 @@ def should_separate(prev2_mo, prev_mo, mo, next_mo, nabcc=False, logwrite=_logwr
 		if not prev_mo.hinshi2 in ('数', 'アルファベット') and not mo.hinshi2 in ('数', 'アルファベット', '接尾'):
 			if prev_mo.hyouki == 'フェア' and mo.hyouki == 'キャッチ':
 				return False
+			if prev_mo.hyouki == '擬古' and mo.hyouki == '文':
+				return False
+			if prev_mo.hyouki == '白' and mo.hyouki == '生地':
+				return False
+			if prev_mo.hyouki == '今日' and mo.hyouki == '限り':
+				return False
+			if prev_mo.hyouki == '擬似' and mo.hyouki == 'コレラ':
+				return True
+			if prev_mo.hyouki == '火事' and mo.hyouki == '見舞い':
+				return True
 			if len(prev_mo.yomi) >= 4 and len(mo.yomi) >= 2:
 				if mo.hyouki != '鍛冶':
 					return True
