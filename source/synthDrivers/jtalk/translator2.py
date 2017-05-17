@@ -903,6 +903,8 @@ def should_separate(prev2_mo, prev_mo, mo, next_mo, nabcc=False, logwrite=_logwr
 				):
 				return True
 		if not prev_mo.hinshi2 in ('数', 'アルファベット') and not mo.hinshi2 in ('数', 'アルファベット'):
+			if prev_mo.hyouki == 'キー' and mo.hyouki == 'ボックス':
+				return True
 			if len(prev_mo.yomi) <= 2 and len(mo.yomi) >= 3: return False
 			if len(prev_mo.yomi) >= 3 and len(mo.yomi) <= 2: return False
 		if mo.hinshi2 != '接尾': return True
