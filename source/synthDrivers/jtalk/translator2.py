@@ -1004,6 +1004,9 @@ def should_separate(prev2_mo, prev_mo, mo, next_mo, nabcc=False, logwrite=_logwr
 	# False/True
 	################################
 
+	if mo.hinshi1 == '形容詞' and mo.kihon in ('ない', '無い', '悪い'):
+		return True
+
 	# ２字漢語 母子/年金
 	if mo.hinshi1 == '名詞' and mo.hinshi2 == '一般' and \
 	   len(prev_mo.hyouki) == 2 and \
@@ -1013,21 +1016,20 @@ def should_separate(prev2_mo, prev_mo, mo, next_mo, nabcc=False, logwrite=_logwr
 		return True
 
 	# 複合名詞内部の2拍以下は切らない
-	if prev_mo.hinshi1 == '名詞' and mo.hinshi1 == '名詞':
-		if not prev_mo.hinshi2 in ('数', 'アルファベット') and not mo.hinshi2 in ('数', 'アルファベット', '接尾'):
-			if len(prev_mo.yomi) >= 4 and len(mo.yomi) >= 2:
-				if mo.hyouki != '鍛冶':
-					return True
-			if len(mo.yomi) >= 4:
-				if prev_mo.hyouki not in ('右', '花'):
-					return True
-			if len(prev_mo.yomi) <= 2 and len(mo.yomi) >= 3:
-				return False
-			if len(prev_mo.yomi) >= 3 and len(mo.yomi) <= 2:
-				return False
-
-	if mo.hinshi1 == '形容詞' and mo.kihon in ('ない', '無い', '悪い'):
-		return True
+	if prev_mo.hinshi1 == '名詞' and \
+		prev_mo.hinshi2 not in ('数', 'アルファベット') and \
+		mo.hinshi1 == '名詞' and \
+		mo.hinshi2 not in ('数', 'アルファベット', '接尾'):
+		if len(prev_mo.yomi) >= 4 and len(mo.yomi) >= 2:
+			if mo.hyouki != '鍛冶':
+				return True
+		if len(mo.yomi) >= 4:
+			if prev_mo.hyouki not in ('右', '花'):
+				return True
+		if len(prev_mo.yomi) <= 2 and len(mo.yomi) >= 3:
+			return False
+		if len(prev_mo.yomi) >= 3 and len(mo.yomi) <= 2:
+			return False
 
 	if prev_mo.is_substantive_word() and mo.is_independent_word():
 		return True
