@@ -618,4 +618,15 @@ tasks = [
 	{'text':'長押し', 'speech':'ナガオシ', 'braille':'ナガオシ'},
 	{'text':'長押しの指を離す', 'speech':'ナガオシノユビヲハナス', 'braille':'ナガオシ/ノ/ユビ/ヲ/ハナス'},
 	{'text':'長押しで移動', 'speech':'ナガオシデイドー', 'braille':'ナガオシ/デ/イドー'},
+
+	#{
+	#	'comment':'https://github.com/nvdajp/nvdajpmiscdep/issues/42',
+	#	'text': "行う",
+	#	'braille': "オコナウ",
+	#},
+	{
+		'comment':'https://github.com/nvdajp/nvdajpmiscdep/issues/42',
+		'text': "行うため",
+		'braille': "オコナウ/タメ",
+	},
 ]
