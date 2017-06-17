@@ -878,6 +878,8 @@ def filter_jdic(s):
 		s = ",".join(a)
 	elif a[0] == '聞き捨て' and a[12] == 'キキステ' and len(a) == 15:
 		s = ""
+	elif a[0] == '米ドル' and a[12] == 'アメリカドル' and len(a) == 15:
+		s = ""
 	elif is_alpha_jp_mixed(a[0]):
 		#print a[0]
 		s = ""
