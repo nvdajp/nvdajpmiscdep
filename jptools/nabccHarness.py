@@ -273,6 +273,13 @@ tests = [
 	{
 		'comment':'https://github.com/nvdajp/nvdajpmiscdep/issues/42',
 		'mode': 'NABCC',
+		'text': " r",
+		'input': " r",
+		'output': ' ⠗',
+	},
+	{
+		'comment':'https://github.com/nvdajp/nvdajpmiscdep/issues/42',
+		'mode': 'NABCC',
 		'text': " 'r",
 		'input': " 'r",
 		'output': ' ⠄⠗',
