@@ -270,4 +270,11 @@ tests = [
 		'input': "Mother's",
 		'output': '⡍⠕⠞⠓⠑⠗⠄⠎',
 	},
+	{
+		'comment':'https://github.com/nvdajp/nvdajpmiscdep/issues/42',
+		'mode': 'NABCC',
+		'text': " 'r",
+		'input': " 'r",
+		'output': ' ⠄⠗',
+	},
 ]
