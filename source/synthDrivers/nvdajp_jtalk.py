@@ -37,7 +37,7 @@ class SynthDriver(SynthDriver):
 		return True
 
 	def __init__(self):
-		self.voice_id = 'V2'
+		self.voice_id = 'V4'
 		self._volume = 100
 		self._pitch = 50
 		self._inflection = 50
