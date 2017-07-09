@@ -72,6 +72,7 @@ _jtalk_voices = [
 	 "lang":"ja",
 	 "samp_rate": 48000,
 	 "fperiod": 240,
+	 "fperiod_bias": 0.5,
 	 "lf0_base": 5.9,
 	 "pitch_bias": 0,
 	 "inflection_bias": 0,
@@ -302,6 +303,7 @@ def set_rate(rate, rateBoost):
 		fperiod = int(240 - 1.5 * int(rate)) # 240..90
 	if not rateBoost:
 		fperiod = int(fperiod * RATE_BOOST_MULTIPLIER)
+	fperiod *= voice_args.get('fperiod_bias', 1.0)
 
 def set_volume(vol):
 	global max_level, thres_level, thres2_level
