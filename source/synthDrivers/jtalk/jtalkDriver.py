@@ -303,7 +303,7 @@ def set_rate(rate, rateBoost):
 		fperiod = int(240 - 1.5 * int(rate)) # 240..90
 	if not rateBoost:
 		fperiod = int(fperiod * RATE_BOOST_MULTIPLIER)
-	fperiod *= voice_args.get('fperiod_bias', 1.0)
+	fperiod = int(fperiod * voice_args.get('fperiod_bias', 1))
 
 def set_volume(vol):
 	global max_level, thres_level, thres2_level
