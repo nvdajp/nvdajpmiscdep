@@ -81,7 +81,7 @@ _jtalk_voices = [
 	 "beta": 0.00,
 	 "espeak_variant": "f1"},
 ]
-default_jtalk_voice = _jtalk_voices[1] # V2
+default_jtalk_voice = _jtalk_voices[3] # V4
 voice_args = None
 
 class VoiceProperty(baseObject.AutoPropertyObject):
