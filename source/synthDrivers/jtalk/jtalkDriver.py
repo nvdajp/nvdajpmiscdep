@@ -72,7 +72,7 @@ _jtalk_voices = [
 	 "lang":"ja",
 	 "samp_rate": 48000,
 	 "fperiod": 240,
-	 "fperiod_bias": 0.5,
+	 "fperiod_bias": 0.75,
 	 "lf0_base": 5.9,
 	 "pitch_bias": 0,
 	 "inflection_bias": 0,
