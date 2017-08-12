@@ -532,7 +532,26 @@ jdic = [
 	{   'text':'〵', 'braille':'クノジテン シタ'},
 
 	# https://github.com/nvdajp/nvdajpmiscdep/issues/45
-	{   'text':'⣏⣿⣹', 'braille':'⣏⣿⣹'},
+	{   'text':'⢎⣿⡱',
+		'braille':'⢎⣿⡱',
+		'speech':'トグルボタンオサレテイル',
+	},
+	{   'text':'⢎⣀⡱',
+		'braille':'⢎⣀⡱',
+		'speech':'トグルボタンオサレテイナイ',
+	},
+	{   'text':'⣏⣿⣹',
+		'braille':'⣏⣿⣹',
+		'speech':'チェックボックスチェック',
+	},
+	{   'text':'⣏⣸⣹',
+		'braille':'⣏⣸⣹',
+		'speech':'チェックボックスイチブチェック',
+	},
+	{   'text':'⣏⣀⣹',
+		'braille':'⣏⣀⣹',
+		'speech':'チェックボックスチェックナシ',
+	},
 
 	# 乗,1000,1000,1000,名詞,一般,*,*,*,*,乗,ジョウ,ジョー,1/2,C2
 	{'text':'乗',

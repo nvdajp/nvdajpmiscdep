@@ -84,7 +84,11 @@ def make_dic(CODE, CS_FILE, THISDIR):
 			cost = 15000
 			# 表層形,左文脈ID,右文脈ID,コスト,品詞,品詞細分類1,品詞細分類2,品詞細分類3,活用形,活用型,原形,読み,発音
 			# 名詞,普通名詞
-			s = "%s,,,%d,名詞,サ変接続,*,*,*,*,%s,%s,%s,0/%d,C0\n" % (k1,cost,k1,y,y,mora_count)
+			s = "%s,,,%d,名詞,サ変接続,*,*,*,*,%s,%s,%s,0/%d,C0" % (k1,cost,k1,y,y,mora_count)
+			# braille pattern
+			if len(k1) == 1 and 0x2800 <= ord(k1) <= 0x28ff:
+				s += ",%s" % k1
+			s += "\n"
 			file.write(s.encode(CODE))
 
 if __name__ == '__main__':

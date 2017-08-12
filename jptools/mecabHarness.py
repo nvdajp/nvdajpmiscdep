@@ -618,4 +618,27 @@ tasks = [
 	{'text':'長押し', 'speech':'ナガオシ', 'braille':'ナガオシ'},
 	{'text':'長押しの指を離す', 'speech':'ナガオシノユビヲハナス', 'braille':'ナガオシ/ノ/ユビ/ヲ/ハナス'},
 	{'text':'長押しで移動', 'speech':'ナガオシデイドー', 'braille':'ナガオシ/デ/イドー'},
+
+	# テキストと点字パターンの混在
+	{
+		'text':'⣏',
+		'braille':'⣏',
+		'speech':'イチニーサンヨンナナハチノテン',
+	},
+	{
+		'text':'⣿',
+		'braille':'⣿',
+		'speech':'イチニーサンヨンゴーロクナナハチノテン',
+	},
+	{
+		'text':'⣹',
+		'braille':'⣹',
+		'speech':'イチヨンゴーロクナナハチノテン',
+	},
+	{
+		'comment':'https://github.com/nvdajp/nvdajpmiscdep/issues/45',
+		'text':'⣏⣿⣹',
+		'braille':'⣏⣿⣹',
+		'speech':'チェックボックスチェック',
+	},
 ]
