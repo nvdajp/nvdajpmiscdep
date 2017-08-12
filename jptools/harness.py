@@ -5934,4 +5934,10 @@ tests = [
 		'text':'47news:',
 		'input':'47news:',
 	},
+	# テキストと点字パターンの混在
+	{
+		'comment':'https://github.com/nvdajp/nvdajpmiscdep/issues/45',
+		'text':'UIオートメーションの有効化(設定を有効にするには再起動が必要) ⣏⣿⣹ チェックボックス',
+		'input':'UI オートメーションノ ユーコーカ(セッテイヲ ユーコーニ スルニワ サイ キドーガ ヒツヨー) ⣏⣿⣹ チェック ボックス',
+	},
 ]

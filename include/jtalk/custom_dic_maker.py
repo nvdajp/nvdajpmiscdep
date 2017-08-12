@@ -531,6 +531,8 @@ jdic = [
 	{   'text':'〴', 'braille':'クノジテン ウエ ダクテン'},
 	{   'text':'〵', 'braille':'クノジテン シタ'},
 
+	# https://github.com/nvdajp/nvdajpmiscdep/issues/45
+	{   'text':'⣏⣿⣹', 'braille':'⣏⣿⣹'},
 
 	# 乗,1000,1000,1000,名詞,一般,*,*,*,*,乗,ジョウ,ジョー,1/2,C2
 	{'text':'乗',
