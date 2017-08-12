@@ -5934,6 +5934,11 @@ tests = [
 		'text':'47news:',
 		'input':'47news:',
 	},
+	# 米ドル
+	{
+		'text':'米ドル',
+		'input':'ベイ ドル',
+	},
 	# テキストと点字パターンの混在
 	{
 		'comment':'https://github.com/nvdajp/nvdajpmiscdep/issues/45',

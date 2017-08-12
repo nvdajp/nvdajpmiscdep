@@ -1214,8 +1214,9 @@ def japanese_braille_separate(inbuf, logwrite, nabcc=False):
 	for pos in xrange(len(li) - 1):
 		mo = li[pos]
 		mo2 = li[pos + 1]
-		if mo.hinshi1 == '動詞' and mo.hyouki != '言う' and len(mo.yomi) > 1 and mo.yomi[-1] == 'ウ' and mo2.yomi[:1] in ('タ', 'テ'):
+		if mo.hinshi1 == '動詞' and mo.hyouki not in ('言う', '行う') and len(mo.yomi) > 1 and mo.yomi[-1] == 'ウ' and mo2.yomi[:1] in ('タ', 'テ'):
 			mo.output = mo.yomi[:-1] + 'ー'
+			# https://github.com/nvdajp/nvdajpmiscdep/issues/42
 
 	li = replace_digit_morphs(li)
 	li = rewrite_number(li, logwrite)

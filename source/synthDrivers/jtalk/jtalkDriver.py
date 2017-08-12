@@ -72,6 +72,7 @@ _jtalk_voices = [
 	 "lang":"ja",
 	 "samp_rate": 48000,
 	 "fperiod": 240,
+	 "fperiod_bias": 0.75,
 	 "lf0_base": 5.9,
 	 "pitch_bias": 0,
 	 "inflection_bias": 0,
@@ -81,7 +82,7 @@ _jtalk_voices = [
 	 "beta": 0.00,
 	 "espeak_variant": "f1"},
 ]
-default_jtalk_voice = _jtalk_voices[1] # V2
+default_jtalk_voice = _jtalk_voices[3] # V4
 voice_args = None
 
 class VoiceProperty(baseObject.AutoPropertyObject):
@@ -302,6 +303,7 @@ def set_rate(rate, rateBoost):
 		fperiod = int(240 - 1.5 * int(rate)) # 240..90
 	if not rateBoost:
 		fperiod = int(fperiod * RATE_BOOST_MULTIPLIER)
+	fperiod = int(fperiod * voice_args.get('fperiod_bias', 1))
 
 def set_volume(vol):
 	global max_level, thres_level, thres2_level

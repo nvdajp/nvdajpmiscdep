@@ -371,7 +371,9 @@ def Mecab_correctFeatures(mf, CODE_ = CODE):
 					h=hyoki, h1=hin1, h2=hin2, y=yomi, p=pron, m=mora
 				)
 				Mecab_setFeature(mf, pos-2, feature, CODE_=CODE_)
-		elif ar2 and ar[0] in (u'ｓ', u'ｄ', u'ｅｄ', u'ｒ', u'ｔｉｎｇ', u'ｔ'):
+		elif (not (ar3 and ar3[0] == u'\u3000' and ar2 and ar2[0] == u"’")) and ar2 and ar[0] in (u'ｓ', u'ｄ', u'ｅｄ', u'ｒ', u'ｔｉｎｇ', u'ｔ'):
+			# https://github.com/nvdajp/nvdajpmiscdep/issues/42
+			#print ((unicode(ar3[0]) if ar3 else '*') + '/' + (unicode(ar2[0]) if ar2 else '*') + '/' + (unicode(ar[0]) if ar else '*')).encode('utf-8')
 			# pattern 5
 			if ar3 and ar2[0] in ("'", u"’"):
 				# PATTERN 5 "author's"
