@@ -36,17 +36,18 @@ def read_characters_file(cs_file):
 				k = a[0]
 				rd = a[2][1:-1]
 				# braille pattern ⣿
-				#if 0x2800 <= ord(k) and ord(k) <= 0x28ff: continue
-				rd = rd.replace('0', 'ゼロ')
-				rd = rd.replace('1', 'イチ')
-				rd = rd.replace('2', 'ニー')
-				rd = rd.replace('3', 'サン')
-				rd = rd.replace('4', 'ヨン')
-				rd = rd.replace('5', 'ゴー')
-				rd = rd.replace('6', 'ロク')
-				rd = rd.replace('7', 'ナナ')
-				rd = rd.replace('8', 'ハチ')
-				rd = rd.replace('9', 'キュー')
+				if len(k) == 1 and 0x2800 <= ord(k) <= 0x28ff:
+					rd = k
+				#rd = rd.replace('0', 'ゼロ')
+				#rd = rd.replace('1', 'イチ')
+				#rd = rd.replace('2', 'ニー')
+				#rd = rd.replace('3', 'サン')
+				#rd = rd.replace('4', 'ヨン')
+				#rd = rd.replace('5', 'ゴー')
+				#rd = rd.replace('6', 'ロク')
+				#rd = rd.replace('7', 'ナナ')
+				#rd = rd.replace('8', 'ハチ')
+				#rd = rd.replace('9', 'キュー')
 				ar[k] = rd
 	return ar
 

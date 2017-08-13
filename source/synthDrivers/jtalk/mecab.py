@@ -270,6 +270,21 @@ def _makeFeatureFromLatinWordAndPostfix(org, ar, symbol=''):
 	)
 	return feature
 
+def _makeBraillePatternReading(s):
+	n = ord(s) - 0x2800
+	if n == 0:
+		return u'マスアケ'
+	ar = []
+	if n | 0x01: ar.append(u'イチ')
+	if n | 0x02: ar.append(u'ニー')
+	if n | 0x04: ar.append(u'サン')
+	if n | 0x08: ar.append(u'ヨン')
+	if n | 0x10: ar.append(u'ゴー')
+	if n | 0x20: ar.append(u'ロク')
+	if n | 0x40: ar.append(u'ナナ')
+	if n | 0x80: ar.append(u'ハチ')
+	return u''.join(ar) + u'ノテン'
+
 def Mecab_correctFeatures(mf, CODE_ = CODE):
 	for pos in xrange(0, mf.size):
 		ar = Mecab_getFeature(mf, pos, CODE_=CODE_).split(',')
@@ -426,7 +441,9 @@ def Mecab_correctFeatures(mf, CODE_ = CODE):
 			if kana:
 				c = len(kana)
 				Mecab_setFeature(mf, pos, u'%s,名詞,固有名詞,*,*,*,*,%s,%s,%s,0/%d,C0' % (roma, roma, kana, kana, c), CODE_=CODE_)
-
+		elif len(ar[0]) == 1 and 0x2800 <= ord(ar[0]) <= 0x28ff:
+			ar[8] = ar[9] = _makeBraillePatternReading(ar[0])
+			Mecab_setFeature(mf, pos, u','.join(ar), CODE_=CODE_)
 
 def Mecab_utf8_to_cp932(mf):
 	for pos in xrange(0, mf.size):

@@ -805,6 +805,9 @@ def should_separate(prev2_mo, prev_mo, mo, next_mo, nabcc=False, logwrite=_logwr
 	# False
 	################################
 
+	if prev_mo.hyouki.endswith('　'):
+		return False
+
 	if prev_mo.hyouki == 'ー':
 		return False
 
