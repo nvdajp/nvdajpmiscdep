@@ -275,14 +275,14 @@ def _makeBraillePatternReading(s):
 	if n == 0:
 		return u'マスアケ'
 	ar = []
-	if n | 0x01: ar.append(u'イチ')
-	if n | 0x02: ar.append(u'ニー')
-	if n | 0x04: ar.append(u'サン')
-	if n | 0x08: ar.append(u'ヨン')
-	if n | 0x10: ar.append(u'ゴー')
-	if n | 0x20: ar.append(u'ロク')
-	if n | 0x40: ar.append(u'ナナ')
-	if n | 0x80: ar.append(u'ハチ')
+	if n & 0x01: ar.append(u'イチ')
+	if n & 0x02: ar.append(u'ニー')
+	if n & 0x04: ar.append(u'サン')
+	if n & 0x08: ar.append(u'ヨン')
+	if n & 0x10: ar.append(u'ゴー')
+	if n & 0x20: ar.append(u'ロク')
+	if n & 0x40: ar.append(u'ナナ')
+	if n & 0x80: ar.append(u'ハチ')
 	return u''.join(ar) + u'ノテン'
 
 def Mecab_correctFeatures(mf, CODE_ = CODE):

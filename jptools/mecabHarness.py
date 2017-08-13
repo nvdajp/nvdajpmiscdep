@@ -630,21 +630,26 @@ tasks = [
 		'braille': "オコナウ/タメ",
 	},
 	# テキストと点字パターンの混在
-	#{
-	#	'text':'⣏',
-	#	'braille':'⣏',
-	#	'speech':'イチニーサンヨンナナハチノテン',
-	#},
+	{
+		'text':'⠁',
+		'braille':'⠁',
+		'speech':'イチノテン',
+	},
+	{
+		'text':'⣏',
+		'braille':'⣏',
+		'speech':'イチニーサンヨンナナハチノテン',
+	},
 	{
 		'text':'⣿',
 		'braille':'⣿',
 		'speech':'イチニーサンヨンゴーロクナナハチノテン',
 	},
-	#{
-	#	'text':'⣹',
-	#	'braille':'⣹',
-	#	'speech':'イチヨンゴーロクナナハチノテン',
-	#},
+	{
+		'text':'⣹',
+		'braille':'⣹',
+		'speech':'イチヨンゴーロクナナハチノテン',
+	},
 	{
 		'comment':'https://github.com/nvdajp/nvdajpmiscdep/issues/45',
 		'text':'⣏⣿⣹',
