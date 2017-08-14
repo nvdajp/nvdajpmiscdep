@@ -300,6 +300,7 @@ def make_dic(IN_FILE, CODE, THISDIR):
 		['versions', 'バージョンズ'],
 		['vantage', 'バンテージ'],
 		['visum', 'ビズム'],
+		['viewing', 'ビューイング'],
 		
 		['waic', 	'ウェイク'],
 		['wave', 	'ウェーブ'],
