@@ -880,6 +880,8 @@ def filter_jdic(s):
 		s = ""
 	elif a[0] == '米ドル' and a[12] == 'アメリカドル' and len(a) == 15:
 		s = ""
+	elif a[0] == '米' and a[12] == 'メートル' and len(a) == 15:
+		s = ""
 	elif a[0] == 'っていう' and a[12] == 'ッテユウ' and len(a) == 15:
 		a.append('ッテ イウ')
 		s = ",".join(a)
