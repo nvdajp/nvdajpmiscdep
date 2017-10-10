@@ -1,7 +1,7 @@
 # tankan_dic_maker.py for nvdajp_jtalk
 # -*- coding: utf-8 -*-
 # since 2010-12-20 by Takuya Nishimoto
-from __future__ import unicode_literals
+from __future__ import unicode_literals, print_function
 
 # IN_DIR : location of nvdajp_dic.py
 # IN_DIR  = '/work/nvda/jp2011.1/source'
@@ -53,7 +53,7 @@ def read_characters_file(cs_file):
 
 def make_dic(CODE, CS_FILE, THISDIR):
 	char_dic = read_characters_file(CS_FILE)
-	print 'char_dic %d' % len(char_dic)
+	print('char_dic %d' % len(char_dic))
 	import csv
 	jdic_tankan = {}
 	reader = csv.reader(open(path.join(THISDIR, "naist-jdic.csv"), 'r'))
@@ -70,8 +70,8 @@ def make_dic(CODE, CS_FILE, THISDIR):
 				continue # print "%s in hyousou" % k.encode(CODE)
 			try:
 				dummy = k.encode(CODE)
-			except Exception, e:
-				print e
+			except Exception as e:
+				print(e)
 				continue
 			k1 = k
 			y = v

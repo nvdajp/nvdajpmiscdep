@@ -27,6 +27,7 @@ install:
 
 build_script:
  - cd jptools
+ - clean.cmd
  - build-and-test.cmd
  - make_html.cmd
 

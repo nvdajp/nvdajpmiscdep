@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 # since 2011-01-19 by Takuya Nishimoto
 
-from __future__ import unicode_literals
+from __future__ import unicode_literals, print_function
 OUT_FILE = 'nvdajp-custom-dic.csv'
 
 import sys
@@ -995,7 +995,7 @@ class DicItem(object):
 			elif 'braille' in a:
 				self.speech = a['braille'].replace(' ', '').replace('/', '')
 			else:
-				print 'data error: ' + str(a)
+				print('data error: ' + str(a))
 				sys.exit(1)
 			self.accent = a['accent'] if 'accent' in a else None
 			self.cost = a['cost'] if 'cost' in a else None

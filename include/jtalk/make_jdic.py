@@ -2,7 +2,7 @@
 # make_jdic.py
 # Copyright (C) 2010-2013 Takuya Nishimoto (NVDA Japanese Team)
 
-from __future__ import unicode_literals
+from __future__ import unicode_literals, print_function
 import os
 from os import path
 import shutil
@@ -44,7 +44,7 @@ tankan_dic_maker.make_dic(CODE, CS_FILE, THISDIR)
 custom_dic_maker.make_dic(CODE, THISDIR)
 
 def convert_file(src_file, src_enc, dest_file, dest_enc):
-	print "converting %s to %s" % (src_file, dest_file)
+	print("converting %s to %s" % (src_file, dest_file))
 	with open(src_file) as sf:
 		with open(dest_file, "w") as df:
 			while 1:
@@ -55,7 +55,7 @@ def convert_file(src_file, src_enc, dest_file, dest_enc):
 				df.write(s.encode(dest_enc))
 
 def convert_jdic_file(src_file, src_enc, dest_file, dest_enc):
-	print "converting %s to %s" % (src_file, dest_file)
+	print("converting %s to %s" % (src_file, dest_file))
 	with open(src_file) as sf:
 		with open(dest_file, "w") as df:
 			while 1:
@@ -79,7 +79,7 @@ euc_files = ['char.def','feature.def','left-id.def','matrix.def',
 jdic_file = 'naist-jdic.csv'
 
 for f in files:
-	print "copy %s to %s" % (path.join(THISDIR, f), TEMPDIR)
+	print("copy %s to %s" % (path.join(THISDIR, f), TEMPDIR))
 	shutil.copy(path.join(THISDIR, f), TEMPDIR)
 
 for f in euc_files:							 
@@ -87,15 +87,15 @@ for f in euc_files:
 
 convert_jdic_file(path.join(THISDIR, jdic_file), 'euc-jp', path.join(TEMPDIR, jdic_file), CODE)
 
-print TEMPDIR, [MECAB_DICT_INDEX, '-d','.', '-o',OUTDIR, '-f',CODE, '-c',CODE]
+print(TEMPDIR, [MECAB_DICT_INDEX, '-d','.', '-o',OUTDIR, '-f',CODE, '-c',CODE])
 subprocess.check_call([MECAB_DICT_INDEX, '-d','.', '-o',OUTDIR, '-f',CODE, '-c',CODE], cwd=TEMPDIR)
 
-print "copy %s to %s" % (path.join(THISDIR, 'dicrc'), OUTDIR)
+print("copy %s to %s" % (path.join(THISDIR, 'dicrc'), OUTDIR))
 shutil.copy(path.join(THISDIR, 'dicrc'), OUTDIR)
 dic_version_file = path.join(OUTDIR, "DIC_VERSION")
-print "dic version file: " + dic_version_file
+print("dic version file: " + dic_version_file)
 version = "nvdajp-jtalk-dic " + '(' + CODE + ') ' + datetime.utcnow().strftime('%Y%m%d-%H%M%S')
-print version
+print(version)
 with open(dic_version_file, "wb") as f:
 	f.write(version + os.linesep) 
 
