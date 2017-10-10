@@ -4,6 +4,10 @@
 from __future__ import unicode_literals, print_function
 import os
 import sys
+if sys.version_info[0] > 2:
+	encode_utf8 = lambda s : s
+else:
+	encode_utf8 = lambda s : s.encode('utf-8', 'ignore')
 sys.path.append(r'..\source\synthDrivers\jtalk')
 from _nvdajp_unicode import unicode_normalize
 import jtalkPrepare
@@ -66,17 +70,17 @@ tests = [
 ]
 
 def _print(s):
-	print(s.encode('utf-8', 'ignore'))
+	print(encode_utf8(s))
 
 def runTasks():
 	jtalkPrepare.setup()
 	count = 0
 	for item in tests:
 		msg = item[0]
-		msg = unicode_normalize(msg)
-		s = jtalkPrepare.convert(msg)
+		normalized = unicode_normalize(msg)
+		s = jtalkPrepare.convert(normalized)
 		if item[1] != s:
-			_print('expected:%s result:%s' % (item[1], s))
+			_print('input:%s normalized:%s result:%s expected:%s' % (msg, normalized, s, item[1]))
 			count += 1
 	return count
 
