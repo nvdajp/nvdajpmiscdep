@@ -1,0 +1,27 @@
+version: "{branch}-{build}"
+
+environment:
+ PY_PYTHON: 2.7-32
+
+clone_depth: 1
+
+init:
+ - ps: Set-WinSystemLocale ja-JP
+ - ps: Start-Sleep -s 5
+ - ps: Restart-Computer
+ - tzutil /g
+ - tzutil /s "Tokyo Standard Time"
+ - tzutil /g
+
+install:
+ - set PATH=%PATH%;C:\MinGW;C:\MinGW\bin;C:\MinGW\msys\1.0
+ - git submodule update --init --recursive
+
+build_script:
+ - cd jptools
+ - build-and-test.cmd
+
+artifacts:
+ - path: jptools\__h1output.txt
+ - path: jptools\__h2output.txt
+ - path: jptools\__test_log.txt
