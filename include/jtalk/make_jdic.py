@@ -3,6 +3,15 @@
 # Copyright (C) 2010-2013 Takuya Nishimoto (NVDA Japanese Team)
 
 from __future__ import unicode_literals, print_function
+import sys
+if sys.version_info[0] > 2:
+	open_file  = lambda name, mode, encoding : open(name, mode, encoding=encoding)
+	decode_str = lambda s, encoding : s
+	encode_str = lambda s, encoding : s
+else:
+	open_file  = lambda name, mode, encoding : open(name, mode)
+	decode_str = lambda s, encoding : s.decode(encoding)
+	encode_str = lambda s, encoding : s.encode(encoding)
 import os
 from os import path
 import shutil
@@ -45,28 +54,28 @@ custom_dic_maker.make_dic(CODE, THISDIR)
 
 def convert_file(src_file, src_enc, dest_file, dest_enc):
 	print("converting %s to %s" % (src_file, dest_file))
-	with open(src_file) as sf:
-		with open(dest_file, "w") as df:
+	with open_file(src_file, "r", src_enc) as sf:
+		with open_file(dest_file, "w", dest_enc) as df:
 			while 1:
 				s = sf.readline()
 				if not s:
 					break
-				s = s.decode(src_enc)
-				df.write(s.encode(dest_enc))
+				s = decode_str(s, src_enc)
+				df.write(encode_str(s, dest_enc))
 
 def convert_jdic_file(src_file, src_enc, dest_file, dest_enc):
 	print("converting %s to %s" % (src_file, dest_file))
-	with open(src_file) as sf:
-		with open(dest_file, "w") as df:
+	with open_file(src_file, "r", src_enc) as sf:
+		with open_file(dest_file, "w", dest_enc) as df:
 			while 1:
 				s = sf.readline()
 				if not s:
 					break
-				s = s.decode(src_enc).rstrip()
+				s = decode_str(s, src_enc).rstrip()
 				s = filter_jdic(s)
 				if s:
 					s += "\n" # do not use os.linesep here
-					df.write(s.encode(dest_enc))
+					df.write(encode_str(s, dest_enc))
 
 files = ['dicrc',
 		 'nvdajp-eng-dic.csv','nvdajp-tankan-dic.csv',
@@ -96,7 +105,7 @@ dic_version_file = path.join(OUTDIR, "DIC_VERSION")
 print("dic version file: " + dic_version_file)
 version = "nvdajp-jtalk-dic " + '(' + CODE + ') ' + datetime.utcnow().strftime('%Y%m%d-%H%M%S')
 print(version)
-with open(dic_version_file, "wb") as f:
+with open_file(dic_version_file, "w", 'utf-8') as f:
 	f.write(version + os.linesep) 
 
 # end of file

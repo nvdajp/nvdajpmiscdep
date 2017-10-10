@@ -7,6 +7,15 @@ from __future__ import unicode_literals, print_function
 # IN_DIR  = '/work/nvda/jp2011.1/source'
 OUT_FILE = 'nvdajp-tankan-dic.csv'
 
+import sys
+if sys.version_info[0] > 2:
+	open_file   = lambda name, mode, encoding : open(name, mode, encoding=encoding)
+	decode_str  = lambda s, encoding : s
+	encode_str  = lambda s, encoding : s
+else:
+	open_file   = lambda name, mode, encoding : open(name, mode)
+	decode_str  = lambda s, encoding : s.decode(encoding)
+	encode_str  = lambda s, encoding : s.encode(encoding)
 import re
 import os
 from os import path
@@ -15,17 +24,17 @@ def contains_hankaku_katakana(k):
 	# hankaku katakana check
 	# http://programmer-toy-box.sblo.jp/article/24644519.html
 	regexp = re.compile(r'(?:\xEF\xBD[\xA1-\xBF]|\xEF\xBE[\x80-\x9F])|[\x20-\x7E]')
-	result = regexp.search(k.encode('utf-8'))
+	result = regexp.search(encode_str(k, 'utf-8'))
 	if result: return True
 	return False
 
 def read_characters_file(cs_file):
-	with open(cs_file) as ch:
+	with open_file(cs_file, 'r', 'utf-8') as ch:
 		ar = {}
 		c = 0
 		for line in ch:
 			c += 1
-			line = line.rstrip().decode('utf-8')
+			line = decode_str(line.rstrip(), 'utf-8')
 			if len(line) == 0: continue
 			#print line.encode('cp932', 'ignore')
 			if line[0] == '#': continue
@@ -56,20 +65,20 @@ def make_dic(CODE, CS_FILE, THISDIR):
 	print('char_dic %d' % len(char_dic))
 	import csv
 	jdic_tankan = {}
-	reader = csv.reader(open(path.join(THISDIR, "naist-jdic.csv"), 'r'))
+	reader = csv.reader(open_file(path.join(THISDIR, "naist-jdic.csv"), 'r', 'euc-jp'))
 	for row in reader:
-		hyousou = row[0].decode('euc-jp') # naist-jdic.csv is euc-jp
+		hyousou = decode_str(row[0], 'euc-jp') # naist-jdic.csv is euc-jp
 		if len(hyousou) == 1:
 			if hyousou == '盲': continue
 			if hyousou == '聾': continue
 			jdic_tankan[hyousou] = row
-	with open(path.join(THISDIR, OUT_FILE), "w") as file:
+	with open_file(path.join(THISDIR, OUT_FILE), "w", CODE) as file:
 		for k,v in char_dic.items():
 			if contains_hankaku_katakana(k): continue
 			if k in jdic_tankan:
 				continue # print "%s in hyousou" % k.encode(CODE)
 			try:
-				dummy = k.encode(CODE)
+				dummy = encode_str(k, CODE)
 			except Exception as e:
 				print(e)
 				continue
@@ -90,7 +99,7 @@ def make_dic(CODE, CS_FILE, THISDIR):
 			if len(k1) == 1 and 0x2800 <= ord(k1) <= 0x28ff:
 				s += ",%s" % k1
 			s += "\n"
-			file.write(s.encode(CODE))
+			file.write(encode_str(s, CODE))
 
 if __name__ == '__main__':
 	make_dic('utf-8')

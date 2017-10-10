@@ -6,6 +6,14 @@ from __future__ import unicode_literals, print_function
 OUT_FILE = 'nvdajp-custom-dic.csv'
 
 import sys
+if sys.version_info[0] > 2:
+	open_file  = lambda name, mode, encoding : open(name, mode, encoding=encoding)
+	decode_str = lambda s, encoding : s
+	encode_str = lambda s, encoding : s
+else:
+	open_file  = lambda name, mode, encoding : open(name, mode)
+	decode_str = lambda s, encoding : s.decode(encoding)
+	encode_str = lambda s, encoding : s.encode(encoding)
 import re
 import os
 from os import path
@@ -1003,7 +1011,7 @@ class DicItem(object):
 			self.braille = a['braille'] if 'braille' in a else None
 
 def make_dic(CODE, THISDIR):
-	with open(path.join(THISDIR, OUT_FILE), "w") as file:
+	with open_file(path.join(THISDIR, OUT_FILE), "w", CODE) as file:
 		## jdic
 		for i in jdic:
 			di = DicItem(i)
@@ -1029,7 +1037,7 @@ def make_dic(CODE, THISDIR):
 			if brl:
 				s += "," + brl
 			s += "\n"
-			file.write(s.encode(CODE))
+			file.write(encode_str(s, CODE))
 
 if __name__ == '__main__':
 	make_dic()

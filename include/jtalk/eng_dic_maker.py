@@ -9,6 +9,15 @@ IN_FILE_DEFAULT = 'c:/work/nvda/bep-eng.dic'
 OUT_FILE = 'nvdajp-eng-dic.csv'
 DEFAULT_COST = 1600
 
+import sys
+if sys.version_info[0] > 2:
+	open_file  = lambda name, mode, encoding : open(name, mode, encoding=encoding)
+	decode_str = lambda s, encoding : s
+	encode_str = lambda s, encoding : s
+else:
+	open_file  = lambda name, mode, encoding : open(name, mode)
+	decode_str = lambda s, encoding : s.decode(encoding)
+	encode_str = lambda s, encoding : s.encode(encoding)
 import os
 from os import path
 from alpha2mb import alpha2mb
@@ -321,16 +330,16 @@ def make_dic(IN_FILE, CODE, THISDIR):
 	k = {}
 	for i in d:
 		k[i[0]] = True
-	for line in open(IN_FILE):
+	for line in open_file(IN_FILE, 'r', 'utf-8'):
 		if line[0] == '#': continue
-		a1, a2 = line.rstrip().decode('UTF-8').split(' ')
+		a1, a2 = decode_str(line.rstrip(), 'utf-8').split(' ')
 		a1 = re.sub("'", "\\'", a1)
 		a1 = a1.lower()
-		if not k.has_key(a1):
+		if a1 not in k:
 			d.append([a1, a2])
 			k[a1] = True
 	d.sort()
-	with open(path.join(THISDIR, OUT_FILE), "w") as file:
+	with open_file(path.join(THISDIR, OUT_FILE), "w", CODE) as file:
 		for i in d:
 			k = i[0]
 			# skip such as SHE'LL
@@ -352,7 +361,7 @@ def make_dic(IN_FILE, CODE, THISDIR):
 			if len(i) >= 5 and i[4] is not None: hin1 = i[4]
 			# 表層形,左文脈ID,右文脈ID,コスト,品詞,品詞細分類1,品詞細分類2,品詞細分類3,活用形,活用型,原形,読み,発音
 			s = "%s,,,%d,名詞,%s,*,*,*,*,%s,%s,%s,%s,C0\n" % (k1,cost,hin1,k1,y,y,pros)
-			file.write(s.encode(CODE))
+			file.write(encode_str(s, CODE))
 
 if __name__ == '__main__':
 	make_dic(IN_FILE_DEFAULT)
