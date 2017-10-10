@@ -26,9 +26,11 @@ tests.extend(nabcc_tests)
 if sys.version_info[0] > 2:
 	getcwd = os.getcwd
 	encode_utf8 = lambda s : s
+	open_file = lambda name, mode : open(name, mode, encoding='utf-8')
 else:
 	getcwd = os.getcwdu
 	encode_utf8 = lambda s : s.encode('utf-8', 'ignore')
+	open_file = lambda name, mode : open(name, mode)
 
 jtalk_dir = os.path.normpath(
 	os.path.join(getcwd(), '..', 'source', 'synthDrivers', 'jtalk')
@@ -75,7 +77,7 @@ def dot_numbers(s):
 def pass1():
 	global output
 	outfile = '__h1output.txt'
-	with open(outfile, 'w') as f:
+	with open_file(outfile, 'w') as f:
 		count = 0
 		for t in tests:
 			nabcc = False
@@ -107,7 +109,7 @@ def pass1():
 def pass2(verboseMode=False):
 	global output
 	outfile = '__h2output.txt'
-	with open(outfile, 'w') as f:
+	with open_file(outfile, 'w') as f:
 		output = cStringIO.StringIO()
 		translator2.initialize(__print, jtalk_dir, dic_dir, user_dics)
 		log = output.getvalue()
@@ -192,7 +194,7 @@ def pass2(verboseMode=False):
 def make_doc():
 	outfile = '__jpBrailleHarness.t2t'
 	timestamp = datetime.datetime.now().strftime('%Y%m%d-%H%M%S')
-	with open(outfile, 'w') as f:
+	with open_file(outfile, 'w') as f:
 		__writeln(f, u"""
 NVDA 日本語版 点訳テストケース """ + timestamp + u"""
 
