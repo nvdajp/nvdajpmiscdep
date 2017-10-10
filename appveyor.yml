@@ -21,8 +21,11 @@ install:
 build_script:
  - cd jptools
  - build-and-test.cmd
+ - make_html.cmd
 
 artifacts:
  - path: jptools\__h1output.txt
  - path: jptools\__h2output.txt
  - path: jptools\__test_log.txt
+ - path: jptools\__jpBrailleHarness.t2t
+ - path: jptools\jpBrailleHarness.xhtml
