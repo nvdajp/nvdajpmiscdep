@@ -17,7 +17,7 @@ import datetime
 try:
 	import cStringIO
 except:
-    import io as cStringIO
+	import io as cStringIO
 import timeit
 from harness import tests
 from nabccHarness import tests as nabcc_tests
