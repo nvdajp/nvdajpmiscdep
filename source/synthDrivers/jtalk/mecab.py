@@ -10,6 +10,11 @@ import os
 import struct
 import threading
 import sys
+if sys.version_info[0] > 2:
+	xrange = range
+	encode_mbcs = lambda s : s
+else:
+	encode_mbcs = lambda s : s.encode('mbcs')
 import re
 from text2mecab import text2mecab
 from roma2kana import getKanaFromRoma
@@ -114,7 +119,7 @@ def Mecab_initialize(logwrite_ = None, libmecab_dir = None, dic = None, user_dic
 	mecab_dll = os.path.join(libmecab_dir, 'libmecab.dll')
 	global libmc
 	if libmc is None:
-		libmc = cdll.LoadLibrary(mecab_dll.encode('mbcs'))
+		libmc = cdll.LoadLibrary(encode_mbcs(mecab_dll))
 		libmc.mecab_version.restype = c_char_p
 		libmc.mecab_strerror.restype = c_char_p
 		libmc.mecab_sparse_tonode.restype = mecab_node_t_ptr

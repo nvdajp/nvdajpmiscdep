@@ -23,10 +23,12 @@ from harness import tests
 from nabccHarness import tests as nabcc_tests
 tests.extend(nabcc_tests)
 
-if hasattr(os,'getcwdu'):
-	getcwd = os.getcwdu
-else:
+if sys.version_info[0] > 2:
 	getcwd = os.getcwd
+	encode_utf8 = lambda s : s
+else:
+	getcwd = os.getcwdu
+	encode_utf8 = lambda s : s.encode('utf-8', 'ignore')
 
 jtalk_dir = os.path.normpath(
 	os.path.join(getcwd(), '..', 'source', 'synthDrivers', 'jtalk')
@@ -40,16 +42,16 @@ user_dics = jtalkDir.user_dics
 
 
 def __write(file, s=""):
-	file.write(s.encode('utf-8', 'ignore'))
+	file.write(encode_utf8(s))
 
 def __writeln(file, s=""):
-	file.write(s.encode('utf-8', 'ignore') + "\n")
+	file.write(encode_utf8(s) + "\n")
 
 output = None
 
 def __print(s=""):
 	global output
-	output.write(s.encode('utf-8', 'ignore') + "\n")
+	output.write(encode_utf8(s) + "\n")
 
 def dot_numbers(s):
 	ret = []
