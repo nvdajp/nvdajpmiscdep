@@ -1149,7 +1149,7 @@ def japanese_braille_separate(inbuf, logwrite, nabcc=False):
 			rspaces += ' '
 			text = text[:-1]
 		outbuf = '⠦' + unicode_normalize(text) + '⠴' + rspaces
-		inpos2 = [0] + range(len(outbuf))
+		inpos2 = [0] + list(range(len(outbuf)))
 		inpos2.append(inpos2[-1])
 		return (outbuf, inpos2)
 
