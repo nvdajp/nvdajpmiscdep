@@ -3,13 +3,17 @@
 # Japanese text processor test module
 # by Takuya Nishimoto
 
-from __future__ import unicode_literals
+from __future__ import unicode_literals, print_function
 import os
+if hasattr(os,'getcwdu'):
+	getcwd = os.getcwdu
+else:
+	getcwd = os.getcwd
 import sys
 from glob import glob
 from mecabHarness import tasks
 jt_dir = os.path.normpath(
-	os.path.join(os.getcwdu(), '..', 'source', 'synthDrivers', 'jtalk')
+	os.path.join(getcwd(), '..', 'source', 'synthDrivers', 'jtalk')
 	)
 sys.path.append(jt_dir)
 from mecab import *
@@ -21,7 +25,7 @@ user_dics_org = jtalkDir.user_dics_org
 user_dics = jtalkDir.user_dics
 
 def __print(s):
-	print s.encode('utf-8', 'ignore')
+	print(s.encode('utf-8', 'ignore'))
 
 _buffer = ''
 
@@ -67,10 +71,10 @@ def get_reading(msg):
 
 def runTasks(enableUserDic=False):
 	if enableUserDic:
-		print jt_dir, dic, user_dics
+		print(jt_dir, dic, user_dics)
 		Mecab_initialize(__print, jt_dir, dic, user_dics)
 	else:
-		print jt_dir, dic
+		print(jt_dir, dic)
 		Mecab_initialize(__print, jt_dir, dic)
 	count = 0
 	for i in tasks:

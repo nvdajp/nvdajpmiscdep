@@ -8,19 +8,28 @@
 # h2: テキスト解析とマスあけのテスト
 
 # from __future__ import unicode_literals
+from __future__ import print_function
 import sys
 import os
 import sys
 import optparse
 import datetime
-import cStringIO
+try:
+	import cStringIO
+except:
+    import io as cStringIO
 import timeit
 from harness import tests
 from nabccHarness import tests as nabcc_tests
 tests.extend(nabcc_tests)
 
+if hasattr(os,'getcwdu'):
+	getcwd = os.getcwdu
+else:
+	getcwd = os.getcwd
+
 jtalk_dir = os.path.normpath(
-	os.path.join(os.getcwdu(), '..', 'source', 'synthDrivers', 'jtalk')
+	os.path.join(getcwd(), '..', 'source', 'synthDrivers', 'jtalk')
 	)
 sys.path.append(jtalk_dir)
 import translator1
@@ -68,11 +77,11 @@ def pass1():
 		count = 0
 		for t in tests:
 			nabcc = False
-			if t.has_key('mode') and t['mode'] == 'NABCC':
+			if t.get('mode') == 'NABCC':
 				nabcc = True
-			if t.has_key('output'):
+			if 'output' in t:
 				result, inpos1 = translator1.translateWithInPos(t['input'], nabcc=nabcc)
-				if t.has_key('inpos1'):
+				if 'inpos1' in t:
 					correct_inpos1 = ','.join(['%d' % n for n in t['inpos1'] ])
 				else:
 					correct_inpos1 = None
@@ -90,7 +99,7 @@ def pass1():
 					if 'comment' in t:
 						f.write("comment: " + t['comment'].encode('utf-8') + "\n")
 					f.write("\n")
-		print 'h1: %d error(s). see %s' % (count, outfile)
+		print('h1: %d error(s). see %s' % (count, outfile))
 	return (count, outfile)
 	
 def pass2(verboseMode=False):
@@ -105,24 +114,24 @@ def pass2(verboseMode=False):
 		f.write("\n")
 		count = 0
 		for t in tests:
-			if not t.has_key('input'):
+			if 'input' not in t:
 				continue
 			nabcc = False
-			if t.has_key('mode') and t['mode'] == 'NABCC':
+			if t.get('mode') == 'NABCC':
 				nabcc = True
-			if t.has_key('text'):
+			if 'text' in t:
 				output = cStringIO.StringIO()
 				result, pat, inpos1, inpos2 = translator2.translateWithInPos2(
 					t['text'], logwrite=__print, nabcc=nabcc)
 				log = output.getvalue()
 				output.close()
 				# inpos2
-				if t.has_key('inpos2'):
+				if 'inpos2' in t:
 					correct_inpos2 = ','.join(['%d' % n for n in t['inpos2'] ])
 				else:
 					correct_inpos2 = None
 				# inpos1
-				if t.has_key('inpos1'):
+				if 'inpos1' in t:
 					correct_inpos1 = ','.join(['%d' % n for n in t['inpos1'] ])
 				else:
 					correct_inpos1 = None
@@ -132,11 +141,11 @@ def pass2(verboseMode=False):
 				# outpos
 				outpos = translator2.makeOutPos(inpos, len(t['text']), len(pat))
 
-				if t.has_key('inpos'):
+				if 'inpos' in t:
 					correct_inpos = ','.join(['%d' % n for n in t['inpos'] ])
 				else:
 					correct_inpos = None
-				if t.has_key('outpos'):
+				if 'outpos' in t:
 					correct_outpos = ','.join(['%d' % n for n in t['outpos'] ])
 				else:
 					correct_outpos = None
@@ -175,7 +184,7 @@ def pass2(verboseMode=False):
 					f.write("\n")
 					f.write(log)
 					f.write("\n")
-		print 'h2: %d error(s). see %s' % (count, outfile)
+		print('h2: %d error(s). see %s' % (count, outfile))
 	return (count, outfile)
 
 def make_doc():
@@ -195,7 +204,7 @@ NVDA 日本語版 点訳テストケース """ + timestamp + u"""
 		count = 0
 		for t in tests:
 			# 'note' はテストケースではなく説明の記述
-			if t.has_key('note'):
+			if 'note' in t:
 				__writeln(f)
 				__writeln(f, t['note'])
 				__writeln(f)
@@ -203,17 +212,17 @@ NVDA 日本語版 点訳テストケース """ + timestamp + u"""
 			count += 1
 			__writeln(f, u"番号: %d" % count)
 			
-			if t.has_key('text'):
+			if 'text' in t:
 				__writeln(f, u"- 日本語: " + t['text'].replace(u'　', u'□').replace(' ', u'□'))
-			if t.has_key('input'):
+			if 'input' in t:
 				__writeln(f, u"- カナ表記: " + t['input'].replace(' ', u'□'))
-			if t.has_key('output'):
+			if 'output' in t:
 				__writeln(f, u"- 点字: " + t['output'].replace(' ', u'□'))
-			if t.has_key('output'):
+			if 'output' in t:
 				__writeln(f, u"- ドット番号: " + dot_numbers(t['output']))
-			if t.has_key('mode'):
+			if 'mode' in t:
 				__writeln(f, u"- モード: " + t['mode'])
-			if t.has_key('comment'):
+			if 'comment' in t:
 				__writeln(f, u"- コメント: " + t['comment'])
 			__writeln(f, u"-")
 
@@ -251,10 +260,10 @@ if __name__ == '__main__':
 		make_doc()
 	elif options.pass1_only == True:
 		t = timeit.Timer(stmt=pass1)
-		print t.timeit(number=options.number)
+		print(t.timeit(number=options.number))
 	elif options.pass2_only == True:
 		t = timeit.Timer(stmt=pass2)
-		print t.timeit(number=options.number)
+		print(t.timeit(number=options.number))
 	elif options.verbose == True:
 		pass2(verboseMode=True)
 	else:

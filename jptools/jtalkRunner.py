@@ -10,6 +10,10 @@
 
 from __future__ import unicode_literals, print_function
 import os
+if hasattr(os,'getcwdu'):
+	getcwd = os.getcwdu
+else:
+	getcwd = os.getcwd
 import sys
 import wave
 import time
@@ -20,7 +24,7 @@ except:
 import cProfile
 import pstats
 jtalk_dir = JT_DIR = os.path.normpath(
-	os.path.join(os.getcwdu(), '..', 'source', 'synthDrivers', 'jtalk')
+	os.path.join(getcwd(), '..', 'source', 'synthDrivers', 'jtalk')
 	)
 sys.path.append(JT_DIR)
 from jtalkCore import *

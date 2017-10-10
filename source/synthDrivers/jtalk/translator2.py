@@ -5,10 +5,14 @@
 #This file is covered by the GNU General Public License.
 #See the file COPYING for more details.
 
-from __future__ import unicode_literals
+from __future__ import unicode_literals, print_function
 import os
 import copy
 import re
+import sys
+if sys.version_info[0] > 2:
+	xrange = range
+	unichr = chr
 from _nvdajp_unicode import unicode_normalize
 from mecab import *
 import translator1
@@ -19,7 +23,7 @@ try:
 	from logHandler import log
 	_logwrite = log.debug
 except:
-	def __print(s): print s
+	def __print(s): print(s)
 	_logwrite = __print
 
 CONNECTED_MORPHS = {
