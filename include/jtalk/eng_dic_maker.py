@@ -133,7 +133,6 @@ def make_dic(IN_FILE, CODE, THISDIR):
 		['gpu', 'ジーピーユー'],
 		['gaming', 'ゲイミング'],
 		
-		['home', 	'ホーム'],
 		['hub', 	'ハブ'],
 		['href',	'エイチレフ'],
 		['home', 		'ホーム', None, 1000],
@@ -141,6 +140,7 @@ def make_dic(IN_FILE, CODE, THISDIR):
 		#['horijun',		'ホリジュン',		"1/4", 1000],
 		#['hokkaido', 	'ホッカイドー', 	None, 1000],
 		['hachinohe', 	'ハチノヘ', None, 1000],
+		['homepage', 	'ホームページ', None, 1000],
 		
 		['internet', 'インターネット'],
 		['insert', 	'インサート'],
