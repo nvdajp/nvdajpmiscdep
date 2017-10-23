@@ -1186,6 +1186,11 @@ tests = [
 		'text': '例えばカーソルっていうのがある',
 		'input': 'タトエバ カーソルッテ イウノガ アル',
 	},
+	{
+		'comment':'https://github.com/nvdajp/nvdajpmiscdep/issues/49',
+		'text':'どういう',
+		'input':'ドウ イウ',
+	},
 	{ 'note': '２、拗音（拗濁音・拗半濁音を含む）は、拗音点字を用いて書く。' },
 	{
 		'comment': '点訳のてびき第3版 第2章 その1 1 2 No.1',
