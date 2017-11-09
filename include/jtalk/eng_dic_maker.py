@@ -348,6 +348,8 @@ def make_dic(IN_FILE, CODE, THISDIR):
 			alpha_count = len(k)
 			k1 = alpha2mb(k.lower())
 			y = i[1]
+			# work around ポッ゜シビリティー
+			y = re.sub("゜", "", y)
 			# default pros
 			mora_count = len(y)
 			pros = "0/%d" % mora_count

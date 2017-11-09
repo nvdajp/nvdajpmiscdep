@@ -666,4 +666,18 @@ tasks = [
 		'text': "5米ドル",
 		'speech': "ゴベイドル",
 	},
+
+	# "possibility"が"ポ"とだけ読み上げされる
+	# https://github.com/nvdajp/nvdajpmiscdep/issues/51
+	{
+		'text': "possibility",
+		'speech': "ポッシビリティー",
+	},
+
+	# "1a"が"1アール"と読み上げされる（"1r"と区別できない）
+	# https://github.com/nvdajp/nvdajpmiscdep/issues/50
+	{
+		'text': "1a",
+		'speech': "イチエイ",
+	},
 ]
