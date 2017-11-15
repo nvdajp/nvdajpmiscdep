@@ -263,6 +263,7 @@ def make_dic(IN_FILE, CODE, THISDIR):
 		['saigai', 		'サイガイ', None, 1000],
 		['sumaho',		'スマホ',		"1/3",	],
 		['smap',		'スマップ',		"2/4",	],
+		['sr',		'エスアール',		"3/5",	],
 		
 		['think', 	'シンク'],
 		['threatened', 'スレッテンド'],
@@ -347,7 +348,14 @@ def make_dic(IN_FILE, CODE, THISDIR):
 				continue
 			alpha_count = len(k)
 			k1 = alpha2mb(k.lower())
+			# https://github.com/nvdajp/nvdajpmiscdep/issues/53
+			# skip 'WORDS' (ワーズ)
+			if k1 == "ｗｏｒｄｓ":
+				continue
 			y = i[1]
+			# 'WORD' ワードゥ -> ワード
+			if y == "ワードゥ":
+				y = "ワード"
 			# work around ポッ゜シビリティー
 			y = re.sub("゜", "", y)
 			# default pros

@@ -229,6 +229,9 @@ def getMoraCount(s):
 
 RE_FULLSHAPE_ALPHA = re.compile(u'^[Ａ-Ｚａ-ｚ]+$')
 
+def _shouldWorkAroundLatinWordPostfix(ar3, ar2, ar):
+	return (not (ar3 and ar3[0] == u'\u3000' and ar2 and ar2[0] == u"’")) and ar2 and ar[0] in (u'ｓ', u'ｄ', u'ｅｄ', u'ｒ', u'ｔｉｎｇ', u'ｔ')
+
 def _makeFeatureFromLatinWordAndPostfix(org, ar, symbol=''):
 	_hyoki = ar[0]
 	_yomi = ar[8] if len(ar) > 8 else convertSpellChar(_hyoki).replace(' ', '')
@@ -246,6 +249,12 @@ def _makeFeatureFromLatinWordAndPostfix(org, ar, symbol=''):
 			postfix = u'ツ'
 			_yomi = _yomi[:-2]
 			_pron = _pron[:-2]
+		elif _hyoki.endswith(u'ｗｏｒｄ'):
+			# https://github.com/nvdajp/nvdajpmiscdep/issues/53
+			# words ワードズ -> ワーズ
+			postfix = u'ズ'
+			_yomi = _yomi[:-1]
+			_pron = _pron[:-1]
 	elif org == u'ｔ':
 		postfix = u'ト'
 	elif org in (u'ｄ', u'ｅｄ'):
@@ -391,7 +400,7 @@ def Mecab_correctFeatures(mf, CODE_ = CODE):
 					h=hyoki, h1=hin1, h2=hin2, y=yomi, p=pron, m=mora
 				)
 				Mecab_setFeature(mf, pos-2, feature, CODE_=CODE_)
-		elif (not (ar3 and ar3[0] == u'\u3000' and ar2 and ar2[0] == u"’")) and ar2 and ar[0] in (u'ｓ', u'ｄ', u'ｅｄ', u'ｒ', u'ｔｉｎｇ', u'ｔ'):
+		elif _shouldWorkAroundLatinWordPostfix(ar3, ar2, ar):
 			# https://github.com/nvdajp/nvdajpmiscdep/issues/42
 			#print ((unicode(ar3[0]) if ar3 else '*') + '/' + (unicode(ar2[0]) if ar2 else '*') + '/' + (unicode(ar[0]) if ar else '*')).encode('utf-8')
 			# pattern 5

@@ -680,4 +680,34 @@ tasks = [
 		'text': "1a",
 		'speech': "イチエイ",
 	},
+
+	# https://github.com/nvdajp/nvdajpmiscdep/issues/53
+	{
+		'text': "seas",
+		'speech': "シーズ",
+	},
+	{
+		'text': "words",
+		'speech': "ワーズ",
+	},
+	{
+		'text': "nvdasr",
+		'speech': "エヌブイディーエーエスアール",
+	},
+	{
+		'text': "windowssr",
+		'speech': "ウィンドウズエスアール",
+	},
+	{
+		'text': "jawssr",
+		'speech': "ジョーズエスアール",
+	},
+	{
+		'text': "excelsr",
+		'speech': "エクセルエスアール",
+	},
+	{
+		'text': "wordsr",
+		'speech': "ワードエスアール",
+	},
 ]
