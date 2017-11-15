@@ -983,6 +983,13 @@ jdic = [
 	 'braille':'オキヲツケ クダサイ',
 	 'accent':"8/9",
 	 },
+	# https://github.com/nvdajp/nvdajpmiscdep/issues/55
+	{   'text':'ほらっ',
+		'braille':'ホラッ',
+		'speech':'ホラッ',
+		'pos':"感動詞,*,*,*,*,*",
+		'accent':"1/3",
+	},
 ]
 
 class DicItem(object):
