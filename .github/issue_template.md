@@ -1,4 +1,5 @@
-[「NVDA日本語版の問題の報告」を利用してください (Please use nvdajp issue system.)](https://github.com/nvdajp/nvdajp/issues)
+「NVDA日本語版の問題の報告」を利用してください (Please use nvdajp issue system.)
+https://github.com/nvdajp/nvdajp/issues
 ただし問題の原因がJTalkまたは日本語点訳である場合にはこちらを利用可能です (Please use this system when the problem is clearly related to JTalk TTS or Japanese Braille translator.)
 
 ### 問題の再現手順 (Steps to reproduce):
