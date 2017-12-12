@@ -594,7 +594,7 @@ def should_separate(prev2_mo, prev_mo, mo, next_mo, nabcc=False, logwrite=_logwr
 	# 接頭語・接尾語・造語要素であっても、意味の理解を助ける場合には、
 	# 発音上の切れ目を考慮して区切って書いてよい。
 	if prev_mo.hinshi1 == '接頭詞' and \
-		prev_mo.hyouki in ('貴', '前', '当', '反', '非', '新', '要', '肝', '逆') and \
+		prev_mo.hyouki in ('貴', '前', '当', '反', '非', '新', '要', '肝', '逆', '超') and \
 		mo.hinshi1 == '名詞' and \
 		mo.hinshi2 != '数':
 		return True
@@ -740,9 +740,6 @@ def should_separate(prev2_mo, prev_mo, mo, next_mo, nabcc=False, logwrite=_logwr
 	if prev_mo.hyouki == '父' and mo.hinshi2 == '固有名詞':
 		return True
 
-	if prev_mo.hinshi1 == '接頭詞' and prev_mo.hyouki == '超' and mo.hinshi1 == '名詞':
-		return True
-	
 	if prev_mo.hinshi1 == '助動詞' and prev_mo.hyouki == 'で' and mo.hinshi1 == '助動詞':
 		return True
 
