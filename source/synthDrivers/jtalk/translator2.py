@@ -594,7 +594,7 @@ def should_separate(prev2_mo, prev_mo, mo, next_mo, nabcc=False, logwrite=_logwr
 	# 接頭語・接尾語・造語要素であっても、意味の理解を助ける場合には、
 	# 発音上の切れ目を考慮して区切って書いてよい。
 	if prev_mo.hinshi1 == '接頭詞' and \
-		prev_mo.hyouki not in ('お', 'ご', '旧', '後', '副', '大') and \
+		prev_mo.hyouki not in ('お', 'ご', '旧', '後', '副', '大', '再') and \
 		mo.hinshi1 == '名詞' and \
 		mo.hinshi2 != '数':
 		return True
@@ -963,9 +963,6 @@ def should_separate(prev2_mo, prev_mo, mo, next_mo, nabcc=False, logwrite=_logwr
 
 	# 行ったきり
 	if prev_mo.hinshi1 == '助動詞' and mo.hyouki == 'きり':
-		return False
-
-	if prev_mo.hinshi1 == '接頭詞' and prev_mo.hyouki == '大' and mo.hinshi1 == '名詞':
 		return False
 
 	# 鍛冶,職人 カジショクニン
