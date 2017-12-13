@@ -710,4 +710,46 @@ tasks = [
 		'text': "wordsr",
 		'speech': "ワードエスアール",
 	},
+	{
+		'comment':'https://github.com/nvdajp/nvdajpmiscdep/issues/57',
+		'text': "京急線",
+		'speech': "ケイキューセン",
+		'braille':'ケイキュー/セン',
+	},
+	{
+		'comment':'https://github.com/nvdajp/nvdajpmiscdep/issues/57',
+		'text': "京急久里浜線",
+		'speech': "ケイキュークリハマセン",
+		'braille':'ケイキュー/クリハマセン',
+	},
+	{
+		'comment':'https://github.com/nvdajp/nvdajpmiscdep/issues/57',
+		'text': "京急本線",
+		'speech': "ケイキューホンセン",
+		'braille':'ケイキュー/ホンセン',
+	},
+	{
+		'comment':'https://github.com/nvdajp/nvdajpmiscdep/issues/57',
+		'text': "京急逗子線",
+		'speech': "ケイキューズシセン",
+		'braille':'ケイキュー/ズシセン',
+	},
+	{
+		'comment':'https://github.com/nvdajp/nvdajpmiscdep/issues/57',
+		'text': "京急大師線",
+		'speech': "ケイキューダイシセン",
+		'braille':'ケイキュー/ダイシセン',
+	},
+	{
+		'comment':'https://github.com/nvdajp/nvdajpmiscdep/issues/57',
+		'text': "京急空港線",
+		'speech': "ケイキュークーコーセン",
+		'braille':'ケイキュー/クーコーセン',
+	},
+	{
+		'comment':'https://github.com/nvdajp/nvdajpmiscdep/issues/57',
+		'text': "東急線",
+		'speech': "トーキューセン",
+		'braille':'トーキュー/セン',
+	},
 ]

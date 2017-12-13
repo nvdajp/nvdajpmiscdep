@@ -990,6 +990,12 @@ jdic = [
 		'pos':"感動詞,*,*,*,*,*",
 		'accent':"1/3",
 	},
+	# https://github.com/nvdajp/nvdajpmiscdep/issues/57
+	{   'text':'京急',
+		'speech':'ケイキュー',
+		'pos':"名詞,固有名詞,組織,*,*,*",
+		'accent':"1/4",
+	},
 ]
 
 class DicItem(object):
