@@ -305,4 +305,11 @@ tests = [
 		'input': "オコナウ タメ",
 		'output': '⠊⠪⠅⠉ ⠕⠿',
 	},
+	{
+		'comment':'https://github.com/nvdajp/nvdajpmiscdep/issues/65',
+		'mode': 'NABCC',
+		'text': "1・2・3",
+		'input': "1・2・3",
+		'output': '⠂⠐ ⠆⠐ ⠒',
+	},
 ]

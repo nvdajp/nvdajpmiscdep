@@ -1279,7 +1279,7 @@ def japanese_braille_separate(inbuf, logwrite, nabcc=False):
 		if li[pos].hyouki == '’' and li[pos+1].hinshi2 == '数':
 			li[pos].output = "'"
 
-	# 算用数字ではさまれた読点と中点を数符にする
+	# 算用数字ではさまれた読点を数符にする
 	# before:
 	# 二,二,名詞,数,*,*,2,2,1/2,2,0
 	# 、,、,記号,読点,*,*,、,、,*/*,、,0
@@ -1290,11 +1290,19 @@ def japanese_braille_separate(inbuf, logwrite, nabcc=False):
 	# 三,三,名詞,数,*,*,3,3,1/2,3,0
 	for pos in xrange(1, len(li) - 1):
 		if li[pos-1].output.isdigit() and \
-				li[pos].hyouki in ('、', '・') and \
+				li[pos].hyouki == '、' and \
 				li[pos+1].output.isdigit():
 			if nabcc:
 				li[pos].output = '.'
 			else:
+				li[pos].output = '⠼'
+
+	# 算用数字ではさまれた中点を数符にする
+	if not nabcc:
+		for pos in xrange(1, len(li) - 1):
+			if li[pos-1].output.isdigit() and \
+					li[pos].hyouki == '・' and \
+					li[pos+1].output.isdigit():
 				li[pos].output = '⠼'
 
 	# before: ａｂ,ab,名詞,一般,*,*,アブ,アブ,1/2,アブ,0
