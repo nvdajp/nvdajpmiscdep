@@ -752,4 +752,10 @@ tasks = [
 		'speech': "トーキューセン",
 		'braille':'トーキュー/セン',
 	},
+    {
+        'comment':'https://github.com/nvdajp/nvdajpmiscdep/issues/61',
+        'text': "従量制課金接続",
+		'speech': "ジューリョーセイカキンセツゾク",
+		'braille':'ジューリョーセイ/カキン/セツゾク',
+    },
 ]
