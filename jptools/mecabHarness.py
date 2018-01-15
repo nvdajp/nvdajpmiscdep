@@ -758,4 +758,10 @@ tasks = [
 		'speech': "ジューリョーセイカキンセツゾク",
 		'braille':'ジューリョーセイ/カキン/セツゾク',
     },
+    {
+        'comment':'https://github.com/nvdajp/nvdajpmiscdep/issues/58',
+        'text': "通帳",
+		'speech': "ツーチョー",
+		'braille':'ツーチョー',
+    },
 ]
