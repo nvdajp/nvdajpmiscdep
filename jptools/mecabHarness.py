@@ -752,16 +752,47 @@ tasks = [
 		'speech': "トーキューセン",
 		'braille':'トーキュー/セン',
 	},
-    {
-        'comment':'https://github.com/nvdajp/nvdajpmiscdep/issues/61',
-        'text': "従量制課金接続",
+	{
+		'comment':'https://github.com/nvdajp/nvdajpmiscdep/issues/61',
+		'text': "従量制課金接続",
 		'speech': "ジューリョーセイカキンセツゾク",
 		'braille':'ジューリョーセイ/カキン/セツゾク',
-    },
-    {
-        'comment':'https://github.com/nvdajp/nvdajpmiscdep/issues/58',
-        'text': "通帳",
+	},
+	{
+		'comment':'https://github.com/nvdajp/nvdajpmiscdep/issues/58',
+		'text': "通帳",
 		'speech': "ツーチョー",
 		'braille':'ツーチョー',
-    },
+	},
+	{
+		'comment':'https://github.com/nvdajp/nvdajpmiscdep/issues/58',
+		'text': "注文書",
+		'speech': "チューモンショ",
+		'braille':'チューモンショ',
+	},
+	{
+		'comment':'https://github.com/nvdajp/nvdajpmiscdep/issues/58',
+		'text': "someone",
+		'speech': "サムワン",
+	},
+	{
+		'comment':'https://github.com/nvdajp/nvdajpmiscdep/issues/58',
+		'text': "warehouse",
+		'speech': "ウェアーハウス",
+	},
+	{
+		'comment':'https://github.com/nvdajp/nvdajpmiscdep/issues/58',
+		'text': "sometime",
+		'speech': "サムタイム",
+	},
+	{
+		'comment':'https://github.com/nvdajp/nvdajpmiscdep/issues/58',
+		'text': "teatime",
+		'speech': "ティータイム",
+	},
+	{
+		'comment':'https://github.com/nvdajp/nvdajpmiscdep/issues/58',
+		'text': "onsite",
+		'speech': "オンサイトゥ",
+	},
 ]

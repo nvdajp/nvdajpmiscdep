@@ -998,11 +998,18 @@ jdic = [
 	},
     # https://github.com/nvdajp/nvdajpmiscdep/issues/61
     {
-        'text': "従量制",
+		'text': "従量制",
 		'speech': "ジューリョーセイ",
-	    'pos':"名詞,一般,*,*,*,*",
-	    'accent':"0/6",
-    },
+		'pos':"名詞,一般,*,*,*,*",
+		'accent':"0/6",
+	},
+	# https://github.com/nvdajp/nvdajpmiscdep/issues/58
+	{
+		'text': "注文書",
+		'speech': "チューモンショ",
+		'pos':"名詞,一般,*,*,*,*",
+		'accent':"0/5",
+	},
 ]
 
 class DicItem(object):

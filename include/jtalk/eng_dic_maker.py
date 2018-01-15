@@ -141,6 +141,7 @@ def make_dic(IN_FILE, CODE, THISDIR):
 		#['hokkaido', 	'ホッカイドー', 	None, 1000],
 		['hachinohe', 	'ハチノヘ', None, 1000],
 		['homepage', 	'ホームページ', None, 1000],
+		['hidari', 	'ヒダリ'],
 		
 		['internet', 'インターネット'],
 		['insert', 	'インサート'],
@@ -220,6 +221,7 @@ def make_dic(IN_FILE, CODE, THISDIR):
 		['output', 		'アウトプット', None, 1000],
 		['opened', 'オープンド', "1/5"],
 		['oshu', 		'オーシュー', None, 1000],
+		['onsite', 	'オンサイトゥ', None, 1000],
 		
 		['python', 	'パイソン'],
 		['pro', 	'プロ'],
@@ -287,6 +289,7 @@ def make_dic(IN_FILE, CODE, THISDIR):
 		['tochigi', 	'トチギ', None, 1000],
 		['themes', 	'スィームズ'],
 		['tasks', 	'タスクス'],
+		['teatime', 	'ティータイム'],
 		
 		['update', 	'アップデート'],
 		['ui', 	'ユーアイ'],

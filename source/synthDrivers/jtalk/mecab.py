@@ -431,12 +431,17 @@ def Mecab_correctFeatures(mf, CODE_ = CODE):
 				Mecab_setFeature(mf, pos - 1, ',,,*,*,*,*', CODE_=CODE_)
 				f = _makeFeatureFromLatinWordAndPostfix(ar[0], ar2)
 				Mecab_setFeature(mf, pos, f, CODE_=CODE_)
-		elif ar2 and RE_FULLSHAPE_ALPHA.match(ar[0]) and RE_FULLSHAPE_ALPHA.match(ar2[0]):
+		elif ar2 and RE_FULLSHAPE_ALPHA.match(ar[0]) and RE_FULLSHAPE_ALPHA.match(ar2[0]) \
+			 and not (len(ar2) > 10 and ar2[10] and ar2[10][0] == '0' and len(ar) > 10 and ar[10] and ar[10][0] == '0'):
 			# 0 ｓｈｉ,名詞,一般,*,*,*,*,ｓｈｉ,シ,シ,1/1,C0
 			# 1 ｍａｎｅ,名詞,一般,*,*,*,*,ｍａｎｅ,メイン,メイン,1/3,C0
 			#
 			# 0 ｋｉｔ,名詞,一般,*,*,*,*,ｋｉｔ,キットゥ,キットゥ,1/4,C0
 			# 1 ａ,記号,アルファベット,*,*,*,*,ａ,エイ,エイ,1/2,*
+			#
+			# https://github.com/nvdajp/nvdajpmiscdep/issues/58
+			# 英単語を0型アクセントで登録しているので、0型同士の場合は元の読みを使用する
+			#
 			hyoki = ar2[0] + ar[0]
 			hin1 = u'名詞'
 			hin2 = u'固有名詞'
