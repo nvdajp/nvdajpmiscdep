@@ -3249,6 +3249,26 @@ tests = [
 		'text': '赤十字社',
 		'input': 'セキジュージシャ',
 	},
+	{
+		# https://github.com/nvdajp/nvdajpmiscdep/issues/64
+		'text': '銀四郎',
+		'input': 'ギンシロー',
+	},
+	{
+		# https://github.com/nvdajp/nvdajpmiscdep/issues/64
+		'text': '談四楼',
+		'input': 'ダンシロー',
+	},
+	{
+		# https://github.com/nvdajp/nvdajpmiscdep/issues/64
+		'text': '立川談四楼',
+		'input': 'タテカワ ダンシロー',
+	},
+	{
+		# https://github.com/nvdajp/nvdajpmiscdep/issues/64
+		'text': '安倍晋三',
+		'input': 'アベ シンゾー',
+	},
 	{ 'note': '【備考】固有名詞であっても、数量や順序の意味を明確にする必要がある場合などには数字を用いて書く。' },
 	{
 		'text': 'ルイ十四世',

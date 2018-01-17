@@ -1010,6 +1010,34 @@ jdic = [
 		'pos':"名詞,一般,*,*,*,*",
 		'accent':"0/5",
 	},
+	# https://github.com/nvdajp/nvdajpmiscdep/issues/64
+	{
+		'text': '銀四郎',
+		'braille': 'ギンシロー',
+		'pos':"名詞,固有名詞,人名,名,*,*",
+		'accent':"0/5",
+	},
+	# https://github.com/nvdajp/nvdajpmiscdep/issues/64
+	{
+		'text': '談四楼',
+		'braille': 'ダンシロー',
+		'pos':"名詞,固有名詞,人名,名,*,*",
+		'accent':"0/5",
+	},
+	# https://github.com/nvdajp/nvdajpmiscdep/issues/64
+	{
+		'text': '立川談四楼',
+		'braille': 'タテカワ ダンシロー',
+		'pos':"名詞,固有名詞,人名,*,*,*",
+		'accent':"2/9",
+	},
+	# https://github.com/nvdajp/nvdajpmiscdep/issues/64
+	{
+		'text': '晋三',
+		'braille': 'シンゾー',
+		'pos':"名詞,固有名詞,人名,名,*,*",
+		'accent':"0/4",
+	},
 ]
 
 class DicItem(object):
