@@ -857,6 +857,9 @@ def should_separate(prev2_mo, prev_mo, mo, next_mo, nabcc=False, logwrite=_logwr
 		return False
 	if mo.hyouki == '嬢' and (prev_mo.hinshi4 in ('姓', '名') or prev_mo.hinshi3 == '人名'):
 		return False
+	# 京急,線 東急,線
+	if mo.hyouki == '線' and prev_mo.hinshi3 == '組織':
+		return False
 
 	if prev_mo.hinshi1 == '動詞' and prev_mo.hinshi2 == '自立':
 		if mo.hinshi1 == '動詞' and mo.hinshi2 == '非自立':

@@ -3715,6 +3715,16 @@ tests = [
 		'output': '⠰⠠⠃⠁⠎⠊⠉ ⠅ ⠜⠺⠊⠃',
 		'inpos1': [0,0,0,1,2,3,4,5,6,7,8,9,10,11],
 	},
+	{
+		'comment': 'https://github.com/nvdajp/nvdajpmiscdep/issues/57',
+		'text': '京急線',
+		'input': 'ケイキューセン',
+	},
+	{
+		'comment': 'https://github.com/nvdajp/nvdajpmiscdep/issues/57',
+		'text': '東急線',
+		'input': 'トーキューセン',
+	},
 	{ 'note': '３．実質的な意味が薄れた名詞（形容詞なども）、自立語であるから前を区切って書く。' },
 	{
 		'comment': '点訳のてびき第3版 第3章 その1 3 No.36',	
