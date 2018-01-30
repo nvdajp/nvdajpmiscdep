@@ -770,21 +770,21 @@ tasks = [
 		'speech': "チューモンショ",
 		'braille':'チューモンショ',
 	},
-	{
-		'comment':'https://github.com/nvdajp/nvdajpmiscdep/issues/58',
-		'text': "someone",
-		'speech': "サムワン",
-	},
-	{
-		'comment':'https://github.com/nvdajp/nvdajpmiscdep/issues/58',
-		'text': "warehouse",
-		'speech': "ウェアーハウス",
-	},
-	{
-		'comment':'https://github.com/nvdajp/nvdajpmiscdep/issues/58',
-		'text': "sometime",
-		'speech': "サムタイム",
-	},
+	#{
+	#	'comment':'https://github.com/nvdajp/nvdajpmiscdep/issues/58',
+	#	'text': "someone",
+	#	'speech': "サムワン",
+	#},
+	#{
+	#	'comment':'https://github.com/nvdajp/nvdajpmiscdep/issues/58',
+	#	'text': "warehouse",
+	#	'speech': "ウェアーハウス",
+	#},
+	#{
+	#	'comment':'https://github.com/nvdajp/nvdajpmiscdep/issues/58',
+	#	'text': "sometime",
+	#	'speech': "サムタイム",
+	#},
 	{
 		'comment':'https://github.com/nvdajp/nvdajpmiscdep/issues/58',
 		'text': "teatime",
@@ -794,5 +794,20 @@ tasks = [
 		'comment':'https://github.com/nvdajp/nvdajpmiscdep/issues/58',
 		'text': "onsite",
 		'speech': "オンサイトゥ",
+	},
+	{
+		'comment':'https://github.com/nvdajp/nvdajpmiscdep/issues/58',
+		'text': "shigeo",
+		'speech': "シゲオ",
+	},
+	{
+		'comment':'https://github.com/nvdajp/nvdajpmiscdep/issues/58',
+		'text': "takeshi",
+		'speech': "タケシ",
+	},
+	{
+		'comment':'https://github.com/nvdajp/nvdajpmiscdep/issues/58',
+		'text': "mitsuo",
+		'speech': "ミツオ",
 	},
 ]
