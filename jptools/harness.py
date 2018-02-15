@@ -3269,6 +3269,122 @@ tests = [
 		'text': '安倍晋三',
 		'input': 'アベ シンゾー',
 	},
+	{
+		# [nvdajp-team 7981] https://github.com/nvdajp/nvdajpmiscdep/issues/64
+		'text': '退所', 'input': 'タイショ',
+	},
+	{
+		# [nvdajp-team 7981] https://github.com/nvdajp/nvdajpmiscdep/issues/64
+		'text': '笑点', 'input': 'ショウテン',
+	},
+	{
+		# [nvdajp-team 7981] https://github.com/nvdajp/nvdajpmiscdep/issues/64
+		'text': '笑福亭 鶴瓶', 'input': 'ショウフクテイ ツルベ',
+	},
+	{
+		# [nvdajp-team 7981] https://github.com/nvdajp/nvdajpmiscdep/issues/64
+		'text': '安住 紳一郎', 'input': 'アズミ シンイチロウ',
+	},
+	{
+		# [nvdajp-team 7981] https://github.com/nvdajp/nvdajpmiscdep/issues/64
+		'text': '峰 竜太', 'input': 'ミネ リュウタ',
+	},
+	{
+		# [nvdajp-team 7981] https://github.com/nvdajp/nvdajpmiscdep/issues/64
+		'text': '倖田 來未', 'input': 'コウダ クミ',
+	},
+	{
+		# [nvdajp-team 7981] https://github.com/nvdajp/nvdajpmiscdep/issues/64
+		'text': '中島 美嘉', 'input': 'ナカジマ ミカ',
+	},
+	{
+		# [nvdajp-team 7981] https://github.com/nvdajp/nvdajpmiscdep/issues/64
+		'text': '木下 優樹菜', 'input': 'キノシタ ユキナ',
+	},
+	{
+		# [nvdajp-team 7981] https://github.com/nvdajp/nvdajpmiscdep/issues/64
+		'text': '北乃 きい', 'input': 'キタノ キイ',
+	},
+	{
+		# [nvdajp-team 7981] https://github.com/nvdajp/nvdajpmiscdep/issues/64
+		'text': '指原 莉乃', 'input': 'サシハラ リノ',
+	},
+	{
+		# [nvdajp-team 7981] https://github.com/nvdajp/nvdajpmiscdep/issues/64
+		'text': '須藤 凜々花', 'input': 'ストウ リリカ',
+	},
+	{
+		# [nvdajp-team 7981] https://github.com/nvdajp/nvdajpmiscdep/issues/64
+		'text': '橋本 環奈', 'input': 'ハシモト カンナ',
+	},
+	{
+		# [nvdajp-team 7981] https://github.com/nvdajp/nvdajpmiscdep/issues/64
+		'text': '村主 章枝', 'input': 'スグリ フミエ',
+	},
+	{
+		# [nvdajp-team 7981] https://github.com/nvdajp/nvdajpmiscdep/issues/64
+		'text': 'ウエンツ 瑛士', 'input': 'ウエンツ エイジ',
+	},
+	{
+		# [nvdajp-team 7981] https://github.com/nvdajp/nvdajpmiscdep/issues/64
+		'text': '瑛太', 'input': 'エイタ',
+	},
+	{
+		# [nvdajp-team 7981] https://github.com/nvdajp/nvdajpmiscdep/issues/64
+		'text': '山崎 裕太', 'input': 'ヤマザキ ユウタ',
+	},
+	{
+		# [nvdajp-team 7981] https://github.com/nvdajp/nvdajpmiscdep/issues/64
+		'text': '西野亮廣', 'input': 'ニシノ アキヒロ',
+	},
+	{
+		# [nvdajp-team 7981] https://github.com/nvdajp/nvdajpmiscdep/issues/64
+		'text': '三浦 翔平', 'input': 'ミウラ ショウヘイ',
+	},
+	{
+		# [nvdajp-team 7981] https://github.com/nvdajp/nvdajpmiscdep/issues/64
+		'text': '三浦 春馬', 'input': 'ミウラ ハルマ',
+	},
+	{
+		# [nvdajp-team 7981] https://github.com/nvdajp/nvdajpmiscdep/issues/64
+		'text': '小池 徹平', 'input': 'コイケ テッペイ',
+	},
+	{
+		# [nvdajp-team 7981] https://github.com/nvdajp/nvdajpmiscdep/issues/64
+		'text': '高橋真麻', 'input': 'タカハシ マアサ',
+	},
+	{
+		# [nvdajp-team 7981] https://github.com/nvdajp/nvdajpmiscdep/issues/64
+		'text': '長友佑都', 'input': 'ナガトモ ユウト',
+	},
+	{
+		# [nvdajp-team 7981] https://github.com/nvdajp/nvdajpmiscdep/issues/64
+		'text': '松坂桃李', 'input': 'マツザカ トオリ',
+	},
+	{
+		# [nvdajp-team 7981] https://github.com/nvdajp/nvdajpmiscdep/issues/64
+		'text': '竹内涼真', 'input': 'タケウチ リョウマ',
+	},
+	{
+		# [nvdajp-team 7981] https://github.com/nvdajp/nvdajpmiscdep/issues/64
+		'text': '菅田 将暉', 'input': 'スダ マサキ',
+	},
+	{
+		# [nvdajp-team 7981] https://github.com/nvdajp/nvdajpmiscdep/issues/64
+		'text': '藤ヶ谷 太輔', 'input': 'フジガヤ タイスケ',
+	},
+	{
+		# [nvdajp-team 7981] https://github.com/nvdajp/nvdajpmiscdep/issues/64
+		'text': '土屋 太鳳', 'input': 'ツチヤ タオ',
+	},
+	{
+		# [nvdajp-team 7981] https://github.com/nvdajp/nvdajpmiscdep/issues/64
+		'text': '高畑 充希', 'input': 'タカハタ ミツキ',
+	},
+	{
+		# [nvdajp-team 7981] https://github.com/nvdajp/nvdajpmiscdep/issues/64
+		'text': '本田 望結', 'input': 'ホンダ ミユ',
+	},
 	{ 'note': '【備考】固有名詞であっても、数量や順序の意味を明確にする必要がある場合などには数字を用いて書く。' },
 	{
 		'text': 'ルイ十四世',

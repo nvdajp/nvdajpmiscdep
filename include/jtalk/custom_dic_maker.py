@@ -1038,6 +1038,258 @@ jdic = [
 		'pos':"名詞,固有名詞,人名,名,*,*",
 		'accent':"0/4",
 	},
+	# https://github.com/nvdajp/nvdajpmiscdep/issues/64
+	{
+		'text': '退所',
+		'braille': 'タイショ',
+		'pos':"名詞,サ変接続,*,*,*,*",
+		'accent':"0/4",
+	},
+	# https://github.com/nvdajp/nvdajpmiscdep/issues/64
+	{
+		'text': '笑点',
+		'braille': 'ショウテン',
+		'pos':'名詞,一般,*,*,*,*',
+		'accent':"1/4",
+	},
+	# https://github.com/nvdajp/nvdajpmiscdep/issues/64
+	{
+		'text': '笑福亭',
+		'braille': 'ショウフクテイ',
+		'pos':"名詞,固有名詞,人名,姓,*,*",
+		'accent':"0/6",
+	},
+	# https://github.com/nvdajp/nvdajpmiscdep/issues/64
+	{
+		'text': '鶴瓶',
+		'braille': 'ツルベ',
+		'pos':"名詞,固有名詞,人名,名,*,*",
+		'accent':"1/3",
+	},
+	# https://github.com/nvdajp/nvdajpmiscdep/issues/64
+	{
+		'text': '安住',
+		'braille': 'アズミ',
+		'pos':"名詞,固有名詞,人名,姓,*,*",
+		'accent':"1/3",
+	},
+	# https://github.com/nvdajp/nvdajpmiscdep/issues/64
+	{
+		'text': '紳一郎',
+		'braille': 'シンイチロウ',
+		'pos':"名詞,固有名詞,人名,名,*,*",
+		'accent':"3/6",
+	},
+	# https://github.com/nvdajp/nvdajpmiscdep/issues/64
+	{
+		'text': '竜太',
+		'braille': 'リュウタ',
+		'pos':"名詞,固有名詞,人名,名,*,*",
+		'accent':"1/3",
+	},
+	# https://github.com/nvdajp/nvdajpmiscdep/issues/64
+	{
+		'text': '倖田',
+		'braille': 'コウダ',
+		'pos':"名詞,固有名詞,人名,姓,*,*",
+		'accent':"0/3",
+	},
+	# https://github.com/nvdajp/nvdajpmiscdep/issues/64
+	{
+		'text': '來未',
+		'braille': 'クミ',
+		'pos':"名詞,固有名詞,人名,名,*,*",
+		'accent':"1/2",
+	},
+	# https://github.com/nvdajp/nvdajpmiscdep/issues/64
+	{
+		'text': '美嘉',
+		'braille': 'ミカ',
+		'pos':"名詞,固有名詞,人名,名,*,*",
+		'accent':"1/2",
+	},
+	# https://github.com/nvdajp/nvdajpmiscdep/issues/64
+	{
+		'text': '優樹菜',
+		'braille': 'ユキナ',
+		'pos':"名詞,固有名詞,人名,名,*,*",
+		'accent':"1/3",
+	},
+	# https://github.com/nvdajp/nvdajpmiscdep/issues/64
+	{
+		'text': '北乃',
+		'braille': 'キタノ',
+		'pos':"名詞,固有名詞,人名,姓,*,*",
+		'accent':"1/3",
+	},
+	# https://github.com/nvdajp/nvdajpmiscdep/issues/64
+	{
+		'text': '指原',
+		'braille': 'サシハラ',
+		'pos':"名詞,固有名詞,人名,姓,*,*",
+		'accent':"2/4",
+	},
+	# https://github.com/nvdajp/nvdajpmiscdep/issues/64
+	{
+		'text': '莉乃',
+		'braille': 'リノ',
+		'pos':"名詞,固有名詞,人名,名,*,*",
+		'accent':"1/2",
+	},
+	# https://github.com/nvdajp/nvdajpmiscdep/issues/64
+	{
+		'text': '凜々花',
+		'braille': 'リリカ',
+		'pos':"名詞,固有名詞,人名,名,*,*",
+		'accent':"1/3",
+	},
+	# https://github.com/nvdajp/nvdajpmiscdep/issues/64
+	{
+		'text': '環奈',
+		'braille': 'カンナ',
+		'pos':"名詞,固有名詞,人名,名,*,*",
+		'accent':"1/3",
+	},
+	# https://github.com/nvdajp/nvdajpmiscdep/issues/64
+	{
+		'text': '村主',
+		'braille': 'スグリ',
+		'pos':"名詞,固有名詞,人名,姓,*,*",
+		'accent':"1/3",
+	},
+	# https://github.com/nvdajp/nvdajpmiscdep/issues/64
+	{
+		'text': '章枝',
+		'braille': 'フミエ',
+		'pos':"名詞,固有名詞,人名,名,*,*",
+		'accent':"0/3",
+	},
+	# https://github.com/nvdajp/nvdajpmiscdep/issues/64
+	{
+		'text': '瑛士',
+		'braille': 'エイジ',
+		'pos':"名詞,固有名詞,人名,名,*,*",
+		'accent':"1/3",
+	},
+	# https://github.com/nvdajp/nvdajpmiscdep/issues/64
+	{
+		'text': '瑛太',
+		'braille': 'エイタ',
+		'pos':"名詞,固有名詞,人名,名,*,*",
+		'accent':"1/3",
+	},
+	# https://github.com/nvdajp/nvdajpmiscdep/issues/64
+	{
+		'text': '裕太',
+		'braille': 'ユウタ',
+		'pos':"名詞,固有名詞,人名,名,*,*",
+		'accent':"1/3",
+	},
+	# https://github.com/nvdajp/nvdajpmiscdep/issues/64
+	{
+		'text': '亮廣',
+		'braille': 'アキヒロ',
+		'pos':"名詞,固有名詞,人名,名,*,*",
+		'accent':"2/4",
+	},
+	# https://github.com/nvdajp/nvdajpmiscdep/issues/64
+	{
+		'text': '翔平',
+		'braille': 'ショウヘイ',
+		'pos':"名詞,固有名詞,人名,名,*,*",
+		'accent':"0/4",
+	},
+	# https://github.com/nvdajp/nvdajpmiscdep/issues/64
+	{
+		'text': '春馬',
+		'braille': 'ハルマ',
+		'pos':"名詞,固有名詞,人名,名,*,*",
+		'accent':"1/3",
+	},
+	# https://github.com/nvdajp/nvdajpmiscdep/issues/64
+	{
+		'text': '徹平',
+		'braille': 'テッペイ',
+		'pos':"名詞,固有名詞,人名,名,*,*",
+		'accent':"0/4",
+	},
+	# https://github.com/nvdajp/nvdajpmiscdep/issues/64
+	{
+		'text': '真麻',
+		'braille': 'マアサ',
+		'pos':"名詞,固有名詞,人名,名,*,*",
+		'accent':"1/3",
+	},
+	# https://github.com/nvdajp/nvdajpmiscdep/issues/64
+	{
+		'text': '佑都',
+		'braille': 'ユウト',
+		'pos':"名詞,固有名詞,人名,名,*,*",
+		'accent':"1/3",
+	},
+	# https://github.com/nvdajp/nvdajpmiscdep/issues/64
+	{
+		'text': '桃李',
+		'braille': 'トオリ',
+		'pos':"名詞,固有名詞,人名,名,*,*",
+		'accent':"1/3",
+	},
+	# https://github.com/nvdajp/nvdajpmiscdep/issues/64
+	{
+		'text': '涼真',
+		'braille': 'リョウマ',
+		'pos':"名詞,固有名詞,人名,名,*,*",
+		'accent':"1/3",
+	},
+	# https://github.com/nvdajp/nvdajpmiscdep/issues/64
+	{
+		'text': '菅田',
+		'braille': 'スダ',
+		'pos':"名詞,固有名詞,人名,姓,*,*",
+		'accent':"0/2",
+	},
+	# https://github.com/nvdajp/nvdajpmiscdep/issues/64
+	{
+		'text': '将暉',
+		'braille': 'マサキ',
+		'pos':"名詞,固有名詞,人名,名,*,*",
+		'accent':"1/3",
+	},
+	# https://github.com/nvdajp/nvdajpmiscdep/issues/64
+	{
+		'text': '藤ヶ谷',
+		'braille': 'フジガヤ',
+		'pos':"名詞,固有名詞,人名,姓,*,*",
+		'accent':"2/4",
+	},
+	# https://github.com/nvdajp/nvdajpmiscdep/issues/64
+	{
+		'text': '太輔',
+		'braille': 'タイスケ',
+		'pos':"名詞,固有名詞,人名,名,*,*",
+		'accent':"1/4",
+	},
+	# https://github.com/nvdajp/nvdajpmiscdep/issues/64
+	{
+		'text': '太鳳',
+		'braille': 'タオ',
+		'pos':"名詞,固有名詞,人名,名,*,*",
+		'accent':"1/2",
+	},
+	# https://github.com/nvdajp/nvdajpmiscdep/issues/64
+	{
+		'text': '充希',
+		'braille': 'ミツキ',
+		'pos':"名詞,固有名詞,人名,名,*,*",
+		'accent':"1/3",
+	},
+	# https://github.com/nvdajp/nvdajpmiscdep/issues/64
+	{
+		'text': '望結',
+		'braille': 'ミユ',
+		'pos':"名詞,固有名詞,人名,名,*,*",
+		'accent':"1/2",
+	},
 ]
 
 class DicItem(object):

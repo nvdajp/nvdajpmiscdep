@@ -892,6 +892,25 @@ def filter_jdic(s):
 		s = ""
 	elif a[0] == '通帳' and a[12] == 'カヨイチョー' and len(a) == 15:
 		s = ""
+	elif a[0] == '須藤' and a[12] == 'ストー' and len(a) == 15:
+		# https://github.com/nvdajp/nvdajpmiscdep/issues/64
+		a.append('ストウ')
+		s = ",".join(a)
+	elif a[0] == '指原' and a[12] == 'サスハラ' and len(a) == 15:
+		# https://github.com/nvdajp/nvdajpmiscdep/issues/64
+		s = ""
+	elif a[0] == '松坂' and a[12] == 'マツサカ' and len(a) == 15:
+		# https://github.com/nvdajp/nvdajpmiscdep/issues/64
+		s = ""
+	elif a[0] == '菅田' and a[12] == 'スゲタ' and len(a) == 15:
+		# https://github.com/nvdajp/nvdajpmiscdep/issues/64
+		s = ""
+	elif a[0] == '菅田' and a[12] == 'スガタ' and len(a) == 15:
+		# https://github.com/nvdajp/nvdajpmiscdep/issues/64
+		s = ""
+	elif a[0] == '菅田' and a[12] == 'スガダ' and len(a) == 15:
+		# https://github.com/nvdajp/nvdajpmiscdep/issues/64
+		s = ""
 	elif is_alpha_jp_mixed(a[0]):
 		#print a[0]
 		s = ""
