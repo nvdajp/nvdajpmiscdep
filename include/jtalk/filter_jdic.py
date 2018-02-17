@@ -892,10 +892,6 @@ def filter_jdic(s):
 		s = ""
 	elif a[0] == '通帳' and a[12] == 'カヨイチョー' and len(a) == 15:
 		s = ""
-	elif a[0] == '須藤' and a[12] == 'ストー' and len(a) == 15:
-		# https://github.com/nvdajp/nvdajpmiscdep/issues/64
-		a.append('ストウ')
-		s = ",".join(a)
 	elif a[0] == '指原' and a[12] == 'サスハラ' and len(a) == 15:
 		# https://github.com/nvdajp/nvdajpmiscdep/issues/64
 		s = ""

@@ -3275,19 +3275,19 @@ tests = [
 	},
 	{
 		# [nvdajp-team 7981] https://github.com/nvdajp/nvdajpmiscdep/issues/64
-		'text': '笑点', 'input': 'ショウテン',
+		'text': '笑点', 'input': 'ショーテン',
 	},
 	{
 		# [nvdajp-team 7981] https://github.com/nvdajp/nvdajpmiscdep/issues/64
-		'text': '笑福亭 鶴瓶', 'input': 'ショウフクテイ ツルベ',
+		'text': '笑福亭 鶴瓶', 'input': 'ショーフクテイ ツルベ',
 	},
 	{
 		# [nvdajp-team 7981] https://github.com/nvdajp/nvdajpmiscdep/issues/64
-		'text': '安住 紳一郎', 'input': 'アズミ シンイチロウ',
+		'text': '安住 紳一郎', 'input': 'アズミ シンイチロー',
 	},
 	{
 		# [nvdajp-team 7981] https://github.com/nvdajp/nvdajpmiscdep/issues/64
-		'text': '峰 竜太', 'input': 'ミネ リュウタ',
+		'text': '峰 竜太', 'input': 'ミネ リュータ',
 	},
 	{
 		# [nvdajp-team 7981] https://github.com/nvdajp/nvdajpmiscdep/issues/64
@@ -3311,7 +3311,7 @@ tests = [
 	},
 	{
 		# [nvdajp-team 7981] https://github.com/nvdajp/nvdajpmiscdep/issues/64
-		'text': '須藤 凜々花', 'input': 'ストウ リリカ',
+		'text': '須藤 凜々花', 'input': 'ストー リリカ',
 	},
 	{
 		# [nvdajp-team 7981] https://github.com/nvdajp/nvdajpmiscdep/issues/64
@@ -3331,7 +3331,7 @@ tests = [
 	},
 	{
 		# [nvdajp-team 7981] https://github.com/nvdajp/nvdajpmiscdep/issues/64
-		'text': '山崎 裕太', 'input': 'ヤマザキ ユウタ',
+		'text': '山崎 裕太', 'input': 'ヤマザキ ユータ',
 	},
 	{
 		# [nvdajp-team 7981] https://github.com/nvdajp/nvdajpmiscdep/issues/64
@@ -3339,7 +3339,7 @@ tests = [
 	},
 	{
 		# [nvdajp-team 7981] https://github.com/nvdajp/nvdajpmiscdep/issues/64
-		'text': '三浦 翔平', 'input': 'ミウラ ショウヘイ',
+		'text': '三浦 翔平', 'input': 'ミウラ ショーヘイ',
 	},
 	{
 		# [nvdajp-team 7981] https://github.com/nvdajp/nvdajpmiscdep/issues/64
@@ -3355,7 +3355,7 @@ tests = [
 	},
 	{
 		# [nvdajp-team 7981] https://github.com/nvdajp/nvdajpmiscdep/issues/64
-		'text': '長友佑都', 'input': 'ナガトモ ユウト',
+		'text': '長友佑都', 'input': 'ナガトモ ユート',
 	},
 	{
 		# [nvdajp-team 7981] https://github.com/nvdajp/nvdajpmiscdep/issues/64
@@ -3363,7 +3363,7 @@ tests = [
 	},
 	{
 		# [nvdajp-team 7981] https://github.com/nvdajp/nvdajpmiscdep/issues/64
-		'text': '竹内涼真', 'input': 'タケウチ リョウマ',
+		'text': '竹内涼真', 'input': 'タケウチ リョーマ',
 	},
 	{
 		# [nvdajp-team 7981] https://github.com/nvdajp/nvdajpmiscdep/issues/64

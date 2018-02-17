@@ -1048,14 +1048,14 @@ jdic = [
 	# https://github.com/nvdajp/nvdajpmiscdep/issues/64
 	{
 		'text': '笑点',
-		'braille': 'ショウテン',
+		'braille': 'ショーテン',
 		'pos':'名詞,一般,*,*,*,*',
 		'accent':"1/4",
 	},
 	# https://github.com/nvdajp/nvdajpmiscdep/issues/64
 	{
 		'text': '笑福亭',
-		'braille': 'ショウフクテイ',
+		'braille': 'ショーフクテイ',
 		'pos':"名詞,固有名詞,人名,姓,*,*",
 		'accent':"0/6",
 	},
@@ -1076,14 +1076,14 @@ jdic = [
 	# https://github.com/nvdajp/nvdajpmiscdep/issues/64
 	{
 		'text': '紳一郎',
-		'braille': 'シンイチロウ',
+		'braille': 'シンイチロー',
 		'pos':"名詞,固有名詞,人名,名,*,*",
 		'accent':"3/6",
 	},
 	# https://github.com/nvdajp/nvdajpmiscdep/issues/64
 	{
 		'text': '竜太',
-		'braille': 'リュウタ',
+		'braille': 'リュータ',
 		'pos':"名詞,固有名詞,人名,名,*,*",
 		'accent':"1/3",
 	},
@@ -1181,7 +1181,7 @@ jdic = [
 	# https://github.com/nvdajp/nvdajpmiscdep/issues/64
 	{
 		'text': '裕太',
-		'braille': 'ユウタ',
+		'braille': 'ユータ',
 		'pos':"名詞,固有名詞,人名,名,*,*",
 		'accent':"1/3",
 	},
@@ -1195,7 +1195,7 @@ jdic = [
 	# https://github.com/nvdajp/nvdajpmiscdep/issues/64
 	{
 		'text': '翔平',
-		'braille': 'ショウヘイ',
+		'braille': 'ショーヘイ',
 		'pos':"名詞,固有名詞,人名,名,*,*",
 		'accent':"0/4",
 	},
@@ -1223,7 +1223,7 @@ jdic = [
 	# https://github.com/nvdajp/nvdajpmiscdep/issues/64
 	{
 		'text': '佑都',
-		'braille': 'ユウト',
+		'braille': 'ユート',
 		'pos':"名詞,固有名詞,人名,名,*,*",
 		'accent':"1/3",
 	},
@@ -1237,7 +1237,7 @@ jdic = [
 	# https://github.com/nvdajp/nvdajpmiscdep/issues/64
 	{
 		'text': '涼真',
-		'braille': 'リョウマ',
+		'braille': 'リョーマ',
 		'pos':"名詞,固有名詞,人名,名,*,*",
 		'accent':"1/3",
 	},
