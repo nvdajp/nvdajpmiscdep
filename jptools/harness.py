@@ -3355,6 +3355,10 @@ tests = [
 	},
 	{
 		# [nvdajp-team 7981] https://github.com/nvdajp/nvdajpmiscdep/issues/64
+		'text': '高橋 真麻', 'input': 'タカハシ マアサ',
+	},
+	{
+		# [nvdajp-team 7981] https://github.com/nvdajp/nvdajpmiscdep/issues/64
 		'text': '長友佑都', 'input': 'ナガトモ ユート',
 	},
 	{
@@ -3384,6 +3388,26 @@ tests = [
 	{
 		# [nvdajp-team 7981] https://github.com/nvdajp/nvdajpmiscdep/issues/64
 		'text': '本田 望結', 'input': 'ホンダ ミユ',
+	},
+	{
+		# [nvdajp-team 7972] https://github.com/nvdajp/nvdajpmiscdep/issues/64
+		'text': '日馬富士', 'input': 'ハルマフジ',
+	},
+	{
+		# [nvdajp-team 7972] https://github.com/nvdajp/nvdajpmiscdep/issues/64
+		'text': '日馬富士関', 'input': 'ハルマフジゼキ',
+	},
+	{
+		# [nvdajp-team 7972] https://github.com/nvdajp/nvdajpmiscdep/issues/64
+		'text': '京野菜', 'input': 'キョーヤサイ',
+	},
+	{
+		# [nvdajp-team 7972] https://github.com/nvdajp/nvdajpmiscdep/issues/64
+		'text': '洛南', 'input': 'ラクナン',
+	},
+	{
+		# [nvdajp-team 7972] https://github.com/nvdajp/nvdajpmiscdep/issues/64
+		'text': '洛北', 'input': 'ラクホク',
 	},
 	{ 'note': '【備考】固有名詞であっても、数量や順序の意味を明確にする必要がある場合などには数字を用いて書く。' },
 	{

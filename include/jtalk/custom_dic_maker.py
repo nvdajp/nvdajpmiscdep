@@ -1290,6 +1290,41 @@ jdic = [
 		'pos':"名詞,固有名詞,人名,名,*,*",
 		'accent':"1/2",
 	},
+	# https://github.com/nvdajp/nvdajpmiscdep/issues/64
+	{
+		'text': '日馬富士',
+		'braille': 'ハルマフジ',
+		'pos':"名詞,固有名詞,人名,*,*,*",
+		'accent':"3/5",
+	},
+	# https://github.com/nvdajp/nvdajpmiscdep/issues/64
+	{
+		'text': '日馬富士関',
+		'braille': 'ハルマフジゼキ',
+		'pos':"名詞,固有名詞,人名,*,*,*",
+		'accent':"5/7",
+	},
+	# https://github.com/nvdajp/nvdajpmiscdep/issues/64
+	{
+		'text': "京野菜",
+		'speech': "キョーヤサイ",
+		'pos':"名詞,一般,*,*,*,*",
+		'accent':"3/5",
+	},
+	# https://github.com/nvdajp/nvdajpmiscdep/issues/64
+	{
+		'text': "洛南",
+		'speech': "ラクナン",
+	 	'pos':'名詞,固有名詞,地域,一般,*,*',
+		'accent':"0/4",
+	},
+	# https://github.com/nvdajp/nvdajpmiscdep/issues/64
+	{
+		'text': "洛北",
+		'speech': "ラクホク",
+	 	'pos':'名詞,固有名詞,地域,一般,*,*',
+		'accent':"0/4",
+	},
 ]
 
 class DicItem(object):
