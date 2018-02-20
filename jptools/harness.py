@@ -3359,6 +3359,10 @@ tests = [
 	},
 	{
 		# [nvdajp-team 7981] https://github.com/nvdajp/nvdajpmiscdep/issues/64
+		'text': '高橋真麻の', 'input': 'タカハシ マアサノ',
+	},
+	{
+		# [nvdajp-team 7981] https://github.com/nvdajp/nvdajpmiscdep/issues/64
 		'text': '長友佑都', 'input': 'ナガトモ ユート',
 	},
 	{
