@@ -910,6 +910,14 @@ def filter_jdic(s):
 	elif a[0] == '真麻' and a[12] == 'マサ' and len(a) == 15:
 		# https://github.com/nvdajp/nvdajpmiscdep/issues/64
 		s = ""
+	elif a[0] == 'ｏｐｅｎ＿ｊｔａｌｋ' and a[12] == 'オープンジェートーク' and len(a) == 15:
+		# https://github.com/nvdajp/nvdajpmiscdep/issues/66
+		a.append('⠠⠦open_jtalk⠠⠴')
+		s = ",".join(a)
+	elif a[0] == 'おうち' and a[12] == 'オーチ' and len(a) == 15:
+		# https://github.com/nvdajp/nvdajpmiscdep/issues/56
+		a.append('オウチ')
+		s = ",".join(a)
 	elif is_alpha_jp_mixed(a[0]):
 		#print a[0]
 		s = ""

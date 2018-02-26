@@ -550,6 +550,11 @@ tests = [
 		'comment': '情報処理点字を円マークに使う。',
 	},
 	{
+		'text': 'open_jtalk',
+		'input': '⠠⠦open_jtalk⠠⠴',
+		'comment': 'https://github.com/nvdajp/nvdajpmiscdep/issues/66',
+	},
+	{
 		# https://osdn.jp/ticket/browse.php?group_id=4221&tid=36052
 		'text': r'\1,500.01',
 		'input': r'⠠⠦\1,500.01⠠⠴',
@@ -1881,6 +1886,16 @@ tests = [
 		'text': '頬張る',
 		'input': 'ホオバル',
 		'output': '⠮⠊⠐⠥⠙',
+	},
+	{
+		'comment': 'https://github.com/nvdajp/nvdajpmiscdep/issues/56',
+		'text': 'まあ、おうちじゃ十分ですね',
+		'input': 'マア、オウチジャ ジューブンデスネ',
+	},
+	{
+		'comment': 'https://github.com/nvdajp/nvdajpmiscdep/issues/63',
+		'text': '話し合うテーマ',
+		'input': 'ハナシアウ テーマ',
 	},
 	{ 'note': '６、「ジ　ズ　ジャ　ジュ　ジョ」と「ヂ　ヅ　ヂャ　ヂョ」の使い分け' },
 	{ 'note': '（１）サ行を用いることを原則とする。' },
