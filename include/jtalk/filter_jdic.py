@@ -918,6 +918,9 @@ def filter_jdic(s):
 		# https://github.com/nvdajp/nvdajpmiscdep/issues/56
 		a.append('オウチ')
 		s = ",".join(a)
+	elif a[0] == '３３０１' and a[12] == 'サンサンゼロイチ' and len(a) == 15:
+		# https://github.com/nvdajp/nvdajpmiscdep/issues/70
+		s = ""
 	elif is_alpha_jp_mixed(a[0]):
 		#print a[0]
 		s = ""
