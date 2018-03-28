@@ -4,6 +4,7 @@ import re
 
 RE_ALPHA = re.compile('^[Ａ-Ｚａ-ｚ]+$')
 RE_NUM_SYMBOL = re.compile('^[０-９・．＆＿＋　／―′－]+$')
+RE_NUMBERS = re.compile('^[０-９]{2,}$')
 
 def is_alpha_jp_mixed(s):
 	has_alpha = has_jp = False
@@ -918,7 +919,7 @@ def filter_jdic(s):
 		# https://github.com/nvdajp/nvdajpmiscdep/issues/56
 		a.append('オウチ')
 		s = ",".join(a)
-	elif a[0] == '３３０１' and a[12] == 'サンサンゼロイチ' and len(a) == 15:
+	elif RE_NUMBERS.match(a[0]) and len(a) == 15:
 		# https://github.com/nvdajp/nvdajpmiscdep/issues/70
 		s = ""
 	elif is_alpha_jp_mixed(a[0]):
