@@ -811,6 +811,36 @@ tasks = [
 		'speech': "ミツオ",
 	},
 	{
+		'comment':'https://github.com/nvdajp/nvdajpmiscdep/issues/59',
+		'text': 'certain',
+		'speech': 'サートゥン',
+	},
+	{
+		'comment':'https://github.com/nvdajp/nvdajpmiscdep/issues/59',
+		'text': 'obvious',
+		'speech': 'オブビアス',
+	},
+	{
+		'comment':'https://github.com/nvdajp/nvdajpmiscdep/issues/59',
+		'text': 'recent',
+		'speech': 'リーセントゥ',
+	},
+	{
+		'comment':'https://github.com/nvdajp/nvdajpmiscdep/issues/59',
+		'text': 'certainly',
+		'speech': 'サートゥンリー',
+	},
+	{
+		'comment':'https://github.com/nvdajp/nvdajpmiscdep/issues/59',
+		'text': 'obviously',
+		'speech': 'オブビアスリー',
+	},
+	{
+		'comment':'https://github.com/nvdajp/nvdajpmiscdep/issues/59',
+		'text': 'recently',
+		'speech': 'リーセントゥリー',
+	},
+	{
 		'comment':'https://github.com/nvdajp/nvdajpmiscdep/issues/70',
 		'text': "sc4401",
 		'speech': "scヨンヨンゼロイチ",

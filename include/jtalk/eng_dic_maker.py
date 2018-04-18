@@ -78,6 +78,7 @@ def make_dic(IN_FILE, CODE, THISDIR):
 		['closed', 'クローズド', "2/5"],
 		['contributions', 'コントリビューションズ'],
 		['co', 			'シーオー', 			"1/4", 1000],
+		['certainly','サートゥンリー','1/6'],
 		
 		['delete', 	'デリート'],
 		['del', 	'デリート'],
@@ -222,6 +223,7 @@ def make_dic(IN_FILE, CODE, THISDIR):
 		['opened', 'オープンド', "1/5"],
 		['oshu', 		'オーシュー', None, 1000],
 		['onsite', 	'オンサイトゥ', None, 1000],
+		['obviously','オブビアスリー',],
 		
 		['python', 	'パイソン'],
 		['pro', 	'プロ'],
@@ -243,6 +245,7 @@ def make_dic(IN_FILE, CODE, THISDIR):
 		['runtime', 'ランタイム', '3/5'],
 		['rendered', 'レンダード'],
 		['required', 'リクワイアード', '3/7'],
+		['recently','リーセントゥリー'],
 		
 		['shift', 	'シフト'],
 		['skype', 	'スカイプ', "2/4"],
