@@ -770,21 +770,21 @@ tasks = [
 		'speech': "チューモンショ",
 		'braille':'チューモンショ',
 	},
-	#{
-	#	'comment':'https://github.com/nvdajp/nvdajpmiscdep/issues/58',
-	#	'text': "someone",
-	#	'speech': "サムワン",
-	#},
-	#{
-	#	'comment':'https://github.com/nvdajp/nvdajpmiscdep/issues/58',
-	#	'text': "warehouse",
-	#	'speech': "ウェアーハウス",
-	#},
-	#{
-	#	'comment':'https://github.com/nvdajp/nvdajpmiscdep/issues/58',
-	#	'text': "sometime",
-	#	'speech': "サムタイム",
-	#},
+	{
+		'comment':'https://github.com/nvdajp/nvdajpmiscdep/issues/58',
+		'text': "someone",
+		'speech': "サムワン",
+	},
+	{
+		'comment':'https://github.com/nvdajp/nvdajpmiscdep/issues/58',
+		'text': "warehouse",
+		'speech': "ウェアーハウス",
+	},
+	{
+		'comment':'https://github.com/nvdajp/nvdajpmiscdep/issues/58',
+		'text': "sometime",
+		'speech': "サムタイム",
+	},
 	{
 		'comment':'https://github.com/nvdajp/nvdajpmiscdep/issues/58',
 		'text': "teatime",

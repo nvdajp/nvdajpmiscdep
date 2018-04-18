@@ -266,6 +266,8 @@ def make_dic(IN_FILE, CODE, THISDIR):
 		['sumaho',		'スマホ',		"1/3",	],
 		['smap',		'スマップ',		"2/4",	],
 		['sr',		'エスアール',		"3/5",	],
+		['someone',		'サムワン',		"1/4",	],
+		['sometime',	'サムタイム',	"1/5",	],
 		
 		['think', 	'シンク'],
 		['threatened', 'スレッテンド'],
@@ -322,6 +324,7 @@ def make_dic(IN_FILE, CODE, THISDIR):
 		['ware', 		'ウェアー', None, 1000],
 		['warranties', 		'ワランティーズ'],
 		['wikipedia', 	'ウイキペディーア',	"0/8", 1000],
+		['warehouse',	'ウェアーハウス',	"1/6"],
 		
 		['xna',     'エクスエヌエー'],
 		
