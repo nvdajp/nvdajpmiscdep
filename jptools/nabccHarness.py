@@ -253,18 +253,21 @@ tests = [
 		'output':'⠲⠶⠝⠑⠺⠎⠱',
 	},
 	{
+		'comment':'https://github.com/nvdajp/nvdajpmiscdep/issues/38',
 		'mode': 'NABCC',
 		'text': "Here's",
 		'input': "Here's",
 		'output': '⡓⠑⠗⠑⠄⠎',
 	},
 	{
+		'comment':'https://github.com/nvdajp/nvdajpmiscdep/issues/38',
 		'mode': 'NABCC',
 		'text': "There's",
 		'input': "There's",
 		'output': '⡞⠓⠑⠗⠑⠄⠎',
 	},
 	{
+		'comment':'https://github.com/nvdajp/nvdajpmiscdep/issues/38',
 		'mode': 'NABCC',
 		'text': "Mother's",
 		'input': "Mother's",
@@ -311,5 +314,19 @@ tests = [
 		'text': "1・2・3",
 		'input': "1・2・3",
 		'output': '⠂⠐ ⠆⠐ ⠒',
+	},
+	{
+		'comment':'https://github.com/nvdajp/nvdajpmiscdep/issues/67',
+		'mode': 'NABCC',
+		'text': '[NVDA][点字]',
+		'input': '[NVDA][テンジ]',
+		'output': '⡪⡝⡧⡙⡁⡻⡪⠟⠴⠐⠳⡻',
+	},
+	{
+		'comment':'https://github.com/nvdajp/nvdajpmiscdep/issues/67',
+		'mode': 'NABCC',
+		'text': '{NVDA}{点字}',
+		'input': '{NVDA}{テンジ}',
+		'output': '⠪⡝⡧⡙⡁⠻⠪⠟⠴⠐⠳⠻',
 	},
 ]

@@ -846,6 +846,12 @@ def should_separate(prev2_mo, prev_mo, mo, next_mo, nabcc=False, logwrite=_logwr
 	if is_prev_mo_nhyouki_alpha_or_single and mo.hyouki in ('細胞', '字'):
 		return False
 
+	# https://github.com/nvdajp/nvdajpmiscdep/issues/67
+	if nabcc and prev_mo.hinshi2 == 'アルファベット' and \
+		(prev_mo.nhyouki.endswith('(') or prev_mo.nhyouki.endswith('[') or prev_mo.nhyouki.endswith('{')) and \
+		mo.hinshi1 == '名詞':
+		return False
+
 	# 数字の後のアルファベット
 	if prev_mo.hinshi2 == '数' and mo.hinshi2 == 'アルファベット':
 		if nabcc:
