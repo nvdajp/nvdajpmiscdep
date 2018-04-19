@@ -922,6 +922,9 @@ def filter_jdic(s):
 		# https://github.com/nvdajp/nvdajpmiscdep/issues/56
 		a.append('オウチ')
 		s = ",".join(a)
+	elif a[0] == '既' and a[12] == 'スンデ' and len(a) == 15:
+		# https://github.com/nvdajp/nvdajpmiscdep/issues/69
+		s = ""
 	elif RE_NUMBERS.match(a[0]) and len(a) == 15:
 		# https://github.com/nvdajp/nvdajpmiscdep/issues/70
 		s = ""

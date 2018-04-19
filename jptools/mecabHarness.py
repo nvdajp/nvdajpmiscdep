@@ -841,6 +841,11 @@ tasks = [
 		'speech': 'リーセントゥリー',
 	},
 	{
+		'comment':'https://github.com/nvdajp/nvdajpmiscdep/issues/69',
+		'text': '降る雪や既に積もった雪が',
+		'speech': 'フルユキヤスデニツモッタユキガ',
+	},
+	{
 		'comment':'https://github.com/nvdajp/nvdajpmiscdep/issues/70',
 		'text': "sc4401",
 		'speech': "scヨンヨンゼロイチ",
