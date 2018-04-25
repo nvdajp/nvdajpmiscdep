@@ -441,7 +441,7 @@ def replace_alphabet_morphs(li, nabcc=False):
 	return new_li
 
 def set_pos_of_alphabets(m):
-	if m.nhyouki == ',':
+	if m.nhyouki in (',', ']['):
 		m.hinshi1 = '記号'
 		m.hinshi2 = '*'
 	elif m.nhyouki not in '[]':

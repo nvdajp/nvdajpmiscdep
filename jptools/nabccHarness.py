@@ -329,4 +329,11 @@ tests = [
 		'input': '{NVDA}{テンジ}',
 		'output': '⠪⡝⡧⡙⡁⠻⠪⠟⠴⠐⠳⠻',
 	},
+	{
+		'comment':'https://github.com/nvdajp/nvdajpmiscdep/issues/67',
+		'mode': 'NABCC',
+		'text': '[音楽][読みたい本]',
+		'input': '[オンガク][ヨミタイ ホン]',
+		'output': '⡪⠊⠴⠐⠡⠩⡻⡪⠜⠷⠕⠃ ⠮⠴⡻',
+	},
 ]
