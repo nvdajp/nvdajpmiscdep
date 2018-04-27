@@ -603,7 +603,9 @@ tasks = [
 	
 	# https://github.com/nvdajp/nvdajpmiscdep/issues/48
 	{'text':"homepage", 'speech':'ホームページ'},
-	
+
+	{'text':"tiflotecnia", 'speech':'ティフロテクニア'},
+
 	{'text':'罰', 'speech':'バツ', 'braille':'バツ'},
 	{'text':'殺', 'speech':'サツ', 'braille':'サツ'},
 	{'text':'重殺', 'speech':'ジューサツ', 'braille':'ジューサツ'},

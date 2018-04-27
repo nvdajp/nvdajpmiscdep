@@ -295,6 +295,7 @@ def make_dic(IN_FILE, CODE, THISDIR):
 		['themes', 	'スィームズ'],
 		['tasks', 	'タスクス'],
 		['teatime', 	'ティータイム'],
+		['tiflotecnia', 'ティフロテクニア'],
 		
 		['update', 	'アップデート'],
 		['ui', 	'ユーアイ'],
