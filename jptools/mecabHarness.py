@@ -872,4 +872,10 @@ tasks = [
 		'text': "sc3301000",
 		'speech': "scサンサンゼロイチゼロゼロゼロ",
 	},
+	{
+		'comment':'https://github.com/nvdajp/nvdajp/issues/67',
+		'text': "行頭文字",
+		'speech': "ギョートーモジ",
+		'braille': "ギョートー モジ",
+	},
 ]
