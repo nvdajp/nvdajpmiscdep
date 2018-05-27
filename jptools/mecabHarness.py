@@ -878,4 +878,16 @@ tasks = [
 		'speech': "ギョートーモジ",
 		'braille': "ギョートー モジ",
 	},
+	{
+		'comment':'https://github.com/nvdajp/nvdajpmiscdep/issues/74',
+		'text': "縮約点字",
+		'speech': "シュクヤクテンジ",
+		'braille': "シュクヤク/テンジ",
+	},
+	{
+		'comment':'https://github.com/nvdajp/nvdajpmiscdep/issues/74',
+		'text': "縮約形",
+		'speech': "シュクヤクケイ",
+		'braille': "シュクヤク ケイ",
+	},
 ]
