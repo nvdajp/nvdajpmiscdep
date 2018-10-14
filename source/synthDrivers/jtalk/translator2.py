@@ -1396,8 +1396,16 @@ def japanese_braille_separate(inbuf, logwrite, nabcc=False):
 	for mo in li:
 		mo.nhyouki = unicode_normalize(mo.nhyouki)
 		# 情報処理点字の開始記号と終了記号
-		if RE_INFORMATION.match(mo.nhyouki) and \
-				('@' in mo.nhyouki) or ('://' in mo.nhyouki) or ('\\' in mo.nhyouki) or (mo.nhyouki[0] == '[' and mo.nhyouki[-1] == ']'):
+		info = False
+		if RE_INFORMATION.match(mo.nhyouki) and '@' in mo.nhyouki and len(mo.nhyouki) > 1:
+			info = True
+		if '://' in mo.nhyouki:
+			info = True
+		if '\\' in mo.nhyouki:
+			info = True
+		if mo.nhyouki[0] == '[' and mo.nhyouki[-1] == ']':
+			info = True
+		if info:
 			if nabcc:
 				mo.output = mo.nhyouki
 			else:
