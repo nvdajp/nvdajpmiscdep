@@ -890,4 +890,9 @@ tasks = [
 		'speech': "シュクヤクケイ",
 		'braille': "シュクヤク ケイ",
 	},
+	{
+		'comment':'https://github.com/nvdajp/nvdajpmiscdep/issues/73',
+		'text': "instagram",
+		'speech': "インスタグラム",
+	},
 ]

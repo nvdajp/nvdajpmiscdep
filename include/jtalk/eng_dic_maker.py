@@ -161,6 +161,7 @@ def make_dic(IN_FILE, CODE, THISDIR):
 		['ime',			'アイエムイー', 		"0/6", 600],
 		['iwate', 		'イワテ', None, 1000],
 		['inking', 		'インキング'],
+		['instagram', 		'インスタグラム'],
 		
 		['java', 	'ジャバ'],
 		['jaxa',    'ジャクサ'],
