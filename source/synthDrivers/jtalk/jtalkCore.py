@@ -392,7 +392,7 @@ def libjt_synthesis(feature,
 		if feed_func_:
 			try:
 				feed_func_(buf)
-			except WindowsError:
+			except (WindowsError, RuntimeError):
 				pass
 	if logwrite_ : logwrite_('libjt_synthesis done.')
 	return buf
