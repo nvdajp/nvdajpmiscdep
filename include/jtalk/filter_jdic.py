@@ -925,6 +925,12 @@ def filter_jdic(s):
 	elif a[0] == '既' and a[12] == 'スンデ' and len(a) == 15:
 		# https://github.com/nvdajp/nvdajpmiscdep/issues/69
 		s = ""
+	elif a[0] == '必須' and a[12] == 'ヒッス':
+		# https://github.com/nvdajp/nvdajp/issues/125
+		a[12] = a[12] = 'ヒッスー'
+		a[13] = '0/4'
+		a.append('ヒッス')
+		s = ','.join(a)
 	elif RE_NUMBERS.match(a[0]) and len(a) == 15:
 		# https://github.com/nvdajp/nvdajpmiscdep/issues/70
 		s = ""

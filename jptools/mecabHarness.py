@@ -895,4 +895,10 @@ tasks = [
 		'text': "instagram",
 		'speech': "インスタグラム",
 	},
+	{
+		'comment':'https://github.com/nvdajp/nvdajp/issues/125',
+		'text': '必須',
+		'speech': 'ヒッスー',
+		'braille': 'ヒッス',
+	},
 ]
