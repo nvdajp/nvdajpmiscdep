@@ -3,4 +3,4 @@
 	url = https://github.com/nvdajp/python-jtalk.git
 [submodule "jptools/libkuraji"]
 	path = jptools/libkuraji
-	url = git@github.com:nishimotz/libkuraji
+	url = https://github.com/nishimotz/libkuraji.git
