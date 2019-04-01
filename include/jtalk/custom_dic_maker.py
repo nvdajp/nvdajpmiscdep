@@ -1349,6 +1349,14 @@ jdic = [
 	 	'pos':'名詞,一般,*,*,*,*',
 		'accent':"0/6",
 	},
+	# https://github.com/nvdajp/nvdajp/issues/186
+	{
+		'text': "令和",
+		'speech': "レイワ",
+		'braille': "レイワ",
+		'pos':'名詞,固有名詞,一般,*,*,*',
+		'accent':"1/3",
+	},
 ]
 
 class DicItem(object):
