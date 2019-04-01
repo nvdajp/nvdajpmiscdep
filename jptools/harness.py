@@ -6709,4 +6709,10 @@ tests = [
 	{ 'text':'%⣏ パーセント', 'input':'%⣏ パーセント', },
 	{ 'text':') ⣏ 括弧閉じと半角スペース', 'input':') ⣏ カッコ トジト ハンカク スペース', },
 	{ 'text':'-⣏ マイナス', 'input':'-⣏ マイナス', },
+	# 新元号
+	{
+		'comment':'https://github.com/nvdajp/nvdajp/issues/186',
+		'text': '令和',
+		'input': 'レイワ',
+	},
 ]

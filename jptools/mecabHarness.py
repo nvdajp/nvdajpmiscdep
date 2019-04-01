@@ -901,6 +901,7 @@ tasks = [
 		'speech': 'ヒッスー',
 		'braille': 'ヒッス',
 	},
+	# 新元号
 	{
 		'comment':'https://github.com/nvdajp/nvdajp/issues/186',
 		'text': '令和',
