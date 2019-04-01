@@ -901,4 +901,10 @@ tasks = [
 		'speech': 'ヒッスー',
 		'braille': 'ヒッス',
 	},
+	{
+		'comment':'https://github.com/nvdajp/nvdajp/issues/186',
+		'text': '令和',
+		'speech': 'レイワ',
+		'braille': 'レイワ',
+	},
 ]
