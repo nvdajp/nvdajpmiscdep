@@ -6715,4 +6715,26 @@ tests = [
 		'text': '令和',
 		'input': 'レイワ',
 	},
+	# https://github.com/nvdajp/nvdajp/issues/200
+	# SDGs×iPadと点字表示しない
+	{
+		'comment':'https://github.com/nvdajp/nvdajp/issues/200',
+		'text': 'SDGs',
+		'input': 'SDGs',
+	},
+	{
+		'comment':'https://github.com/nvdajp/nvdajp/issues/200',
+		'text': 'SDGs×',
+		# 'input': 'SDGs×',
+	},
+	{
+		'comment':'https://github.com/nvdajp/nvdajp/issues/200',
+		'text': 'SDGs×iPad',
+		# 'input': 'SDGs×iPad',
+	},
+	{
+		'comment':'https://github.com/nvdajp/nvdajp/issues/200',
+		'text': 'SDGs×iPadと点字表示しない',
+		# 'input': 'SDGs×iPad ト テンジ ヒョージ シナイ',
+	},
 ]
