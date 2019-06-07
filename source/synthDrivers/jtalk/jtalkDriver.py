@@ -153,13 +153,11 @@ def _jtalk_speak(msg, index=None, prop=None):
 				if DEBUG: Mecab_print(a, logwrite, CODE_='utf-8')
 				Mecab_utf8_to_cp932(a)
 				if DEBUG: logwrite("Mecab_analysis done")
-				on_done_ = (lambda indexNum=lastIndex: onIndexReached(indexNum)) if onIndexReached else None
 				libjt_synthesis(
 					a.feature,
 					a.size,
 					fperiod_ = fperiod_current,
 					feed_func_ = player.feed, # player.feed() is called inside
-					on_done_ = on_done_,
 					is_speaking_func_ = isSpeaking,
 					begin_thres_ = thres_level,
 					end_thres_ = thres2_level,
@@ -211,6 +209,8 @@ def _updateSpeakIndex(index):
 	global currIndex
 	global lastIndex
 	lastIndex = currIndex = index
+	if onIndexReached:
+		onIndexReached(index)
 
 def speak(msg, lang, index=None, voiceProperty_=None):
 	if msg is None and lang is None:
@@ -249,6 +249,8 @@ def stop():
 	if DEBUG: logwrite("stop: %d task(s) stopping" % stop_task_count)
 	player.stop()
 	lastIndex = None
+	if onIndexReached:
+		onIndexReached(None)
 
 def pause(switch):
 	if currentEngine == 1:
