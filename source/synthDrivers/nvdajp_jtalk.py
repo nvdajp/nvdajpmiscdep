@@ -8,7 +8,7 @@
 # Copyright (C) 2013 Masamitsu Misono (043.jp)
 # Copyright (C) 2010-2019 Takuya Nishimoto (nishimotz.com)
 
-from synthDriverHandler import SynthDriver,VoiceInfo,BooleanSynthSetting
+from synthDriverHandler import SynthDriver,VoiceInfo
 from collections import OrderedDict
 from logHandler import log
 import speech
@@ -28,7 +28,7 @@ class SynthDriver(SynthDriver):
 		SynthDriver.RateSetting(),
 		SynthDriver.RateBoostSetting() \
 		if hasattr(SynthDriver, "RateBoostSetting") \
-		else BooleanSynthSetting("rateBoost",_("Rate boos&t")),
+		else synthDriverHandler.BooleanSynthSetting("rateBoost",_("Rate boos&t")),
 		SynthDriver.PitchSetting(),
 		SynthDriver.InflectionSetting(),
 		SynthDriver.VolumeSetting()
