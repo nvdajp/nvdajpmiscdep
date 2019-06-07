@@ -6,7 +6,7 @@
 #See the file COPYING for more details.
 #
 # Copyright (C) 2013 Masamitsu Misono (043.jp)
-# Copyright (C) 2010-2014 Takuya Nishimoto (nishimotz.com)
+# Copyright (C) 2010-2019 Takuya Nishimoto (nishimotz.com)
 
 from synthDriverHandler import SynthDriver,VoiceInfo,BooleanSynthSetting
 from collections import OrderedDict
@@ -26,7 +26,9 @@ class SynthDriver(SynthDriver):
 	supportedSettings=(
 		SynthDriver.VoiceSetting(),
 		SynthDriver.RateSetting(),
-		BooleanSynthSetting("rateBoost",_("Rate boos&t")),
+		SynthDriver.RateBoostSetting() \
+		if hasattr(SynthDriver, "RateBoostSetting") \
+		else BooleanSynthSetting("rateBoost",_("Rate boos&t")),
 		SynthDriver.PitchSetting(),
 		SynthDriver.InflectionSetting(),
 		SynthDriver.VolumeSetting()
