@@ -14,6 +14,10 @@ from logHandler import log
 import speech
 import synthDriverHandler
 import languageHandler
+try:
+	from synthDriverHandler import synthIndexReached, synthDoneSpeaking
+except:
+	synthIndexReached = synthDoneSpeaking = None
 from jtalk import jtalkDriver
 from jtalk.jtalkDriver import VoiceProperty
 from jtalk._nvdajp_espeak import isJapaneseLang
@@ -33,6 +37,16 @@ class SynthDriver(SynthDriver):
 		SynthDriver.InflectionSetting(),
 		SynthDriver.VolumeSetting()
 	)
+	supportedCommands = {
+		speech.IndexCommand,
+		speech.CharacterModeCommand,
+		speech.LangChangeCommand,
+		speech.PitchCommand,
+		speech.RateCommand,
+		speech.VolumeCommand,
+	}
+	if synthIndexReached:
+		supportedNotifications = {synthIndexReached, synthDoneSpeaking}
 
 	@classmethod
 	def check(cls):
@@ -44,7 +58,9 @@ class SynthDriver(SynthDriver):
 		self._pitch = 50
 		self._inflection = 50
 		self._rateBoost = False
-		jtalkDriver.initialize()
+		jtalkDriver.initialize(
+			indexCallback=self._onIndexReached if synthIndexReached else None
+		)
 		self.rate = 50
 
 	def speak(self,speechSequence):
@@ -166,3 +182,9 @@ class SynthDriver(SynthDriver):
 			return None
 		#log.debug("_get_lastIndex returns %d" % jtalkDriver.lastIndex)
 		return jtalkDriver.lastIndex
+
+	def _onIndexReached(self, index):
+		if index is not None:
+			synthIndexReached.notify(synth=self, index=index)
+		else:
+			synthDoneSpeaking.notify(synth=self)

@@ -105,6 +105,8 @@ lastIndex = None
 player = None
 currentEngine = 0 # 1:espeak 2:jtalk
 
+onIndexReached = None
+
 def isSpeaking():
 	return _bgthread.isSpeaking
 
@@ -151,11 +153,13 @@ def _jtalk_speak(msg, index=None, prop=None):
 				if DEBUG: Mecab_print(a, logwrite, CODE_='utf-8')
 				Mecab_utf8_to_cp932(a)
 				if DEBUG: logwrite("Mecab_analysis done")
+				on_done_ = (lambda indexNum=lastIndex: onIndexReached(indexNum)) if onIndexReached else None
 				libjt_synthesis(
 					a.feature,
 					a.size,
 					fperiod_ = fperiod_current,
 					feed_func_ = player.feed, # player.feed() is called inside
+					on_done_ = on_done_,
 					is_speaking_func_ = isSpeaking,
 					begin_thres_ = thres_level,
 					end_thres_ = thres2_level,
@@ -168,6 +172,8 @@ def _jtalk_speak(msg, index=None, prop=None):
 			del a
 		del mf
 	player.idle()
+	if onIndexReached:
+		onIndexReached(None)
 	setSpeaking(False)
 	currentEngine = 0
 
@@ -250,9 +256,11 @@ def pause(switch):
 	elif currentEngine == 2:
 		player.pause(switch)
 
-def initialize(voice = default_jtalk_voice):
+def initialize(indexCallback=None, voice=default_jtalk_voice):
 	global player, voice_args
 	global speaker_attenuation
+	global onIndexReached
+	onIndexReached = indexCallback
 	voice_args = voice
 	speaker_attenuation = voice_args['speaker_attenuation']
 	if not _espeak.espeakDLL:
@@ -283,11 +291,13 @@ def initialize(voice = default_jtalk_voice):
 
 def terminate():
 	global player
+	global onIndexReached
 	stop()
 	_bgthread.terminate()
 	player.close()
 	player = None
 	_espeak.terminate()
+	onIndexReached = None
 
 rate_percent = 50
 
