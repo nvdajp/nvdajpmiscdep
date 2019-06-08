@@ -344,7 +344,6 @@ def libjt_synthesis(feature,
 					size,
 					fperiod_=80,
 					feed_func_=None,
-					on_done_=None,
 					is_speaking_func_=None,
 					begin_thres_=32,
 					end_thres_=32,
@@ -392,8 +391,6 @@ def libjt_synthesis(feature,
 		buf = string_at(speech_ptr, byte_count)
 		if feed_func_:
 			try:
-				feed_func_(buf, onDone=on_done_)
-			except TypeError:
 				feed_func_(buf)
 			except (WindowsError, RuntimeError):
 				pass
