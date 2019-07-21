@@ -1,7 +1,10 @@
 # -*- coding: utf-8 -*-
 
-from __future__ import unicode_literals
-from _nvdajp_unicode import unicode_normalize
+from __future__ import unicode_literals, absolute_import
+try:
+	from ._nvdajp_unicode import unicode_normalize
+except (ImportError, ValueError):
+	from _nvdajp_unicode import unicode_normalize
 import re
 
 romadic = [

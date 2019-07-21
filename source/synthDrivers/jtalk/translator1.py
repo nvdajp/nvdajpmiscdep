@@ -6,12 +6,11 @@
 #This file is covered by the GNU General Public License.
 #See the file COPYING for more details.
 
-from __future__ import unicode_literals
+from __future__ import unicode_literals, absolute_import
 import unicodedata
-import re
 from copy import deepcopy
 import sys
-if sys.version_info[0] > 2:
+if sys.version_info.major >= 3:
 	xrange = range
 
 kana1_dic = {

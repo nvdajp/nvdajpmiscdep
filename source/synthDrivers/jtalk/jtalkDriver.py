@@ -1,28 +1,32 @@
+# jtalkDriver.py
 # -*- coding: utf-8 -*-
 #A part of NonVisual Desktop Access (NVDA)
 # speech engine nvdajp_jtalk
-# Copyright (C) 2010-2016 Takuya Nishimoto (nishimotz.com)
+# Copyright (C) 2010-2019 Takuya Nishimoto (nishimotz.com)
+
+from __future__ import absolute_import
 
 from logHandler import log
 import time
-import Queue
+import sys
+if sys.version_info.major >= 3:
+	import queue as Queue
+else:
+	import Queue
 import os
-import codecs
 import re
-import string
-import ctypes
 import baseObject
 import copy
 import nvwave
 from .. import _espeak
-from jtalkCore import *
-import jtalkPrepare 
+from .jtalkCore import *
+from . import jtalkPrepare 
 from ..jtalk._nvdajp_unicode import unicode_normalize
 from ..jtalk import _bgthread
 import time
 import watchdog
 import config
-from jtalkDir import jtalk_dir, dic_dir, user_dics
+from .jtalkDir import jtalk_dir, dic_dir, user_dics
 
 DEBUG = False
 
@@ -31,56 +35,56 @@ RATE_BOOST_MULTIPLIER = 1.5
 # math.log(150) = 5.0, math.log(350) = 5.9
 _jtalk_voices = [
 	{"id": "V1",
-	 "name": "m001",
-	 "lang":"ja",
-	 "samp_rate": 48000,
-	 "fperiod": 240,
-	 "lf0_base": 5.0,
-	 "pitch_bias": 0,
-	 "speaker_attenuation": 1.0,
-	 "htsvoice": os.path.join(jtalk_dir, 'm001', 'm001.htsvoice'),
-	 "alpha": 0.55,
-	 "beta": 0.00,
-	 "espeak_variant": "max"},
+	"name": "m001",
+	"lang":"ja",
+	"samp_rate": 48000,
+	"fperiod": 240,
+	"lf0_base": 5.0,
+	"pitch_bias": 0,
+	"speaker_attenuation": 1.0,
+	"htsvoice": os.path.join(jtalk_dir, 'm001', 'm001.htsvoice'),
+	"alpha": 0.55,
+	"beta": 0.00,
+	"espeak_variant": "max"},
 	{"id": "V2",
-	 "name": "mei",
-	 "lang":"ja",
-	 "samp_rate": 48000,
-	 "fperiod": 240,
-	 "lf0_base": 5.9,
-	 "pitch_bias": -25,
-	 "inflection_bias": -10,
-	 "speaker_attenuation": 0.8,
-	 "htsvoice": os.path.join(jtalk_dir, 'mei', 'mei_happy.htsvoice'),
-	 "alpha": 0.60, # 0.55,
-	 "beta": 0.00,
-	 "espeak_variant": "f1"},
+	"name": "mei",
+	"lang":"ja",
+	"samp_rate": 48000,
+	"fperiod": 240,
+	"lf0_base": 5.9,
+	"pitch_bias": -25,
+	"inflection_bias": -10,
+	"speaker_attenuation": 0.8,
+	"htsvoice": os.path.join(jtalk_dir, 'mei', 'mei_happy.htsvoice'),
+	"alpha": 0.60, # 0.55,
+	"beta": 0.00,
+	"espeak_variant": "f1"},
 	{"id": "V3",
-	 "name": "lite",
-	 "lang":"ja",
-	 "samp_rate": 16000,
-	 "fperiod": 80,
-	 "lf0_base": 5.0,
-	 "pitch_bias": 0,
-	 "speaker_attenuation": 1.0,
-	 "htsvoice": os.path.join(jtalk_dir, 'lite', 'voice.htsvoice'),
-	 "alpha": 0.42,
-	 "beta": 0.00,
-	 "espeak_variant": "max"},
+	"name": "lite",
+	"lang":"ja",
+	"samp_rate": 16000,
+	"fperiod": 80,
+	"lf0_base": 5.0,
+	"pitch_bias": 0,
+	"speaker_attenuation": 1.0,
+	"htsvoice": os.path.join(jtalk_dir, 'lite', 'voice.htsvoice'),
+	"alpha": 0.42,
+	"beta": 0.00,
+	"espeak_variant": "max"},
 	{"id": "V4",
-	 "name": "tohoku-f01",
-	 "lang":"ja",
-	 "samp_rate": 48000,
-	 "fperiod": 240,
-	 "fperiod_bias": 0.75,
-	 "lf0_base": 5.9,
-	 "pitch_bias": 0,
-	 "inflection_bias": 0,
-	 "speaker_attenuation": 0.8,
-	 "htsvoice": os.path.join(jtalk_dir, 'tohokuf01', 'tohoku-f01-neutral.htsvoice'),
-	 "alpha": 0.54,
-	 "beta": 0.00,
-	 "espeak_variant": "f1"},
+	"name": "tohoku-f01",
+	"lang":"ja",
+	"samp_rate": 48000,
+	"fperiod": 240,
+	"fperiod_bias": 0.75,
+	"lf0_base": 5.9,
+	"pitch_bias": 0,
+	"inflection_bias": 0,
+	"speaker_attenuation": 0.8,
+	"htsvoice": os.path.join(jtalk_dir, 'tohokuf01', 'tohoku-f01-neutral.htsvoice'),
+	"alpha": 0.54,
+	"beta": 0.00,
+	"espeak_variant": "f1"},
 ]
 default_jtalk_voice = _jtalk_voices[3] # V4
 voice_args = None
@@ -101,9 +105,9 @@ speaker_attenuation = 1.0
 logwrite = log.debug
 lastIndex = None
 currIndex = None
-lastIndex = None
 player = None
 currentEngine = 0 # 1:espeak 2:jtalk
+indexReachedFunc = None
 
 def isSpeaking():
 	return _bgthread.isSpeaking
@@ -115,6 +119,7 @@ def _jtalk_speak(msg, index=None, prop=None):
 	global currIndex, buff
 	global currentEngine
 	global lastIndex
+	#log.info("index %r msg(%s) start" % (index, msg))
 	if prop is None: return
 	currIndex = index
 	if prop.characterMode:
@@ -135,7 +140,7 @@ def _jtalk_speak(msg, index=None, prop=None):
 	if DEBUG: logwrite("lo:%f la:%f" % (lo, la))
 	lastIndex = currIndex
 	currIndex = None
-	for t in string.split(msg):
+	for t in msg.split():
 		if DEBUG: logwrite("unicode (%s)" % t)
 		s = text2mecab(t)
 		if DEBUG: logwrite("utf-8 (%s)" % s.decode('utf-8', 'ignore'))
@@ -168,6 +173,7 @@ def _jtalk_speak(msg, index=None, prop=None):
 			del a
 		del mf
 	player.idle()
+	#log.info('player.idle done. lastIndex %r' % lastIndex)
 	setSpeaking(False)
 	currentEngine = 0
 
@@ -181,9 +187,10 @@ def _espeak_speak(msg, lang, index=None, prop=None):
 	msg = u"<voice xml:lang=\"%s\">%s</voice>" % (lang, msg)
 	msg += u"<mark name=\"%d\" />" % espeakMark
 	_espeak.speak(msg)
-	while currentEngine == 1 and _espeak.lastIndex != espeakMark:
-		time.sleep(0.1)
-		watchdog.alive()
+	if hasattr(_espeak, 'lastIndex'):
+		while currentEngine == 1 and _espeak.lastIndex != espeakMark:
+			time.sleep(0.1)
+			watchdog.alive()
 	time.sleep(0.4)
 	watchdog.alive()
 	lastIndex = index
@@ -200,13 +207,49 @@ def _speak(arg):
 	else:
 		_espeak_speak(msg, lang, index, prop)
 
+indexCommands = []
+lastIndexCommand = None
+
+def _processIndexReached():
+	global indexCommands
+	flag = False
+	indexCommandsNew = []
+	for item in indexCommands:
+		if indexReachedFunc and (lastIndex is None or item <= lastIndex):
+			indexReachedFunc(item)
+			flag = True
+		else:
+			indexCommandsNew.append(item)
+	if flag:
+		indexCommands = indexCommandsNew
+		#log.info("lastIndex %r indexCommands %r" % (lastIndex, indexCommands))
+
 # call from BgThread
 def _updateSpeakIndex(index):
 	global currIndex
 	global lastIndex
 	lastIndex = currIndex = index
+	_processIndexReached()
+	if not indexCommands:
+		indexReachedFunc(None)
+
+# call from nvdajp_jtalk.py
+def updateIndex(index):
+	global lastIndexCommand
+	lastIndex = lastIndexCommand = index
+	indexCommands.append(index)
+	#log.info("index %r indexCommands %r" % (index, indexCommands))
+
+def onJtalkDone():
+	#log.info("onJtalkDone")
+	_processIndexReached()
+
+def onEspeakDone(index):
+	#log.info("onEspeakDone %r" % index)
+	_processIndexReached()
 
 def speak(msg, lang, index=None, voiceProperty_=None):
+	#log.info("index(%r) msg(%s) lang(%s)" % (index, msg, lang))
 	if msg is None and lang is None:
 		_bgthread.execWhenDone(_updateSpeakIndex, index, mustBeAsync=True)
 		return
@@ -218,6 +261,14 @@ def speak(msg, lang, index=None, voiceProperty_=None):
 
 def stop():
 	global currentEngine
+	if indexReachedFunc:
+		for item in indexCommands:
+			indexReachedFunc(item)
+		if sys.version_info.major >= 3:
+			indexCommands.clear()
+		else:
+			del indexCommands[:]
+		indexReachedFunc(None)
 	if currentEngine == 1:
 		_espeak.stop()
 		currentEngine = 0
@@ -250,13 +301,18 @@ def pause(switch):
 	elif currentEngine == 2:
 		player.pause(switch)
 
-def initialize(voice = default_jtalk_voice):
+def initialize(voice = default_jtalk_voice, onIndexReached=None):
 	global player, voice_args
 	global speaker_attenuation
+	global indexReachedFunc
+	indexReachedFunc = onIndexReached
 	voice_args = voice
 	speaker_attenuation = voice_args['speaker_attenuation']
 	if not _espeak.espeakDLL:
-		_espeak.initialize()
+		try:
+			_espeak.initialize(indexCallback=onEspeakDone)
+		except TypeError:
+			_espeak.initialize()
 		log.debug("jtalk using eSpeak version %s" % _espeak.info())
 	_espeak.setVoiceByLanguage("en")
 	_espeak.setVoiceAndVariant(variant=voice["espeak_variant"])
@@ -265,17 +321,19 @@ def initialize(voice = default_jtalk_voice):
 	if not _bgthread.bgThread:
 		_bgthread.initialize()
 	if not mecab:
-		Mecab_initialize(log.info, jtalk_dir, dic_dir, user_dics)
+		lw = logwrite if DEBUG else None
+		Mecab_initialize(lw, jtalk_dir, dic_dir, user_dics)
 	jtalkPrepare.setup()
 
 	jt_dll = os.path.join(jtalk_dir, 'libopenjtalk.dll')
 	log.debug('jt_dll %s' % jt_dll)
 	libjt_initialize(jt_dll)
+	libjt_set_on_done(onJtalkDone)
 	log.debug(libjt_version())
 
 	if os.path.isfile(voice_args['htsvoice']):
 		libjt_load(voice_args['htsvoice'])
-		log.info("loaded " + voice_args['htsvoice'])
+		#log.info("loaded " + voice_args['htsvoice'])
 	else:
 		log.error("load error " + voice_args['htsvoice'])
 	libjt_set_alpha(voice_args['alpha'])
