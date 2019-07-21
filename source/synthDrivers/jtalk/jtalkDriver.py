@@ -4,8 +4,6 @@
 # speech engine nvdajp_jtalk
 # Copyright (C) 2010-2019 Takuya Nishimoto (nishimotz.com)
 
-from __future__ import absolute_import
-
 from logHandler import log
 import time
 import sys
@@ -217,7 +215,7 @@ def _processIndexReached():
 	flag = False
 	indexCommandsNew = []
 	for item in indexCommands:
-		if indexReachedFunc and (lastIndex is None or item <= lastIndex):
+		if lastIndex is None or item <= lastIndex:
 			indexReachedFunc(item)
 			flag = True
 		else:
