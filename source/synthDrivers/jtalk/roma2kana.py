@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from __future__ import unicode_literals, absolute_import
+from __future__ import unicode_literals
 from ._nvdajp_unicode import unicode_normalize
 import re
 

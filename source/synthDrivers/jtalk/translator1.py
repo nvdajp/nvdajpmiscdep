@@ -8,6 +8,7 @@
 
 from __future__ import unicode_literals
 import unicodedata
+import re
 from copy import deepcopy
 import sys
 if sys.version_info.major >= 3:
