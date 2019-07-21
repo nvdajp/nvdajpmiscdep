@@ -14,14 +14,11 @@ if sys.version_info.major >= 3:
 	xrange = range
 	unichr = chr
 	from ._nvdajp_unicode import unicode_normalize
-	from .mecab import *
-	from . import translator1
-	from .jtalkDir import jtalk_dir, dic_dir, user_dics
 else:
 	from _nvdajp_unicode import unicode_normalize
-	from mecab import *
-	import translator1
-	from jtalkDir import jtalk_dir, dic_dir, user_dics
+from .mecab import *
+from . import translator1
+from .jtalkDir import jtalk_dir, dic_dir, user_dics
 
 _logwrite = None
 try:
