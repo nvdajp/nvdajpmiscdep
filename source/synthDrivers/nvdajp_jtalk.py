@@ -6,26 +6,17 @@
 #See the file COPYING for more details.
 #
 # Copyright (C) 2013 Masamitsu Misono (043.jp)
-# Copyright (C) 2010-2019 Takuya Nishimoto (nishimotz.com)
-# Released under GPL 2
+# Copyright (C) 2010-2014 Takuya Nishimoto (nishimotz.com)
 
-import sys
-from synthDriverHandler import SynthDriver, VoiceInfo
+from synthDriverHandler import SynthDriver,VoiceInfo,BooleanSynthSetting
 from collections import OrderedDict
 from logHandler import log
 import speech
 import synthDriverHandler
 import languageHandler
-from .jtalk import jtalkDriver
-from .jtalk.jtalkDriver import VoiceProperty
-from .jtalk._nvdajp_espeak import isJapaneseLang
-try:
-	from synthDriverHandler import synthIndexReached, synthDoneSpeaking
-except:
-	synthIndexReached = synthDoneSpeaking = None
-if sys.version_info.major >= 3:
-	unicode = str
-	basestring = str
+from jtalk import jtalkDriver
+from jtalk.jtalkDriver import VoiceProperty
+from jtalk._nvdajp_espeak import isJapaneseLang
 
 class SynthDriver(SynthDriver):
 	"""A Japanese synth driver for NVDAjp.
@@ -35,22 +26,11 @@ class SynthDriver(SynthDriver):
 	supportedSettings=(
 		SynthDriver.VoiceSetting(),
 		SynthDriver.RateSetting(),
-		SynthDriver.RateBoostSetting() \
-		if hasattr(SynthDriver, "RateBoostSetting") \
-		else synthDriverHandler.BooleanSynthSetting("rateBoost",_("Rate boos&t")),
+		BooleanSynthSetting("rateBoost",_("Rate boos&t")),
 		SynthDriver.PitchSetting(),
 		SynthDriver.InflectionSetting(),
 		SynthDriver.VolumeSetting()
 	)
-	supportedCommands = {
-		speech.IndexCommand,
-		speech.CharacterModeCommand,
-		speech.LangChangeCommand,
-		speech.PitchCommand,
-		speech.RateCommand,
-		speech.VolumeCommand,
-	}
-	supportedNotifications = {synthIndexReached, synthDoneSpeaking}
 
 	@classmethod
 	def check(cls):
@@ -62,11 +42,11 @@ class SynthDriver(SynthDriver):
 		self._pitch = 50
 		self._inflection = 50
 		self._rateBoost = False
-		jtalkDriver.initialize(onIndexReached=self._onIndexReached)
+		jtalkDriver.initialize()
 		self.rate = 50
 
 	def speak(self,speechSequence):
-		index = None
+		finalIndex = None
 		spellState = False
 		defaultLanguage = languageHandler.getLanguage()
 		if defaultLanguage[:2] == 'ja': defaultLanguage = 'ja'
@@ -85,11 +65,10 @@ class SynthDriver(SynthDriver):
 					lang = 'ja'
 				elif defaultLanguage != 'ja' and not isMsgJp:
 					lang = defaultLanguage
-				log.debug("lang:%s idx:%r pit:%d inf:%d chr:%d (%s)" % (lang, index, p.pitch, p.inflection, p.characterMode, msg))
-				jtalkDriver.speak(msg, lang, index=index, voiceProperty_=p)
+				log.debug("lang:%s idx:%s pit:%d inf:%d chr:%d (%s)" % (lang, str(finalIndex), p.pitch, p.inflection, p.characterMode, msg))
+				jtalkDriver.speak(msg, lang, index=finalIndex, voiceProperty_=p)
 			elif isinstance(item,speech.IndexCommand):
-				jtalkDriver.updateIndex(item.index)
-				index = item.index
+				finalIndex = item.index
 			elif isinstance(item,speech.CharacterModeCommand):
 				if item.state: 
 					spellState = True 
@@ -103,7 +82,7 @@ class SynthDriver(SynthDriver):
 				log.debugWarning("Unsupported speech command: %s"%item)
 			else:
 				log.error("Unknown speech: %s"%item)
-		jtalkDriver.speak(None, None, index=index)
+		jtalkDriver.speak(None, None, index=finalIndex)
 
 	def cancel(self):
 		jtalkDriver.stop()
@@ -185,13 +164,3 @@ class SynthDriver(SynthDriver):
 			return None
 		#log.debug("_get_lastIndex returns %d" % jtalkDriver.lastIndex)
 		return jtalkDriver.lastIndex
-
-	def _onIndexReached(self, index):
-		if index is None:
-			#log.info("synthDoneSpeaking")
-			if synthDoneSpeaking:
-				synthDoneSpeaking.notify(synth=self)
-		else:
-			#log.info("synthIndexReached %r" % index)
-			if synthIndexReached:
-				synthIndexReached.notify(synth=self, index=index)

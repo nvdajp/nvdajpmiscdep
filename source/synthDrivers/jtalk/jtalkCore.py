@@ -1,6 +1,6 @@
-# jtalkCore.py
+# jtalk_core.py
 # -*- coding: utf-8 -*-
-# Copyright (C) 2013-2019 Takuya Nishimoto
+# 2013 Takuya Nishimoto
 
 import codecs
 import re
@@ -8,12 +8,12 @@ import string
 import os
 import struct
 import sys
-if sys.version_info.major >= 3:
+if sys.version_info[0] > 2:
 	xrange = range
 	encode_mbcs = lambda s : s
 else:
 	encode_mbcs = lambda s : s.encode('mbcs')
-from .mecab import *
+from mecab import *
 
 ############################################
 
@@ -116,9 +116,9 @@ class HTS_Condition(Structure):
 		("beta", c_double),
 
 		# log F0
-		("additional_half_tone", c_double),
+	    ("additional_half_tone", c_double),
 
-		# interpolation weights
+	    # interpolation weights
 		("duration_iw", c_double_p),
 		("parameter_iw", c_double_p_p),
 		("gv_iw", c_double_p_p),
@@ -340,12 +340,6 @@ def libjt_clear():
 	libjt.JPCommon_clear(jpcommon)
 	libjt.HTS_Engine_clear(engine)
 
-libjt_on_done = None
-
-def libjt_set_on_done(func):
-	global libjt_on_done
-	libjt_on_done = func
-
 def libjt_synthesis(feature,
 					size,
 					fperiod_=80,
@@ -397,8 +391,6 @@ def libjt_synthesis(feature,
 		buf = string_at(speech_ptr, byte_count)
 		if feed_func_:
 			try:
-				feed_func_(buf, onDone=libjt_on_done)
-			except TypeError:
 				feed_func_(buf)
 			except (WindowsError, RuntimeError):
 				pass

@@ -11,7 +11,7 @@ import unicodedata
 import re
 from copy import deepcopy
 import sys
-if sys.version_info.major >= 3:
+if sys.version_info[0] > 2:
 	xrange = range
 
 kana1_dic = {

@@ -9,7 +9,7 @@ from glob import glob
 import tempfile
 import shutil
 
-if sys.version_info.major >= 3:
+if sys.version_info[0] > 2:
 	getcwd = os.getcwd
 	encode_str = lambda s, c : s
 else:

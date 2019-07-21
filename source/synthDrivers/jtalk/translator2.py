@@ -10,13 +10,13 @@ import os
 import copy
 import re
 import sys
-if sys.version_info.major >= 3:
+if sys.version_info[0] > 2:
 	xrange = range
 	unichr = chr
-from ._nvdajp_unicode import unicode_normalize
-from .mecab import *
-from . import translator1
-from .jtalkDir import jtalk_dir, dic_dir, user_dics
+from _nvdajp_unicode import unicode_normalize
+from mecab import *
+import translator1
+from jtalkDir import jtalk_dir, dic_dir, user_dics
 
 _logwrite = None
 try:
