@@ -1,11 +1,10 @@
 # _nvdajp_espeak.py 
 # -*- coding: utf-8 -*-
 
-from __future__ import unicode_literals
+from __future__ import unicode_literals, absolute_import
 from . import translator2
 from logHandler import log
 import re
-import copy
 from ._nvdajp_unicode import unicode_normalize
 from speech import CharacterModeCommand
 import sys

@@ -9,6 +9,8 @@
 #
 # based on NVDA (synthDrivers/_espeak.py)
 
+from __future__ import absolute_import
+
 from logHandler import log
 import threading
 import sys

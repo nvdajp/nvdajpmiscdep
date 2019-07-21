@@ -7,6 +7,8 @@
 
 # workaround for msspeech Haruka with "Use spelling functionality"
 
+from __future__ import absolute_import
+
 import re
 _dic = None
 
