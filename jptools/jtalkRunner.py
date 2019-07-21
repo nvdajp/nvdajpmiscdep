@@ -10,22 +10,22 @@
 
 from __future__ import unicode_literals, print_function
 import os
-if hasattr(os,'getcwdu'):
-	getcwd = os.getcwdu
-else:
-	getcwd = os.getcwd
 import sys
 import wave
 import time
+if sys.version_info.major >= 3:
+	getcwd = os.getcwd
+else:
+	getcwd = os.getcwdu
 try:
 	import pyaudio
 except:
 	pyaudio = None
-import cProfile
-import pstats
+# import cProfile
+# import pstats
 jtalk_dir = JT_DIR = os.path.normpath(
 	os.path.join(getcwd(), '..', 'source', 'synthDrivers', 'jtalk')
-	)
+)
 sys.path.append(JT_DIR)
 from jtalkCore import *
 import jtalkPrepare

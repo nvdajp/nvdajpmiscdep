@@ -5,16 +5,15 @@
 
 from __future__ import unicode_literals, print_function
 import os
-if hasattr(os,'getcwdu'):
-	getcwd = os.getcwdu
-else:
-	getcwd = os.getcwd
 import sys
-from glob import glob
+if sys.version_info.major >= 3:
+	getcwd = os.getcwd
+else:
+	getcwd = os.getcwdu
 from mecabHarness import tasks
 jt_dir = os.path.normpath(
 	os.path.join(getcwd(), '..', 'source', 'synthDrivers', 'jtalk')
-	)
+)
 sys.path.append(jt_dir)
 from mecab import *
 import jtalkDir

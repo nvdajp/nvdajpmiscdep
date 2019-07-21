@@ -4,11 +4,17 @@
 from __future__ import unicode_literals, print_function
 import os
 import sys
-if sys.version_info[0] > 2:
+if sys.version_info.major >= 3:
 	encode_utf8 = lambda s : s
+	getcwd = os.getcwd
 else:
 	encode_utf8 = lambda s : s.encode('utf-8', 'ignore')
-sys.path.append(r'..\source\synthDrivers\jtalk')
+	getcwd = os.getcwdu
+sys.path.append(
+	os.path.normpath(
+		os.path.join(getcwd(), '..', 'source', 'synthDrivers', 'jtalk')
+	)
+)
 from _nvdajp_unicode import unicode_normalize
 import jtalkPrepare
 

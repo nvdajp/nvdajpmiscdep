@@ -23,7 +23,7 @@ from harness import tests
 from nabccHarness import tests as nabcc_tests
 tests.extend(nabcc_tests)
 
-if sys.version_info[0] > 2:
+if sys.version_info.major >= 3:
 	getcwd = os.getcwd
 	encode_utf8 = lambda s : s
 	open_file = lambda name, mode : open(name, mode, encoding='utf-8')
@@ -34,7 +34,7 @@ else:
 
 jtalk_dir = os.path.normpath(
 	os.path.join(getcwd(), '..', 'source', 'synthDrivers', 'jtalk')
-	)
+)
 sys.path.append(jtalk_dir)
 import translator1
 import translator2

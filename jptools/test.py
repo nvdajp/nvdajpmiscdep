@@ -6,6 +6,7 @@ import mecabRunner
 import jtalkPredicTest
 import jtalkRunner
 
+
 class JpBrailleTests(unittest.TestCase):
 
 	def test_pass1(self):
@@ -16,6 +17,7 @@ class JpBrailleTests(unittest.TestCase):
 		count, outfile = jpBrailleRunner.pass2()
 		self.assertEqual(count, 0)
 
+
 class MecabTests(unittest.TestCase):
 
 	def test_all(self):
@@ -24,17 +26,20 @@ class MecabTests(unittest.TestCase):
 		count = mecabRunner.runTasks(enableUserDic=True)
 		self.assertEqual(count, 0)
 
+
 class JtalkPrepareTests(unittest.TestCase):
 
 	def test_all(self):
 		count = jtalkPredicTest.runTasks()
 		self.assertEqual(count, 0)
 
+
 class JtalkTests(unittest.TestCase):
 
 	def test_jtalk(self):
 		ret = jtalkRunner.main(do_play=False, do_write=False, do_log=False)
 		self.assertEqual(ret, 0)
+
 
 if __name__ == '__main__':
 	unittest.main()
