@@ -2,12 +2,15 @@
 # -*- coding: utf-8 -*-
 
 from __future__ import unicode_literals
-import translator2
+from . import translator2
 from logHandler import log
 import re
 import copy
-from _nvdajp_unicode import unicode_normalize
+from ._nvdajp_unicode import unicode_normalize
 from speech import CharacterModeCommand
+import sys
+if sys.version_info.major >= 3:
+	basestring = str
 
 _logwrite = log.debug
 

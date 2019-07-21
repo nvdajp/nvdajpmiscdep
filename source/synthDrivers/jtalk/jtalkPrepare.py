@@ -4,7 +4,7 @@
 
 import re
 import sys
-if sys.version_info[0] > 2:
+if sys.version_info.major >= 3:
 	re_ascii = re.ASCII
 else:
 	re_ascii = 0

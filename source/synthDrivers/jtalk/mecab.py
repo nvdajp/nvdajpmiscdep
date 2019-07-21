@@ -10,15 +10,15 @@ import os
 import struct
 import threading
 import sys
-if sys.version_info[0] > 2:
+if sys.version_info.major >= 3:
 	xrange = range
 	encode_mbcs = lambda s : s
 else:
 	encode_mbcs = lambda s : s.encode('mbcs')
 import re
-from text2mecab import text2mecab
-from roma2kana import getKanaFromRoma
-from _nvdajp_spellchar import convert as convertSpellChar
+from .text2mecab import text2mecab
+from .roma2kana import getKanaFromRoma
+from ._nvdajp_spellchar import convert as convertSpellChar
 
 c_double_p = POINTER(c_double)
 c_double_p_p = POINTER(c_double_p) 

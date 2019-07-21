@@ -11,7 +11,11 @@
 
 from logHandler import log
 import threading
-import Queue
+import sys
+if sys.version_info.major >= 3:
+	import queue as Queue
+else:
+	import Queue
 
 bgThread = None
 bgQueue = None
