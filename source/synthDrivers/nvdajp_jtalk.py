@@ -49,8 +49,6 @@ class SynthDriver(SynthDriver):
 		speech.CharacterModeCommand,
 		speech.LangChangeCommand,
 		speech.PitchCommand,
-		speech.RateCommand,
-		speech.VolumeCommand,
 	}
 	supportedNotifications = {synthIndexReached, synthDoneSpeaking}
 
@@ -62,6 +60,7 @@ class SynthDriver(SynthDriver):
 		self.voice_id = 'V4'
 		self._volume = 100
 		self._pitch = 50
+		self._pitchOffset = 0
 		self._inflection = 50
 		self._rateBoost = False
 		jtalkDriver.initialize(onIndexReached=self._onIndexReached)
@@ -77,7 +76,7 @@ class SynthDriver(SynthDriver):
 		for item in speechSequence:
 			if isinstance(item,basestring):
 				p = VoiceProperty()
-				p.pitch = self._pitch
+				p.pitch = min(max(self._pitch + self._pitchOffset, 0), 100)
 				p.inflection = self._inflection
 				p.characterMode = spellState
 				msg = unicode(item)
@@ -94,14 +93,16 @@ class SynthDriver(SynthDriver):
 				index = item.index
 			elif isinstance(item,speech.CharacterModeCommand):
 				if item.state: 
-					spellState = True 
+					spellState = True
 				else: 
-					spellState = True 
+					spellState = True
 			elif isinstance(item,speech.LangChangeCommand):
 				lang = (item.lang if item.lang else defaultLanguage).replace('_','-')
 				if lang[:2] == 'ja': lang = 'ja'
 				currentLang = lang
-			elif isinstance(item,speech.SpeechCommand):
+			elif isinstance(item, speech.PitchCommand):
+				self._pitchOffset = item.offset
+			elif isinstance(item, speech.SpeechCommand):
 				log.debugWarning("Unsupported speech command: %s"%item)
 			else:
 				log.error("Unknown speech: %s"%item)
