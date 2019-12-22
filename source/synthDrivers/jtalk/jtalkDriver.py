@@ -318,8 +318,6 @@ def initialize(voice = default_jtalk_voice, onIndexReached=None):
 			log.debug("jtalk using eSpeak version %s" % _espeak.info())
 		_espeak.setVoiceByLanguage("en")
 		_espeak.setVoiceAndVariant(variant=voice["espeak_variant"])
-	import tones
-	tones.beep(1000, 100)
 	if not player:
 		player = nvwave.WavePlayer(channels=1, samplesPerSec=voice_args['samp_rate'], bitsPerSample=16, outputDevice=config.conf["speech"]["outputDevice"])
 	if not _bgthread.bgThread:
