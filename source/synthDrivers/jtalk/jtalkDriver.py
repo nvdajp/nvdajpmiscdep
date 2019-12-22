@@ -19,7 +19,7 @@ import re
 import baseObject
 import copy
 import nvwave
-from .. import _espeak
+_espeak = None  # from .. import _espeak
 from .jtalkCore import *
 from . import jtalkPrepare 
 from ..jtalk._nvdajp_unicode import unicode_normalize
@@ -203,7 +203,7 @@ def _speak(arg):
 	msg, lang, index, prop = arg
 	if DEBUG: logwrite('[' + lang + ']' + msg)
 	if DEBUG: logwrite("_speak(%s)" % msg)
-	if lang == 'ja':
+	if _espeak is None or lang == 'ja':
 		_jtalk_speak(msg, index, prop)
 	else:
 		_espeak_speak(msg, lang, index, prop)
@@ -309,14 +309,17 @@ def initialize(voice = default_jtalk_voice, onIndexReached=None):
 	indexReachedFunc = onIndexReached
 	voice_args = voice
 	speaker_attenuation = voice_args['speaker_attenuation']
-	if not _espeak.espeakDLL:
-		try:
-			_espeak.initialize(indexCallback=onEspeakDone)
-		except TypeError:
-			_espeak.initialize()
-		log.debug("jtalk using eSpeak version %s" % _espeak.info())
-	_espeak.setVoiceByLanguage("en")
-	_espeak.setVoiceAndVariant(variant=voice["espeak_variant"])
+	if _espeak:
+		if not _espeak.espeakDLL:
+			try:
+				_espeak.initialize(indexCallback=onEspeakDone)
+			except TypeError:
+				_espeak.initialize()
+			log.debug("jtalk using eSpeak version %s" % _espeak.info())
+		_espeak.setVoiceByLanguage("en")
+		_espeak.setVoiceAndVariant(variant=voice["espeak_variant"])
+	import tones
+	tones.beep(1000, 100)
 	if not player:
 		player = nvwave.WavePlayer(channels=1, samplesPerSec=voice_args['samp_rate'], bitsPerSample=16, outputDevice=config.conf["speech"]["outputDevice"])
 	if not _bgthread.bgThread:
@@ -346,7 +349,8 @@ def terminate():
 	_bgthread.terminate()
 	player.close()
 	player = None
-	_espeak.terminate()
+	if _espeak:
+		_espeak.terminate()
 
 rate_percent = 50
 
