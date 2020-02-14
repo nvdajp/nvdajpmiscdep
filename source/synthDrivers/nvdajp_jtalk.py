@@ -176,7 +176,7 @@ class SynthDriver(SynthDriver):
 				if self.voice_id != identifier:
 					self.voice_id = identifier
 					jtalkDriver.terminate()
-					jtalkDriver.initialize(v)
+					jtalkDriver.initialize(v, onIndexReached=self._onIndexReached)
 					jtalkDriver.set_rate(rate,self._rateBoost)
 					jtalkDriver.set_volume(self._volume)
 					return
