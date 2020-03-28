@@ -167,10 +167,10 @@ def pass2(verboseMode=False):
 					isError = True
 					count+=1 
 				if isError or verboseMode:
-					f.write("text   : " + t['text'].encode('utf-8') + "\n")
-					f.write("correct: " + t['input'].encode('utf-8') + "\n")
-					f.write("result : " + result.encode('utf-8') + "\n")
-					f.write("pat    : " + pat.encode('utf-8') + "\n")
+					f.write("text   : " + t['text'] + "\n")
+					f.write("correct: " + t['input'] + "\n")
+					f.write("result : " + result + "\n")
+					f.write("pat    : " + pat + "\n")
 					if correct_inpos2:
 						f.write("cor_in2: " + correct_inpos2 + "\n")
 					if correct_inpos1:
@@ -184,7 +184,7 @@ def pass2(verboseMode=False):
 					f.write("res_in : " + result_inpos + "\n")
 					f.write("res_out: " + result_outpos + "\n")
 					if 'comment' in t and t['comment']:
-						f.write("comment: " + t['comment'].encode('utf-8') + "\n")
+						f.write("comment: " + t['comment'] + "\n")
 					f.write("\n")
 					f.write(log)
 					f.write("\n")
