@@ -65,9 +65,10 @@ class SynthDriver(SynthDriver):
 		self._rateBoost = False
 		jtalkDriver.initialize(onIndexReached=self._onIndexReached)
 		self.rate = 50
+		self.speakingIndex = None
+		self.finishedIndex = None
 
 	def speak(self,speechSequence):
-		index = None
 		spellState = False
 		defaultLanguage = languageHandler.getLanguage()
 		if defaultLanguage[:2] == 'ja': defaultLanguage = 'ja'
@@ -86,11 +87,12 @@ class SynthDriver(SynthDriver):
 					lang = 'ja'
 				elif defaultLanguage != 'ja' and not isMsgJp:
 					lang = defaultLanguage
-				log.debug("lang:%s idx:%r pit:%d inf:%d chr:%d (%s)" % (lang, index, p.pitch, p.inflection, p.characterMode, msg))
-				jtalkDriver.speak(msg, lang, index=index, voiceProperty_=p)
+				log.debug("lang:%s idx:%r pit:%d inf:%d chr:%d (%s)" % (lang, self.speakingIndex, p.pitch, p.inflection, p.characterMode, msg))
+				jtalkDriver.speak(msg, lang, index=self.speakingIndex, voiceProperty_=p)
 			elif isinstance(item,speech.IndexCommand):
+				#log.info("IndexCommand %r" % self.speakingIndex)
 				jtalkDriver.updateIndex(item.index)
-				index = item.index
+				self.speakingIndex = item.index
 			elif isinstance(item,speech.CharacterModeCommand):
 				if item.state: 
 					spellState = True
@@ -106,7 +108,7 @@ class SynthDriver(SynthDriver):
 				log.debugWarning("Unsupported speech command: %s"%item)
 			else:
 				log.error("Unknown speech: %s"%item)
-		jtalkDriver.speak(None, None, index=index)
+		jtalkDriver.updateSpeakIndexWhenDone(self.speakingIndex)
 
 	def cancel(self):
 		jtalkDriver.stop()
@@ -190,11 +192,12 @@ class SynthDriver(SynthDriver):
 		return jtalkDriver.lastIndex
 
 	def _onIndexReached(self, index):
-		if index is None:
+		self.finishedIndex = index
+		if self.finishedIndex is None:
 			#log.info("synthDoneSpeaking")
 			if synthDoneSpeaking:
 				synthDoneSpeaking.notify(synth=self)
 		else:
-			#log.info("synthIndexReached %r" % index)
+			#log.info("synthIndexReached %r" % self.finishedIndex)
 			if synthIndexReached:
-				synthIndexReached.notify(synth=self, index=index)
+				synthIndexReached.notify(synth=self, index=self.finishedIndex)

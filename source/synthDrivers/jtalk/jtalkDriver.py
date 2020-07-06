@@ -204,6 +204,7 @@ def _speak(arg):
 	if DEBUG: logwrite('[' + lang + ']' + msg)
 	if DEBUG: logwrite("_speak(%s)" % msg)
 	if _espeak is None or lang == 'ja':
+		#log.info("_jtalk_speak")
 		_jtalk_speak(msg, index, prop)
 	else:
 		_espeak_speak(msg, lang, index, prop)
@@ -230,14 +231,15 @@ def _updateSpeakIndex(index):
 	global currIndex
 	global lastIndex
 	lastIndex = currIndex = index
+	#log.info("lastIndex %r" % lastIndex)
 	_processIndexReached()
 	if not indexCommands:
 		indexReachedFunc(None)
 
 # call from nvdajp_jtalk.py
 def updateIndex(index):
-	global lastIndexCommand
-	lastIndex = lastIndexCommand = index
+	global lastIndex
+	lastIndex = index
 	indexCommands.append(index)
 	#log.info("index %r indexCommands %r" % (index, indexCommands))
 
@@ -251,14 +253,21 @@ def onEspeakDone(index):
 
 def speak(msg, lang, index=None, voiceProperty_=None):
 	#log.info("index(%r) msg(%s) lang(%s)" % (index, msg, lang))
-	if msg is None and lang is None:
-		_bgthread.execWhenDone(_updateSpeakIndex, index, mustBeAsync=True)
-		return
+	# if msg is None and lang is None:
+	# 	import tones
+	# 	tones.beep(440, 10)
+	# 	_bgthread.execWhenDone(_updateSpeakIndex, index, mustBeAsync=True)
+	# 	return
 	msg = msg.strip()
 	if len(msg) == 0: return
 	if voiceProperty_ is None: return
 	arg = [msg, lang, index, copy.deepcopy(voiceProperty_)]
 	_bgthread.execWhenDone(_speak, arg, mustBeAsync=True)
+
+def updateSpeakIndexWhenDone(index):
+	# import tones
+	# tones.beep(440, 10)
+	_bgthread.execWhenDone(_updateSpeakIndex, index, mustBeAsync=True)
 
 def stop():
 	global currentEngine
