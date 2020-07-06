@@ -24,14 +24,18 @@ if hasattr(sys,'frozen'):
 	if os.path.isdir(d):
 		jtalk_dir = d
 
-dic_dir = os.path.join(jtalk_dir, 'dic')
-
 configDir = getcwd()
 try:
 	import globalVars
 	configDir = globalVars.appArgs.configPath
+	d = os.path.join(globalVars.appArgs.configPath, 'addons', 'nvdajp_jtalk', 'synthDrivers' , 'jtalk')
+	if os.path.isdir(d):
+		jtalk_dir = d
 except:
 	pass
+
+dic_dir = os.path.join(jtalk_dir, 'dic')
+
 user_dics_org = [os.path.normpath(d) for d in glob(os.path.join(configDir, 'jtusr.dic'))]
 
 tempDir = encode_str(tempfile.mkdtemp(), 'mbcs')
