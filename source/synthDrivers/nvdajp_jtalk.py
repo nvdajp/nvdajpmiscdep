@@ -6,7 +6,7 @@
 #See the file COPYING for more details.
 #
 # Copyright (C) 2013 Masamitsu Misono (043.jp)
-# Copyright (C) 2010-2019 Takuya Nishimoto (nishimotz.com)
+# Copyright (C) 2010-2021 Takuya Nishimoto (nishimotz.com)
 # Released under GPL 2
 
 from __future__ import absolute_import
@@ -16,6 +16,20 @@ from synthDriverHandler import SynthDriver, VoiceInfo
 from collections import OrderedDict
 from logHandler import log
 import speech
+try:
+	from speech.commands import (
+		IndexCommand,
+		CharacterModeCommand,
+		LangChangeCommand,
+		PitchCommand,
+	)
+except:
+	from speech import  (
+		IndexCommand,
+		CharacterModeCommand,
+		LangChangeCommand,
+		PitchCommand,
+	)
 import synthDriverHandler
 import languageHandler
 from .jtalk import jtalkDriver
@@ -45,10 +59,10 @@ class SynthDriver(SynthDriver):
 		SynthDriver.VolumeSetting()
 	)
 	supportedCommands = {
-		speech.IndexCommand,
-		speech.CharacterModeCommand,
-		speech.LangChangeCommand,
-		speech.PitchCommand,
+		IndexCommand,
+		CharacterModeCommand,
+		LangChangeCommand,
+		PitchCommand,
 	}
 	supportedNotifications = {synthIndexReached, synthDoneSpeaking}
 
@@ -89,22 +103,22 @@ class SynthDriver(SynthDriver):
 					lang = defaultLanguage
 				log.debug("lang:%s idx:%r pit:%d inf:%d chr:%d (%s)" % (lang, self.speakingIndex, p.pitch, p.inflection, p.characterMode, msg))
 				jtalkDriver.speak(msg, lang, index=self.speakingIndex, voiceProperty_=p)
-			elif isinstance(item,speech.IndexCommand):
+			elif isinstance(item, IndexCommand):
 				#log.info("IndexCommand %r" % self.speakingIndex)
 				jtalkDriver.updateIndex(item.index)
 				self.speakingIndex = item.index
-			elif isinstance(item,speech.CharacterModeCommand):
+			elif isinstance(item, CharacterModeCommand):
 				if item.state: 
 					spellState = True
 				else: 
 					spellState = True
-			elif isinstance(item,speech.LangChangeCommand):
+			elif isinstance(item, LangChangeCommand):
 				lang = (item.lang if item.lang else defaultLanguage).replace('_','-')
 				if lang[:2] == 'ja': lang = 'ja'
 				currentLang = lang
-			elif isinstance(item, speech.PitchCommand):
+			elif isinstance(item, PitchCommand):
 				self._pitchOffset = item.offset
-			elif isinstance(item, speech.SpeechCommand):
+			elif isinstance(item, SpeechCommand):
 				log.debugWarning("Unsupported speech command: %s"%item)
 			else:
 				log.error("Unknown speech: %s"%item)
