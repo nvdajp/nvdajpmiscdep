@@ -22,6 +22,7 @@ try:
 		CharacterModeCommand,
 		LangChangeCommand,
 		PitchCommand,
+		SpeechCommand,
 	)
 except:
 	from speech import  (
@@ -29,6 +30,7 @@ except:
 		CharacterModeCommand,
 		LangChangeCommand,
 		PitchCommand,
+		SpeechCommand,
 	)
 import synthDriverHandler
 import languageHandler
