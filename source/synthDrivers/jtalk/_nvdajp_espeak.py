@@ -6,7 +6,10 @@ from . import translator2
 from logHandler import log
 import re
 from ._nvdajp_unicode import unicode_normalize
-from speech import CharacterModeCommand
+try:
+	from speech.commands import CharacterModeCommand
+except:
+	from speech import CharacterModeCommand
 import sys
 if sys.version_info.major >= 3:
 	basestring = str
