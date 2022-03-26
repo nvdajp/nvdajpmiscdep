@@ -5,25 +5,19 @@ from __future__ import absolute_import
 
 CODE = "utf-8"
 
-from ctypes import *
 import os
-import threading
-import sys
-
-
-encode_mbcs = lambda s: s
-
-
 import re
+import threading
+from ctypes import *
 
 try:
-    from .text2mecab import text2mecab
-    from .roma2kana import getKanaFromRoma
     from ._nvdajp_spellchar import convert as convertSpellChar
+    from .roma2kana import getKanaFromRoma
+    from .text2mecab import text2mecab
 except (ImportError, ValueError):
-    from text2mecab import text2mecab
-    from roma2kana import getKanaFromRoma
     from _nvdajp_spellchar import convert as convertSpellChar
+    from roma2kana import getKanaFromRoma
+    from text2mecab import text2mecab
 
 c_double_p = POINTER(c_double)
 c_double_p_p = POINTER(c_double_p)
@@ -137,7 +131,7 @@ def Mecab_initialize(logwrite_=None, libmecab_dir=None, dic=None, user_dics=None
     mecab_dll = os.path.join(libmecab_dir, "libmecab.dll")
     global libmc
     if libmc is None:
-        libmc = cdll.LoadLibrary(encode_mbcs(mecab_dll))
+        libmc = cdll.LoadLibrary(mecab_dll)
         libmc.mecab_version.restype = c_char_p
         libmc.mecab_strerror.restype = c_char_p
         libmc.mecab_sparse_tonode.restype = mecab_node_t_ptr
@@ -186,13 +180,13 @@ def Mecab_initialize(logwrite_=None, libmecab_dir=None, dic=None, user_dics=None
 def Mecab_analysis(src, features, logwrite_=None):
     if not src:
         if logwrite_:
-            logwrite("src empty")
+            logwrite_("src empty")
         features.size = 0
         return
     head = libmc.mecab_sparse_tonode(mecab, src)
     if head is None:
         if logwrite_:
-            logwrite("mecab_sparse_tonode result empty")
+            logwrite_("mecab_sparse_tonode result empty")
         features.size = 0
         return
     features.size = 0
