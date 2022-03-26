@@ -10,15 +10,10 @@ import sys
 from glob import glob
 import tempfile
 import shutil
+from os import getcwd
 
 
-getcwd = os.getcwd
-encode_str = lambda s, c: s
-
-
-
-
-jtalk_dir = encode_str(os.path.dirname(__file__), "mbcs")
+jtalk_dir = os.path.dirname(__file__)
 if hasattr(sys, "frozen"):
     d = os.path.join(getcwd(), "synthDrivers", "jtalk")
     if os.path.isdir(d):
@@ -43,7 +38,7 @@ user_dics_org = [
     os.path.normpath(d) for d in glob(os.path.join(configDir, "jtusr.dic"))
 ]
 
-tempDir = encode_str(tempfile.mkdtemp(), "mbcs")
+tempDir = tempfile.mkdtemp()
 user_dics = []
 for u in user_dics_org:
     b = os.path.basename(u)

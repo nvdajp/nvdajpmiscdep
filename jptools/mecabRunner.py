@@ -6,9 +6,7 @@
 from __future__ import unicode_literals, print_function
 import os
 import sys
-
-
-getcwd = os.getcwd
+from os import getcwd
 
 
 from mecabHarness import tasks

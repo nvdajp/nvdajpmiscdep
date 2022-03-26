@@ -13,9 +13,7 @@ import os
 import sys
 import wave
 import time
-
-
-getcwd = os.getcwd
+from os import getcwd
 
 
 try:

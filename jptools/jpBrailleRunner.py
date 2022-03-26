@@ -25,8 +25,8 @@ from nabccHarness import tests as nabcc_tests
 
 tests.extend(nabcc_tests)
 
-getcwd = os.getcwd
-encode_utf8 = lambda s: s
+from os import getcwd
+
 open_file = lambda name, mode: open(name, mode, encoding="utf-8")
 
 jtalk_dir = os.path.normpath(
@@ -42,11 +42,11 @@ user_dics = jtalkDir.user_dics
 
 
 def __write(file, s=""):
-    file.write(encode_utf8(s))
+    file.write(s)
 
 
 def __writeln(file, s=""):
-    file.write(encode_utf8(s) + "\n")
+    file.write(s + "\n")
 
 
 output = None
@@ -54,7 +54,7 @@ output = None
 
 def __print(s=""):
     global output
-    output.write(encode_utf8(s) + "\n")
+    output.write(s + "\n")
 
 
 def dot_numbers(s):

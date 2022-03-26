@@ -4,9 +4,8 @@
 from __future__ import unicode_literals, print_function
 import os
 import sys
+from os import getcwd
 
-encode_utf8 = lambda s: s
-getcwd = os.getcwd
 sys.path.append(
     os.path.normpath(os.path.join(getcwd(), "..", "source", "synthDrivers", "jtalk"))
 )
@@ -75,7 +74,7 @@ tests = [
 
 
 def _print(s):
-    print(encode_utf8(s))
+    print(s)
 
 
 def runTasks():
