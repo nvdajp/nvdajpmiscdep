@@ -8,13 +8,13 @@
 # requires pyaudio (PortAudio wrapper)
 # http://people.csail.mit.edu/hubert/pyaudio/
 
-from __future__ import unicode_literals, print_function
+from __future__ import print_function, unicode_literals
+
 import os
 import sys
-import wave
 import time
+import wave
 from os import getcwd
-
 
 try:
     import pyaudio
@@ -26,8 +26,8 @@ jtalk_dir = JT_DIR = os.path.normpath(
     os.path.join(getcwd(), "..", "source", "synthDrivers", "jtalk")
 )
 sys.path.append(JT_DIR)
-from jtalkCore import *
 import jtalkPrepare
+from jtalkCore import *
 
 JT_DLL = os.path.join(JT_DIR, "libopenjtalk.dll")
 

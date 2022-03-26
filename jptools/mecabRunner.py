@@ -3,11 +3,11 @@
 # Japanese text processor test module
 # by Takuya Nishimoto
 
-from __future__ import unicode_literals, print_function
+from __future__ import print_function, unicode_literals
+
 import os
 import sys
 from os import getcwd
-
 
 from mecabHarness import tasks
 
@@ -15,9 +15,9 @@ jt_dir = os.path.normpath(
     os.path.join(getcwd(), "..", "source", "synthDrivers", "jtalk")
 )
 sys.path.append(jt_dir)
-from mecab import *
 import jtalkDir
 from _nvdajp_unicode import unicode_normalize
+from mecab import *
 
 dic = os.path.join(jt_dir, "dic")
 user_dics_org = jtalkDir.user_dics_org

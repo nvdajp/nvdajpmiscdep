@@ -1,10 +1,11 @@
 # -*- coding: UTF-8 -*-
 
 import unittest
+
 import jpBrailleRunner
-import mecabRunner
 import jtalkPredicTest
 import jtalkRunner
+import mecabRunner
 
 
 class JpBrailleTests(unittest.TestCase):

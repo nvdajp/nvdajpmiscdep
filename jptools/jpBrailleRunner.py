@@ -9,14 +9,14 @@
 
 # from __future__ import unicode_literals
 from __future__ import print_function
-import sys
+
+import datetime
+import io
+import optparse
 import os
 import sys
-import optparse
-import datetime
-
-import io
 import timeit
+
 from harness import tests
 from nabccHarness import tests as nabcc_tests
 
@@ -30,9 +30,9 @@ jtalk_dir = os.path.normpath(
     os.path.join(getcwd(), "..", "source", "synthDrivers", "jtalk")
 )
 sys.path.append(jtalk_dir)
+import jtalkDir
 import translator1
 import translator2
-import jtalkDir
 
 dic_dir = os.path.join(jtalk_dir, "dic")
 user_dics = jtalkDir.user_dics

@@ -9,14 +9,15 @@ IN_FILE_DEFAULT = "c:/work/nvda/bep-eng.dic"
 OUT_FILE = "nvdajp-eng-dic.csv"
 DEFAULT_COST = 1600
 
-import sys
+
 
 
 open_file = lambda name, mode, encoding: open(name, mode, encoding=encoding)
 
 
-import os
+
 from os import path
+
 from alpha2mb import alpha2mb
 
 

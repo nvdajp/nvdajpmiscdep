@@ -2,23 +2,21 @@
 # make_jdic.py
 # Copyright (C) 2010-2013 Takuya Nishimoto (NVDA Japanese Team)
 
-from __future__ import unicode_literals, print_function
-import sys
-
+from __future__ import print_function, unicode_literals
 
 open_file = lambda name, mode, encoding: open(name, mode, encoding=encoding)
 
 
+import errno
 import os
-from os import path
 import shutil
 import subprocess
 from datetime import datetime
-import errno
+from os import path
 
+import custom_dic_maker
 import eng_dic_maker
 import tankan_dic_maker
-import custom_dic_maker
 from filter_jdic import filter_jdic
 
 # MECAB_DICT_INDEX と OUTDIR は libopenjtalk/mecab-naist-jdic/_temp が基準

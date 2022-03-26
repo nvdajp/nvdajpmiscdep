@@ -1,5 +1,6 @@
 # coding: utf-8
 from __future__ import unicode_literals
+
 import re
 
 RE_ALPHA = re.compile("^[Ａ-Ｚａ-ｚ]+$")

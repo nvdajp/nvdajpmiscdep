@@ -1,7 +1,8 @@
 # jtalkPredicTest.py
 # -*- coding: utf-8 -*-
 
-from __future__ import unicode_literals, print_function
+from __future__ import print_function, unicode_literals
+
 import os
 import sys
 from os import getcwd
@@ -9,8 +10,8 @@ from os import getcwd
 sys.path.append(
     os.path.normpath(os.path.join(getcwd(), "..", "source", "synthDrivers", "jtalk"))
 )
-from _nvdajp_unicode import unicode_normalize
 import jtalkPrepare
+from _nvdajp_unicode import unicode_normalize
 
 tests = [
     ["ー", "チョーオン"],

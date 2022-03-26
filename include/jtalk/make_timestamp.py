@@ -1,5 +1,5 @@
-import os
 import datetime
+import os
 
 s = "libopenjtalk " + datetime.datetime.utcnow().strftime("%Y%m%d-%H%M%S")
 with open("libopenjtalk\\lib\\libopenjtalk-timestamp.h", "wb") as f:

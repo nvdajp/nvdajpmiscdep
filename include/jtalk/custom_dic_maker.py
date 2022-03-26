@@ -2,20 +2,17 @@
 # -*- coding: utf-8 -*-
 # since 2011-01-19 by Takuya Nishimoto
 
-from __future__ import unicode_literals, print_function
+from __future__ import print_function, unicode_literals
 
 OUT_FILE = "nvdajp-custom-dic.csv"
 
 import sys
 
-
 open_file = lambda name, mode, encoding: open(name, mode, encoding=encoding)
 
 
-import re
-import os
 from os import path
-from alpha2mb import alpha2mb
+
 
 jdic = [
     # first item should use fullshape(zenkaku) charactors

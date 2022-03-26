@@ -5,10 +5,8 @@ from __future__ import unicode_literals
 
 OUT_FILE = "nvdajp-roma-dic.csv"
 
-import sys
-import re
-import os
 from os import path
+
 from alpha2mb import alpha2mb
 
 romadic = [
