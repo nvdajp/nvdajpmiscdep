@@ -8,14 +8,10 @@ OUT_FILE = "nvdajp-custom-dic.csv"
 
 import sys
 
-if sys.version_info[0] > 2:
-    open_file = lambda name, mode, encoding: open(name, mode, encoding=encoding)
-    decode_str = lambda s, encoding: s
-    encode_str = lambda s, encoding: s
-else:
-    open_file = lambda name, mode, encoding: open(name, mode)
-    decode_str = lambda s, encoding: s.decode(encoding)
-    encode_str = lambda s, encoding: s.encode(encoding)
+
+open_file = lambda name, mode, encoding: open(name, mode, encoding=encoding)
+
+
 import re
 import os
 from os import path
@@ -1497,7 +1493,7 @@ def make_dic(CODE, THISDIR):
             if brl:
                 s += "," + brl
             s += "\n"
-            file.write(encode_str(s, CODE))
+            file.write(s)
 
 
 if __name__ == "__main__":

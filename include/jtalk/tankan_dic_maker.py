@@ -9,14 +9,10 @@ OUT_FILE = "nvdajp-tankan-dic.csv"
 
 import sys
 
-if sys.version_info[0] > 2:
-    open_file = lambda name, mode, encoding: open(name, mode, encoding=encoding)
-    decode_str = lambda s, encoding: s
-    encode_str = lambda s, encoding: s
-else:
-    open_file = lambda name, mode, encoding: open(name, mode)
-    decode_str = lambda s, encoding: s.decode(encoding)
-    encode_str = lambda s, encoding: s.encode(encoding)
+
+open_file = lambda name, mode, encoding: open(name, mode, encoding=encoding)
+
+
 import re
 import os
 from os import path
@@ -26,7 +22,7 @@ def contains_hankaku_katakana(k):
     # hankaku katakana check
     # http://programmer-toy-box.sblo.jp/article/24644519.html
     regexp = re.compile(r"(?:\xEF\xBD[\xA1-\xBF]|\xEF\xBE[\x80-\x9F])|[\x20-\x7E]")
-    result = regexp.search(encode_str(k, "utf-8"))
+    result = regexp.search(k)
     if result:
         return True
     return False
@@ -38,7 +34,7 @@ def read_characters_file(cs_file):
         c = 0
         for line in ch:
             c += 1
-            line = decode_str(line.rstrip(), "utf-8")
+            line = line.rstrip()
             if len(line) == 0:
                 continue
             # print line.encode('cp932', 'ignore')
@@ -75,7 +71,7 @@ def make_dic(CODE, CS_FILE, THISDIR):
     jdic_tankan = {}
     reader = csv.reader(open_file(path.join(THISDIR, "naist-jdic.csv"), "r", "euc-jp"))
     for row in reader:
-        hyousou = decode_str(row[0], "euc-jp")  # naist-jdic.csv is euc-jp
+        hyousou = row[0]
         if len(hyousou) == 1:
             if hyousou == "盲":
                 continue
@@ -88,11 +84,6 @@ def make_dic(CODE, CS_FILE, THISDIR):
                 continue
             if k in jdic_tankan:
                 continue  # print "%s in hyousou" % k.encode(CODE)
-            try:
-                dummy = encode_str(k, CODE)
-            except Exception as e:
-                print(e)
-                continue
             k1 = k
             y = v
             # ー,,,5000,名詞,サ変接続,*,*,*,*,ー,チョーオン,チョーオン,0/5,C0
@@ -117,7 +108,7 @@ def make_dic(CODE, CS_FILE, THISDIR):
             if len(k1) == 1 and 0x2800 <= ord(k1) <= 0x28FF:
                 s += ",%s" % k1
             s += "\n"
-            file.write(encode_str(s, CODE))
+            file.write(s)
 
 
 if __name__ == "__main__":

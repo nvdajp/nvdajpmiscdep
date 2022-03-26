@@ -5,14 +5,10 @@
 from __future__ import unicode_literals, print_function
 import sys
 
-if sys.version_info[0] > 2:
-    open_file = lambda name, mode, encoding: open(name, mode, encoding=encoding)
-    decode_str = lambda s, encoding: s
-    encode_str = lambda s, encoding: s
-else:
-    open_file = lambda name, mode, encoding: open(name, mode)
-    decode_str = lambda s, encoding: s.decode(encoding)
-    encode_str = lambda s, encoding: s.encode(encoding)
+
+open_file = lambda name, mode, encoding: open(name, mode, encoding=encoding)
+
+
 import os
 from os import path
 import shutil
@@ -67,8 +63,8 @@ def convert_file(src_file, src_enc, dest_file, dest_enc):
                 s = sf.readline()
                 if not s:
                     break
-                s = decode_str(s, src_enc)
-                df.write(encode_str(s, dest_enc))
+
+                df.write(s)
 
 
 def convert_jdic_file(src_file, src_enc, dest_file, dest_enc):
@@ -79,11 +75,11 @@ def convert_jdic_file(src_file, src_enc, dest_file, dest_enc):
                 s = sf.readline()
                 if not s:
                     break
-                s = decode_str(s, src_enc).rstrip()
+                s = s.rstrip()
                 s = filter_jdic(s)
                 if s:
                     s += "\n"  # do not use os.linesep here
-                    df.write(encode_str(s, dest_enc))
+                    df.write(s)
 
 
 files = [

@@ -11,14 +11,10 @@ DEFAULT_COST = 1600
 
 import sys
 
-if sys.version_info[0] > 2:
-    open_file = lambda name, mode, encoding: open(name, mode, encoding=encoding)
-    decode_str = lambda s, encoding: s
-    encode_str = lambda s, encoding: s
-else:
-    open_file = lambda name, mode, encoding: open(name, mode)
-    decode_str = lambda s, encoding: s.decode(encoding)
-    encode_str = lambda s, encoding: s.encode(encoding)
+
+open_file = lambda name, mode, encoding: open(name, mode, encoding=encoding)
+
+
 import os
 from os import path
 from alpha2mb import alpha2mb
@@ -357,7 +353,7 @@ def make_dic(IN_FILE, CODE, THISDIR):
     for line in open_file(IN_FILE, "r", "utf-8"):
         if line[0] == "#":
             continue
-        a1, a2 = decode_str(line.rstrip(), "utf-8").split(" ")
+        a1, a2 = line.rstrip().split(" ")
         a1 = re.sub("'", "\\'", a1)
         a1 = a1.lower()
         if a1 not in k:
@@ -407,7 +403,7 @@ def make_dic(IN_FILE, CODE, THISDIR):
                 y,
                 pros,
             )
-            file.write(encode_str(s, CODE))
+            file.write(s)
 
 
 if __name__ == "__main__":
