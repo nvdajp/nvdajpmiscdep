@@ -400,7 +400,7 @@ def make_nabcc_dic():
         dic[c] = alpha_dic[c]
     keys = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ,;:.!\"'()-_<=>%+~`&$?{[}]^@#\\|/*"
     vals = "⠴⠂⠆⠒⠲⠢⠖⠶⠦⠔⡁⡃⡉⡙⡑⡋⡛⡓⡊⡚⡅⡇⡍⡝⡕⡏⡟⡗⡎⡞⡥⡧⡺⡭⡽⡵⠠⠰⠱⠨⠮⠐⠄⠷⠾⠤⠸⠣⠿⠜⠩⠬⠘⠈⠯⠫⠹⠪⡪⠻⡻⡘⡈⠼⡳⠳⠌⠡"
-    for pos in xrange(len(keys)):
+    for pos in range(len(keys)):
         dic[keys[pos]] = vals[pos]
     return dic
 

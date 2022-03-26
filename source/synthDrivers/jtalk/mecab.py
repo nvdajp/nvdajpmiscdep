@@ -11,7 +11,6 @@ import threading
 import sys
 
 
-xrange = range
 encode_mbcs = lambda s: s
 
 
@@ -110,12 +109,12 @@ class NonblockingMecabFeatures(object):
     def __init__(self):
         self.size = 0
         self.feature = FEATURE_ptr_array()
-        for i in xrange(0, FECOUNT):
+        for i in range(0, FECOUNT):
             buf = mc_malloc(FELEN)
             self.feature[i] = cast(buf, FEATURE_ptr)
 
     def __del__(self):
-        for i in xrange(0, FECOUNT):
+        for i in range(0, FECOUNT):
             try:
                 mc_free(self.feature[i])
             except:
@@ -235,7 +234,7 @@ def Mecab_print(mf, logwrite_=None, CODE_=CODE, output_header=True):
     s2 = ""
     if output_header:
         s2 += "Mecab_print size: %d\n" % size
-    for i in xrange(0, size):
+    for i in range(0, size):
         s = string_at(feature[i])
         if s:
             if CODE_ is None:
@@ -360,7 +359,7 @@ def _makeBraillePatternReading(s):
 
 
 def Mecab_correctFeatures(mf, CODE_=CODE):
-    for pos in xrange(0, mf.size):
+    for pos in range(0, mf.size):
         ar = Mecab_getFeature(mf, pos, CODE_=CODE_).split(",")
         if pos >= 1:
             ar2 = Mecab_getFeature(mf, pos - 1, CODE_=CODE_).split(",")
@@ -425,7 +424,7 @@ def Mecab_correctFeatures(mf, CODE_=CODE):
             nbmf = NonblockingMecabFeatures()
             for c in hyoki:
                 Mecab_analysis(text2mecab(c, CODE_=CODE_), nbmf)
-                for pos2 in xrange(0, nbmf.size):
+                for pos2 in range(0, nbmf.size):
                     ar2 = Mecab_getFeature(nbmf, pos2, CODE_=CODE_).split(",")
                     if len(ar2) > 10:
                         yomi += ar2[8]
@@ -541,7 +540,7 @@ def Mecab_correctFeatures(mf, CODE_=CODE):
 
 
 def Mecab_utf8_to_cp932(mf):
-    for pos in xrange(0, mf.size):
+    for pos in range(0, mf.size):
         s = Mecab_getFeature(mf, pos, CODE_="utf-8")
         Mecab_setFeature(mf, pos, s, CODE_="cp932")
 
@@ -551,7 +550,7 @@ def Mecab_duplicateFeatures(mf, startPos=0, stopPos=None, CODE_="utf-8"):
         stopPos = mf.size
     nbmf = NonblockingMecabFeatures()
     newPos = 0
-    for pos in xrange(startPos, stopPos):
+    for pos in range(startPos, stopPos):
         s = Mecab_getFeature(mf, pos, CODE_)
         Mecab_setFeature(nbmf, newPos, s, CODE_)
         newPos += 1
@@ -562,7 +561,7 @@ def Mecab_duplicateFeatures(mf, startPos=0, stopPos=None, CODE_="utf-8"):
 def Mecab_splitFeatures(mf, CODE_="utf-8"):
     ar = []
     startPos = 0
-    for pos in xrange(mf.size):
+    for pos in range(mf.size):
         a = Mecab_getFeature(mf, pos, CODE_).split(",")
         if a[0].isspace() or a[1] == "記号" and a[2] in ("空白", "句点", "読点"):
             f = Mecab_duplicateFeatures(mf, startPos, pos + 1, CODE_)

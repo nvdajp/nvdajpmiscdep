@@ -50,7 +50,7 @@ def __print_dummy(s):
 def Mecab_get_reading(mf, CODE_=CODE):
     reading = ""
     braille = ""
-    for pos in xrange(0, mf.size):
+    for pos in range(0, mf.size):
         ar = Mecab_getFeature(mf, pos, CODE_=CODE_).split(",")
         rd = ""
         if len(ar) > 9:

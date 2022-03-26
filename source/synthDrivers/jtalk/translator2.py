@@ -12,8 +12,6 @@ import re
 import sys
 
 
-xrange = range
-unichr = chr
 try:
     from ._nvdajp_unicode import unicode_normalize
     from .mecab import *
@@ -203,7 +201,7 @@ class MecabMorph(object):
 
 
 def update_phonetic_symbols(mo):
-    for p in xrange(0, len(mo.yomi)):
+    for p in range(0, len(mo.yomi)):
         # 点訳のてびき第3版 第2章 その1 1 5
         # ５、長音の書き表し方 (1), (2)
         # before: ああ,ああ,感動詞,*,*,*,アア,アー,1/2,アー,0
@@ -225,7 +223,7 @@ def mecab_to_morphs(mf):
     li = []
     if mf is None or mf.feature is None or mf.size is None:
         return li
-    for i in xrange(0, mf.size):
+    for i in range(0, mf.size):
         s = string_at(mf.feature[i])
         if s:
             s = s.decode(CODE, "ignore")
@@ -469,7 +467,7 @@ def replace_alphabet_morphs(li, nabcc=False):
     #  Ｂａｓｉｃ,Basic,名詞,アルファベット,*,*,ビーアシーシー,ビーアシーシー,1/2,Basic
     new_li = []
     alp_morphs = []
-    for pos in xrange(len(li)):
+    for pos in range(len(li)):
         mo = li[pos]
         if pos < len(li) - 1:
             next_mo = li[pos + 1]
@@ -558,7 +556,7 @@ WAGO_DIC = {
 
 def fix_japanese_date_morphs(li):
     new_li = []
-    for i in xrange(0, len(li)):
+    for i in range(0, len(li)):
         prev2_mo = li[i - 2] if i - 2 >= 0 else None
         prev_mo = li[i - 1] if i - 1 >= 0 else None
         mo = li[i]
@@ -1209,7 +1207,7 @@ def morphs_to_string(li, inbuf, logwrite):
     outbuf = ""
     inpos2 = []
     p = 0
-    for i in xrange(0, len(li)):
+    for i in range(0, len(li)):
         if not li[i].output:
             continue
         out = li[i].output
@@ -1217,22 +1215,22 @@ def morphs_to_string(li, inbuf, logwrite):
         outbuf += out
         hyolen = len(li[i].hyouki)
         if hyolen == outlen:
-            inpos2.extend(xrange(p, p + outlen))
+            inpos2.extend(range(p, p + outlen))
         elif out[:2] == "⠠⠦" and out[-2:] == "⠠⠴":
             # 情報処理用点字の内側
             c = outlen - 4
             inpos2.extend([p] * 2)
-            inpos2.extend(xrange(p, p + c))
+            inpos2.extend(range(p, p + c))
             inpos2.extend([p + c - 1] * 2)
         elif out[:1] == "⠦" and out[-1:] == "⠴":
             # 外国語引用符の内側
             c = outlen - 2
             inpos2.extend([p])
-            inpos2.extend(xrange(p, p + c))
+            inpos2.extend(range(p, p + c))
             inpos2.extend([p + c - 1])
         else:
             # 表記と出力の文字数が変化する場合
-            for x in xrange(outlen):
+            for x in range(outlen):
                 inpos2.append(p + int(float(x) * hyolen / outlen))
         p += hyolen
         if li[i].sepflag:
@@ -1321,19 +1319,19 @@ def to_dakuon_kana(s):
     return s
 
 
-TAB_CODE = unichr(0x200B)
+TAB_CODE = chr(0x200B)
 
 
 def japanese_braille_separate(inbuf, logwrite, nabcc=False):
     text = inbuf
     if RE_HALF_KATAKANA.match(text):
         outbuf = text
-        inpos2 = xrange(len(outbuf))
+        inpos2 = range(len(outbuf))
         return (outbuf, inpos2)
 
     if not nabcc and RE_MB_ALPHA_NUM_SPACE.match(text):
         outbuf = unicode_normalize(text)
-        inpos2 = xrange(len(outbuf))
+        inpos2 = range(len(outbuf))
         return (outbuf, inpos2)
 
     if not nabcc and is_gaiji(text) and " " in text.rstrip():
@@ -1391,7 +1389,7 @@ def japanese_braille_separate(inbuf, logwrite, nabcc=False):
 
     # before: ３ー,名詞,数,*,*,*,*,３ー,サンー,サンー,1/3,C0
     # after:  ３,名詞,数,*,*,*,*,３,サン,サン,1/3,C0
-    for pos in xrange(len(li) - 1):
+    for pos in range(len(li) - 1):
         mo = li[pos]
         mo2 = li[pos + 1]
         if "ー" in mo.hyouki and mo2.hyouki == "ー":
@@ -1411,7 +1409,7 @@ def japanese_braille_separate(inbuf, logwrite, nabcc=False):
     # after:
     # 思う,思う,動詞,自立,*,*,五段・ワ行ウ音便,連用タ接続,思う,オモウ,オモウ,2/3,オモー,0
     # て,て,助詞,接続助詞,*,*,*,*,て,テ,テ,0/1,テ,0
-    for pos in xrange(len(li) - 1):
+    for pos in range(len(li) - 1):
         mo = li[pos]
         mo2 = li[pos + 1]
         if (
@@ -1481,7 +1479,7 @@ def japanese_braille_separate(inbuf, logwrite, nabcc=False):
     # after:
     # ’,’,記号,括弧閉,*,*,’,’,*/*,',0
     # ０,0,名詞,数,*,*,ゼロ,ゼロ,1/2,0,0
-    for pos in xrange(0, len(li) - 1):
+    for pos in range(0, len(li) - 1):
         if li[pos].hyouki == "’" and li[pos + 1].hinshi2 == "数":
             li[pos].output = "'"
 
@@ -1494,7 +1492,7 @@ def japanese_braille_separate(inbuf, logwrite, nabcc=False):
     # 二,二,名詞,数,*,*,2,2,1/2,2,0
     # 、,、,記号,読点,*,*,、,、,*/*,⠼,0
     # 三,三,名詞,数,*,*,3,3,1/2,3,0
-    for pos in xrange(1, len(li) - 1):
+    for pos in range(1, len(li) - 1):
         if (
             li[pos - 1].output.isdigit()
             and li[pos].hyouki == "、"
@@ -1507,7 +1505,7 @@ def japanese_braille_separate(inbuf, logwrite, nabcc=False):
 
     # 算用数字ではさまれた中点を数符にする
     if not nabcc:
-        for pos in xrange(1, len(li) - 1):
+        for pos in range(1, len(li) - 1):
             if (
                 li[pos - 1].output.isdigit()
                 and li[pos].hyouki == "・"
@@ -1534,7 +1532,7 @@ def japanese_braille_separate(inbuf, logwrite, nabcc=False):
             if RE_KATAKANA.match(mo.nhyouki):
                 mo.output = mo.nhyouki
             elif RE_HIRAGANA.match(mo.nhyouki):
-                mo.output = "".join([unichr(ord(c) + 0x60) for c in mo.nhyouki])
+                mo.output = "".join([chr(ord(c) + 0x60) for c in mo.nhyouki])
 
     # 単語が小文字カタカナのみであれば修正
     # 表記は修正せず should_separate() で小文字として判定される
@@ -1566,7 +1564,7 @@ def japanese_braille_separate(inbuf, logwrite, nabcc=False):
 
     # 記号を Unicode 正規化
     # 踊り字の処理
-    for i in xrange(0, len(li)):
+    for i in range(0, len(li)):
         mo = li[i]
         if mo.hinshi1 == "記号" and mo.hinshi2 == "一般":
             if mo.hyouki == "〻":
@@ -1667,14 +1665,14 @@ def japanese_braille_separate(inbuf, logwrite, nabcc=False):
     # 日本語の直後のコンマを '、' で解釈
     # before: ，,記号,読点,*,*,*,*,，,，,，,*/*,*
     # after:  、,記号,読点,*,*,*,*,、,、,、,*/*,*
-    for pos in xrange(len(li) - 1):
+    for pos in range(len(li) - 1):
         mo = li[pos]
         mo2 = li[pos + 1]
         if mo2.hyouki == "，" and not (mo.hinshi2 in ("アルファベット", "数", "括弧閉")):
             mo2.hyouki = mo2.nhyouki = mo2.output = "、"
 
     # 分かち書き判定
-    for i in xrange(1, len(li)):
+    for i in range(1, len(li)):
         prev2_mo = li[i - 2] if i - 2 >= 0 else None
         prev_mo = li[i - 1]
         next_mo = li[i + 1] if i + 1 < len(li) else None
@@ -1683,7 +1681,7 @@ def japanese_braille_separate(inbuf, logwrite, nabcc=False):
         )
 
     # do not translate if string is unicode braille
-    for i in xrange(0, len(li)):
+    for i in range(0, len(li)):
         mo = li[i]
         if all((0x2800 <= ord(c) <= 0x28FF or c == "\u3000") for c in mo.hyouki):
             mo.output = mo.hyouki.replace("\u3000", " ")
@@ -1733,7 +1731,7 @@ def translateWithInPos2(inbuf, logwrite=_logwrite, nabcc=False):
     # do not translate if string is unicode braille
     if all((0x2800 <= ord(c) <= 0x28FF or c == " ") for c in inbuf):
         outbuf = inbuf
-        inpos2 = [n for n in xrange(len(inbuf))]
+        inpos2 = [n for n in range(len(inbuf))]
     else:
         outbuf, inpos2 = japanese_braille_separate(inbuf, logwrite, nabcc=nabcc)
     result, inpos1 = translator1.translateWithInPos(outbuf, nabcc=nabcc)
@@ -1754,12 +1752,12 @@ def japaneseToUnicodeBraille(text, logwrite=_logwrite, nabcc=False):
 def makeOutPos(inPos, inlen, outlen):
     # make outPos
     outPos = [-1] * inlen
-    for p in xrange(outlen - 1, -1, -1):
+    for p in range(outlen - 1, -1, -1):
         if inPos[p] < len(outPos):
             outPos[inPos[p]] = p
     # fill skipped outPos
     prev = 0
-    for p in xrange(inlen):
+    for p in range(inlen):
         if outPos[p] == -1:
             outPos[p] = prev
         else:
@@ -1769,7 +1767,7 @@ def makeOutPos(inPos, inlen, outlen):
 
 def mergePositionMap(inpos1, inpos2, outlen, inlen):
     inPos = [0] * outlen
-    for p in xrange(outlen):
+    for p in range(outlen):
         inPos[p] = inpos2[inpos1[p]]
     outPos = makeOutPos(inPos, inlen, outlen)
     return inPos, outPos
@@ -1797,7 +1795,7 @@ def translate(inbuf, cursorPos=0, logwrite=_logwrite, unicodeIO=False, nabcc=Fal
     )
     if not unicodeIO:
         pat = outbuf.replace(" ", "\u2800")
-        outbuf = "".join([unichr((ord(c) - 0x2800) + 0x8000) for c in pat])
+        outbuf = "".join([chr((ord(c) - 0x2800) + 0x8000) for c in pat])
     inPos, outPos = mergePositionMap(inpos1, inpos2, len(outbuf), len(inbuf))
     cursorPos = outPos[cursorPos]
     return (outbuf, inPos, outPos, cursorPos)
