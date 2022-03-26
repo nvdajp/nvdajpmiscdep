@@ -15,10 +15,7 @@ import sys
 import optparse
 import datetime
 
-try:
-    import cStringIO
-except:
-    import io as cStringIO
+import io
 import timeit
 from harness import tests
 from nabccHarness import tests as nabcc_tests
@@ -124,7 +121,7 @@ def pass2(verboseMode=False):
     global output
     outfile = "__h2output.txt"
     with open_file(outfile, "w") as f:
-        output = cStringIO.StringIO()
+        output = io.StringIO()
         translator2.initialize(__print, jtalk_dir, dic_dir, user_dics)
         log = output.getvalue()
         output.close()
@@ -138,7 +135,7 @@ def pass2(verboseMode=False):
             if t.get("mode") == "NABCC":
                 nabcc = True
             if "text" in t:
-                output = cStringIO.StringIO()
+                output = io.StringIO()
                 result, pat, inpos1, inpos2 = translator2.translateWithInPos2(
                     t["text"], logwrite=__print, nabcc=nabcc
                 )
