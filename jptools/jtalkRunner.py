@@ -14,10 +14,10 @@ import sys
 import wave
 import time
 
-if sys.version_info.major >= 3:
-    getcwd = os.getcwd
-else:
-    getcwd = os.getcwdu
+
+getcwd = os.getcwd
+
+
 try:
     import pyaudio
 except:

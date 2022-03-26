@@ -7,10 +7,10 @@ from __future__ import unicode_literals, print_function
 import os
 import sys
 
-if sys.version_info.major >= 3:
-    getcwd = os.getcwd
-else:
-    getcwd = os.getcwdu
+
+getcwd = os.getcwd
+
+
 from mecabHarness import tasks
 
 jt_dir = os.path.normpath(

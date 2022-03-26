@@ -25,14 +25,9 @@ from nabccHarness import tests as nabcc_tests
 
 tests.extend(nabcc_tests)
 
-if sys.version_info.major >= 3:
-    getcwd = os.getcwd
-    encode_utf8 = lambda s: s
-    open_file = lambda name, mode: open(name, mode, encoding="utf-8")
-else:
-    getcwd = os.getcwdu
-    encode_utf8 = lambda s: s.encode("utf-8", "ignore")
-    open_file = lambda name, mode: open(name, mode)
+getcwd = os.getcwd
+encode_utf8 = lambda s: s
+open_file = lambda name, mode: open(name, mode, encoding="utf-8")
 
 jtalk_dir = os.path.normpath(
     os.path.join(getcwd(), "..", "source", "synthDrivers", "jtalk")

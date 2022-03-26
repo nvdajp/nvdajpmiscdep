@@ -5,12 +5,8 @@ from __future__ import unicode_literals, print_function
 import os
 import sys
 
-if sys.version_info.major >= 3:
-    encode_utf8 = lambda s: s
-    getcwd = os.getcwd
-else:
-    encode_utf8 = lambda s: s.encode("utf-8", "ignore")
-    getcwd = os.getcwdu
+encode_utf8 = lambda s: s
+getcwd = os.getcwd
 sys.path.append(
     os.path.normpath(os.path.join(getcwd(), "..", "source", "synthDrivers", "jtalk"))
 )

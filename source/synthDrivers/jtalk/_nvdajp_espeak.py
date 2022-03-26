@@ -13,8 +13,8 @@ except:
     from speech import CharacterModeCommand
 import sys
 
-if sys.version_info.major >= 3:
-    basestring = str
+
+basestring = str
 
 _logwrite = log.debug
 

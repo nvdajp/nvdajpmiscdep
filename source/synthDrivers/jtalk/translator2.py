@@ -11,9 +11,9 @@ import copy
 import re
 import sys
 
-if sys.version_info.major >= 3:
-    xrange = range
-    unichr = chr
+
+xrange = range
+unichr = chr
 try:
     from ._nvdajp_unicode import unicode_normalize
     from .mecab import *

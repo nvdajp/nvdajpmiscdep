@@ -11,8 +11,8 @@ import unicodedata
 from copy import deepcopy
 import sys
 
-if sys.version_info.major >= 3:
-    xrange = range
+
+xrange = range
 
 kana1_dic = {
     "ア": "⠁",

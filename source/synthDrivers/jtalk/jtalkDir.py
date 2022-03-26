@@ -11,12 +11,12 @@ from glob import glob
 import tempfile
 import shutil
 
-if sys.version_info.major >= 3:
-    getcwd = os.getcwd
-    encode_str = lambda s, c: s
-else:
-    getcwd = os.getcwdu
-    encode_str = lambda s, c: unicode(s, c)
+
+getcwd = os.getcwd
+encode_str = lambda s, c: s
+
+
+
 
 jtalk_dir = encode_str(os.path.dirname(__file__), "mbcs")
 if hasattr(sys, "frozen"):

@@ -10,12 +10,10 @@ from logHandler import log
 import time
 import sys
 
-if sys.version_info.major >= 3:
-    import queue as Queue
 
-    unicode = str
-else:
-    import Queue
+import queue as Queue
+
+
 import os
 import re
 import baseObject
@@ -322,10 +320,9 @@ def stop():
     if indexReachedFunc:
         for item in indexCommands:
             indexReachedFunc(item)
-        if sys.version_info.major >= 3:
-            indexCommands.clear()
-        else:
-            del indexCommands[:]
+
+        indexCommands.clear()
+
         indexReachedFunc(None)
     if currentEngine == 1:
         _espeak.stop()

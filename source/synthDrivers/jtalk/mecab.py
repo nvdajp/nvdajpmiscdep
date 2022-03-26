@@ -10,11 +10,11 @@ import os
 import threading
 import sys
 
-if sys.version_info.major >= 3:
-    xrange = range
-    encode_mbcs = lambda s: s
-else:
-    encode_mbcs = lambda s: s.encode("mbcs")
+
+xrange = range
+encode_mbcs = lambda s: s
+
+
 import re
 
 try:
