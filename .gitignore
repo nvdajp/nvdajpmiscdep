@@ -13,3 +13,4 @@ source/synthDrivers/jtalk/dic/DIC_VERSION
 source/synthDrivers/jtalk/dic/sys.dic
 source/synthDrivers/jtalk/dic/unk.dic
 source/synthDrivers/jtalk/libopenjtalk.dll
+venv*
