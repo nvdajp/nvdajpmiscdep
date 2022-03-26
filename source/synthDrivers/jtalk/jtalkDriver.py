@@ -215,7 +215,7 @@ espeakMark = 10000
 def _espeak_speak(msg, lang, index=None, prop=None):
     global currentEngine, lastIndex, espeakMark
     currentEngine = 1
-    msg = unicode(msg)
+    msg = str(msg)
     msg.translate({ord("\01"): None, ord("<"): "&lt;", ord(">"): "&gt;"})
     msg = '<voice xml:lang="%s">%s</voice>' % (lang, msg)
     msg += '<mark name="%d" />' % espeakMark

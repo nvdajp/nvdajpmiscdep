@@ -21,7 +21,7 @@ from plumbum import local
 
 del sys.path[-1]
 
-_addonDir = os.path.join(os.path.dirname(__file__), "..", "..").decode("mbcs")
+_addonDir = os.path.join(os.path.dirname(__file__), "..", "..")
 _curAddon = addonHandler.Addon(_addonDir)
 _addonSummary = _curAddon.manifest["summary"]
 addonHandler.initTranslation()
@@ -66,7 +66,7 @@ def compileUserDic(self):
 
 
 class GlobalPlugin(globalPluginHandler.GlobalPlugin):
-    scriptCategory = unicode(_addonSummary)
+    scriptCategory = _addonSummary
 
     def __init__(self, *args, **kwargs):
         super(GlobalPlugin, self).__init__(*args, **kwargs)

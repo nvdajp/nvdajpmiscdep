@@ -100,7 +100,7 @@ class SynthDriver(SynthDriver):
                 p.pitch = min(max(self._pitch + self._pitchOffset, 0), 100)
                 p.inflection = self._inflection
                 p.characterMode = spellState
-                msg = unicode(item)
+                msg = str(item)
                 isMsgJp = isJapaneseLang(msg)
                 lang = currentLang
                 if isMsgJp:

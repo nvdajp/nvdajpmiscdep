@@ -11,7 +11,7 @@ import codecs
 
 jtalk_dir = os.path.normpath(
     os.path.join(
-        unicode(os.path.dirname(__file__), "mbcs"),
+        os.path.dirname(__file__),
         "..",
         "..",
         "..",
@@ -22,13 +22,13 @@ jtalk_dir = os.path.normpath(
     )
 )
 if hasattr(sys, "frozen"):
-    d = os.path.join(os.getcwdu(), "synthDrivers", "jtalk")
+    d = os.path.join(os.getcwd(), "synthDrivers", "jtalk")
     if os.path.isdir(d):
         jtalk_dir = d
 
 dic_dir = os.path.join(jtalk_dir, "dic")
 
-configDir = os.getcwdu()
+configDir = os.getcwd()
 try:
     import globalVars
 
@@ -36,7 +36,7 @@ try:
 except:
     pass
 
-tempDir = unicode(tempfile.mkdtemp(), "mbcs")
+tempDir = tempfile.mkdtemp()
 
 
 def user_dic_srcs():
