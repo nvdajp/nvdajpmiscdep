@@ -6,13 +6,10 @@
 # This file is covered by the GNU General Public License.
 # See the file COPYING for more details.
 
-from __future__ import unicode_literals, absolute_import
+from __future__ import absolute_import, unicode_literals
+
 import unicodedata
 from copy import deepcopy
-import sys
-
-
-xrange = range
 
 kana1_dic = {
     "ア": "⠁",
