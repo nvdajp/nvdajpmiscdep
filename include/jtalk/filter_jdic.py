@@ -929,6 +929,9 @@ def filter_jdic(s):
     elif a[0] == "真麻" and a[12] == "マサ" and len(a) == 15:
         # https://github.com/nvdajp/nvdajpmiscdep/issues/64
         s = ""
+    elif a[0] == "点点" and a[12] == "チョボチョボ" and len(a) == 15:
+        # https://github.com/nvdajp/nvdajp/issues/294
+        s = ""
     elif a[0] == "ｏｐｅｎ＿ｊｔａｌｋ" and a[12] == "オープンジェートーク" and len(a) == 15:
         # https://github.com/nvdajp/nvdajpmiscdep/issues/66
         a.append("⠠⠦open_jtalk⠠⠴")
