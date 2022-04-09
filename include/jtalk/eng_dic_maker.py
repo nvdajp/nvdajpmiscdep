@@ -10,10 +10,7 @@ OUT_FILE = "nvdajp-eng-dic.csv"
 DEFAULT_COST = 1600
 
 
-
-
 open_file = lambda name, mode, encoding: open(name, mode, encoding=encoding)
-
 
 
 from os import path
