@@ -949,6 +949,10 @@ def filter_jdic(s):
         a[13] = "0/4"
         a.append("ヒッス")
         s = ",".join(a)
+    elif a[0] == "あっという間" and a[12] == "アットユウマ" and len(a) == 15:
+        # https://github.com/nvdajp/nvdajp/issues/231
+        a.append("アット イウ マ")
+        s = ",".join(a)
     elif RE_NUMBERS.match(a[0]) and len(a) == 15:
         # https://github.com/nvdajp/nvdajpmiscdep/issues/70
         s = ""

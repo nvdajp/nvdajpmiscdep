@@ -8532,4 +8532,10 @@ tests = [
         "input": "6 テンテンジ",
         "output": "⠼⠋ ⠟⠴⠟⠴⠐⠳",
     },
+    {
+        "comment": "https://github.com/nvdajp/nvdajp/issues/231",
+        "text": "あっという間",
+        "input": "アット イウ マ",
+        "output": "⠁⠂⠞ ⠃⠉ ⠵",
+    },
 ]
