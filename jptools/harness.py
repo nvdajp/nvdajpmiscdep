@@ -8562,6 +8562,6 @@ tests = [
         # u+fffd
         "comment": "https://github.com/nvdajp/nvdajp/issues/342",
         "text": "�",
-        "input": "",
+        "input": "?",
     },
 ]
