@@ -8539,19 +8539,29 @@ tests = [
         "output": "⠁⠂⠞ ⠃⠉ ⠵",
     },
     {
+        # ウクライナ地名
         "text": "キーウ",
         "input": "キーウ",
     },
     {
+        # ウクライナ地名
         "text": "チョルノービリ",
         "input": "チョルノービリ",
     },
     {
+        # ウクライナ地名
         "text": "オデーサ",
         "input": "オデーサ",
     },
     {
+        # ウクライナ地名
         "text": "ドニプロ",
         "input": "ドニプロ",
+    },
+    {
+        # u+fffd
+        "comment": "https://github.com/nvdajp/nvdajp/issues/342",
+        "text": "�",
+        "input": "",
     },
 ]
