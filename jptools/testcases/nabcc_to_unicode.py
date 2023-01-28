@@ -152,7 +152,7 @@ for line in table_text:
             val |= 0x2800
         else:
             val = 0x20
-        table_dict[chr(ch)] = chr(val)
+        table_dict[chr(ch).swapcase()] = chr(val)
 
 table = str.maketrans(table_dict)
 
