@@ -7,9 +7,6 @@
 # h1: カナと記号のテスト
 # h2: テキスト解析とマスあけのテスト
 
-# from __future__ import unicode_literals
-from __future__ import print_function
-
 import datetime
 import io
 import optparse
@@ -19,8 +16,10 @@ import timeit
 
 from harness import tests
 from nabccHarness import tests as nabcc_tests
+from eng2Harness import tests as eng2_tests
 
 tests.extend(nabcc_tests)
+tests.extend(eng2_tests)
 
 from os import getcwd
 
@@ -104,14 +103,14 @@ def pass1():
                     or (len(result) != len(inpos1))
                 ):
                     count += 1
-                    f.write("input: " + t["input"].encode("utf-8") + "\n")
-                    f.write("result: " + result.encode("utf-8") + "\n")
-                    f.write("correct: " + t["output"].encode("utf-8") + "\n")
+                    f.write("input: " + t["input"] + "\n")
+                    f.write("result: " + result + "\n")
+                    f.write("correct: " + t["output"] + "\n")
                     if correct_inpos1:
                         f.write("correct_inpos1: " + correct_inpos1 + "\n")
                     f.write("result_inpos1: " + result_inpos1 + "\n")
                     if "comment" in t:
-                        f.write("comment: " + t["comment"].encode("utf-8") + "\n")
+                        f.write("comment: " + t["comment"] + "\n")
                     f.write("\n")
         print("h1: %d error(s). see %s" % (count, outfile))
     return (count, outfile)
