@@ -7,25 +7,17 @@
 #
 # For output field, blank should be 0x20 (not 0x2800).
 # output の空白は 0x2800 ではなく 0x20 を使います
+#
+# The following means enabled lines
+# "input": "⠦NonVisual Desktop Access (NVDA)⠴",
+# "output": "⠦⠠⠝⠕⠝⠠⠧⠊⠎⠥⠁⠇ ⠠⠙⠑⠎⠅⠞⠕⠏ ⠠⠁⠉⠉⠑⠎⠎ ⠶⠠⠠⠝⠧⠙⠁⠶⠴",
+#
+# The following means commenting out lines
+# "_text": "NonVisual Desktop Access (NVDA)",
+# "_output-eng2": "⠦⠠⠝⠕⠝⠠⠧⠊⠎⠥⠁⠇ ⠠⠙⠑⠎⠅⠞⠕⠏ ⠠⠁⠒⠑⠎⠎ ⠶⠠⠠⠝⠧⠙⠁⠶⠴"
 
-tests = [
-    {"note": "+ 日本語点字と英語2級の併用モード +"},
-    {
-        # "text": "NonVisual Desktop Access (NVDA)",
-        "input": "⠦NonVisual Desktop Access (NVDA)⠴",
-        "output": "⠦⠠⠝⠕⠝⠠⠧⠊⠎⠥⠁⠇ ⠠⠙⠑⠎⠅⠞⠕⠏ ⠠⠁⠉⠉⠑⠎⠎ ⠶⠠⠠⠝⠧⠙⠁⠶⠴",
-        # "output-eng2": "⠦⠠⠝⠕⠝⠠⠧⠊⠎⠥⠁⠇ ⠠⠙⠑⠎⠅⠞⠕⠏ ⠠⠁⠒⠑⠎⠎ ⠶⠠⠠⠝⠧⠙⠁⠶⠴",
-    },
-    {
-        # "text": "Microsoft Windows",
-        "input": "⠦Microsoft Windows⠴",
-        "output": "⠦⠠⠍⠊⠉⠗⠕⠎⠕⠋⠞ ⠠⠺⠊⠝⠙⠕⠺⠎⠴",
-        # "output-eng2": ⠦⠠⠍⠊⠉⠗⠕⠎⠷⠞ ⠠⠺⠔⠙⡪⠎⠴⠊⠠⠯⠛⠒⠈⠗⠴",
-    },
-    {
-        # "text": "NonVisual Desktop Access (NVDA) は、Microsoft Windowsオペレーティングシステム用の無料でオープンソースのスクリーンリーダーです。",
-        "input": "⠦NonVisual Desktop Access (NVDA)⠴ ハ、⠦Microsoft Windows⠴ オペレーティング システムヨーノ ムリョーデ オープン ソースノ スクリーン リーダーデス。",
-        "output": "⠦⠠⠝⠕⠝⠠⠧⠊⠎⠥⠁⠇ ⠠⠙⠑⠎⠅⠞⠕⠏ ⠠⠁⠉⠉⠑⠎⠎ ⠶⠠⠠⠝⠧⠙⠁⠶⠴ ⠥⠰ ⠦⠠⠍⠊⠉⠗⠕⠎⠕⠋⠞ ⠠⠺⠊⠝⠙⠕⠺⠎⠴ ⠊⠠⠯⠛⠒⠈⠗⠴⠐⠩ ⠳⠹⠟⠽⠜⠒⠎ ⠽⠈⠚⠒⠐⠟ ⠊⠒⠠⠭⠴ ⠺⠒⠹⠎ ⠹⠩⠓⠒⠴ ⠓⠒⠐⠕⠒⠐⠟⠹⠲",
-        # "output-eng2": "⠦⠠⠝⠕⠝⠠⠧⠊⠎⠥⠁⠇ ⠠⠙⠑⠎⠅⠞⠕⠏ ⠠⠁⠒⠑⠎⠎ ⠶⠠⠠⠝⠧⠙⠁⠶⠴ ⠥⠰ ⠦⠠⠍⠊⠉⠗⠕⠎⠷⠞ ⠠⠺⠔⠙⡪⠎⠴⠊⠠⠯⠛⠒⠈⠗⠴⠐⠩ ⠳⠹⠟⠽⠜⠒⠎ ⠽⠈⠚⠒⠐⠟ ⠊⠒⠠⠭⠴ ⠺⠒⠹⠎ ⠹⠩⠓⠒⠴ ⠓⠒⠐⠕⠒⠐⠟⠹⠲",
-    },
-]
+import json
+from pathlib import Path
+path = Path(__file__).parent / "eng2Harness.json"
+data = open(path, encoding="utf-8").read()
+tests = json.loads(data)
