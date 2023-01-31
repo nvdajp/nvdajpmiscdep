@@ -3,21 +3,20 @@
 # Japanese text processor test module
 # by Takuya Nishimoto
 
-import os
+from pathlib import Path
 import sys
 from os import getcwd
 
 from mecabHarness import tasks
 
-jt_dir = os.path.normpath(
-    os.path.join(getcwd(), "..", "source", "synthDrivers", "jtalk")
-)
+jt_dir = Path(getcwd()).parent / "source" / "synthDrivers" / "jtalk"
+
 sys.path.append(jt_dir)
 import jtalkDir
 from _nvdajp_unicode import unicode_normalize
-from mecab import *
+import mecab
 
-dic = os.path.join(jt_dir, "dic")
+dic = jt_dir / "dic"
 user_dics_org = jtalkDir.user_dics_org
 user_dics = jtalkDir.user_dics
 
@@ -43,11 +42,11 @@ def __print_dummy(s):
     _buffer += s + "\n"
 
 
-def Mecab_get_reading(mf, CODE_=CODE):
+def Mecab_get_reading(mf, CODE_=mecab.CODE):
     reading = ""
     braille = ""
     for pos in range(0, mf.size):
-        ar = Mecab_getFeature(mf, pos, CODE_=CODE_).split(",")
+        ar = mecab.Mecab_getFeature(mf, pos, CODE_=CODE_).split(",")
         rd = ""
         if len(ar) > 9:
             rd = ar[9].replace("\u3000", " ")
@@ -62,13 +61,13 @@ def Mecab_get_reading(mf, CODE_=CODE):
 
 
 def get_reading(msg):
-    s = text2mecab(msg)
-    mf = MecabFeatures()
-    Mecab_analysis(s, mf)
-    Mecab_print(mf, logwrite_=__print_dummy)
-    Mecab_correctFeatures(mf)
-    Mecab_print(mf, logwrite_=__print_dummy)
-    Mecab_print(mf)
+    s = mecab.text2mecab(msg)
+    mf = mecab.MecabFeatures()
+    mecab.Mecab_analysis(s, mf)
+    mecab.Mecab_print(mf, logwrite_=__print_dummy)
+    mecab.Mecab_correctFeatures(mf)
+    mecab.Mecab_print(mf, logwrite_=__print_dummy)
+    mecab.Mecab_print(mf)
     reading = Mecab_get_reading(mf)
     mf = None
     return reading
@@ -77,10 +76,10 @@ def get_reading(msg):
 def runTasks(enableUserDic=False):
     if enableUserDic:
         print(jt_dir, dic, user_dics)
-        Mecab_initialize(__print, jt_dir, dic, user_dics)
+        mecab.Mecab_initialize(__print, jt_dir, dic, user_dics)
     else:
         print(jt_dir, dic)
-        Mecab_initialize(__print, jt_dir, dic)
+        mecab.Mecab_initialize(__print, jt_dir, dic)
     count = 0
     for i in tasks:
         if isinstance(i, dict):
