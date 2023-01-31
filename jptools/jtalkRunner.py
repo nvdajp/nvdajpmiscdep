@@ -8,8 +8,6 @@
 # requires pyaudio (PortAudio wrapper)
 # http://people.csail.mit.edu/hubert/pyaudio/
 
-from __future__ import print_function, unicode_literals
-
 import os
 import sys
 import time

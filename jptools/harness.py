@@ -8,8 +8,6 @@
 # For output field, blank should be 0x20 (not 0x2800).
 # output の空白は 0x2800 ではなく 0x20 を使います
 
-from __future__ import unicode_literals
-
 tests = [
     {"note": "+ 基本テスト +"},
     {
