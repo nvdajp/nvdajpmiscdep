@@ -96,19 +96,21 @@ def runTasks(enableUserDic=False):
                 else:
                     s = i["input"].replace(" ", "").replace("/", "")
                     item = [i["text"], s, i["input"]]
-            else:
+            elif "text" in i and "speech" in i:
                 item = [i["text"], i["speech"]]
+            else:
+                continue
         else:
-            item = i
+            item = i[:3]
         clear_morph_buffer()
         result = get_reading(item[0])
-        if item[1] is not None and result[0] != item[1]:
+        if item[1] and result[0] != item[1]:
             __print("input:    " + item[0])
             __print("reading expected: " + item[1])
             __print("reading result:   " + result[0])
             print_morph_buffer()
             count += 1
-        if len(item) > 2 and result[1] != item[2]:
+        if len(item) > 2 and result[1] != item[2] and item[2]:
             __print("input:            " + item[0])
             __print("braille expected: " + item[2])
             __print("braille result:   " + result[1])
