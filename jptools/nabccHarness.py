@@ -16,6 +16,6 @@
 
 import json
 from pathlib import Path
-path = Path(__file__).parent / "nabccHarness.json"
+path = Path(__file__).parent / "libkuraji" / "tests" / "nabccHarness.json"
 data = open(path, encoding="utf-8").read()
 tests = json.loads(data)
