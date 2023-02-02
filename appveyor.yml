@@ -24,7 +24,7 @@ install:
  - git submodule update --init --recursive
 
 build_script:
- - py -m pip install --upgrade --no-warn-script-location mypy
+ - py -m pip install --upgrade --no-warn-script-location -r requirements-dev.txt
  - run_mypy.cmd
  - cd jptools
  - build-and-test.cmd
