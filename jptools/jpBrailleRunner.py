@@ -247,7 +247,11 @@ NVDA 日本語版 点訳テストケース """
             if "mode" in t:
                 __writeln(f, "- モード: " + t["mode"])
             if "comment" in t:
-                __writeln(f, "- コメント: " + t["comment"])
+                if isinstance(t['comment'], list):
+                    for line in t['comment']:
+                        __writeln(f, "- コメント: " + line)
+                elif t["comment"]:
+                    __writeln(f, "- コメント: " + t["comment"])
             __writeln(f, "-")
 
 
