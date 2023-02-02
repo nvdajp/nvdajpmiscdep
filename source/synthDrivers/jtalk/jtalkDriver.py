@@ -4,21 +4,17 @@
 # speech engine nvdajp_jtalk
 # Copyright (C) 2010-2019 Takuya Nishimoto (nishimotz.com)
 
-from __future__ import absolute_import
-
-from logHandler import log
+from logHandler import log  # type: ignore
 import time
-import sys
 
 
 import queue as Queue
 
 
 import os
-import re
-import baseObject
+import baseObject  # type: ignore
 import copy
-import nvwave
+import nvwave  # type: ignore
 
 _espeak = None  # from .. import _espeak
 from .jtalkCore import *
@@ -26,8 +22,8 @@ from . import jtalkPrepare
 from ..jtalk._nvdajp_unicode import unicode_normalize
 from ..jtalk import _bgthread
 import time
-import watchdog
-import config
+import watchdog  # type: ignore
+import config  # type: ignore
 from .jtalkDir import jtalk_dir, dic_dir, user_dics
 
 DEBUG = False

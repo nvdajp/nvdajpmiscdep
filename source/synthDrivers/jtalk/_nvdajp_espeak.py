@@ -1,20 +1,16 @@
 # _nvdajp_espeak.py
 # -*- coding: utf-8 -*-
 
-from __future__ import unicode_literals, absolute_import
 from . import translator2
-from logHandler import log
+from logHandler import log  # type: ignore
 import re
 from ._nvdajp_unicode import unicode_normalize
 
 try:
-    from speech.commands import CharacterModeCommand
+    from speech.commands import CharacterModeCommand  # type: ignore
 except:
-    from speech import CharacterModeCommand
-import sys
+    from speech import CharacterModeCommand  # type: ignore
 
-
-basestring = str
 
 _logwrite = log.debug
 
@@ -221,14 +217,14 @@ def replaceJapaneseFromSpeechSequence(speechSequence):
     charmode = False
     for item in speechSequence:
         disableCharMode = False
-        if isinstance(item, basestring):
+        if isinstance(item, str):
             item = unicode_normalize(item)
             if isJapaneseLang(item):
                 item = replaceJapanese(item)
                 if charmode:
                     disableCharMode = True
         elif isinstance(item, CharacterModeCommand):
-            cmstate = item.state
+            pass
         if disableCharMode:
             a.append(CharacterModeCommand(False))
             a.append(item)

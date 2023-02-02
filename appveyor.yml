@@ -24,6 +24,8 @@ install:
  - git submodule update --init --recursive
 
 build_script:
+ - python -m pip install mypy
+ - run_mypy.cmd
  - cd jptools
  - build-and-test.cmd
  - make_html.cmd

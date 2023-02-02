@@ -9,15 +9,11 @@
 #
 # based on NVDA (synthDrivers/_espeak.py)
 
-from __future__ import absolute_import
-
-from logHandler import log
+from logHandler import log  # type: ignore
 import threading
-import sys
 
 
 import queue as Queue
-
 
 
 bgThread = None

@@ -1,9 +1,7 @@
-from __future__ import absolute_import
-
-from synthDriverHandler import SynthDriver
+from synthDriverHandler import SynthDriver as BaseSynthDriver  # type: ignore
 
 
-class SynthDriver(SynthDriver):
+class SynthDriver(BaseSynthDriver):
     @classmethod
     def check(cls):
         return False

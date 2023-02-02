@@ -9,16 +9,13 @@
 # Copyright (C) 2010-2021 Takuya Nishimoto (nishimotz.com)
 # Released under GPL 2
 
-from __future__ import absolute_import
-
-import sys
-from synthDriverHandler import SynthDriver, VoiceInfo
+from synthDriverHandler import SynthDriver as BaseSynthDriver, VoiceInfo  # type: ignore
 from collections import OrderedDict
-from logHandler import log
-import speech
+from logHandler import log  # type: ignore
+
 
 try:
-    from speech.commands import (
+    from speech.commands import (  # type: ignore
         IndexCommand,
         CharacterModeCommand,
         LangChangeCommand,
@@ -26,42 +23,42 @@ try:
         SpeechCommand,
     )
 except:
-    from speech import (
+    from speech import (  # type: ignore
         IndexCommand,
         CharacterModeCommand,
         LangChangeCommand,
         PitchCommand,
         SpeechCommand,
     )
-import synthDriverHandler
-import languageHandler
-from .jtalk import jtalkDriver
-from .jtalk.jtalkDriver import VoiceProperty
-from .jtalk._nvdajp_espeak import isJapaneseLang
+import synthDriverHandler  # type: ignore
+import languageHandler  # type: ignore
+from .jtalk import jtalkDriver  # type: ignore
+from .jtalk.jtalkDriver import VoiceProperty  # type: ignore
+from .jtalk._nvdajp_espeak import isJapaneseLang  # type: ignore
 
 try:
-    from synthDriverHandler import synthIndexReached, synthDoneSpeaking
+    from synthDriverHandler import synthIndexReached, synthDoneSpeaking  # type: ignore
 except:
     synthIndexReached = synthDoneSpeaking = None
 
-unicode = str
-basestring = str
 
-
-class SynthDriver(SynthDriver):
+class SynthDriver(BaseSynthDriver):
     """A Japanese synth driver for NVDAjp."""
 
     name = "nvdajp_jtalk"
     description = "JTalk"
     supportedSettings = (
-        SynthDriver.VoiceSetting(),
-        SynthDriver.RateSetting(),
-        SynthDriver.RateBoostSetting()
-        if hasattr(SynthDriver, "RateBoostSetting")
-        else synthDriverHandler.BooleanSynthSetting("rateBoost", _("Rate boos&t")),
-        SynthDriver.PitchSetting(),
-        SynthDriver.InflectionSetting(),
-        SynthDriver.VolumeSetting(),
+        BaseSynthDriver.VoiceSetting(),
+        BaseSynthDriver.RateSetting(),
+        BaseSynthDriver.RateBoostSetting()
+        if hasattr(BaseSynthDriver, "RateBoostSetting")
+        else synthDriverHandler.BooleanSynthSetting(
+            "rateBoost",
+            _("Rate boos&t")  # type: ignore
+        ),
+        BaseSynthDriver.PitchSetting(),
+        BaseSynthDriver.InflectionSetting(),
+        BaseSynthDriver.VolumeSetting(),
     )
     supportedCommands = {
         IndexCommand,
@@ -95,7 +92,7 @@ class SynthDriver(SynthDriver):
         lang = defaultLanguage
         currentLang = lang
         for item in speechSequence:
-            if isinstance(item, basestring):
+            if isinstance(item, str):
                 p = VoiceProperty()
                 p.pitch = min(max(self._pitch + self._pitchOffset, 0), 100)
                 p.inflection = self._inflection

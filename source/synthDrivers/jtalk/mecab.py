@@ -1,8 +1,6 @@
 # coding: UTF-8
 # mecab.py for python-jtalk
 
-from __future__ import absolute_import
-
 CODE = "utf-8"
 
 import os

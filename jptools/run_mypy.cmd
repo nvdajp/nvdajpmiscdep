@@ -1,1 +1,0 @@
-mypy @mypy_files.txt

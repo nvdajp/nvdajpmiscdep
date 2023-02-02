@@ -6,8 +6,6 @@
 # This file is covered by the GNU General Public License.
 # See the file COPYING for more details.
 
-from __future__ import absolute_import, unicode_literals
-
 import unicodedata
 from copy import deepcopy
 

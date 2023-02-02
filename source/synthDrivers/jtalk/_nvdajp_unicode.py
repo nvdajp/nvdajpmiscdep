@@ -1,7 +1,6 @@
 # _nvdajp_unicode.py
 # -*- coding: utf-8 -*-
 
-from __future__ import unicode_literals, absolute_import
 import unicodedata
 
 
