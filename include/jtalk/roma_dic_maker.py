@@ -1,7 +1,6 @@
 # roma_dic_maker.py for nvdajp_jtalk
 # -*- coding: utf-8 -*-
 # since 2011-04-06 by Takuya Nishimoto
-from __future__ import unicode_literals
 
 OUT_FILE = "nvdajp-roma-dic.csv"
 

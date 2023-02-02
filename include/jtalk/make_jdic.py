@@ -2,8 +2,6 @@
 # make_jdic.py
 # Copyright (C) 2010-2013 Takuya Nishimoto (NVDA Japanese Team)
 
-from __future__ import print_function, unicode_literals
-
 open_file = lambda name, mode, encoding: open(name, mode, encoding=encoding)
 
 

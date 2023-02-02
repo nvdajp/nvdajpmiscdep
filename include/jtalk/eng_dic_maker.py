@@ -3,7 +3,6 @@
 # since 2010-12-05 by Takuya Nishimoto
 # bep-eng.dic is available at:
 # http://cpansearch.perl.org/src/MASH/Lingua-JA-Yomi-0.01/lib/Lingua/JA/bep-eng.dic
-from __future__ import unicode_literals
 
 IN_FILE_DEFAULT = "c:/work/nvda/bep-eng.dic"
 OUT_FILE = "nvdajp-eng-dic.csv"
