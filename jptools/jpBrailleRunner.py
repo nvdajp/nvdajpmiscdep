@@ -29,9 +29,9 @@ jtalk_dir = os.path.normpath(
     os.path.join(getcwd(), "..", "source", "synthDrivers", "jtalk")
 )
 sys.path.append(jtalk_dir)
-import jtalkDir
-import translator1
-import translator2
+import jtalkDir  # type: ignore
+import translator1  # type: ignore
+import translator2  # type: ignore
 
 dic_dir = os.path.join(jtalk_dir, "dic")
 user_dics = jtalkDir.user_dics

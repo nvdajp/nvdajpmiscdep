@@ -11,10 +11,10 @@ from mecabHarness import tasks
 
 jt_dir = Path(getcwd()).parent / "source" / "synthDrivers" / "jtalk"
 
-sys.path.append(jt_dir)
-import jtalkDir
-from _nvdajp_unicode import unicode_normalize
-import mecab
+sys.path.append(str(jt_dir))
+import jtalkDir  # type: ignore
+from _nvdajp_unicode import unicode_normalize  # type: ignore
+import mecab  # type: ignore
 
 dic = jt_dir / "dic"
 user_dics_org = jtalkDir.user_dics_org

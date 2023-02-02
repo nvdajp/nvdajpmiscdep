@@ -6,7 +6,6 @@
 # Usage:
 # > python jtalkRunner.py
 # requires pyaudio (PortAudio wrapper)
-# http://people.csail.mit.edu/hubert/pyaudio/
 
 import os
 import sys
@@ -17,15 +16,15 @@ from os import getcwd
 try:
     import pyaudio
 except:
-    pyaudio = None
+    pyaudio = None  # type: ignore
 # import cProfile
 # import pstats
 jtalk_dir = JT_DIR = os.path.normpath(
     os.path.join(getcwd(), "..", "source", "synthDrivers", "jtalk")
 )
 sys.path.append(JT_DIR)
-import jtalkPrepare
-from jtalkCore import *
+import jtalkPrepare  # type: ignore
+from jtalkCore import *  # type: ignore
 
 JT_DLL = os.path.join(JT_DIR, "libopenjtalk.dll")
 
