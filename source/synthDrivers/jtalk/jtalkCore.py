@@ -5,7 +5,7 @@
 try:
     from .mecab import *
 except (ImportError, ValueError):
-    from mecab import *
+    from mecab import *  # type: ignore
 
 ############################################
 

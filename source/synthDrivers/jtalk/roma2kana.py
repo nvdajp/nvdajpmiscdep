@@ -3,7 +3,7 @@
 try:
     from ._nvdajp_unicode import unicode_normalize
 except (ImportError, ValueError):
-    from _nvdajp_unicode import unicode_normalize
+    from _nvdajp_unicode import unicode_normalize  # type: ignore
 import re
 
 romadic = [

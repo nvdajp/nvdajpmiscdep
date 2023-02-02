@@ -13,9 +13,9 @@ try:
     from .roma2kana import getKanaFromRoma
     from .text2mecab import text2mecab
 except (ImportError, ValueError):
-    from _nvdajp_spellchar import convert as convertSpellChar
-    from roma2kana import getKanaFromRoma
-    from text2mecab import text2mecab
+    from _nvdajp_spellchar import convert as convertSpellChar  # type: ignore
+    from roma2kana import getKanaFromRoma  # type: ignore
+    from text2mecab import text2mecab  # type: ignore
 
 c_double_p = POINTER(c_double)
 c_double_p_p = POINTER(c_double_p)

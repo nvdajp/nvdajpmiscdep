@@ -19,8 +19,8 @@ import nvwave  # type: ignore
 _espeak = None  # from .. import _espeak
 from .jtalkCore import *
 from . import jtalkPrepare
-from ..jtalk._nvdajp_unicode import unicode_normalize
-from ..jtalk import _bgthread
+from ..jtalk._nvdajp_unicode import unicode_normalize  # type: ignore
+from ..jtalk import _bgthread  # type: ignore
 import time
 import watchdog  # type: ignore
 import config  # type: ignore
@@ -241,7 +241,7 @@ def _speak(arg):
         _espeak_speak(msg, lang, index, prop)
 
 
-indexCommands = []
+indexCommands = []  # type: ignore
 lastIndexCommand = None
 
 
