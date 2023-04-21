@@ -1,6 +1,6 @@
 call ..\include\python-jtalk\vcsetup.cmd
 cd /d %~dp0
-cd ..\..\jtalk
+cd ..\jtalk
 call all-clean.cmd
 @if not "%ERRORLEVEL%"=="0" goto onerror
 call all-build.cmd

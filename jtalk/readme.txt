@@ -1,10 +1,10 @@
-include/jtalk: libopenjtalk.dll source code 
+jtalk: libopenjtalk.dll source code 
 
 2012-07-14 by Takuya Nishimoto (nishimotz at gmail.com)
 
 libopenjtalk can be compiled as follows:
 
-(1) type "cd include\jtalk"
+(1) type "cd jtalk"
 (2) type "setenv-x86"
 (3) type "all-clean", "all-build"
 (4) type "all-install" to copy to source/synthDrivers/jtalk/
