@@ -1,9 +1,9 @@
 rem all-clean
 del *.pyc
 
-cd ..\python-jtalk
+cd ..\include\python-jtalk
 call clean.cmd
-cd ..\jtalk
+cd ..\..\jtalk
 
 cd libopenjtalk\mecab\src
 nmake -f Makefile.mak clean
