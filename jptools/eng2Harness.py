@@ -18,6 +18,6 @@
 
 import json
 from pathlib import Path
-path = Path(__file__).parent / "libkuraji" / "tests" / "eng2Harness.json"
+path = Path(__file__).parent.parent / "include" / "libkuraji" / "tests" / "eng2Harness.json"
 data = open(path, encoding="utf-8").read()
 tests = json.loads(data)
