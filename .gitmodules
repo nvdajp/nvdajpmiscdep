@@ -6,7 +6,7 @@
 	url = https://github.com/nishimotz/libkuraji.git
 [submodule "include/htsengineapi"]
 	path = include/htsengineapi
-	url = git@github.com:nishimotz/htsengineapi.git
+	url = https://github.com/nishimotz/htsengineapi.git
 [submodule "include/libopenjtalk"]
 	path = include/libopenjtalk
-	url = git@github.com:nishimotz/libopenjtalk.git
+	url = https://github.com/nishimotz/libopenjtalk.git
