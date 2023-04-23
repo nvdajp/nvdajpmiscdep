@@ -1,8 +1,8 @@
 rem build
 cd ..\include
-rmdir /s /q python-jtalk\htsengineapi
+if exist python-jtalk\htsengineapi rmdir /s /q python-jtalk\htsengineapi
 xcopy /e /i /h /k /x /y htsengineapi python-jtalk\htsengineapi
-rmdir /s /q python-jtalk\libopenjtalk
+if exist python-jtalk\libopenjtalk rmdir /s /q python-jtalk\libopenjtalk
 xcopy /e /i /h /k /x /y libopenjtalk python-jtalk\libopenjtalk
 cd python-jtalk
 call build.cmd
