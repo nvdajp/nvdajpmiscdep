@@ -20,7 +20,7 @@ from filter_jdic import filter_jdic
 # MECAB_DICT_INDEX と OUTDIR は libopenjtalk/mecab-naist-jdic/_temp が基準
 JTDIR = path.dirname(path.abspath(__file__))
 ENGDIC = path.normpath(path.join(JTDIR, "bep-eng.dic"))
-CS_FILE = path.normpath(path.join(JTDIR, "characters-ja.dic"))
+CS_FILE = path.normpath(path.join(JTDIR, "characters.dic"))
 
 # THISDIR = path.normpath(path.join(JTDIR, "..", "python-jtalk", "libopenjtalk", "mecab-naist-jdic"))
 THISDIR = path.normpath(path.join(JTDIR, "libopenjtalk", "mecab-naist-jdic"))
