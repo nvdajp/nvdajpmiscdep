@@ -4,3 +4,12 @@
 [submodule "jptools/libkuraji"]
 	path = jptools/libkuraji
 	url = https://github.com/nishimotz/libkuraji.git
+[submodule "include/libkuraji"]
+	path = include/libkuraji
+	url = https://github.com/nishimotz/libkuraji.git
+[submodule "include/libopenjtalk"]
+	path = include/libopenjtalk
+	url = https://github.com/nishimotz/libopenjtalk.git
+[submodule "include/htsengineapi"]
+	path = include/htsengineapi
+	url = https://github.com/nishimotz/htsengineapi.git
