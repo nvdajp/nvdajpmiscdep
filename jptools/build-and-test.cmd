@@ -1,3 +1,6 @@
+xcopy /E /Y ..\include\htsengineapi ..\include\python-jtalk\htsengineapi
+xcopy /E /Y ..\include\libopenjtalk ..\include\python-jtalk\libopenjtalk
+
 call ..\include\python-jtalk\vcsetup.cmd
 cd /d %~dp0
 cd ..\include\jtalk
