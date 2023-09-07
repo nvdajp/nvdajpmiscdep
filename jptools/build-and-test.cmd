@@ -1,3 +1,4 @@
+xcopy /E /Y .\jtalk ..\include\jtalk
 xcopy /E /Y ..\include\htsengineapi ..\include\python-jtalk\htsengineapi
 xcopy /E /Y ..\include\libopenjtalk ..\include\python-jtalk\libopenjtalk
 
