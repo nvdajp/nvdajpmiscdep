@@ -24,11 +24,18 @@ install:
  - git submodule update --init --recursive
 
 build_script:
+ - python -m venv .venv
+ - .venv\scripts\activate
+ - pip install -r requirements-dev.txt
+ - run_mypy.cmd > __mypy.txt
  - cd jptools
  - build-and-test.cmd
  - make_html.cmd
-
+ - cd ..
+- deactivate
+ 
 artifacts:
+ - path: __mypy.txt
  - path: jptools\__h1output.txt
  - path: jptools\__h2output.txt
  - path: jptools\__test_log.txt

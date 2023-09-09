@@ -11,4 +11,5 @@ source/synthDrivers/jtalk/libopenjtalk.dll
 source/synthDrivers/jtalk/jtalkCore.py
 source/synthDrivers/jtalk/mecab.py
 source/synthDrivers/jtalk/text2mecab.py
+__*.txt
 .venv
