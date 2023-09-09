@@ -2,15 +2,9 @@
 *.obj
 jptools/__*.txt
 jptools/jtusr.dic
-include/jtalk/libopenjtalk/mecab-naist-jdic/_temp/
-include/jtalk/libopenjtalk/mecab-naist-jdic/dic/
-include/jtalk/libopenjtalk/mecab-naist-jdic/nvdajp-custom-dic.csv
-include/jtalk/libopenjtalk/mecab-naist-jdic/nvdajp-eng-dic.csv
-include/jtalk/libopenjtalk/mecab-naist-jdic/nvdajp-tankan-dic.csv
-include/jtalk/libopenjtalk/mecab/src/mecab-dict-index.exe
-include/jtalk/libopenjtalk/mecab/src/mecab.lib
+include/jtalk
 source/synthDrivers/jtalk/dic/DIC_VERSION
 source/synthDrivers/jtalk/dic/sys.dic
 source/synthDrivers/jtalk/dic/unk.dic
 source/synthDrivers/jtalk/libopenjtalk.dll
-venv*
+.venv

@@ -15,14 +15,14 @@ try:
     from . import translator1
     from .jtalkDir import jtalk_dir, dic_dir, user_dics
 except (ImportError, ValueError):
-    from _nvdajp_unicode import unicode_normalize
-    from mecab import *
-    import translator1
-    from jtalkDir import jtalk_dir, dic_dir, user_dics
+    from _nvdajp_unicode import unicode_normalize  # type: ignore
+    from mecab import *  # type: ignore
+    import translator1  # type: ignore
+    from jtalkDir import jtalk_dir, dic_dir, user_dics  # type: ignore
 
 _logwrite = None
 try:
-    from logHandler import log
+    from logHandler import log  # type: ignore
 
     _logwrite = log.debug
 except:

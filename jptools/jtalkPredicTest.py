@@ -8,8 +8,8 @@ from os import getcwd
 sys.path.append(
     os.path.normpath(os.path.join(getcwd(), "..", "source", "synthDrivers", "jtalk"))
 )
-import jtalkPrepare
-from _nvdajp_unicode import unicode_normalize
+import jtalkPrepare  # type: ignore
+from _nvdajp_unicode import unicode_normalize  # type: ignore
 
 tests = [
     ["ー", "チョーオン"],

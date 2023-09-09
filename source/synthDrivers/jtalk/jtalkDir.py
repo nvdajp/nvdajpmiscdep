@@ -19,7 +19,7 @@ if hasattr(sys, "frozen"):
 
 configDir = getcwd()
 try:
-    import globalVars
+    import globalVars  # type: ignore
 
     configDir = globalVars.appArgs.configPath
     d = os.path.join(

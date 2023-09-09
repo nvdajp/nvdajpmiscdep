@@ -13,9 +13,9 @@ jt_dir = os.path.normpath(
     os.path.join(getcwd(), "..", "source", "synthDrivers", "jtalk")
 )
 sys.path.append(jt_dir)
-import jtalkDir
-from _nvdajp_unicode import unicode_normalize
-from mecab import *
+import jtalkDir  # type: ignore
+from _nvdajp_unicode import unicode_normalize  # type: ignore
+from mecab import *  # type: ignore
 
 dic = os.path.join(jt_dir, "dic")
 user_dics_org = jtalkDir.user_dics_org
@@ -43,7 +43,7 @@ def __print_dummy(s):
     _buffer += s + "\n"
 
 
-def Mecab_get_reading(mf, CODE_=CODE):
+def Mecab_get_reading(mf, CODE_=CODE):  # type: ignore
     reading = ""
     braille = ""
     for pos in range(0, mf.size):
