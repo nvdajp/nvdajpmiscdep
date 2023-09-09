@@ -32,7 +32,7 @@ build_script:
  - build-and-test.cmd
  - make_html.cmd
  - cd ..
-- deactivate
+ - deactivate
  
 artifacts:
  - path: __mypy.txt
