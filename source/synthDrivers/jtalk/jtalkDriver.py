@@ -4,18 +4,14 @@
 # speech engine nvdajp_jtalk
 # Copyright (C) 2010-2019 Takuya Nishimoto (nishimotz.com)
 
-from __future__ import absolute_import
-
 from logHandler import log
 import time
-import sys
 
 
 import queue as Queue
 
 
 import os
-import re
 import baseObject
 import copy
 import nvwave

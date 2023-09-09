@@ -3,8 +3,6 @@
 # speech engine nvdajp_jtalk
 # Copyright (C) 2010-2014 Takuya Nishimoto (nishimotz.com)
 
-from __future__ import absolute_import
-
 import os
 import sys
 from glob import glob

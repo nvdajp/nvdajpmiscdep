@@ -3,8 +3,6 @@
 # Japanese text processor test module
 # by Takuya Nishimoto
 
-from __future__ import unicode_literals
-
 # tasks: 要素2は音声合成の読み、(もしあれば)要素3は点訳用のカナ表記
 # 点訳の表記と分かち書きは、規則で処理できないものを
 # Mecab 辞書の第13フィールドに追加している。

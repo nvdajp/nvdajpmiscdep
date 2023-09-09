@@ -7,9 +7,6 @@
 # h1: カナと記号のテスト
 # h2: テキスト解析とマスあけのテスト
 
-# from __future__ import unicode_literals
-from __future__ import print_function
-
 import datetime
 import io
 import optparse

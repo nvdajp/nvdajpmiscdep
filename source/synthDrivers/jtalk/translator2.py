@@ -5,11 +5,8 @@
 # This file is covered by the GNU General Public License.
 # See the file COPYING for more details.
 
-from __future__ import unicode_literals, print_function, absolute_import
-import os
 import copy
 import re
-import sys
 
 
 try:

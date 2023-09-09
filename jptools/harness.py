@@ -3,12 +3,10 @@
 # A part of NonVisual Desktop Access (NVDA)
 # This file is covered by the GNU General Public License.
 # See the file COPYING for more details.
-# Copyright (C) 2013 Masataka.Shinke, Takuya Nishimoto, NVDA Japanese Team
+# Copyright (C) 2013,2023 Masataka.Shinke, Takuya Nishimoto(Shuaruta), NVDA Japanese Team
 #
 # For output field, blank should be 0x20 (not 0x2800).
 # output の空白は 0x2800 ではなく 0x20 を使います
-
-from __future__ import unicode_literals
 
 tests = [
     {"note": "+ 基本テスト +"},

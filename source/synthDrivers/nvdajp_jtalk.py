@@ -9,13 +9,9 @@
 # Copyright (C) 2010-2021 Takuya Nishimoto (nishimotz.com)
 # Released under GPL 2
 
-from __future__ import absolute_import
-
-import sys
 from synthDriverHandler import SynthDriver, VoiceInfo
 from collections import OrderedDict
 from logHandler import log
-import speech
 
 try:
     from speech.commands import (

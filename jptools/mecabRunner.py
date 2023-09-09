@@ -3,8 +3,6 @@
 # Japanese text processor test module
 # by Takuya Nishimoto
 
-from __future__ import print_function, unicode_literals
-
 import os
 import sys
 from os import getcwd

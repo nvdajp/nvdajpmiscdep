@@ -1,7 +1,6 @@
 # tankan_dic_maker.py for nvdajp_jtalk
 # -*- coding: utf-8 -*-
 # since 2010-12-20 by Takuya Nishimoto
-from __future__ import print_function, unicode_literals
 
 # IN_DIR : location of nvdajp_dic.py
 # IN_DIR  = '/work/nvda/jp2011.1/source'

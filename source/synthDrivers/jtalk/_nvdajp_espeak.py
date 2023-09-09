@@ -1,7 +1,6 @@
 # _nvdajp_espeak.py
 # -*- coding: utf-8 -*-
 
-from __future__ import unicode_literals, absolute_import
 from . import translator2
 from logHandler import log
 import re
@@ -11,7 +10,6 @@ try:
     from speech.commands import CharacterModeCommand
 except:
     from speech import CharacterModeCommand
-import sys
 
 
 basestring = str

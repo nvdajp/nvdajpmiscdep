@@ -2,8 +2,6 @@
 # -*- coding: utf-8 -*-
 # since 2011-01-19 by Takuya Nishimoto
 
-from __future__ import print_function, unicode_literals
-
 OUT_FILE = "nvdajp-custom-dic.csv"
 
 import sys
