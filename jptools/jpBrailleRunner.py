@@ -16,13 +16,8 @@ import timeit
 
 from harness import tests
 from nabccHarness import tests as nabcc_tests
-from eng2Harness import tests as eng2_tests
 
 tests.extend(nabcc_tests)
-for t in eng2_tests:
-    if "text" in t:
-        del t["text"]
-    tests.append(t)
 
 from os import getcwd
 
@@ -32,9 +27,9 @@ jtalk_dir = os.path.normpath(
     os.path.join(getcwd(), "..", "source", "synthDrivers", "jtalk")
 )
 sys.path.append(jtalk_dir)
-import jtalkDir  # type: ignore
-import translator1  # type: ignore
-import translator2  # type: ignore
+import jtalkDir
+import translator1
+import translator2
 
 dic_dir = os.path.join(jtalk_dir, "dic")
 user_dics = jtalkDir.user_dics
@@ -84,142 +79,9 @@ def dot_numbers(s):
     return " ".join(ret)
 
 
-def translatePhase2(outbuf, table):
-    # FIXME handle inPos
-    inPos = []
-
-    # input: ⠦NonVisual Desktop Access (NVDA)⠴
-    if table == "en-ueb-g2":
-        outbuf = outbuf.replace(
-            "NonVisual Desktop Access (NVDA)",
-            "⠠⠝⠕⠝⠠⠧⠊⠎⠥⠁⠇ ⠠⠙⠑⠎⠅⠞⠕⠏ ⠠⠁⠒⠑⠎⠎ ⠐⠣⠠⠠⠝⠧⠙⠁⠐⠜",
-        )
-    elif table == "en-us-g2":
-        outbuf = outbuf.replace(
-            "NonVisual Desktop Access (NVDA)",
-            "⠠⠝⠕⠝⠠⠧⠊⠎⠥⠁⠇ ⠠⠙⠑⠎⠅⠞⠕⠏ ⠠⠁⠒⠑⠎⠎ ⠶⠠⠠⠝⠧⠙⠁⠶",
-        )
-
-    # input: ⠦Microsoft Windows⠴
-    if table == "en-ueb-g2":
-        outbuf = outbuf.replace(
-            "Microsoft Windows",
-            "⠠⠍⠊⠉⠗⠕⠎⠷⠞ ⠠⠺⠔⠙⠪⠎",
-        )
-    elif table == "en-us-g2":
-        outbuf = outbuf.replace(
-            "Microsoft Windows",
-            "⠠⠍⠊⠉⠗⠕⠎⠷⠞ ⠠⠺⠔⠙⠪⠎",
-        )
-
-    # input: ⠦Hello! It's Patty. Is Kate there?⠴
-    if table == "en-ueb-g2":
-        outbuf = outbuf.replace(
-            "Hello! It's Patty. Is Kate there?",
-            "⠠⠓⠑⠇⠇⠕⠖ ⠠⠭⠄⠎ ⠠⠏⠁⠞⠞⠽⠲ ⠠⠊⠎ ⠠⠅⠁⠞⠑ ⠐⠮⠦",
-        )
-    elif table == "en-us-g2":
-        outbuf = outbuf.replace(
-            "Hello! It's Patty. Is Kate there?",
-            "⠠⠓⠑⠇⠇⠕⠖ ⠠⠭⠄⠎ ⠠⠏⠁⠞⠞⠽⠲ ⠠⠊⠎ ⠠⠅⠁⠞⠑ ⠐⠮⠦",
-        )
-
-    # input: ⠦what's new⠴
-    if table == "en-ueb-g2":
-        outbuf = outbuf.replace(
-            "what's new",
-            "⠱⠁⠞⠄⠎ ⠝⠑⠺",
-        )
-    elif table == "en-us-g2":
-        outbuf = outbuf.replace(
-            "what's new",
-            "⠱⠁⠞⠄⠎ ⠝⠑⠺",
-        )
-
-    # input: ⠦MODERN TIMES⠴
-    if table == "en-ueb-g2":
-        outbuf = outbuf.replace(
-            "MODERN TIMES",
-            "⠠⠠⠍⠕⠙⠻⠝ ⠠⠠⠐⠞⠎",
-        )
-    elif table == "en-us-g2":
-        outbuf = outbuf.replace(
-            "MODERN TIMES",
-            "⠠⠠⠍⠕⠙⠻⠝ ⠠⠠⠐⠞⠎",
-        )
-
-    # input: ⠦Pokemon GO⠴
-    if table == "en-ueb-g2":
-        outbuf = outbuf.replace(
-            "Pokemon GO",
-            "⠠⠏⠕⠅⠑⠍⠕⠝ ⠠⠠⠛",
-        )
-    elif table == "en-us-g2":
-        outbuf = outbuf.replace(
-            "Pokemon GO",
-            "⠠⠏⠕⠅⠑⠍⠕⠝ ⠠⠠⠛",
-        )
-
-    # input: ⠦correct, and⠴
-    if table == "en-ueb-g2":
-        outbuf = outbuf.replace(
-            "correct, and",
-            "⠉⠕⠗⠗⠑⠉⠞⠂ ⠯",
-        )
-    elif table == "en-us-g2":
-        outbuf = outbuf.replace(
-            "correct, and",
-            "⠉⠕⠗⠗⠑⠉⠞⠂ ⠯",
-        )
-
-    # input: ⠦MY FAIR LADY, a Broadway play, is a musical.⠴
-    if table == "en-ueb-g2":
-        outbuf = outbuf.replace(
-            "MY FAIR LADY, a Broadway play, is a musical.",
-            "⠠⠠⠠⠍⠽ ⠋⠁⠊⠗ ⠇⠁⠙⠽⠂⠠⠄ ⠁ ⠠⠃⠗⠕⠁⠙⠺⠁⠽ ⠏⠇⠁⠽⠂ ⠊⠎ ⠁ ⠍⠥⠎⠊⠉⠁⠇⠲",
-        )
-    elif table == "en-us-g2":
-        outbuf = outbuf.replace(
-            "MY FAIR LADY, a Broadway play, is a musical.",
-            "⠠⠠⠍⠽ ⠠⠠⠋⠁⠊⠗ ⠠⠠⠇⠁⠙⠽⠂ ⠁ ⠠⠃⠗⠕⠁⠙⠺⠁⠽ ⠏⠇⠁⠽⠂ ⠊⠎ ⠁ ⠍⠥⠎⠊⠉⠁⠇⠲",
-        )
-
-    # input: ⠦World Health Organization⠴
-    if table == "en-ueb-g2":
-        outbuf = outbuf.replace(
-            "World Health Organization",
-            "⠠⠸⠺ ⠠⠓⠂⠇⠹ ⠠⠕⠗⠛⠁⠝⠊⠵⠁⠰⠝",
-        )
-    elif table == "en-us-g2":
-        outbuf = outbuf.replace(
-            "World Health Organization",
-            "⠠⠸⠺ ⠠⠓⠂⠇⠹ ⠠⠕⠗⠛⠁⠝⠊⠵⠠⠝",
-        )
-
-    # input: ⠦v1.4⠴
-    if table == "en-us-g2":
-        outbuf = outbuf.replace(
-            "v1.4",
-            "⠧⠼⠁⠨⠙",
-        )
-
-    # input: ⠦abc.123.jp⠴
-    if table == "en-ueb-g2":
-        outbuf = outbuf.replace(
-            "abc.123.jp",
-            "⠁⠃⠉⠲⠼⠁⠃⠉⠲⠰⠚⠏",
-        )
-    elif table == "en-us-g2":
-        outbuf = outbuf.replace(
-            "abc.123.jp",
-            "⠁⠃⠉⠼⠨⠁⠃⠉⠨⠚⠏",
-        )
-    return (outbuf, inPos)
-
-
-def phase3():
+def pass1():
     global output
-    outfile = "__p3output.txt"
+    outfile = "__h1output.txt"
     with open_file(outfile, "w") as f:
         count = 0
         for t in tests:
@@ -227,62 +89,34 @@ def phase3():
             if t.get("mode") == "NABCC":
                 nabcc = True
             if "output" in t:
-                result, inpos1 = translator1.translatePhase3(t["input"], nabcc=nabcc)
+                result, inpos1 = translator1.translateWithInPos(t["input"], nabcc=nabcc)
                 if "inpos1" in t:
                     correct_inpos1 = ",".join(["%d" % n for n in t["inpos1"]])
                 else:
                     correct_inpos1 = None
                 result_inpos1 = ",".join(["%d" % n for n in inpos1])
-                if "ueb_g2" in t:
-                    result_ueb_g2 = t["input"]
-                    if not nabcc:
-                        result_ueb_g2, _ = translatePhase2(result_ueb_g2, "en-ueb-g2")
-                    result_ueb_g2, inpos1_ueb_g2 = translator1.translatePhase3(
-                        result_ueb_g2, nabcc=nabcc
-                    )
-                else:
-                    result_ueb_g2 = inpos1_ueb_g2 = None
-                if "us_g2" in t:
-                    result_us_g2 = t["input"]
-                    if not nabcc:
-                        result_us_g2, _ = translatePhase2(result_us_g2, "en-us-g2")
-                    result_us_g2, inpos1_us_g2 = translator1.translatePhase3(
-                        result_us_g2, nabcc=nabcc
-                    )
-                else:
-                    result_us_g2 = inpos1_us_g2 = None
                 if (
                     result != t["output"]
                     or (correct_inpos1 and result_inpos1 != correct_inpos1)
                     or (len(result) != len(inpos1))
-                    or (result_ueb_g2 and result_ueb_g2 != t["ueb_g2"])
-                    or (result_us_g2 and result_us_g2 != t["us_g2"])
                 ):
                     count += 1
-                    f.write("input: " + t["input"] + "\n")
-                    f.write("result: " + result + "\n")
-                    f.write("correct: " + t["output"] + "\n")
+                    f.write("input: " + t["input"].encode("utf-8") + "\n")
+                    f.write("result: " + result.encode("utf-8") + "\n")
+                    f.write("correct: " + t["output"].encode("utf-8") + "\n")
                     if correct_inpos1:
                         f.write("correct_inpos1: " + correct_inpos1 + "\n")
                     f.write("result_inpos1: " + result_inpos1 + "\n")
-                    if result_ueb_g2:
-                        f.write("result_ueb_g2: " + result_ueb_g2 + "\n")
-                    if "ueb_g2" in t:
-                        f.write("correct_ueb_g2: " + t["ueb_g2"] + "\n")
-                    if result_us_g2:
-                        f.write("result_us_g2: " + result_us_g2 + "\n")
-                    if "us_g2" in t:
-                        f.write("correct_us_g2: " + t["us_g2"] + "\n")
                     if "comment" in t:
-                        f.write("comment: " + t["comment"] + "\n")
+                        f.write("comment: " + t["comment"].encode("utf-8") + "\n")
                     f.write("\n")
-        print("p3: %d error(s). see %s" % (count, outfile))
+        print("h1: %d error(s). see %s" % (count, outfile))
     return (count, outfile)
 
 
-def phase1(verboseMode=False):
+def pass2(verboseMode=False):
     global output
-    outfile = "__p1output.txt"
+    outfile = "__h2output.txt"
     with open_file(outfile, "w") as f:
         output = io.StringIO()
         translator2.initialize(__print, jtalk_dir, dic_dir, user_dics)
@@ -299,7 +133,7 @@ def phase1(verboseMode=False):
                 nabcc = True
             if "text" in t:
                 output = io.StringIO()
-                result, pat, inpos1, inpos2 = translator2.translatePhase1(
+                result, pat, inpos1, inpos2 = translator2.translateWithInPos2(
                     t["text"], logwrite=__print, nabcc=nabcc
                 )
                 log = output.getvalue()
@@ -366,7 +200,7 @@ def phase1(verboseMode=False):
                     f.write("\n")
                     f.write(log)
                     f.write("\n")
-        print("p1: %d error(s). see %s" % (count, outfile))
+        print("h2: %d error(s). see %s" % (count, outfile))
     return (count, outfile)
 
 
@@ -410,16 +244,8 @@ NVDA 日本語版 点訳テストケース """
                 __writeln(f, "- ドット番号: " + dot_numbers(t["output"]))
             if "mode" in t:
                 __writeln(f, "- モード: " + t["mode"])
-            if "ueb_g2" in t:
-                __writeln(f, "- UEB2級: " + t["ueb_g2"])
-            if "us_g2" in t:
-                __writeln(f, "- アメリカ英語2級点字: " + t["us_g2"])
             if "comment" in t:
-                if isinstance(t["comment"], list):
-                    for line in t["comment"]:
-                        __writeln(f, "- コメント: " + line)
-                elif t["comment"]:
-                    __writeln(f, "- コメント: " + t["comment"])
+                __writeln(f, "- コメント: " + t["comment"])
             __writeln(f, "-")
 
 
@@ -427,11 +253,19 @@ if __name__ == "__main__":
     parser = optparse.OptionParser()
     parser.add_option(
         "-1",
-        "--phase1only",
+        "--pass1only",
         action="store_true",
-        dest="phase1_only",
+        dest="pass1_only",
         default="False",
-        help="phase1 only timeit",
+        help="pass1 only timeit",
+    )
+    parser.add_option(
+        "-2",
+        "--pass2only",
+        action="store_true",
+        dest="pass2_only",
+        default="False",
+        help="pass2 only timeit",
     )
     parser.add_option(
         "-v",
@@ -439,15 +273,7 @@ if __name__ == "__main__":
         action="store_true",
         dest="verbose",
         default="False",
-        help="phase1 with verbose mode",
-    )
-    parser.add_option(
-        "-3",
-        "--phase3only",
-        action="store_true",
-        dest="phase3_only",
-        default="False",
-        help="phase3 only timeit",
+        help="pass2 with verbose mode",
     )
     parser.add_option(
         "-m",
@@ -468,16 +294,16 @@ if __name__ == "__main__":
     )
     (options, args) = parser.parse_args()
 
-    if options.make_doc:
+    if options.make_doc == True:
         make_doc()
-    elif options.phase1_only:
-        t = timeit.Timer(stmt=phase1)
+    elif options.pass1_only == True:
+        t = timeit.Timer(stmt=pass1)
         print(t.timeit(number=options.number))
-    elif options.verbose:
-        phase1(verboseMode=True)
-    elif options.phase3_only:
-        t = timeit.Timer(stmt=phase3)
+    elif options.pass2_only == True:
+        t = timeit.Timer(stmt=pass2)
         print(t.timeit(number=options.number))
+    elif options.verbose == True:
+        pass2(verboseMode=True)
     else:
-        phase1()
-        phase3()
+        pass1()
+        pass2()
