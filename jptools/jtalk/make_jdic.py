@@ -35,13 +35,7 @@ CODE = "utf-8"  # cp932
 
 
 def mkdir_p(path):
-    try:
-        os.makedirs(path)
-    except OSError as exc:
-        if exc.errno == errno.EEXIST:
-            pass
-        else:
-            raise exc
+    os.makedirs(path, exist_ok=True)
 
 
 mkdir_p(OUTDIR)
@@ -52,7 +46,7 @@ tankan_dic_maker.make_dic(CODE, CS_FILE, THISDIR)
 custom_dic_maker.make_dic(CODE, THISDIR)
 
 
-def convert_file(src_file, src_enc, dest_file, dest_enc):
+def convert_file(src_file, src_enc, dest_file, dest_enc, apply_filter=False):
     print("converting %s to %s" % (src_file, dest_file))
     with open_file(src_file, "r", src_enc) as sf:
         with open_file(dest_file, "w", dest_enc) as df:
@@ -60,23 +54,12 @@ def convert_file(src_file, src_enc, dest_file, dest_enc):
                 s = sf.readline()
                 if not s:
                     break
-
+                if apply_filter:
+                    s = s.rstrip()
+                    s = filter_jdic(s)
+                    if s:
+                        s += "\n"  # do not use os.linesep here
                 df.write(s)
-
-
-def convert_jdic_file(src_file, src_enc, dest_file, dest_enc):
-    print("converting %s to %s" % (src_file, dest_file))
-    with open_file(src_file, "r", src_enc) as sf:
-        with open_file(dest_file, "w", dest_enc) as df:
-            while 1:
-                s = sf.readline()
-                if not s:
-                    break
-                s = s.rstrip()
-                s = filter_jdic(s)
-                if s:
-                    s += "\n"  # do not use os.linesep here
-                    df.write(s)
 
 
 files = [
@@ -106,8 +89,8 @@ for f in files:
 for f in euc_files:
     convert_file(path.join(THISDIR, f), "euc-jp", path.join(TEMPDIR, f), CODE)
 
-convert_jdic_file(
-    path.join(THISDIR, jdic_file), "euc-jp", path.join(TEMPDIR, jdic_file), CODE
+convert_file(
+    path.join(THISDIR, jdic_file), "euc-jp", path.join(TEMPDIR, jdic_file), CODE, apply_filter=True
 )
 
 print(TEMPDIR, [MECAB_DICT_INDEX, "-d", ".", "-o", OUTDIR, "-f", CODE, "-c", CODE])
