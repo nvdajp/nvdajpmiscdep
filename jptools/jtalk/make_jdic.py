@@ -10,7 +10,7 @@ import errno
 import os
 import shutil
 import subprocess
-from datetime import datetime
+from datetime import datetime, timezone
 from os import path
 
 import custom_dic_maker
@@ -119,13 +119,7 @@ print("copy %s to %s" % (path.join(THISDIR, "dicrc"), OUTDIR))
 shutil.copy(path.join(THISDIR, "dicrc"), OUTDIR)
 dic_version_file = path.join(OUTDIR, "DIC_VERSION")
 print("dic version file: " + dic_version_file)
-version = (
-    "nvdajp-jtalk-dic "
-    + "("
-    + CODE
-    + ") "
-    + datetime.utcnow().strftime("%Y%m%d-%H%M%S")
-)
+version = f"nvdajp-jtalk-dic ({CODE}) {datetime.now(timezone.utc).strftime('%Y%m%d-%H%M%S')}"
 print(version)
 with open_file(dic_version_file, "w", "utf-8") as f:
     f.write(version + os.linesep)
