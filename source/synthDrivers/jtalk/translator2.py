@@ -1,7 +1,7 @@
 # coding: UTF-8
 # translator2.py (Japanese Braille translator Phase 2)
 # A part of NonVisual Desktop Access (NVDA)
-# Copyright (C) 2012-2017 Takuya Nishimoto (NVDA Japanese Team)
+# Copyright (C) 2012-2023 Takuya Nishimoto (NVDA Japanese Team / Shuaruta Inc.)
 # This file is covered by the GNU General Public License.
 # See the file COPYING for more details.
 
@@ -1773,7 +1773,7 @@ def mergePositionMap(inpos1, inpos2, outlen, inlen):
 # louis-compatible method
 # tableList, typeform are not supported.
 # mode=dotsIO is default.
-def translate(inbuf, cursorPos=0, logwrite=_logwrite, unicodeIO=False, nabcc=False):
+def translate(inbuf, cursorPos=0, logwrite=_logwrite, unicodeIO=False, nabcc=False, louisTranslate=None, louisTableList=None):
     """Translate a string of characters, providing position information.
     @param inbuf: The string to translate.
     @type inbuf: str
