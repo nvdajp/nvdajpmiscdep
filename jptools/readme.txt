@@ -1,14 +1,14 @@
 A part of NonVisual Desktop Access (NVDA)
 This file is covered by the GNU General Public License.
 See the file COPYING for more details.
-Copyright (C) 2015-2020 Takuya Nishimoto
+Copyright (C) 2015-2024 Takuya Nishimoto
 
 setup:
 
-> python -VV
-Python 3.7.7 (tags/v3.7.7:d7c567b08f, Mar 10 2020, 09:44:33) [MSC v.1900 32 bit (Intel)]
+py -3.11-32 -VV
+Python 3.11.8 (tags/v3.11.8:db85d51, Feb  6 2024, 21:52:07) [MSC v.1937 32 bit (Intel)]
 
-Visual Studio 2019 (Ver.16.4 for Windows Desktop x64)
+Visual Studio 2022
 
 > git clone https://github.com/nvdajp/nvdajpmiscdeps.git miscDepsJp
 > cd miscDepsJp
