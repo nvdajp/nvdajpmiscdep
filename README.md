@@ -7,7 +7,7 @@ See the file COPYING for more details.
 Copyright (C) 2015-2024 Takuya Nishimoto
 ```
 
-[NVDA 日本語版 開発者メモ](https://github.com/nvdajp/nvdajp/blob/betajp/jptools/readme.md)
+[NVDA 日本語版 開発者メモ](https://github.com/nvdajp/nvdajp/blob/betajp/readme-nvdajp.md)
 
 ## setup
 
